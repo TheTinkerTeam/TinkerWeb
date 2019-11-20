@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 export function callLogin(payload) {
+  console.log(payload);
+  
   const body = ({
     username: payload.username,
     password: payload.password,
@@ -12,7 +14,9 @@ export function callLogin(payload) {
   };
 
   return axios.post('api/user/login', body, config)
-    .then(response => response.data)
+    .then(response => {
+      return response.data
+    })
     .catch((error) => {
       throw error.response || error;
     });

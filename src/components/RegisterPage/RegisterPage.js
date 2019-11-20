@@ -39,7 +39,7 @@ class RegisterPage extends Component {
         })
         .catch(() => {
           this.setState({
-            message: 'Ooops! Something went wrong! Is the server running?',
+            message: 'Ooops! That didn\'t work. The username might already be taken. Try again!',
           });
         });
     }

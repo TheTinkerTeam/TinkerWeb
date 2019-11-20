@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-
+import { callLogin } from '../../redux/requests/loginRequests'
+import { callUser } from '../../redux/requests/userRequests'
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -20,24 +21,36 @@ class LoginPage extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch(clearError());
-  }
 
-  componentDidUpdate() {
-    if (!this.props.user.isLoading && this.props.user.userName !== null) {
-      this.props.history.push('user');
-    }
-  }
-
-  login = (event) => {
+  login = async (event) => {
     event.preventDefault();
 
     if (this.state.username === '' || this.state.password === '') {
-      this.props.dispatch(formError());
+      this.props.dispatch({
+        type: 'INPUT_ERROR',
+        payload: 'Enter your username and password!'
+      });
     } else {
-      this.props.dispatch(triggerLogin(this.state.username, this.state.password));
+      await this.props.dispatch({ type: 'CLEAR_LOGIN_ERROR' })
+      await this.props.dispatch({ type: 'REQUEST_START' })
+      let res = await callLogin({
+        username: this.state.username,
+        password: this.state.password
+      })
+      await this.props.dispatch({ type: 'REQUEST_DONE' })
+      if (res = 200) {
+        const user = await callUser()
+        await this.props.dispatch({ type: 'SET_USER', user })
+        this.props.history.push('/user');
+      }
+      else {
+        this.props.dispatch({
+          type: 'INPUT_ERROR',
+          payload: 'Failed to find user.'
+        });
+      }
+
+      
     }
   }
 
@@ -54,7 +67,7 @@ class LoginPage extends Component {
           className="alert"
           role="alert"
         >
-          { this.props.login.message }
+          {this.props.login.message}
         </h2>
       );
     }
@@ -64,7 +77,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        { this.renderAlert() }
+        {this.renderAlert()}
         <form onSubmit={this.login}>
           <h1>Login</h1>
           <div>

@@ -4,26 +4,23 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
-
+import { callLogout } from '../../redux/requests/loginRequests'
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
 class UserPage extends Component {
-  componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-  }
 
-  componentDidUpdate() {
-    if (!this.props.user.isLoading && this.props.user.userName === null) {
-      this.props.history.push('home');
+  logout = async () => {
+    try {
+      await callLogout()
+      this.props.dispatch({type: 'UNSET_USER' });
+      this.props.history.push('/home')
+    } catch (error) {
+      console.log(error);
+      
     }
-  }
-
-  logout = () => {
-    this.props.dispatch(triggerLogout());
   }
 
   render() {
