@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
-import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { callLogin } from '../../redux/requests/loginRequests'
 import { callUser } from '../../redux/requests/userRequests'
 

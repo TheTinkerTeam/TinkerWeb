@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { LOGIN_ACTIONS } from '../actions/loginActions';
 
 const message = (state = '', action) => {
   switch (action.type) {
