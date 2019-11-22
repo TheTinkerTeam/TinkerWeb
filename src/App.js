@@ -24,11 +24,13 @@ class App extends React.Component {
   async componentDidMount() {
     try {
       const user = await callUser();
+      console.log(user);
+      
       if (user.id) {
         this.props.dispatch({
           type: 'SET_USER',
           user
-        });
+        }); 
       }
     } catch (error) {
       this.props.dispatch({
@@ -45,7 +47,9 @@ class App extends React.Component {
     }
   }
 
-  render() {
+  render() {    
+    console.log(this.props.user);
+    
     let content = (
       <div>
         <Header title="Tinker Web" />
@@ -77,10 +81,6 @@ class App extends React.Component {
               <Route
                 path="/home"
                 component={LoginPage}
-              />
-              <Route
-                path="/register"
-                component={RegisterPage}
               />
               <Route
                 path="/user"
