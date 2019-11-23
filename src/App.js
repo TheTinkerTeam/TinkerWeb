@@ -79,10 +79,6 @@ class App extends React.Component {
                 component={LoginPage}
               />
               <Route
-                path="/register"
-                component={RegisterPage}
-              />
-              <Route
                 path="/user"
                 component={UserPage}
               />

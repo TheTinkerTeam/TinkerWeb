@@ -9,7 +9,7 @@ class RegisterPage extends Component {
     this.state = {
       username: '',
       password: '',
-      message: '',
+      message: ''
     };
   }
 
@@ -24,6 +24,7 @@ class RegisterPage extends Component {
       const body = {
         username: this.state.username,
         password: this.state.password,
+        type: this.state.type
       };
 
       // making the request to the server to post the new user's registration
@@ -93,6 +94,7 @@ class RegisterPage extends Component {
               />
             </label>
           </div>
+ 
           <div>
             <input
               type="submit"
