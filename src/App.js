@@ -113,8 +113,6 @@ class App extends React.Component {
                 component={TeacherUserPage}
               />
               <Route
-<<<<<<< HEAD
-=======
                 path="/info"
                 component={TeacherInfoPage}
               />
@@ -133,7 +131,6 @@ class App extends React.Component {
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route
->>>>>>> f69965eca92a49129dc6a81fbfbc0ce3faf152f7
                 path="/user"
                 component={AdminUserPage}
               />
