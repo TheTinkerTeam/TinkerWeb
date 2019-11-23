@@ -10,8 +10,16 @@ import { connect } from 'react-redux'
 import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
-import UserPage from './components/UserPage/UserPage';
-import InfoPage from './components/InfoPage/InfoPage';
+
+import StudentUserPage from './components/User-Student/StudentUser'
+import StudentInfoPage from './components/User-Student/StudentInfo'
+
+import AdminUserPage from './components/User-Admin/AdminUser'
+import AdminInfoPage from './components/User-Admin/AdminInfo'
+
+import TeacherUserPage from './components/User-Teacher/TeacherUser'
+import TeacherInfoPage from './components/User-Teacher/TeacherInfo'
+
 import { callUser } from './redux/requests/userRequests';
 
 import './styles/main.css';
@@ -71,7 +79,7 @@ class App extends React.Component {
       </div>
     ); // this handles not logged in
 
-    if (this.props.user.userName) {
+    if (this.props.user.userType === 1) {
       content = (
         <div>
           <Header title="Tinker Web" />
@@ -79,16 +87,56 @@ class App extends React.Component {
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route
-                path="/home"
-                component={LoginPage}
-              />
-              <Route
                 path="/user"
-                component={UserPage}
+                component={StudentUserPage}
               />
               <Route
                 path="/info"
-                component={InfoPage}
+                component={StudentInfoPage}
+              />
+              {/* OTHERWISE (no path!) */}
+              <Route render={() => <h1>404</h1>} />
+            </Switch>
+          </Router>
+        </div>
+      )
+    }
+    else if (this.props.user.userType === 2) {
+      content = (
+        <div>
+          <Header title="Tinker Web" />
+          <Router>
+            <Switch>
+              <Redirect exact from="/" to="/home" />
+              <Route
+                path="/user"
+                component={TeacherUserPage}
+              />
+              <Route
+                path="/info"
+                component={TeacherInfoPage}
+              />
+              {/* OTHERWISE (no path!) */}
+              <Route render={() => <h1>404</h1>} />
+            </Switch>
+          </Router>
+        </div>
+      )
+    }
+    else if (this.props.user.userType === 3) {
+      content = (
+        <div>
+          <Header title="Tinker Web" />
+          <Router>
+            <Switch>
+              <Redirect exact from="/" to="/home" />
+              <Route
+                path="/user"
+                component={AdminUserPage}
+              />
+              <Route
+                path="/info"
+                component={AdminInfoPage}
               />
               {/* OTHERWISE (no path!) */}
               <Route render={() => <h1>404</h1>} />
