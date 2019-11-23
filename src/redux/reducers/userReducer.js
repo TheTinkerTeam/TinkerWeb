@@ -23,9 +23,23 @@ const userName = (state = null, action) => {
   }
 };
 
+const userType = (state = null, action) => {
+  console.log(action.user);
+  
+  switch (action.type) {
+    case 'SET_USER':
+      return action.user.user_type;
+    case 'UNSET_USER':
+      return null;
+    default:
+      return state;
+  }
+};
+
 
 
 export default combineReducers({
   id,
-  userName
+  userName,
+  userType,
 });

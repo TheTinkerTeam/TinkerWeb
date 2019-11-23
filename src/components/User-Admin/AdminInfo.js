@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../../components/Nav/Nav';
+import Nav from '../Nav/Nav';
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
-class InfoPage extends Component {
+class AdminInfoPage extends Component {
  
 
 
@@ -19,7 +19,7 @@ class InfoPage extends Component {
       content = (
         <div>
           <p>
-            Info Page
+            Admin Info Page
           </p>
         </div>
       );
@@ -35,4 +35,4 @@ class InfoPage extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(InfoPage);
+export default connect(mapStateToProps)(AdminInfoPage);
