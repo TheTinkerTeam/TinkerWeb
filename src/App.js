@@ -87,7 +87,7 @@ class App extends React.Component {
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route
-                path="/user"
+                path="/home"
                 component={StudentUserPage}
               />
               <Route
@@ -109,7 +109,7 @@ class App extends React.Component {
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route
-                path="/user"
+                path="/home"
                 component={TeacherUserPage}
               />
               <Route
@@ -131,7 +131,7 @@ class App extends React.Component {
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route
-                path="/user"
+                path="/home"
                 component={AdminUserPage}
               />
               <Route

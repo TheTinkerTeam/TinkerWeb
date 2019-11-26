@@ -39,7 +39,7 @@ class LoginPage extends Component {
       if (res = 200) {
         const user = await callUser()
         await this.props.dispatch({ type: 'SET_USER', user })
-        this.props.history.push('/user');
+        this.props.history.push('/home');
       }
       else {
         this.props.dispatch({
@@ -47,8 +47,6 @@ class LoginPage extends Component {
           payload: 'Failed to find user.'
         });
       }
-
-      
     }
   }
 
