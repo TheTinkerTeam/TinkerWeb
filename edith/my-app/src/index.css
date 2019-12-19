@@ -1,13 +1,118 @@
 body {
   margin: 0;
+  background-color: #F5DBDF;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.ui.menu.secondary .item{
+  padding-inline-start: 10px;
+}
+
+.ui.menu.secondary {
+  background-color: white;
+  min-height: 4em;
+  font-family: 'Roboto Mono', monospace;
+  color: #181C3F;
+}
+
+.ui.secondary.pointing.menu {
+  border-bottom: 0px solid #181C3F;
+}
+
+.ui.secondary.pointing.menu .active.item {
+  color: #181C3F;
+  border-color: #181C3F;
+
+  /* border-color: #F5514C; */
+}
+
+.ui.secondary.pointing.menu .item {
+  min-height: 4em;
+  vertical-align: center;
+
+  /* border-color: #F5514C; */
+}
+
+.ui.menu.pointing.secondary.menu .item:hover {
+  color: #F5514C;
+}
+
+.ui.menu.pointing.menu .active.item:hover {
+  color: #F5514C;
+  border-color: #F5514C;
+  font-family: 'Roboto Mono';
+}
+
+.ui.menu.pointing.secondary.menu .item {
+  color: #181C3F;
+}
+
+.ui.menu.pointing.secondary.menu.item .item {
+  font-family: 'Roboto Mono';
+}
+
+#search-menubar {
+  font-family: 'Roboto Mono';
+  font-size: 1em;
+}
+
+#search-menubar ::after{
+  font-family: 'Roboto Mono';
+  font-size: 1em;
+}
+
+#navlogo {
+  height: 2.5em;
+  padding-top: 0em;
+  padding-left: 1em;
+  padding-right: 2em;
+  margin: -0.75em;
+}
+
+.ui.input .content {
+  color: #181C3F;
+}
+
+.ui.icon.input.icon {
+  color: #F5514C;
+  font-family: 'Roboto Mono';
+  padding-inline-start: 3em;;
+}
+
+.ui.icon.input.icon :focus{
+  color: #F5514C;
+  border-color: #F5514C;
+}
+
+.ui.icon.input.icon ::after{
+  color: #F5514C;
+  border-color: #F5514C;
+}
+
+.ui.input>input {
+  color: #DEDEDE;
+}
+
+.ui.icon.input.icon ::selection{
+  color: white;
+  background-color: #f5514C;
+  border-color: #F5514C;
+}
+
+.ui.pointing.secondary.menu .item{
+  padding-inline-end: 1.5em;
+}
+
+.ui.menu.menu {
+  padding-inline-end: 1.5em;
 }
