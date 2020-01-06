@@ -11,7 +11,7 @@ class NavBar extends Component {
 
     return (
       <div>
-        <Menu pointing secondary>
+        <Menu pointing secondary fixed='top'>
           <Menu.Item>
             <a>
               <img src={logo} alt='SHlogo' id='navlogo' />
