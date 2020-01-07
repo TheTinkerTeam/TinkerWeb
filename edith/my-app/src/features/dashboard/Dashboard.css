@@ -87,3 +87,10 @@
 	padding: 1em;
 	border-bottom: 5px solid red;
 }
+
+.tinkernewsitem-title {
+	margin-top: 1.6em;
+	margin-bottom: 0.2em;
+	font-weight: 600;
+	font-size: 1.1em
+}
