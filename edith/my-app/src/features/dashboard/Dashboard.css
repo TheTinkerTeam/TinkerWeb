@@ -22,7 +22,7 @@
   border-radius: 16px;
   padding: 1em;
   grid-column: 1 / 6;
-  grid-row: 2/3;
+  /* grid-row: 2/3; */
   height: 100%;
 }
 
@@ -39,7 +39,7 @@
   /* background: LightGray; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  /* grid-template-rows: 1fr 1fr 1fr; */
   /* grid-template-rows: repeat(2, minmax(21em, 1fr)); */
   grid-gap: 1.3em;
   /* align-items: center; */
