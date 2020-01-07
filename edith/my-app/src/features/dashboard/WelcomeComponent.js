@@ -15,10 +15,19 @@ class WelcomeComponent extends Component {
   render() {
     return (
       <div>
-        <div className='red-title'>Welcome to SuperTinker</div>
-        <a>
-          <img src={tinkercart} alt='Tinker Cart model' height='42' width='42' />
-        </a>
+        <div className='title-tinkercart-image'>
+          <div className='red-title'>Welcome to SuperTinker</div>
+          {/* <a className='tinkercart-img-position'>
+          <img src={tinkercart} alt='Tinker Cart model' height='90em' width='90em' />
+        </a> */}
+          <img
+            src={tinkercart}
+            className='tinkercart-img-position'
+            alt='Tinker Cart model'
+            height='90em'
+            width='90em'
+          />
+        </div>
         <WelcomeList items={this.state.items} />
       </div>
     );

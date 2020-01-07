@@ -52,7 +52,20 @@
 	font-weight: 300;
 	font-size: 1.5em;
 	margin-top: 0.5em;
+	flex-grow: 1;
 	margin-bottom:0.5em;
+}
+
+/* image */
+
+.tinkercart-img-position {
+	/* position:absolute; */
+	right: 47em;
+}
+
+.title-tinkercart-image {
+	display:flex;
+	align-content: space-around;
 }
 
 /* Welcome component */
