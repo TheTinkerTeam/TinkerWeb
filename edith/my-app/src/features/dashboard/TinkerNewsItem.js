@@ -7,7 +7,7 @@ class TinkerNewsItem extends Component {
         <div className='tinkernewsitem-title'>
           {this.props.notification.title}
         </div>
-        <div className='tinkernewsitem-decription'>
+        <div className='tinkernewsitem-description'>
           {this.props.notification.description}
         </div>
       </div>

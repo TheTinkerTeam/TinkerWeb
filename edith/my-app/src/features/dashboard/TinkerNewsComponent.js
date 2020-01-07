@@ -20,6 +20,12 @@ const newsFromDatabase = [
 	description:
 	  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
   },
+  {
+	id: '4',
+	title: 'Hello Toto!',
+	description:
+	  'Miaourem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
+  },
 ]
 
 class TinkerNews extends Component {

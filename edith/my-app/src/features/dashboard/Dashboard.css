@@ -88,9 +88,21 @@
 	border-bottom: 5px solid red;
 }
 
+.tinkernewslist-scroll {
+	height: 200px;
+	overflow-y: scroll;
+	margin-top: 1.8em;
+	padding: 1.5em;
+	padding-top: 0;
+}
+
 .tinkernewsitem-title {
-	margin-top: 1.6em;
 	margin-bottom: 0.2em;
 	font-weight: 600;
 	font-size: 1.1em
+}
+
+.tinkernewsitem-description {
+	margin-bottom: 1.3em;
+	font-weight: 200;
 }

@@ -7,8 +7,8 @@ class TinkerNewsList extends Component {
     console.log({ news });
 
     return (
-      <div>
-        {news.slice(0, 3).map((notification, index) => (
+      <div className='tinkernewslist-scroll'>
+        {news.map((notification, index) => (
           <TinkerNewsItem key={news[index].id} notification={notification} />
         ))}
       </div>
