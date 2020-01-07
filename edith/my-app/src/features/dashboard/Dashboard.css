@@ -56,6 +56,25 @@
 	margin-bottom:0.5em;
 }
 
+.rotate-title {
+	transform: rotate(-8deg);
+    font-size: 2.8em;
+    font-weight: 200;
+    margin-top: 1.1em;
+    margin-bottom: 1.6em;
+}
+
+.supertinker-text {
+    font-weight: 700;
+    margin-top: 1.1em;
+    margin-bottom: 1.6em;
+}
+
+#supertinker-i {
+	transform: rotate(180deg) translateY(-0.15em);
+    display: inline-block;
+}
+
 /* image */
 
 .tinkercart-img-position {
