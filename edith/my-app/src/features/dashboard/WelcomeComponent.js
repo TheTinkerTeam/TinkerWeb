@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Segment } from "semantic-ui-react";
 import WelcomeList from "./WelcomeList";
 
 class WelcomeComponent extends Component {

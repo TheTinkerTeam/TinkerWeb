@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import NavBar from './features/navbar/nav/Navbar';
 import Dashboard from './features/dashboard/Dashboard';
 import { Container } from 'semantic-ui-react';
