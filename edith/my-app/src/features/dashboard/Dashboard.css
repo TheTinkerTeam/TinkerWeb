@@ -3,87 +3,164 @@
   border-radius: 16px;
   padding: 1em;
   grid-column: 1 / 4;
-  grid-row:1/2;
+  grid-row: 1/2;
   height: 100%;
 }
 
 .tinker-news-item {
-	background: white;
-	border-radius: 16px;
-	padding: 1em;
-	grid-column: 4 / 6;
-	grid-row:1/2;
-	height: 100%;
+  background: white;
+  border-radius: 16px;
+  padding: 1em;
+  grid-column: 4 / 6;
+  grid-row: 1/2;
+  height: 100%;
 }
 
 .projects-list {
-	background: white;
-	border-radius: 16px;
-	padding: 1em;
-	grid-column: 1 / 6;
-	grid-row:2/3;
-	height: 100%;
+  background: white;
+  border-radius: 16px;
+  padding: 1em;
+  grid-column: 1 / 6;
+  height: 100%;
 }
 
 .dashboardcontainer {
-	margin-top: 7em;
-	font-family: 'Poppins', sans-serif;
-	/* color: #282c34; */
-	color: #181C3F;
-	/* font-style: italic; */
-	font-weight: 300;
+  margin-top: 7em;
+  font-family: "Poppins", sans-serif;
+  color: #181c3f;
+  font-weight: 200;
   font-size: 1em;
   min-height: 30em;
   width: 100%;
-  /* background: LightGray; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
   grid-gap: 1.3em;
-  /* align-items: center; */
 }
 
-
-/* title */
+/* ====== */
+/* Titles */
+/* ====== */
 
 .red-title {
-	color: #F5514C;
-	font-weight: 300;
-	font-size: 1.5em;
-	margin-top: 0.5em;
-	margin-bottom:0.5em;
+  color: #f5514c;
+  font-weight: 300;
+  font-size: 1.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
+.rotate-title {
+  transform: rotate(-6deg);
+  font-size: 3em;
+  font-weight: 200;
+  margin-bottom: 1.3em;
+  margin-top: -2.5em;
+  margin-left: 0.1em;
+}
+
+.supertinker-text {
+  font-weight: 700;
+  margin-top: 1.1em;
+  margin-bottom: 1.6em;
+}
+
+#supertinker-i {
+  transform: rotate(180deg) translateY(-0.15em);
+  display: inline-block;
+}
+
+/* ================================================= */
+/* image of the Tinker Cart in the Welcome Component */
+/* ================================================= */
+
+.tinkercart-img-position {
+  position: relative;
+  left: 76%;
+  top: 6em;
+  z-index: 2;
+}
+
+/* ================= */
 /* Welcome component */
+/* ================= */
 
 .welcomecontainer {
-	/* margin-top: 7em; */
-	/* font-family: 'Poppins', sans-serif; */
-	/* color: #282c34; */
-	/* color: #181C3F; */
-	/* font-style: italic; */
-	/* font-weight: 300; */
-  /* font-size: 1em; */
-  /* min-height: 30em; */
   width: 100%;
-  /* background: LightGray; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   grid-gap: 1em;
-  /* align-items: center; */
 }
 
 .welcomelist {
   width: 100%;
   display: flex;
-  /* align-items: center; */
+  justify-content: space-evenly;
 }
 
 .welcomelistitem {
-	height: 100%;
-	align-self: center;
-	margin: 1em;
-	padding: 1em;
-	border-bottom: 5px solid red;
+  height: 100%;
+  align-self: center;
+  margin: 1em;
+  padding: 1em;
+  border-bottom: 5px solid #f5514c;
+  text-align: center;
+}
+
+/* ===================== */
+/* Tinker News component */
+/* ===================== */
+
+.tinkernewslist-scroll {
+  height: 200px;
+  overflow-y: scroll;
+  margin-top: 1.8em;
+  padding: 1.5em;
+  padding-top: 0;
+}
+
+.tinkernewsitem-title {
+  margin-bottom: 0.2em;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.tinkernewsitem-description {
+  margin-bottom: 1.3em;
+  font-weight: 200;
+}
+
+/* ================== */
+/* Carousel component */
+/* ================== */
+
+/* relevant styles */
+.img__wrap {
+  position: relative;
+  display: flex;
+}
+
+.img__description {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 25%;
+  margin: auto;
+  background: #f5514c;
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  text-align: center;
+  /* transition effect. not necessary */
+  transition: opacity 0.2s, visibility 0.2s;
+  max-width: 100%;
+  max-height: 100%;
+  font-weight: 300;
+}
+
+.img__wrap:hover .img__description {
+  visibility: visible;
+  opacity: 1;
 }

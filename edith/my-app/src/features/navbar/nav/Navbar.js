@@ -13,7 +13,7 @@ class NavBar extends Component {
       <div>
         <Menu pointing secondary fixed='top'>
           <Menu.Item>
-            <a>
+            <a href="_blank">
               <img src={logo} alt='SHlogo' id='navlogo' />
             </a>
           </Menu.Item>
