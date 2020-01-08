@@ -23,26 +23,20 @@ class CarouselItem extends Component {
     //     ) : null}
     //   </div>
     // );
-    const { project, category } = this.props;
+    const { project } = this.props;
     console.log(project);
     return (
       <div>
-        {project.tags.map((tag, index) =>
-          project.tags[index] === category ? (
-            <div key={index}>
-              <div>{project.title}</div>
-			  <a>
-    			<img
-     				src={project.imageURL}
-     				className=''
-     				alt={project.title}
-     				height='100em'
-     				width='100em'
-     			/>
-     			</a>
-            </div>
-          ) : null
-        )}
+        <div>{project.title}</div>
+        <a href='_blank'>
+          <img
+            src={project.imageURL}
+            className=''
+            alt={project.title}
+            height='100em'
+            width='100em'
+          />
+        </a>
       </div>
     );
   }
