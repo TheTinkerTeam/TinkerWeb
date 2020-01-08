@@ -5,7 +5,6 @@
   grid-column: 1 / 4;
   grid-row: 1/2;
   height: 100%;
-  /* z-index: -1; */
 }
 
 .tinker-news-item {
@@ -22,37 +21,31 @@
   border-radius: 16px;
   padding: 1em;
   grid-column: 1 / 6;
-  /* grid-row: 2/3; */
   height: 100%;
 }
 
 .dashboardcontainer {
   margin-top: 7em;
   font-family: "Poppins", sans-serif;
-  /* color: #282c34; */
   color: #181c3f;
-  /* font-style: italic; */
   font-weight: 200;
   font-size: 1em;
   min-height: 30em;
   width: 100%;
-  /* background: LightGray; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  /* grid-template-rows: 1fr 1fr 1fr; */
-  /* grid-template-rows: repeat(2, minmax(21em, 1fr)); */
   grid-gap: 1.3em;
-  /* align-items: center; */
 }
 
-/* title */
+/* ====== */
+/* Titles */
+/* ====== */
 
 .red-title {
   color: #f5514c;
   font-weight: 300;
   font-size: 1.5em;
   margin-top: 0.5em;
-  /* flex-grow: 1; */
   margin-bottom: 0.5em;
 }
 
@@ -77,7 +70,9 @@
   display: inline-block;
 }
 
-/* image */
+/* ================================================= */
+/* image of the Tinker Cart in the Welcome Component */
+/* ================================================= */
 
 .tinkercart-img-position {
   position: relative;
@@ -86,24 +81,16 @@
   z-index: 2;
 }
 
+/* ================= */
 /* Welcome component */
+/* ================= */
 
 .welcomecontainer {
-  /* margin-top: 7em; */
-  /* font-family: 'Poppins', sans-serif; */
-  /* color: #282c34; */
-  /* color: #181C3F; */
-  /* font-style: italic; */
-  /* font-weight: 300; */
-  /* font-size: 1em; */
-  /* min-height: 30em; */
   width: 100%;
-  /* background: LightGray; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   grid-gap: 1em;
-  /* align-items: center; */
 }
 
 .welcomelist {
@@ -118,9 +105,12 @@
   margin: 1em;
   padding: 1em;
   border-bottom: 5px solid red;
-  /* flex-grow: 1; */
   text-align: center;
 }
+
+/* ===================== */
+/* Tinker News component */
+/* ===================== */
 
 .tinkernewslist-scroll {
   height: 200px;
@@ -140,3 +130,7 @@
   margin-bottom: 1.3em;
   font-weight: 200;
 }
+
+/* ================== */
+/* Carousel component */
+/* ================== */
