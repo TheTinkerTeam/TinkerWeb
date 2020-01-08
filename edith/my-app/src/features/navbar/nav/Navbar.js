@@ -1,14 +1,28 @@
 import React, { Component } from "react";
 import { Menu, Input } from "semantic-ui-react";
 import logo from "../img/SHlogo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
+import SignedOutMenu from "../menus/SignedOutMenu";
+import SignedInMenu from "../menus/SignedInMenu";
 
 class NavBar extends Component {
-  state = { activeItem: "home" };
+  state = {
+    activeItem: "home",
+    authenticated: false
+  };
+
+  handleSignIn = () => {
+    this.setState({ authenticated: true });
+  };
+
+  handleSignOut = () => {
+    this.setState({ authenticated: false });
+    this.props.history.push('/');
+  };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
   render() {
-    const { activeItem } = this.state;
+    const { activeItem, authenticated } = this.state;
 
     return (
       <div>
@@ -59,7 +73,7 @@ class NavBar extends Component {
               id='search-menubar'
             />
           </Menu.Item>
-          <Menu.Menu position='right'>
+          {/* <Menu.Menu position='right'>
             <Menu.Item
               name='Join Supertinker'
               active={activeItem === "Join Supertinker"}
@@ -70,11 +84,16 @@ class NavBar extends Component {
               active={activeItem === "Sign in"}
               onClick={this.handleItemClick}
             />
-          </Menu.Menu>
+          </Menu.Menu> */}
+          {authenticated ? (
+            <SignedInMenu signOut={this.handleSignOut} />
+          ) : (
+            <SignedOutMenu signIn={this.handleSignIn} />
+          )}
         </Menu>
       </div>
     );
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
