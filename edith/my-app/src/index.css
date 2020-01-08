@@ -13,9 +13,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.main{
-  margin-left: 7%;
-  margin-right: 7%;
+
+.container {
+  margin-left: 6%;
+  margin-right: 6%;
+  margin-top: 6em;
 }
 
 .ui.menu.secondary .item{

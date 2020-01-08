@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Input } from "semantic-ui-react";
 import logo from "../img/SHlogo.png";
+import { NavLink } from "react-router-dom";
 
 class NavBar extends Component {
   state = { activeItem: "home" };
@@ -13,37 +14,50 @@ class NavBar extends Component {
       <div>
         <Menu pointing secondary fixed='top'>
           <Menu.Item>
-            <a href="_blank">
+            <a href='/'>
               <img src={logo} alt='SHlogo' id='navlogo' />
             </a>
           </Menu.Item>
-		  <Menu.Item
+          {/* <Menu.Item
             name='Home'
             active={activeItem === "Home"}
             onClick={this.handleItemClick}
-          />
+          /> */}
           <Menu.Item
+            as={NavLink}
+            to='/projects'
             name='Projects'
             active={activeItem === "Projects"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
+            as={NavLink}
+            to='/tutorials'
             name='Tutorials'
             active={activeItem === "Tutorials"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
+            as={NavLink}
+            to='/tinkercart'
             name='TinkerCart'
             active={activeItem === "TinkerCart"}
             onClick={this.handleItemClick}
           />
-		  <Menu.Item
+          <Menu.Item
+            as={NavLink}
+            to='/membership'
             name='Membership'
             active={activeItem === "Membership"}
             onClick={this.handleItemClick}
           />
           <Menu.Item>
-            <Input className='icon' icon='search' placeholder='Search...' id="search-menubar" />
+            <Input
+              className='icon'
+              icon='search'
+              placeholder='Search...'
+              id='search-menubar'
+            />
           </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item
