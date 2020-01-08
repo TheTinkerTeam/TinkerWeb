@@ -29,7 +29,7 @@ class CarouselItem extends Component {
       <div>
         {project.tags.map((tag, index) =>
           project.tags[index] === category ? (
-            <div>
+            <div key={index}>
               <div>{project.title}</div>
 			  <a>
     			<img
