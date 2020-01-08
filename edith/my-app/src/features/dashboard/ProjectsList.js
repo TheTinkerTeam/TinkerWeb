@@ -1,14 +1,15 @@
 import React, { Component } from "react";
+import CarouselComponent from "./CarouselComponent";
 
 class ProjectsList extends Component {
 
   render() {
-	  const {category} = this.props;
+	  const {category, projects} = this.props;
 
 	return (
       <div className='projects-list'>
         <div className='red-title'>{category} projects</div>
-		<div>Here goes the carousel component</div>
+		<CarouselComponent projects={projects} category={category} />
       </div>
     );
   }
