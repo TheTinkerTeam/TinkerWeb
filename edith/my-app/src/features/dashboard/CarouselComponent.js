@@ -59,3 +59,10 @@ class CarouselComponent extends Component {
 }
 
 export default CarouselComponent;
+
+// ==================================================================================================== //
+//                                                                                                      //
+// More info about <InfiniteCarousel />                                                                 //
+// https://reactjsexample.com/react-simple-infinite-carousel-with-lazy-loading-and-responsive-support/  //
+//                                                                                                      //
+// ==================================================================================================== //

@@ -26,12 +26,12 @@ class CarouselItem extends Component {
     const { project } = this.props;
     console.log(project);
     return (
-      <div>
-        <div>{project.title}</div>
+      <div className="img__wrap">
+        <div className="img__description">{project.title}</div>
         <a href='_blank'>
           <img
             src={project.imageURL}
-            className=''
+            className='img__img'
             alt={project.title}
             height='100em'
             width='100em'
