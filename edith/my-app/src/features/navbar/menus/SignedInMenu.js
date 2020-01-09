@@ -1,6 +1,7 @@
 import React from 'react'
 import { Dropdown, Menu, Image } from 'semantic-ui-react';
 import avatar from '../img/avatar.png';
+import { Link } from 'react-router-dom';
 
 const SignedInMenu = ({signOut}) => {
 	return (
@@ -12,7 +13,7 @@ const SignedInMenu = ({signOut}) => {
 				  <Dropdown.Item text="My Classes" icon="calendar" />
 				  <Dropdown.Item text="My Teams" icon="users" />
 				  <Dropdown.Item text="My Profile" icon="user" />
-				  <Dropdown.Item text="Settings" icon="settings" />
+				  <Dropdown.Item as={Link} to='/settings' text="Settings" icon="settings" />
 				  <Dropdown.Item onClick={signOut} text="Sign Out" icon="power" />
 				</Dropdown.Menu>
 			  </Dropdown>

@@ -7,6 +7,7 @@ import TutorialsPage from "./features/tutorials/TutorialsPage";
 import TutorialDetailsPage from "./features/tutorials/TutorialDetailsPage";
 import ProjectsPage from "./features/projects/ProjectsPage";
 import ProjectDetailsPage from "./features/projects/ProjectDetailsPage";
+import SettingsDashboard from "./features/user/SettingsDashboard";
 import { Route } from "react-router-dom";
 
 class App extends React.Component {
@@ -24,6 +25,7 @@ class App extends React.Component {
                 <Route path='/membership' component={MembershipPage} />
                 <Route exact path='/tutorials' component={TutorialsPage} />
                 <Route exact path='/projects' component={ProjectsPage} />
+                <Route path='/settings' component={SettingsDashboard} />
                 <Route path='/projects/:id' component={ProjectDetailsPage} />
                 <Route path='/tutorials/:id' component={TutorialDetailsPage} />
               </div>
@@ -55,3 +57,5 @@ export default App;
 //     );
 //   }
 // }
+
+// export default App;
