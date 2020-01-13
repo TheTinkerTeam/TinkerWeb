@@ -79,10 +79,12 @@ code {
 
 #navlogo {
   height: 2.5em;
-  padding-top: 0em;
+  width: auto;
+  margin-right: 0.75em;
+  /* padding-top: 0em;
   padding-left: 1em;
   padding-right: 2em;
-  margin: -0.75em;
+  margin: -0.75em; */
 }
 
 .ui.input .content {

@@ -6,10 +6,15 @@ import SignedOutMenu from "../menus/SignedOutMenu";
 import SignedInMenu from "../menus/SignedInMenu";
 
 class NavBar extends Component {
-  state = {
-    activeItem: "home",
-    authenticated: false
-  };
+  // We put the constructor so it will rerender the component if the props are updated
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeItem: "Home",
+      authenticated: false
+    };
+  }
 
   handleSignIn = () => {
     this.setState({ authenticated: true });
@@ -17,26 +22,32 @@ class NavBar extends Component {
 
   handleSignOut = () => {
     this.setState({ authenticated: false });
-    this.props.history.push('/');
+    this.props.history.push("/");
   };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
   render() {
     const { activeItem, authenticated } = this.state;
 
     return (
       <div>
         <Menu pointing secondary fixed='top'>
-          <Menu.Item>
+          {/* <Menu.Item>
             <a href='/'>
               <img src={logo} alt='SHlogo' id='navlogo' />
             </a>
-          </Menu.Item>
-          {/* <Menu.Item
+          </Menu.Item> */}
+          <Menu.Item
+            as={NavLink}
+            exact
+            to='/'
             name='Home'
             active={activeItem === "Home"}
             onClick={this.handleItemClick}
-          /> */}
+          >
+            <img src={logo} alt='SHlogo' id='navlogo' />
+          </Menu.Item>
           <Menu.Item
             as={NavLink}
             to='/projects'
