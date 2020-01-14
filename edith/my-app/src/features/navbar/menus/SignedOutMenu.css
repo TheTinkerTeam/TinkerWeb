@@ -1,10 +1,33 @@
 .ui.basic.button.custom {
 	color: #181c3f !important;
 	font-family: "Roboto Mono", sans-serif;
-	box-shadow: 0 0 0 0.015em #181c3f inset;
+	/* box-shadow: 0 0 0 0.015em #181c3f inset; */
+	box-shadow: 0 0 0 0 #181c3f inset;
+	border-width: 0.1em;
+	border-style: solid;
+	border-radius: 2em;
 }
 
 .ui.basic.button.custom:hover {
 	color: #f5514c !important;
-	box-shadow: 0 0 0 0.02em #f5514c inset;
+	font-weight: 700;
+	/* box-shadow: 0 0 0 0.02em #f5514c inset; */
+}
+
+.ui.labeled.icon.button>.icon, .ui.labeled.icon.buttons>.button>.icon {
+	background-color: white;
+	/* border-left: 2em; */
+}
+
+.ui.labeled.icon.button>.icon {
+	border-left-style: solid;
+	border-width: 0.1em;
+}
+
+.ui[class*="right labeled"].icon.button {
+	padding-right: 3.6em!important;
+}
+
+#signInButton {
+	border-width: 0;
 }

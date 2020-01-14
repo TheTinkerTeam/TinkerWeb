@@ -1,25 +1,28 @@
 import React from "react";
-import { Menu, Button } from "semantic-ui-react";
-import './SignedOutMenu.css';
+import { Menu, Button, Icon } from "semantic-ui-react";
+import "./SignedOutMenu.css";
 
 const SignedOutMenu = ({ signIn }) => {
   return (
     <Menu.Item position='right'>
       <Button
         onClick={signIn}
-        content='Join SuperTinker'
-        basic
-        id='joinSuperTinkerButton'
-		className='custom'
-      />
-      <Button
-        onClick={signIn}
         content='Sign in'
         basic
         style={{ marginLeft: "0.5em" }}
-        id='signInButton'
-		className='custom'
+        className='custom'
+		id='signInButton'
       />
+      <Button
+        onClick={signIn}
+        basic
+        className='custom'
+		icon labelPosition='right'
+		id='getStartedButton'
+      >
+	  Get Started
+	  <Icon name='angle right' />
+	  </Button>
     </Menu.Item>
   );
 };
