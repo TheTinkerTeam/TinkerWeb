@@ -1,25 +1,3 @@
-/* #joinSuperTinkerButton {
-	color: #181c3f !important;
-	font-family: "Poppins", sans-serif;
-	border-color: #181c3f !important;
-
-}
-
-#joinSuperTinkerButton:hover {
-	font-weight: 500;
-	border-color: #181c3f !important;
-}
-
-#signInButton {
-	color: #181c3f !important;
-	font-family: "Poppins", sans-serif;
-}
-
-#signInButton:hover {
-	font-weight: 500;
-	border-color: #181c3f !important;
-} */
-
 .ui.basic.button.custom {
 	color: #181c3f !important;
 	font-family: "Poppins", sans-serif;
