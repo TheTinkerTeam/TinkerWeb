@@ -13,9 +13,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.main{
-  margin-left: 7%;
-  margin-right: 7%;
+
+.container {
+  margin-left: 6%;
+  margin-right: 6%;
+  margin-top: 6em;
 }
 
 .ui.menu.secondary .item{
@@ -77,10 +79,12 @@ code {
 
 #navlogo {
   height: 2.5em;
-  padding-top: 0em;
+  width: auto;
+  margin-right: 0.75em;
+  /* padding-top: 0em;
   padding-left: 1em;
   padding-right: 2em;
-  margin: -0.75em;
+  margin: -0.75em; */
 }
 
 .ui.input .content {
