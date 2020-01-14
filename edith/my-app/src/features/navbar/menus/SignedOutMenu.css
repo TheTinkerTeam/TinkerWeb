@@ -1,11 +1,10 @@
 .ui.basic.button.custom {
 	color: #181c3f !important;
-	font-family: "Poppins", sans-serif;
+	font-family: "Roboto Mono", sans-serif;
 	box-shadow: 0 0 0 0.015em #181c3f inset;
 }
 
 .ui.basic.button.custom:hover {
 	color: #f5514c !important;
-	font-family: "Poppins", sans-serif;
 	box-shadow: 0 0 0 0.02em #f5514c inset;
 }
