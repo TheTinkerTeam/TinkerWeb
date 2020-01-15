@@ -42,8 +42,7 @@ code {
   /* box-shadow: 0px 0px 10px rgba(24,28,63, 0.2); */
   /* box-shadow: 1px 1px 15px rgba(0,0,0, 0.1); */
   /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-
+  /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
 }
 
 .ui.menu.secondary .item{
@@ -81,8 +80,10 @@ code {
 
 .ui.menu.pointing.menu .active.item:hover {
   color: #F5514C;
-  /* border-color: #F5514C; */
+  border-color: #F5514C;
   font-family: 'Roboto Mono';
+  /* border-style:none; */
+  /* border-color:transparent; */
 }
 
 .ui.menu.pointing.secondary.menu .item {
@@ -151,7 +152,3 @@ code {
   padding-inline-end: 1.5em;
 }
 
-.ui.menu.pointing.menu .active.item:hover {
-  /* border-style:none; */
-  border-color:transparent;
-}
