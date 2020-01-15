@@ -11,7 +11,7 @@ class NavBar extends Component {
     super(props);
 
     this.state = {
-      activeItem: "Home",
+      activeItem: "",
       authenticated: false
     };
   }
