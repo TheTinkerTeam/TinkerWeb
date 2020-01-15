@@ -7,11 +7,9 @@ class BubbleItem extends Component {
   }
 
   render() {
-	  const {category} = this.props;
+    const { category } = this.props;
 
-    return (
-		<Button>{category.name}</Button>
-	);
+    return <Button>{category.name}</Button>;
   }
 }
 
