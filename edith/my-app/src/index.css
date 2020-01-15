@@ -81,7 +81,7 @@ code {
 
 .ui.menu.pointing.menu .active.item:hover {
   color: #F5514C;
-  border-color: #F5514C;
+  /* border-color: #F5514C; */
   font-family: 'Roboto Mono';
 }
 
