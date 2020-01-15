@@ -6,7 +6,7 @@ class ProjectsList extends Component {
     const { category, projects } = this.props;
 
     return (
-      <div className='projects-list'>
+      <div className='projects-list card'>
         <div className='red-title'>{category} projects</div>
         <CarouselComponent projects={projects} category={category} />
       </div>

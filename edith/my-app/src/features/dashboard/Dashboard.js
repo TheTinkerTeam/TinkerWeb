@@ -128,7 +128,7 @@ class Dashboard extends Component {
 
     return (
         <div className='dashboardcontainer'>
-          <div className='welcome-item'>
+          <div className='welcome-item card'>
             <img
               src={tinkercart}
               className='tinkercart-img-position'
@@ -138,7 +138,7 @@ class Dashboard extends Component {
             />
             <WelcomeComponent />
           </div>
-          <div className='tinker-news-item'>
+          <div className='tinker-news-item card'>
             <TinkerNewsComponent />
           </div>
           <ProjectsList
