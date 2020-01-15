@@ -150,3 +150,8 @@ code {
 .ui.menu.menu {
   padding-inline-end: 1.5em;
 }
+
+.ui.menu.pointing.menu .active.item:hover {
+  /* border-style:none; */
+  border-color:transparent;
+}
