@@ -93,7 +93,6 @@
   opacity: 0.5;
 }
 
-.ui.button.bubble-container:focus,
 .ui.button.bubble-container.active {
   color: white;
   background-color: #f5514c;
