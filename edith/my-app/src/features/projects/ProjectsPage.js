@@ -38,25 +38,27 @@ class ProjectsPage extends Component {
     };
   }
 
-  handleSelection = (category) => {
+  handleSelection = category => {
     this.setState(({ activeItems }) => ({
       activeItems: [...activeItems, category.name]
     }));
   };
 
-  handleUnselection = id => {
+  // handleUnselection = (id) => {
+  //   this.setState(({ activeItems }) => ({
+  //     activeItems: activeItems.filter(
+  //       activeItems => activeItems.id !== id //returns the elements of the array that does not match the id that we are passing in our parameter
+  //     )
+  //   }));
+  // };
+
+  handleUnselection = name => {
     this.setState(({ activeItems }) => ({
       activeItems: activeItems.filter(
-        activeItems => activeItems.id !== id //returns the elements of the array that does not match the id that we are passing in our parameter
+        activeItems => activeItems !== name //returns the elements of the array that does not match the id that we are passing in our parameter
       )
     }));
   };
-
-  addactiveItems = (activeItems, evt) => {
-    this.setState({
-      activeItems: [...activeItems, evt.target.value] // object braket notation: we can access the object property by the string value
-    })
-  }
 
   render() {
     const { categories, activeItems } = this.state;
@@ -83,7 +85,6 @@ class ProjectsPage extends Component {
           <CategoryBubblesList
             categories={categories}
             activeItems={activeItems}
-            addactiveItems={this.addactiveItems}
             handleSelection={this.handleSelection}
             handleUnselection={this.handleUnselection}
           />
