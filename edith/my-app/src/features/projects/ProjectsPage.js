@@ -1,9 +1,10 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 import "./projects.css";
 import "../dashboard/Dashboard.css";
 import { Input } from "semantic-ui-react";
 import CategoryBubblesList from "./categoriesBubbleComponent/CategoryBubblesList";
 import ProjectsDisplayedList from "./ProjectsDisplayedList";
+import cuid from "cuid";
 
 const categoriesFromDatabase = [
   {
@@ -25,20 +26,42 @@ const categoriesFromDatabase = [
   {
     id: "5",
     name: "Cooking"
-  },
-]
+  }
+];
 class ProjectsPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      categories: categoriesFromDatabase
+      categories: categoriesFromDatabase,
+      activeItem: ["All"]
     };
   }
 
-  render() {
+  handleSelection = ({target: {value}}, newActiveItem) => {
+    newActiveItem.id = cuid();
+    newActiveItem.name = value;
+    this.setState(({ activeItem }) => ({
+      activeItem: [...activeItem, newActiveItem]
+    }));
+  };
 
-    const { categories } = this.state;
+  handleUnselection = id => {
+    this.setState(({ activeItem }) => ({
+      activeItem: activeItem.filter(
+        activeItem => activeItem.id !== id //returns the elements of the array that does not match the id that we are passing in our parameter
+      )
+    }));
+  };
+
+  addActiveItem = (activeItem, evt) => {
+    this.setState({
+      activeItem: [...activeItem, evt.target.value] // object braket notation: we can access the object property by the string value
+    })
+  }
+
+  render() {
+    const { categories, activeItem } = this.state;
 
     return (
       <div className='projects-container'>
@@ -59,7 +82,13 @@ class ProjectsPage extends Component {
               id='search-bar-projects'
             />
           </div>
-          <CategoryBubblesList categories={categories} />
+          <CategoryBubblesList
+            categories={categories}
+            activeItem={activeItem}
+            addActiveItem={this.addActiveItem}
+            handleSelection={this.handleSelection}
+            handleUnselection={this.handleUnselection}
+          />
           <ProjectsDisplayedList />
         </div>
       </div>

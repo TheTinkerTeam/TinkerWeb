@@ -81,3 +81,20 @@
   display: flex;
   margin: 1em 3em 2em 3em;
 }
+
+.ui.button.bubble-container {
+  margin: 0em 1em 0em 0em;
+  color: #f5514c;
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  background-color: white;
+  border: solid 1px;
+  border-radius: 30px;
+  opacity: 0.5;
+}
+
+.ui.button.bubble-container:focus {
+  color: white;
+  background-color: #f5514c;
+  opacity: 1;
+}
