@@ -34,34 +34,32 @@ class ProjectsPage extends Component {
 
     this.state = {
       categories: categoriesFromDatabase,
-      activeItem: ["All"]
+      activeItems: []
     };
   }
 
-  handleSelection = ({target: {value}}, newActiveItem) => {
-    newActiveItem.id = cuid();
-    newActiveItem.name = value;
-    this.setState(({ activeItem }) => ({
-      activeItem: [...activeItem, newActiveItem]
+  handleSelection = (category) => {
+    this.setState(({ activeItems }) => ({
+      activeItems: [...activeItems, category.name]
     }));
   };
 
   handleUnselection = id => {
-    this.setState(({ activeItem }) => ({
-      activeItem: activeItem.filter(
-        activeItem => activeItem.id !== id //returns the elements of the array that does not match the id that we are passing in our parameter
+    this.setState(({ activeItems }) => ({
+      activeItems: activeItems.filter(
+        activeItems => activeItems.id !== id //returns the elements of the array that does not match the id that we are passing in our parameter
       )
     }));
   };
 
-  addActiveItem = (activeItem, evt) => {
+  addactiveItems = (activeItems, evt) => {
     this.setState({
-      activeItem: [...activeItem, evt.target.value] // object braket notation: we can access the object property by the string value
+      activeItems: [...activeItems, evt.target.value] // object braket notation: we can access the object property by the string value
     })
   }
 
   render() {
-    const { categories, activeItem } = this.state;
+    const { categories, activeItems } = this.state;
 
     return (
       <div className='projects-container'>
@@ -84,8 +82,8 @@ class ProjectsPage extends Component {
           </div>
           <CategoryBubblesList
             categories={categories}
-            activeItem={activeItem}
-            addActiveItem={this.addActiveItem}
+            activeItems={activeItems}
+            addactiveItems={this.addactiveItems}
             handleSelection={this.handleSelection}
             handleUnselection={this.handleUnselection}
           />

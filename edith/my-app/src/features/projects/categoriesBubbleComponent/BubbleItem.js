@@ -23,9 +23,8 @@ class BubbleItem extends Component {
 //   };
 
   render() {
-    const { category, activeItem, handleSelection, handleUnselection } = this.props;
-	console.log(activeItem);
-    return <Button onClick={this.handleSelection} value={category.name} className='bubble-container'>{category.name}</Button>;
+    const { category, isActive, handleSelection, handleUnselection } = this.props;
+	return <Button onClick={() => handleSelection(category)} className={'bubble-container ' + (isActive ? 'active' : '') }>{category.name}</Button>;
   }
 }
 

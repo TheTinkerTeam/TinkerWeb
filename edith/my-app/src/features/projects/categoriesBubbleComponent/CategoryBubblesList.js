@@ -7,18 +7,18 @@ class CategoryBubblesList extends Component {
   }
 
   render() {
-    // const { categories, activeItem, addActiveItem, handleUnselection, handleSelection } = this.props;
-    const { categories, activeItem, handleUnselection, handleSelection } = this.props;
+    const { categories, activeItems, addActiveItem, handleUnselection, handleSelection } = this.props;
 
     return (
       <div className='categories-bubble-list'>
         {categories.map(category => (
 			<BubbleItem
 				key={category.id}
-				activeItem={activeItem}
+				isActive={activeItems.indexOf(category.name) !== -1}
 				category={category}
 				handleSelection={handleSelection}
 				handleUnselection={handleUnselection}
+				addActiveItem={addActiveItem}
 			/>
         ))}
       </div>
