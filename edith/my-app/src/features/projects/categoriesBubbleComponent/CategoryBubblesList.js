@@ -3,23 +3,29 @@ import BubbleItem from "./BubbleItem";
 
 class CategoryBubblesList extends Component {
   constructor(props) {
-	super(props);
+    super(props);
   }
 
   render() {
-    // const { categories, activeItem, addActiveItem, handleUnselection, handleSelection } = this.props;
-    const { categories, activeItem, handleUnselection, handleSelection } = this.props;
+    const {
+      categories,
+      activeItems,
+      addActiveItem,
+      handleUnselection,
+      handleSelection
+    } = this.props;
 
     return (
       <div className='categories-bubble-list'>
         {categories.map(category => (
-			<BubbleItem
-				key={category.id}
-				activeItem={activeItem}
-				category={category}
-				handleSelection={handleSelection}
-				handleUnselection={handleUnselection}
-			/>
+          <BubbleItem
+            key={category.id}
+            isActive={activeItems.indexOf(category.name) !== -1}
+            category={category}
+            handleSelection={handleSelection}
+            handleUnselection={handleUnselection}
+            addActiveItem={addActiveItem}
+          />
         ))}
       </div>
     );

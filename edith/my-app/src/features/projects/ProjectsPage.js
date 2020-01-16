@@ -34,35 +34,64 @@ class ProjectsPage extends Component {
 
     this.state = {
       categories: categoriesFromDatabase,
-      activeItem: ["All"]
+      activeItems: ["All"]
     };
   }
 
-  handleSelection = ({target: {value}}, newActiveItem) => {
-    newActiveItem.id = cuid();
-    newActiveItem.name = value;
-    this.setState(({ activeItem }) => ({
-      activeItem: [...activeItem, newActiveItem]
-    }));
+  handleSelection = category => {
+    if (this.state.activeItems.includes("All")) {
+      this.setState(({ activeItems }) => ({
+        activeItems: [
+          ...activeItems.filter(activeItems => activeItems !== "All"),
+          category.name
+        ]
+      }));
+    } else {
+        if (category.name === 'All') {
+          this.setState(({activeItems}) => ({
+            activeItems: [
+              'All'
+            ]
+          }))
+        } else {
+          this.setState(({ activeItems }) => ({
+            activeItems: [...activeItems, category.name]
+          }))
+      }
+    }
   };
 
-  handleUnselection = id => {
-    this.setState(({ activeItem }) => ({
-      activeItem: activeItem.filter(
-        activeItem => activeItem.id !== id //returns the elements of the array that does not match the id that we are passing in our parameter
-      )
-    }));
+  handleUnselection = name => {
+    if (this.state.activeItems.includes("All")) {
+      this.setState(({ activeItems }) => ({
+        activeItems: activeItems.filter(activeItems => activeItems === "All")
+      }));
+    } else {
+      this.setState(({ activeItems }) => ({
+        activeItems: activeItems.filter(
+          activeItems => activeItems !== name //returns the elements of the array that does not match the name that we are passing in our parameter
+        )
+      }));
+    }
   };
 
-  addActiveItem = (activeItem, evt) => {
-    this.setState({
-      activeItem: [...activeItem, evt.target.value] // object braket notation: we can access the object property by the string value
-    })
+  componentDidUpdate() {
+    if (this.state.activeItems.length === 0){
+      this.setState(({activeItems}) => ({
+        activeItems: [
+          'All'
+        ]
+      }))
+    }
   }
 
-  render() {
-    const { categories, activeItem } = this.state;
+  // componentDidMount() {
+  //   console.log(this.state.activeItems);
+  // }
 
+  render() {
+    const { categories, activeItems } = this.state;
+    console.log(this.state);
     return (
       <div className='projects-container'>
         <div className='red-title rotate-title'>
@@ -84,8 +113,7 @@ class ProjectsPage extends Component {
           </div>
           <CategoryBubblesList
             categories={categories}
-            activeItem={activeItem}
-            addActiveItem={this.addActiveItem}
+            activeItems={activeItems}
             handleSelection={this.handleSelection}
             handleUnselection={this.handleUnselection}
           />
