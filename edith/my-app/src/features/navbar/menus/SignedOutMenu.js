@@ -28,16 +28,3 @@ const SignedOutMenu = ({ signIn }) => {
 };
 
 export default SignedOutMenu;
-
-{
-  /* <Menu.Item
-	name='Join Supertinker'
-	active={activeItem === "Join Supertinker"}
-	onClick={this.handleItemClick}
-/>
-<Menu.Item
-	name='Sign in'
-	active={activeItem === "Sign in"}
-	onClick={this.handleItemClick}
-/> */
-}

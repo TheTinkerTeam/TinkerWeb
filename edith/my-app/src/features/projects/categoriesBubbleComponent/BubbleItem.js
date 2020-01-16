@@ -3,10 +3,6 @@ import { Button } from "semantic-ui-react";
 import "../projects.css";
 
 class BubbleItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       category,

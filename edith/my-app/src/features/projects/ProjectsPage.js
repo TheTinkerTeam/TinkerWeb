@@ -4,7 +4,6 @@ import "../dashboard/Dashboard.css";
 import { Input } from "semantic-ui-react";
 import CategoryBubblesList from "./categoriesBubbleComponent/CategoryBubblesList";
 import ProjectsDisplayedList from "./ProjectsDisplayedList";
-import cuid from "cuid";
 
 const categoriesFromDatabase = [
   {
