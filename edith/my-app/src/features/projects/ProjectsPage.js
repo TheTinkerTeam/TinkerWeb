@@ -34,35 +34,64 @@ class ProjectsPage extends Component {
 
     this.state = {
       categories: categoriesFromDatabase,
-      activeItems: []
+      activeItems: ["All"]
     };
   }
 
   handleSelection = category => {
-    this.setState(({ activeItems }) => ({
-      activeItems: [...activeItems, category.name]
-    }));
+    if (this.state.activeItems.includes("All")) {
+      this.setState(({ activeItems }) => ({
+        activeItems: [
+          ...activeItems.filter(activeItems => activeItems !== "All"),
+          category.name
+        ]
+      }));
+    } else {
+        if (category.name === 'All') {
+          this.setState(({activeItems}) => ({
+            activeItems: [
+              'All'
+            ]
+          }))
+        } else {
+          this.setState(({ activeItems }) => ({
+            activeItems: [...activeItems, category.name]
+          }))
+      }
+    }
   };
-
-  // handleUnselection = (id) => {
-  //   this.setState(({ activeItems }) => ({
-  //     activeItems: activeItems.filter(
-  //       activeItems => activeItems.id !== id //returns the elements of the array that does not match the id that we are passing in our parameter
-  //     )
-  //   }));
-  // };
 
   handleUnselection = name => {
-    this.setState(({ activeItems }) => ({
-      activeItems: activeItems.filter(
-        activeItems => activeItems !== name //returns the elements of the array that does not match the id that we are passing in our parameter
-      )
-    }));
+    if (this.state.activeItems.includes("All")) {
+      this.setState(({ activeItems }) => ({
+        activeItems: activeItems.filter(activeItems => activeItems === "All")
+      }));
+    } else {
+      this.setState(({ activeItems }) => ({
+        activeItems: activeItems.filter(
+          activeItems => activeItems !== name //returns the elements of the array that does not match the name that we are passing in our parameter
+        )
+      }));
+    }
   };
+
+  componentDidUpdate() {
+    if (this.state.activeItems.length === 0){
+      this.setState(({activeItems}) => ({
+        activeItems: [
+          'All'
+        ]
+      }))
+    }
+  }
+
+  // componentDidMount() {
+  //   console.log(this.state.activeItems);
+  // }
 
   render() {
     const { categories, activeItems } = this.state;
-
+    console.log(this.state);
     return (
       <div className='projects-container'>
         <div className='red-title rotate-title'>
