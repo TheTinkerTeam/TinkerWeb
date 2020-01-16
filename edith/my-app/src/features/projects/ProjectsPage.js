@@ -46,16 +46,14 @@ class ProjectsPage extends Component {
         ]
       }));
     } else {
-        if (category.name === 'All') {
-          this.setState(({activeItems}) => ({
-            activeItems: [
-              'All'
-            ]
-          }))
-        } else {
-          this.setState(({ activeItems }) => ({
-            activeItems: [...activeItems, category.name]
-          }))
+      if (category.name === "All") {
+        this.setState(({ activeItems }) => ({
+          activeItems: ["All"]
+        }));
+      } else {
+        this.setState(({ activeItems }) => ({
+          activeItems: [...activeItems, category.name]
+        }));
       }
     }
   };
@@ -75,12 +73,10 @@ class ProjectsPage extends Component {
   };
 
   componentDidUpdate() {
-    if (this.state.activeItems.length === 0){
-      this.setState(({activeItems}) => ({
-        activeItems: [
-          'All'
-        ]
-      }))
+    if (this.state.activeItems.length === 0) {
+      this.setState(({ activeItems }) => ({
+        activeItems: ["All"]
+      }));
     }
   }
 
@@ -90,7 +86,6 @@ class ProjectsPage extends Component {
 
   render() {
     const { categories, activeItems } = this.state;
-    console.log(this.state);
     return (
       <div className='projects-container'>
         <div className='red-title rotate-title'>

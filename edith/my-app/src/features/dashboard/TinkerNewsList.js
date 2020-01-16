@@ -4,8 +4,6 @@ import TinkerNewsItem from "./TinkerNewsItem";
 class TinkerNewsList extends Component {
   render() {
     const { news } = this.props;
-    console.log({ news });
-
     return (
       <div className='tinkernewslist-scroll'>
         {news.map((notification, index) => (
