@@ -27,7 +27,7 @@ class CarouselItem extends Component {
     return (
       <div className='img__wrap'>
         <div className='img__description'>{project.title}</div>
-        <a href='_blank'>
+        <a href={`/projects/${project.id}`}>
           <img
             src={project.imageURL}
             className='img__img'
