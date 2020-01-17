@@ -2,15 +2,10 @@ import React, { Component } from "react";
 import BubbleItem from "./BubbleItem";
 
 class CategoryBubblesList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       categories,
       activeItems,
-      addActiveItem,
       handleUnselection,
       handleSelection
     } = this.props;
@@ -24,7 +19,6 @@ class CategoryBubblesList extends Component {
             category={category}
             handleSelection={handleSelection}
             handleUnselection={handleUnselection}
-            addActiveItem={addActiveItem}
           />
         ))}
       </div>

@@ -76,6 +76,13 @@ class NavBar extends Component {
             active={activeItem === "Membership"}
             onClick={this.handleItemClick}
           />
+          <Menu.Item
+            as={NavLink}
+            to='/test'
+            name='Test'
+            active={activeItem === "Test"}
+            onClick={this.handleItemClick}
+          />
           <Menu.Item>
             <Input
               className='icon'
