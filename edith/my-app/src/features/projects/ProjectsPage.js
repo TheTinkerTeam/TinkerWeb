@@ -36,6 +36,7 @@ const categoriesFromDatabase = [
     name: "Innovation"
   },
 ];
+
 class ProjectsPage extends Component {
   constructor(props) {
     super(props);
