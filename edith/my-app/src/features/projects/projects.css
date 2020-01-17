@@ -65,12 +65,12 @@
 /* ========== */
 
 #search-bar-projects {
-    font-family: 'Roboto Mono';
-	font-size: 1em;
+  font-family: "Roboto Mono";
+  font-size: 1em;
 }
 
 #search-bar-projects:focus {
-	width: 300px;
+  width: 300px;
 }
 
 /* ====================== */
@@ -79,6 +79,7 @@
 
 .categories-bubble-list {
   display: flex;
+  flex-wrap: wrap;
   margin: 1em 3em 2em 3em;
 }
 
@@ -97,4 +98,33 @@
   color: white;
   background-color: #f5514c;
   opacity: 1;
+}
+
+/* ========================== */
+/* Display Projects component */
+/* ========================== */
+
+.wrapper {
+  display: inline-block;
+  width: 10em;
+}
+.projects-display-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.projects-display-flex-container {
+  margin: 1.5em;
+  text-align: center;
+}
+
+.displayed-projects-item {
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.child {
+  flex-wrap: wrap;
 }
