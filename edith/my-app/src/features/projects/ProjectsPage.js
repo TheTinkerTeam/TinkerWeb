@@ -4,6 +4,11 @@ import "../dashboard/Dashboard.css";
 import { Input } from "semantic-ui-react";
 import CategoryBubblesList from "./categoriesBubbleComponent/CategoryBubblesList";
 import ProjectsDisplayedList from "./ProjectsDisplayedList";
+import {connect} from 'react-redux';
+
+const mapStateToProps = (state) => ({
+  projects: state.projects
+})
 
 const categoriesFromDatabase = [
   {
