@@ -95,6 +95,9 @@ class ProjectsPage extends Component {
 
   render() {
     const { categories, activeItems } = this.state;
+
+    const {projects} = this.props;
+
     return (
       <div className='projects-container'>
         <div className='red-title rotate-title'>
@@ -120,11 +123,11 @@ class ProjectsPage extends Component {
             handleSelection={this.handleSelection}
             handleUnselection={this.handleUnselection}
           />
-          <ProjectsDisplayedList />
+          <ProjectsDisplayedList projects={projects} />
         </div>
       </div>
     );
   }
 }
 
-export default ProjectsPage;
+export default connect(mapStateToProps)(ProjectsPage);
