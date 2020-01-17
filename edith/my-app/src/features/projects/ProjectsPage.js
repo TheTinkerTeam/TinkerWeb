@@ -25,7 +25,11 @@ const categoriesFromDatabase = [
   {
     id: "5",
     name: "Cooking"
-  }
+  },
+  {
+    id: "6",
+    name: "Innovation"
+  },
 ];
 class ProjectsPage extends Component {
   constructor(props) {
