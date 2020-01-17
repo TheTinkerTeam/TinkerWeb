@@ -6,5 +6,5 @@ export const createReducer = (initialState, fnMap) => {
   };
 };
 
-//fnMap is a map of teh functions we create inside the reducer
+//fnMap is a map of the functions we create inside the reducer
 // [type] => object braket notation: the object is going to be passed as a string
