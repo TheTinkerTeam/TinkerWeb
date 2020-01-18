@@ -7,42 +7,43 @@ import ProjectsDisplayedList from "./ProjectsDisplayedList";
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => ({
-  projects: state.projects
+  projects: state.projects,
+  categories: state.projectsCategory
 })
 
-const categoriesFromDatabase = [
-  {
-    id: "1",
-    name: "All"
-  },
-  {
-    id: "2",
-    name: "Science"
-  },
-  {
-    id: "3",
-    name: "Wood-working"
-  },
-  {
-    id: "4",
-    name: "Coding"
-  },
-  {
-    id: "5",
-    name: "Cooking"
-  },
-  {
-    id: "6",
-    name: "Innovation"
-  },
-];
+// const categoriesFromDatabase = [
+//   {
+//     id: "1",
+//     name: "All"
+//   },
+//   {
+//     id: "2",
+//     name: "Science"
+//   },
+//   {
+//     id: "3",
+//     name: "Wood-working"
+//   },
+//   {
+//     id: "4",
+//     name: "Coding"
+//   },
+//   {
+//     id: "5",
+//     name: "Cooking"
+//   },
+//   {
+//     id: "6",
+//     name: "Innovation"
+//   },
+// ];
 
 class ProjectsPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      categories: categoriesFromDatabase,
+      // categories: categoriesFromDatabase,
       activeItems: ["All"]
     };
   }
@@ -95,9 +96,9 @@ class ProjectsPage extends Component {
   // }
 
   render() {
-    const { categories, activeItems } = this.state;
+    const { activeItems } = this.state;
 
-    const {projects} = this.props;
+    const {projects, categories} = this.props;
 
     return (
       <div className='projects-container'>
