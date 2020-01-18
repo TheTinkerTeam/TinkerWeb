@@ -4,7 +4,7 @@ class WelcomeListItem extends Component {
 	render() {
     return (
       <div className='welcomelistitem'>
-        {this.props.item}
+        {this.props.item.description}
       </div>
     );
   }

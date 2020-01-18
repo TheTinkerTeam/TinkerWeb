@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import WelcomeList from "./WelcomeList";
+import { connect } from "react-redux";
+
+const mapStateToProps = state => ({
+  welcomeItems: state.welcomeItems
+});
 
 class WelcomeComponent extends Component {
-  state = {
-    items: [
-      "Try out starter projects",
-      "Join a class with your class code",
-      "Download the Tinker Cart plans",
-      "wow"
-    ]
-  };
-
   render() {
+    const { welcomeItems } = this.props;
+
     return (
       <div>
         <div className='title-tinkercart-image'>
@@ -24,10 +22,10 @@ class WelcomeComponent extends Component {
             <span className='supertinker-text'>nker</span>
           </div>
         </div>
-        <WelcomeList items={this.state.items} />
+        <WelcomeList items={welcomeItems} />
       </div>
     );
   }
 }
 
-export default WelcomeComponent;
+export default connect(mapStateToProps)(WelcomeComponent);
