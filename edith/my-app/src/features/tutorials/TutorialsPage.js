@@ -5,42 +5,16 @@ import TutoDisplayedList from "./TutoDisplayedList";
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => ({
-  tutorials: state.tutorials
+  tutorials: state.tutorials,
+  tutoCat: state.tutorialsCategory
 })
-
-const tutoCatFromDatabase = [
-  {
-    id: "1",
-    name: "All"
-  },
-  {
-    id: "2",
-    name: "3D printing"
-  },
-  {
-    id: "3",
-    name: "Wood-working"
-  },
-  {
-    id: "4",
-    name: "Laser Cutting"
-  },
-  {
-    id: "5",
-    name: "Software"
-  },
-  {
-    id: "6",
-    name: "Coding"
-  }
-];
 
 class TutorialsPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      tutoCat: tutoCatFromDatabase,
+      // tutoCat: tutoCatFromDatabase,
       activeItems: ["All"]
     };
   }
@@ -88,9 +62,9 @@ class TutorialsPage extends Component {
   }
 
   render() {
-    const { tutoCat, activeItems } = this.state;
+    const { activeItems } = this.state;
 
-    const { tutorials } = this.props;
+    const { tutorials, tutoCat } = this.props;
 
     return (
       <div className='projects-container'>
