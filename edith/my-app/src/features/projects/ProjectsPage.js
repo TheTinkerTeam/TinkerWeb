@@ -4,12 +4,12 @@ import "../dashboard/Dashboard.css";
 import { Input } from "semantic-ui-react";
 import CategoryBubblesList from "./categoriesBubbleComponent/CategoryBubblesList";
 import ProjectsDisplayedList from "./ProjectsDisplayedList";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   projects: state.projects,
   categories: state.projectsCategory
-})
+});
 
 class ProjectsPage extends Component {
   constructor(props) {
@@ -66,7 +66,7 @@ class ProjectsPage extends Component {
   render() {
     const { activeItems } = this.state;
 
-    const {projects, categories} = this.props;
+    const { projects, categories } = this.props;
 
     return (
       <div className='projects-container'>

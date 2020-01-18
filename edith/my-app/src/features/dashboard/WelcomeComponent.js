@@ -7,9 +7,8 @@ const mapStateToProps = state => ({
 });
 
 class WelcomeComponent extends Component {
-
   render() {
-    const {welcomeItems} = this.props;
+    const { welcomeItems } = this.props;
 
     return (
       <div>

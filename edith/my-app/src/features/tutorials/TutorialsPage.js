@@ -2,19 +2,18 @@ import React, { Component } from "react";
 import { Input } from "semantic-ui-react";
 import CategoryBubblesList from "../projects/categoriesBubbleComponent/CategoryBubblesList";
 import TutoDisplayedList from "./TutoDisplayedList";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   tutorials: state.tutorials,
   tutoCat: state.tutorialsCategory
-})
+});
 
 class TutorialsPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // tutoCat: tutoCatFromDatabase,
       activeItems: ["All"]
     };
   }
