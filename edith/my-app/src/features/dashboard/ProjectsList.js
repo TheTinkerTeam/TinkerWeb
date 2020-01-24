@@ -7,8 +7,6 @@ class ProjectsList extends Component {
   render() {
     const { category, projects } = this.props;
 
-    console.log({ projects });
-
     const responsive = {
       superLargeDesktop: {
         // the naming can be any, depends on you.

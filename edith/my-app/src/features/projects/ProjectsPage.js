@@ -57,9 +57,12 @@ class ProjectsPage extends Component {
 
   componentDidUpdate() {
     if (this.state.activeItems.length === 0) {
-      this.setState(({ activeItems }) => ({
+      // this.setState(({ activeItems }) => ({
+      //   activeItems: ["All"]
+      // }));
+      this.setState({
         activeItems: ["All"]
-      }));
+      });
     }
   }
 
