@@ -1,18 +1,27 @@
 import React, { Component } from "react";
-import "./Dashboard.css";
+// import "./Dashboard.css";
 import WelcomeComponent from "./WelcomeComponent";
 import TinkerNewsComponent from "./TinkerNewsComponent";
 import ProjectsList from "./ProjectsList";
 import tinkercart from "./img/tinkercart.png";
 import { connect } from "react-redux";
+import ProjectForm from "../projects/projectForm/ProjectForm";
+import {createProject} from './projectsActions';
 
 const mapStateToProps = state => ({
   projects: state.projects
 });
 
+const mapDispatchToProps = {
+	createProject
+}
+
 class Dashboard extends Component {
+
   render() {
-    const { projects } = this.props;
+    const { projects, createProject } = this.props;
+
+    console.log(projects);
 
     return (
       <div className='dashboardcontainer'>
@@ -59,9 +68,11 @@ class Dashboard extends Component {
             return project.tags.indexOf("Cooking") !== -1;
           })}
         />
+        <ProjectForm createProject={createProject} />
+
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

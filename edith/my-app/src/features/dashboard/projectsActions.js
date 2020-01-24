@@ -1,9 +1,9 @@
-import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT } from "./projectsConstants";
+import { CREATE_PROJECT, UPDATE_EVENT, DELETE_EVENT } from "./projectsConstants";
 
-export const createEvent = event => {
+export const createProject = project => {
   return {
-    type: CREATE_EVENT,
-    payload: { event }
+    type: CREATE_PROJECT,
+    payload: { project }
   };
 };
 
