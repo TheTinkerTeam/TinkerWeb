@@ -3,10 +3,44 @@ import CarouselItem from "./CarouselItem";
 import InfiniteCarousel from "react-leaf-carousel";
 
 class CarouselComponent extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+//   shouldComponentUpdate(nextProps) {
+//     const projectAdded = this.props.projects.length !== nextProps.projects.length;
+//     return projectAdded;
+// }
+
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.props.projects != nextProps.projects) {
+  //     return (true)
+  //   }
+  // }
+
+  // componentDidUpdate(prevProps) {
+  //   // Typical usage (don't forget to compare props):
+  //   if (this.props.projects !== prevProps.projects) {
+  //     this.forceUpdate();
+  //   }
+  // }
+
   render() {
     const { projects, category } = this.props;
+
+    console.log('in carousel')
+    console.log(projects)
     return (
       <div>
+        <div>{projects.length}</div>
+        {projects.map((project, index) => (
+            <div key={index}>
+              {project.title}
+            </div>
+          ))}
+        {console.log("test" + projects)}
+
         <InfiniteCarousel
           breakpoints={[
             {
@@ -31,13 +65,19 @@ class CarouselComponent extends Component {
           slidesToScroll={1}
           slidesToShow={9}
           scrollOnDevice={true}
+          projects={projects.length}
         >
+          {/* {projects.map((project, index) => (
+            <div key={index}>
+              <div>{projects.length}</div>
+              <CarouselItem key={index} category={category} project={project} />
+            </div>
+          ))} */}
           {projects.map((project, index) => (
-            <CarouselItem
-              key={projects[index].id}
-              category={category}
-              project={project}
-            />
+            <div key={index}>
+              <div>{projects.length}</div>
+              <CarouselItem key={index} category={category} project={project} />
+            </div>
           ))}
         </InfiniteCarousel>
       </div>

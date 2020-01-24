@@ -1,5 +1,5 @@
 import { createReducer } from "../../common/util/reducerUtils";
-import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT } from "./projectsConstants";
+import { CREATE_PROJECT, UPDATE_EVENT, DELETE_EVENT } from "./projectsConstants";
 
 const initialState = [
   {
@@ -72,7 +72,7 @@ const initialState = [
     id: "7",
     title: "The House of the Future",
     imageURL: "https://via.placeholder.com/150",
-    description: "This is the description of the 'Keeping birds safe' project",
+    description: "This is the description of the 'The House of the Future' project",
     learning_objectives:
       "Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Quam quisque id diam vel quam elementum pulvinar etiam non. Dictum varius duis at consectetur lorem donec massa. Amet est placerat in egestas erat. At volutpat diam ut venenatis tellus. Sit amet facilisis magna etiam tempor orci eu lobortis. Sit amet mauris commodo quis imperdiet massa tincidunt. Cras fermentum odio eu feugiat pretium nibh ipsum consequat. Interdum consectetur libero id faucibus nisl tincidunt eget nullam non. Nisi vitae suscipit tellus mauris a diam maecenas sed. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Vitae ultricies leo integer malesuada. Erat imperdiet sed euismod nisi porta lorem mollis aliquam ut. Tristique senectus et netus et malesuada fames. Et ultrices neque ornare aenean euismod elementum nisi quis.",
     subjects: ["design", "maths", "Science"],
@@ -83,7 +83,7 @@ const initialState = [
     id: "8",
     title: "Medium is the Message",
     imageURL: "https://via.placeholder.com/150",
-    description: "This is the description of the 'Keeping birds safe' project",
+    description: "This is the description of the 'Medium is the Message' project",
     learning_objectives:
       "Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Quam quisque id diam vel quam elementum pulvinar etiam non. Dictum varius duis at consectetur lorem donec massa. Amet est placerat in egestas erat. At volutpat diam ut venenatis tellus. Sit amet facilisis magna etiam tempor orci eu lobortis. Sit amet mauris commodo quis imperdiet massa tincidunt. Cras fermentum odio eu feugiat pretium nibh ipsum consequat. Interdum consectetur libero id faucibus nisl tincidunt eget nullam non. Nisi vitae suscipit tellus mauris a diam maecenas sed. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Vitae ultricies leo integer malesuada. Erat imperdiet sed euismod nisi porta lorem mollis aliquam ut. Tristique senectus et netus et malesuada fames. Et ultrices neque ornare aenean euismod elementum nisi quis.",
     subjects: ["design", "maths", "Science"],
@@ -94,7 +94,7 @@ const initialState = [
     id: "9",
     title: "Making a Toy",
     imageURL: "https://via.placeholder.com/150",
-    description: "This is the description of the 'Keeping birds safe' project",
+    description: "This is the description of the 'Making a Toy' project",
     learning_objectives:
       "Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Quam quisque id diam vel quam elementum pulvinar etiam non. Dictum varius duis at consectetur lorem donec massa. Amet est placerat in egestas erat. At volutpat diam ut venenatis tellus. Sit amet facilisis magna etiam tempor orci eu lobortis. Sit amet mauris commodo quis imperdiet massa tincidunt. Cras fermentum odio eu feugiat pretium nibh ipsum consequat. Interdum consectetur libero id faucibus nisl tincidunt eget nullam non. Nisi vitae suscipit tellus mauris a diam maecenas sed. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Vitae ultricies leo integer malesuada. Erat imperdiet sed euismod nisi porta lorem mollis aliquam ut. Tristique senectus et netus et malesuada fames. Et ultrices neque ornare aenean euismod elementum nisi quis.",
     subjects: ["design", "maths", "Science"],
@@ -105,7 +105,7 @@ const initialState = [
     id: "10",
     title: "Moving a Dot",
     imageURL: "https://via.placeholder.com/150",
-    description: "This is the description of the 'Keeping birds safe' project",
+    description: "This is the description of the 'Moving a Dot' project",
     learning_objectives:
       "Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Quam quisque id diam vel quam elementum pulvinar etiam non. Dictum varius duis at consectetur lorem donec massa. Amet est placerat in egestas erat. At volutpat diam ut venenatis tellus. Sit amet facilisis magna etiam tempor orci eu lobortis. Sit amet mauris commodo quis imperdiet massa tincidunt. Cras fermentum odio eu feugiat pretium nibh ipsum consequat. Interdum consectetur libero id faucibus nisl tincidunt eget nullam non. Nisi vitae suscipit tellus mauris a diam maecenas sed. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Vitae ultricies leo integer malesuada. Erat imperdiet sed euismod nisi porta lorem mollis aliquam ut. Tristique senectus et netus et malesuada fames. Et ultrices neque ornare aenean euismod elementum nisi quis.",
     subjects: ["design", "maths", "Science"],
@@ -114,8 +114,9 @@ const initialState = [
   }
 ];
 
-const createEvent = (state, payload) => {
-  return [...state, payload.event];
+const createProject = (state, payload) => {
+  console.log(payload);
+  return [...state, payload.project];
 };
 
 const updateEvent = (state, payload) => {
@@ -130,7 +131,7 @@ const deleteEvent = (state, payload) => {
 };
 
 export default createReducer(initialState, {
-	[CREATE_EVENT]: createEvent,
+	[CREATE_PROJECT]: createProject,
 	[UPDATE_EVENT]: updateEvent,
 	[DELETE_EVENT]: deleteEvent,
 })
