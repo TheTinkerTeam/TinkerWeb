@@ -10,6 +10,7 @@ class SearchBarComponent extends Component {
       handleSelection,
       handleUnselection
     } = this.props;
+
     return (
       <div>
         <div>

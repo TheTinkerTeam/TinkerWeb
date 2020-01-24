@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./projects.css";
 import "../dashboard/Dashboard.css";
-import { Input } from "semantic-ui-react";
-import CategoryBubblesList from "./categoriesBubbleComponent/CategoryBubblesList";
 import ProjectsDisplayedList from "./ProjectsDisplayedList";
 import { connect } from "react-redux";
 import SearchBarComponent from "./searchBar/SearchBarComponent";
@@ -58,9 +56,6 @@ class ProjectsPage extends Component {
 
   componentDidUpdate() {
     if (this.state.activeItems.length === 0) {
-      // this.setState(({ activeItems }) => ({
-      //   activeItems: ["All"]
-      // }));
       this.setState({
         activeItems: ["All"]
       });
@@ -71,6 +66,8 @@ class ProjectsPage extends Component {
     const { activeItems } = this.state;
 
     const { projects, categories } = this.props;
+
+    console.log(activeItems);
 
     return (
       <div className='projects-container'>
@@ -89,7 +86,20 @@ class ProjectsPage extends Component {
             activeItems={activeItems}
             categories={categories}
           />
-          <ProjectsDisplayedList projects={projects} />
+          <div>
+            {activeItems[0] === "All" ? (
+              <ProjectsDisplayedList projects={projects} />
+            ) : (
+              <ProjectsDisplayedList
+                projects={projects.filter(project => {
+                  return (
+                    project.tags.filter(value => activeItems.includes(value))
+                      .length > 0
+                  );
+                })}
+              />
+            )}
+          </div>
         </div>
       </div>
     );
