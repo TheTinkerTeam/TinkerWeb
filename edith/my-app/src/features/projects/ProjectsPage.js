@@ -5,6 +5,7 @@ import { Input } from "semantic-ui-react";
 import CategoryBubblesList from "./categoriesBubbleComponent/CategoryBubblesList";
 import ProjectsDisplayedList from "./ProjectsDisplayedList";
 import { connect } from "react-redux";
+import SearchBarComponent from "./searchBar/SearchBarComponent";
 
 const mapStateToProps = state => ({
   projects: state.projects,
@@ -82,19 +83,11 @@ class ProjectsPage extends Component {
           <span className='superprojects-text'>ects</span>
         </div>
         <div className='projects-card'>
-          <div>
-            <Input
-              className='icon'
-              icon='search'
-              placeholder='Search...'
-              id='search-bar-projects'
-            />
-          </div>
-          <CategoryBubblesList
-            categories={categories}
-            activeItems={activeItems}
+          <SearchBarComponent
             handleSelection={this.handleSelection}
             handleUnselection={this.handleUnselection}
+            activeItems={activeItems}
+            categories={categories}
           />
           <ProjectsDisplayedList projects={projects} />
         </div>
