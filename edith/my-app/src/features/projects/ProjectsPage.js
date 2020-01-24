@@ -5,7 +5,6 @@ import { Input } from "semantic-ui-react";
 import CategoryBubblesList from "./categoriesBubbleComponent/CategoryBubblesList";
 import ProjectsDisplayedList from "./ProjectsDisplayedList";
 import { connect } from "react-redux";
-import ProjectForm from "./projectForm/ProjectForm";
 
 const mapStateToProps = state => ({
   projects: state.projects,
@@ -96,7 +95,6 @@ class ProjectsPage extends Component {
           />
           <ProjectsDisplayedList projects={projects} />
         </div>
-        <ProjectForm />
       </div>
     );
   }

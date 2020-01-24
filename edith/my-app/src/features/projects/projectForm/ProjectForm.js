@@ -40,7 +40,6 @@ class ProjectForm extends Component {
   };
 
   handleInputChange = ({ target: { name, value } }) => {
-
     if (name === "tags") {
       value = [value];
     }
@@ -57,7 +56,6 @@ class ProjectForm extends Component {
   };
 
   render() {
-
     const {
       title,
       description,
@@ -68,7 +66,8 @@ class ProjectForm extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div style={{ "grid-column": "1/6" }}>
+        <hr color='#181C3F' />
         <h1>Create a project TEST</h1>
         <Segment>
           <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
