@@ -89,8 +89,8 @@ class ProjectsPage extends Component {
             <ProjectsDisplayedList
               projects={projects.filter(project => {
                 return (
-                  project.tags.filter(tag => activeItems.includes(tag))
-                    .length > 0
+                  project.tags.filter(tag => activeItems.includes(tag)).length >
+                  0
                 );
               })}
             />
