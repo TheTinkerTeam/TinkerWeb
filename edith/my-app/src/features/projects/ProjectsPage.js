@@ -86,20 +86,18 @@ class ProjectsPage extends Component {
             activeItems={activeItems}
             categories={categories}
           />
-          <div>
-            {activeItems[0] === "All" ? (
-              <ProjectsDisplayedList projects={projects} />
-            ) : (
-              <ProjectsDisplayedList
-                projects={projects.filter(project => {
-                  return (
-                    project.tags.filter(value => activeItems.includes(value))
-                      .length > 0
-                  );
-                })}
-              />
-            )}
-          </div>
+          {activeItems[0] === "All" ? (
+            <ProjectsDisplayedList projects={projects} />
+          ) : (
+            <ProjectsDisplayedList
+              projects={projects.filter(project => {
+                return (
+                  project.tags.filter(tag => activeItems.includes(tag))
+                    .length > 0
+                );
+              })}
+            />
+          )}
         </div>
       </div>
     );
