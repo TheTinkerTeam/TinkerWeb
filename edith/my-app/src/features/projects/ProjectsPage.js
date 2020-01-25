@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import "./projects.css";
 import "../dashboard/Dashboard.css";
-import { Input } from "semantic-ui-react";
-import CategoryBubblesList from "./categoriesBubbleComponent/CategoryBubblesList";
 import ProjectsDisplayedList from "./ProjectsDisplayedList";
 import { connect } from "react-redux";
-import ProjectForm from "./projectForm/ProjectForm";
+import SearchBarComponent from "./searchBar/SearchBarComponent";
 
 const mapStateToProps = state => ({
   projects: state.projects,
@@ -58,9 +56,9 @@ class ProjectsPage extends Component {
 
   componentDidUpdate() {
     if (this.state.activeItems.length === 0) {
-      this.setState(({ activeItems }) => ({
+      this.setState({
         activeItems: ["All"]
-      }));
+      });
     }
   }
 
@@ -68,6 +66,8 @@ class ProjectsPage extends Component {
     const { activeItems } = this.state;
 
     const { projects, categories } = this.props;
+
+    console.log(activeItems);
 
     return (
       <div className='projects-container'>
@@ -80,23 +80,25 @@ class ProjectsPage extends Component {
           <span className='superprojects-text'>ects</span>
         </div>
         <div className='projects-card'>
-          <div>
-            <Input
-              className='icon'
-              icon='search'
-              placeholder='Search...'
-              id='search-bar-projects'
-            />
-          </div>
-          <CategoryBubblesList
-            categories={categories}
-            activeItems={activeItems}
+          <SearchBarComponent
             handleSelection={this.handleSelection}
             handleUnselection={this.handleUnselection}
+            activeItems={activeItems}
+            categories={categories}
           />
-          <ProjectsDisplayedList projects={projects} />
+          {activeItems[0] === "All" ? (
+            <ProjectsDisplayedList projects={projects} />
+          ) : (
+            <ProjectsDisplayedList
+              projects={projects.filter(project => {
+                return (
+                  project.tags.filter(tag => activeItems.includes(tag))
+                    .length > 0
+                );
+              })}
+            />
+          )}
         </div>
-        <ProjectForm />
       </div>
     );
   }

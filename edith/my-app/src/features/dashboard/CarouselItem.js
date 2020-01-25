@@ -4,7 +4,6 @@ class CarouselItem extends Component {
 
   render() {
     const { project } = this.props;
-    console.log(project);
     return (
       <a href={`/projects/${project.id}`} className='img__wrap'>
         <div className='img__description'>{project.title}</div>
