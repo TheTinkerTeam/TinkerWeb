@@ -64,10 +64,7 @@ class ProjectsPage extends Component {
 
   render() {
     const { activeItems } = this.state;
-
     const { projects, categories } = this.props;
-
-    console.log(activeItems);
 
     return (
       <div className='projects-container'>

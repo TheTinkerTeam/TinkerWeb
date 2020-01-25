@@ -66,7 +66,7 @@ class ProjectForm extends Component {
     } = this.state;
 
     return (
-      <div style={{ "grid-column": "1/6" }}>
+      <div style={{ "gridColumn": "1/6" }}>
         <hr color='#181C3F' />
         <h1>Create a project TEST</h1>
         <Segment>
