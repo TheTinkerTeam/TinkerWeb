@@ -64,10 +64,7 @@ class ProjectsPage extends Component {
 
   render() {
     const { activeItems } = this.state;
-
     const { projects, categories } = this.props;
-
-    console.log(activeItems);
 
     return (
       <div className='projects-container'>
@@ -92,8 +89,8 @@ class ProjectsPage extends Component {
             <ProjectsDisplayedList
               projects={projects.filter(project => {
                 return (
-                  project.tags.filter(tag => activeItems.includes(tag))
-                    .length > 0
+                  project.tags.filter(tag => activeItems.includes(tag)).length >
+                  0
                 );
               })}
             />
