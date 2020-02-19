@@ -1,0 +1,82 @@
+
+@host = http://localhost:8000/api/v1
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWU0ZDU3NzAyZGI5ZDA5YmY4MDI0YzRlIn0sImlhdCI6MTU4MjEyNjk2MCwiZXhwIjoxNTgyMTMwNTYwfQ.-eZfdPLIoBCE6n5Xv6peE8_F-kAY-tNQJXMlc4JHtOk
+@email = kaplinjoseph@gmail.com
+@username = jkaplin
+@password = 12345678
+
+// Users
+
+@userID = something
+
+### Sign Up
+POST {{host}}/users
+Content-Type: application/json
+
+{
+    "email": "{{email}}",
+    "username": "{{username}}",
+    "password": "{{password}}"
+}
+
+### Log In
+POST {{host}}/users/auth
+Content-Type: application/json
+
+{
+    "username": "{{username}}",
+    "password": "{{password}}"
+}
+
+### Log Out
+DELETE {{host}}/users/auth/{{userID}}
+x-auth-token: {{token}}
+
+// Profiles
+
+@profileID = 5e4d57fa2db9d09bf8024c4f
+@name = Joseph Kaplin
+
+### Get all profiles
+GET {{host}}/profiles
+x-auth-token: {{token}}
+
+### Get full details of a user's profile
+GET {{host}}/profiles/{{profileID}}
+x-auth-token: {{token}}
+
+### Create user's profile
+POST {{host}}/profiles
+x-auth-token: {{token}}
+Content-Type: application/json
+
+{
+    "name": "{{name}}"
+}
+
+### Update user's profile
+PATCH {{host}}/profiles/{{profileID}}
+x-auth-token: {{token}}
+Content-Type: application/json
+
+{
+    "name": "{{name}}"
+}
+
+### Remove user's profile
+DELETE {{host}}/profiles/{{profileID}}
+x-auth-token: {{token}}
+
+
+
+### Create project
+POST {{host}}/projects
+Content-Type: application/json
+
+{
+    "title": "test",
+    "description": "test"
+}
+### Get all projects
+GET {{host}}/projects
