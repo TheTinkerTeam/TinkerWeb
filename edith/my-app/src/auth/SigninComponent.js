@@ -4,7 +4,7 @@ class SigninComponent extends Component {
 	render() {
 		return (
 			<div>
-				This is the SignIn page
+				Hello!
 			</div>
 		)
 	}
