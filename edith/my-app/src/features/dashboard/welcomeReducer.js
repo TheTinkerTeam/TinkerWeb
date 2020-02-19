@@ -1,5 +1,4 @@
-import { createReducer } from "../../common/util/reducerUtils";
-import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT } from "./welcomeConstants";
+import { CREATE_WELCOME } from "./welcomeConstants";
 
 const initialState = [
   {
@@ -20,23 +19,13 @@ const initialState = [
   }
 ];
 
-const createEvent = (state, payload) => {
-  return [...state, payload.event];
+const welcomeReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case CREATE_WELCOME:
+      return [...state, action.payload];
+    default:
+      return state;
+  }
 };
 
-const updateEvent = (state, payload) => {
-  return [
-    ...state.filter(event => event.id !== payload.event.id),
-    payload.event
-  ];
-};
-
-const deleteEvent = (state, payload) => {
-  return [...state.filter(event => event.id !== payload.eventId)];
-};
-
-export default createReducer(initialState, {
-  [CREATE_EVENT]: createEvent,
-  [UPDATE_EVENT]: updateEvent,
-  [DELETE_EVENT]: deleteEvent
-});
+export default welcomeReducer;

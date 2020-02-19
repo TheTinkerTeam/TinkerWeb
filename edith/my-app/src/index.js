@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { configureStore } from "./store/configureStore";
 
-const store = configureStore();
+const my_store = configureStore();
 
 // console.log(store.getState());
 
@@ -17,7 +17,7 @@ const rootEl = document.getElementById("root");
 
 let render = () => {
   ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={my_store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
