@@ -1,5 +1,4 @@
-import { createReducer } from "../../common/util/reducerUtils";
-import { CREATE_PROJECT, UPDATE_EVENT, DELETE_EVENT } from "./projectsConstants";
+import { CREATE_PROJECT } from "./projectsConstants";
 
 const initialState = [
   {
@@ -114,24 +113,13 @@ const initialState = [
   }
 ];
 
-const createProject = (state, payload) => {
-  console.log(payload);
-  return [...state, payload.project];
-};
+const projectReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case CREATE_PROJECT:
+      return [...state, action.payload.project]
+    default:
+      return state
+  }
+}
 
-const updateEvent = (state, payload) => {
-  return [
-    ...state.filter(event => event.id !== payload.event.id),
-    payload.event
-  ];
-};
-
-const deleteEvent = (state, payload) => {
-  return [...state.filter(event => event.id !== payload.eventId)];
-};
-
-export default createReducer(initialState, {
-	[CREATE_PROJECT]: createProject,
-	[UPDATE_EVENT]: updateEvent,
-	[DELETE_EVENT]: deleteEvent,
-})
+export default projectReducer;

@@ -34,6 +34,7 @@ class ProjectForm extends Component {
         imageURL: "https://via.placeholder.com/150"
       },
       () => {
+        console.log('test')
         console.log(this.props.createProject(this.state));
       }
     );
