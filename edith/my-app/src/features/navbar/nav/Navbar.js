@@ -12,7 +12,13 @@ class NavBar extends Component {
 
     this.state = {
       activeItem: "",
-      authenticated: false
+      authenticated: false,
+      // user: {
+      //   id: "",
+      //   username: "",
+      //   password: "",
+      //   email: ""
+      // }
     };
   }
 

@@ -1,20 +1,59 @@
 import React from "react";
-import { Menu, Button, Icon, Modal, Image, Header } from "semantic-ui-react";
+import {
+  Menu,
+  Button,
+  Icon,
+  Modal,
+  Header,
+  Segment,
+  Form
+} from "semantic-ui-react";
 import "./SignedOutMenu.css";
-import { Link } from "react-router-dom";
 import { Component } from "react";
+import cuid from "cuid";
 
 class SignedOutMenu extends Component {
-  state = { open: false };
-
-  closeConfigShow = (closeOnEscape, closeOnDimmerClick) => () => {
-    this.setState({ closeOnEscape, closeOnDimmerClick, open: true });
+  state = {
+    loggedIn: false,
+    user: {
+      id: "",
+      username: "",
+      password: "",
+      email: ""
+    }
   };
 
-  close = () => this.setState({ open: false });
+  handleFormSubmit = evt => {
+    evt.preventDefault();
+    window.scrollTo(0, 0);
+    console.log(this.state);
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        id: cuid()
+      }
+    }));
+  };
+
+  handleInputChange = ({ target: { name, value } }) => {
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        [name]: value
+      }
+    }));
+    console.log(this.state);
+  };
+
+  // closeConfigShow = (closeOnEscape, closeOnDimmerClick) => () => {
+  //   this.setState({ closeOnEscape, closeOnDimmerClick, loggedIn: true });
+  // };
+
+  close = () => this.setState({ loggedIn: false });
 
   render() {
-    const { open, closeOnEscape, closeOnDimmerClick } = this.state;
+    // const { loggedIn, closeOnEscape, closeOnDimmerClick } = this.state;
+    const { user } = this.state;
     const { signIn } = this.props;
 
     return (
@@ -28,15 +67,13 @@ class SignedOutMenu extends Component {
         id='signInButton'
       /> */}
         <Modal
-          open={open}
-          closeOnEscape={closeOnEscape}
-          closeOnDimmerClick={closeOnDimmerClick}
-          onClose={this.close}
+          //loggedIn={loggedIn}
+          //closeOnEscape={closeOnEscape}
+          //closeOnDimmerClick={closeOnDimmerClick}
+          //onClose={this.close}
           trigger={
             <Button
-              onClick={this.closeConfigShow(true, false)}
-              as={Link}
-              to='/signin'
+              //onClick={this.closeConfigShow(true, false)}
               basic
               className='custom'
               icon
@@ -48,38 +85,56 @@ class SignedOutMenu extends Component {
             </Button>
           }
         >
-          <Modal.Header>Select a Photo</Modal.Header>
-          <Modal.Content image>
-            <Image
-              wrapped
-              size='medium'
-              src='https://www.antgibbz.com/wp-content/uploads/2016/05/person-placeholder-200x200.jpg'
-            />
+          <Modal.Header>Super Humanics</Modal.Header>
+          <Modal.Content>
             <Modal.Description>
-              <Header>Default Profile Image</Header>
+              <Header>Hello!</Header>
               <p>
                 We've found the following gravatar image associated with your
                 e-mail address.
               </p>
-              <p>Is it okay to use this photo?</p>
+              <Segment>
+                <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
+                  <Form.Field>
+                    <label>Username</label>
+                    <input
+                      name='username'
+                      onChange={this.handleInputChange}
+                      value={user.username}
+                      placeholder='Username'
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Password</label>
+                    <input
+                      name='password'
+                      onChange={this.handleInputChange}
+                      value={user.password}
+                      placeholder='Password'
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>email</label>
+                    <input
+                      name='email'
+                      onChange={this.handleInputChange}
+                      value={user.email}
+                      placeholder='email'
+                    />
+                  </Form.Field>
+                  <Button
+                    positive
+                    type='submit'
+                    onClick={() => {
+                      signIn();
+                      this.close();
+                    }}
+                  >
+                    Sign In
+                  </Button>
+                </Form>
+              </Segment>
             </Modal.Description>
-            <Modal.Actions>
-              <Button onClick={this.close} as={Link} to='/' negative>
-                No
-              </Button>
-              <Button
-                onClick={() => {
-                  this.close();
-                  signIn();
-                }}
-                as={Link}
-                to='/'
-                positive
-                labelPosition='right'
-                icon='checkmark'
-                content='Yes'
-              />
-            </Modal.Actions>
           </Modal.Content>
         </Modal>
       </Menu.Item>
