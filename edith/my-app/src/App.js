@@ -10,7 +10,6 @@ import ProjectDetailsPage from "./features/projects/ProjectDetailsPage";
 import SettingsDashboard from "./features/user/SettingsDashboard";
 import { Route } from "react-router-dom";
 import TestComponent from "./features/testarea/TestComponent";
-import SigninComponent from "./auth/SigninComponent";
 
 class App extends React.Component {
   render() {
@@ -31,7 +30,6 @@ class App extends React.Component {
                 <Route path='/projects/:id' component={ProjectDetailsPage} />
                 <Route path='/tutorials/:id' component={TutorialDetailsPage} />
                 <Route path='/test' component={TestComponent} />
-                <Route path='/signin' component={SigninComponent} />
               </div>
             )}
           />
