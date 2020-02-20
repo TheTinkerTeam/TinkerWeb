@@ -10,51 +10,21 @@ import {
 } from "semantic-ui-react";
 import "./SignedOutMenu.css";
 import { Component } from "react";
-import cuid from "cuid";
 
 class SignedOutMenu extends Component {
   state = {
     loggedIn: false,
-    user: {
-      id: "",
-      username: "",
-      password: "",
-      email: ""
-    }
-  };
-
-  handleFormSubmit = evt => {
-    evt.preventDefault();
-    window.scrollTo(0, 0);
-    console.log(this.state);
-    this.setState(prevState => ({
-      user: {
-        ...prevState.user,
-        id: cuid()
-      }
-    }));
-  };
-
-  handleInputChange = ({ target: { name, value } }) => {
-    this.setState(prevState => ({
-      user: {
-        ...prevState.user,
-        [name]: value
-      }
-    }));
-    console.log(this.state);
   };
 
   // closeConfigShow = (closeOnEscape, closeOnDimmerClick) => () => {
   //   this.setState({ closeOnEscape, closeOnDimmerClick, loggedIn: true });
   // };
 
-  close = () => this.setState({ loggedIn: false });
+  close = () => this.setState({ loggedIn: true });
 
   render() {
     // const { loggedIn, closeOnEscape, closeOnDimmerClick } = this.state;
-    const { user } = this.state;
-    const { signIn } = this.props;
+    const { signIn, handleFormSubmit, handleInputChange } = this.props;
 
     return (
       <Menu.Item position='right'>
@@ -94,13 +64,12 @@ class SignedOutMenu extends Component {
                 e-mail address.
               </p>
               <Segment>
-                <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
+                <Form onSubmit={() => {signIn(); this.close(); handleFormSubmit();}} autoComplete='off'>
                   <Form.Field>
                     <label>Username</label>
                     <input
                       name='username'
-                      onChange={this.handleInputChange}
-                      value={user.username}
+                      onChange={handleInputChange}
                       placeholder='Username'
                     />
                   </Form.Field>
@@ -108,8 +77,7 @@ class SignedOutMenu extends Component {
                     <label>Password</label>
                     <input
                       name='password'
-                      onChange={this.handleInputChange}
-                      value={user.password}
+                      onChange={handleInputChange}
                       placeholder='Password'
                     />
                   </Form.Field>
@@ -117,18 +85,13 @@ class SignedOutMenu extends Component {
                     <label>email</label>
                     <input
                       name='email'
-                      onChange={this.handleInputChange}
-                      value={user.email}
+                      onChange={handleInputChange}
                       placeholder='email'
                     />
                   </Form.Field>
                   <Button
                     positive
                     type='submit'
-                    onClick={() => {
-                      signIn();
-                      this.close();
-                    }}
                   >
                     Sign In
                   </Button>

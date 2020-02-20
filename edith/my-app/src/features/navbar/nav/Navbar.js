@@ -4,6 +4,7 @@ import logo from "../img/SHlogo.png";
 import { NavLink, withRouter } from "react-router-dom";
 import SignedOutMenu from "../menus/SignedOutMenu";
 import SignedInMenu from "../menus/SignedInMenu";
+import cuid from "cuid";
 
 class NavBar extends Component {
   // We put the constructor so it will rerender the component if the props are updated
@@ -13,14 +14,39 @@ class NavBar extends Component {
     this.state = {
       activeItem: "",
       authenticated: false,
-      // user: {
-      //   id: "",
-      //   username: "",
-      //   password: "",
-      //   email: ""
-      // }
+      user: {
+        id: "",
+        username: "",
+        password: "",
+        email: ""
+      }
     };
   }
+
+  handleFormSubmit = () => {
+    //evt.preventDefault();
+    window.scrollTo(0, 0);
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        id: cuid()
+      },
+    }),
+    () => {
+      console.log('test')
+      console.log(this.state);
+    });
+  };
+
+  handleInputChange = ({ target: { name, value } }) => {
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        [name]: value
+      }
+    }));
+    console.log(this.state);
+  };
 
   handleSignIn = () => {
     this.setState({ authenticated: true });
@@ -112,7 +138,11 @@ class NavBar extends Component {
           {authenticated ? (
             <SignedInMenu signOut={this.handleSignOut} />
           ) : (
-            <SignedOutMenu signIn={this.handleSignIn} />
+            <SignedOutMenu
+              signIn={this.handleSignIn}
+              handleInputChange={this.handleInputChange}
+              handleFormSubmit={this.handleFormSubmit}
+            />
           )}
         </Menu>
       </div>
