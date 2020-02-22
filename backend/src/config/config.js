@@ -1,6 +1,6 @@
 const dev = {
  app: {
-   port: parseInt(process.env.DEV_APP_PORT)
+   port: parseInt(process.env.DEV_APP_PORT) || 5000
  },
  db: {
    host: process.env.DEV_DB_HOST,
@@ -11,7 +11,7 @@ const dev = {
 
 const prod = {
  app: {
-   port: parseInt(process.env.TEST_APP_PORT)
+   port: parseInt(process.env.TEST_APP_PORT) || 5000
  },
  db: {
    host: process.env.PROD_DB_HOST,
@@ -22,7 +22,7 @@ const prod = {
 
 const test = {
  app: {
-   port: parseInt(process.env.TEST_APP_PORT)
+   port: parseInt(process.env.TEST_APP_PORT) || 5000
  },
  db: {
    host: process.env.TEST_DB_HOST,

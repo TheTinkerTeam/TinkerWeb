@@ -1,8 +1,8 @@
 const config = require('./config');
 const mongoose = require('mongoose');
 
-// TODO: Select MongoDB Collection depending on the route that the user is at because each school has it's own database collection
-// Example: for the school Harvard the dbCollection show be 'harvard' to have the right dbURI exporting here
+// ToDo: Select MongoDB Collection depending on the route that the user is at because each school has it's own database
+// Example: for the school Harvard the dbCollection show be 'haravard' to have the right dbURI exporting here
 const school = 'public';
 
 const dbHost = config.db.host;

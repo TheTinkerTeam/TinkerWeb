@@ -60,6 +60,19 @@ exports.createUser = async (req, res) => {
   }
 };
 
+// @route   GET /users/auth
+// @desc    Authenticate route
+// @access  Public
+exports.authenticate = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
 // @route   POST /users/auth
 // @desc    Log In User
 // @access  Public

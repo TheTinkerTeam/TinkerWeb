@@ -12,6 +12,7 @@ router
 
 router
   .route("/auth")
+  .get(auth, userController.authenticate)
   .post(userController.loginUser)
   .delete(auth, userController.logoutUser);
 
