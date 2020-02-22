@@ -1,4 +1,4 @@
-const config = require('./config');
+const config = require('src/config');
 const mongoose = require('mongoose');
 
 // ToDo: Select MongoDB Collection depending on the route that the user is at because each school has it's own database
