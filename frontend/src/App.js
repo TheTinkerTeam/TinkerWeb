@@ -1,15 +1,15 @@
 import React from "react";
-import NavBar from "./features/navbar/nav/Navbar";
-import Dashboard from "./features/dashboard/Dashboard";
-import TinkerCartPage from "./features/tinkercart/TinkerCartPage";
-import MembershipPage from "./features/membership/MembershipPage";
-import TutorialsPage from "./features/tutorials/TutorialsPage";
-import TutorialDetailsPage from "./features/tutorials/TutorialDetailsPage";
-import ProjectsPage from "./features/projects/ProjectsPage";
-import ProjectDetailsPage from "./features/projects/ProjectDetailsPage";
-import SettingsDashboard from "./features/user/SettingsDashboard";
 import { Route } from "react-router-dom";
-import TestComponent from "./features/testarea/TestComponent";
+
+import NavBar from "src/components/layout/Navbar";
+import Dashboard from "src/components/pages/Dashboard";
+import TinkerCartPage from "src/components/pages/TinkerCartPage";
+import MembershipPage from "src/components/pages/MembershipPage";
+import TutorialsPage from "src/components/pages/TutorialsPage";
+import TutorialDetailsPage from "src/components/pages/TutorialDetailsPage";
+import ProjectsPage from "src/components/pages/ProjectsPage";
+import ProjectDetailsPage from "src/components/pages/ProjectDetailsPage";
+import SettingsDashboard from "src/components/pages/SettingsDashboard";
 
 class App extends React.Component {
   render() {
