@@ -2,16 +2,9 @@ import axios from 'axios';
 
 import { setAlert } from 'src/actions/alert';
 
-import {
-    SIGNUP_SUCCESS,
-    SIGNUP_FAIL,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    USER_LOADED,
-    AUTH_ERROR
-} from './types.js';
+import * as types from "src/actions/types"
 
-import setAuthToken from '../utils/setAuthToken';
+import setAuthToken from "src/utils/setAuthToken";
 
 export const loadUser = () => async dispatch => {
     if (localStorage.token) {
@@ -22,12 +15,12 @@ export const loadUser = () => async dispatch => {
         const res = await axios.get('/api/v1/users/auth');
 
         dispatch({
-            type: USER_LOADED,
+            type: types.USER_LOADED,
             payload: res.data
         });
     } catch (err) {
         dispatch({
-            type: AUTH_ERROR
+            type: types.AUTH_ERROR
         });
     }
 };
@@ -38,7 +31,7 @@ export const signup = ({ email, username, password}) => async dispatch => {
         const res = await axios.post('/api/v1/users', body);
 
         dispatch({
-            type: SIGNUP_SUCCESS,
+            type: types.SIGNUP_SUCCESS,
             payload: res.data
         });
     } catch(err) {
@@ -50,7 +43,7 @@ export const signup = ({ email, username, password}) => async dispatch => {
             });
         }
         dispatch({
-            type: SIGNUP_FAIL
+            type: types.SIGNUP_FAIL
         });
     }
 };
@@ -61,7 +54,7 @@ export const login = ({ username, password }) => async dispatch => {
         const res = await axios.post('/api/v1/users/auth', body);
 
         dispatch({
-            type: LOGIN_SUCCESS,
+            type: types.LOGIN_SUCCESS,
             payload: res.data
         });
     } catch(err) {
@@ -74,7 +67,7 @@ export const login = ({ username, password }) => async dispatch => {
         }
 
         dispatch({
-            type: LOGIN_FAIL
+            type: types.LOGIN_FAIL
         });
     }
 };

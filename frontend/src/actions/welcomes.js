@@ -1,22 +1,22 @@
-import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT } from "./welcomeConstants";
+import * as types from "src/actions/types"
 
 export const createEvent = event => {
   return {
-    type: CREATE_EVENT,
+    type: types.CREATE_EVENT,
     payload: { event }
   };
 };
 
 export const updateEvent = event => {
   return {
-    type: UPDATE_EVENT,
+    type: types.UPDATE_EVENT,
     payload: { event }
   };
 };
 
 export const deleteEvent = eventId => {
   return {
-    type: DELETE_EVENT,
+    type: types.DELETE_EVENT,
     payload: { eventId }
   };
 };

@@ -1,14 +1,11 @@
 import uuid from 'uuid';
 
-import {
-    SET_ALERT,
-    REMOVE_ALERT
-} from './types';
+import * as types from "src/actions/types"
 
 export const setAlert = (msg, type, timeout = 5000) => dispatch => {
     const id = uuid.v4();
     dispatch({
-        type: SET_ALERT,
+        type: types.SET_ALERT,
         payload: {
             id,
             msg,
@@ -17,7 +14,7 @@ export const setAlert = (msg, type, timeout = 5000) => dispatch => {
     });
 
     setTimeout(() => dispatch({
-        type: REMOVE_ALERT,
+        type: types.REMOVE_ALERT,
         payload: id
     }), timeout);
 };
