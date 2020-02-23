@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { Menu, Header, Grid } from "semantic-ui-react";
-import "./settings.css";
 import { NavLink } from "react-router-dom";
+
+import "src/css/settings.css";
 
 const SettingsNav = () => {
   return (

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Segment, Form, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
+import cuid from "cuid";
 
 import { createProject } from "src/actions/projects";
 

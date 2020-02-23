@@ -27,7 +27,7 @@ class Dashboard extends Component {
             height='100em'
             width='100em'
           />
-          <WelcomeComponent />
+          <WelcomeComponent items={[]}/>
         </div>
         <div className='tinker-news-item card'>
           <TinkerNewsComponent />

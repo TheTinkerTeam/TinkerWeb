@@ -9,9 +9,9 @@ app.use(cors());
 app.use(express.json());
 
 // Define Routes
-const userRoutes = require("./routes/api/v1/users");
-const profileRoutes = require("./routes/api/v1/profiles");
-const projectRoutes = require("./routes/api/v1/projects");
+const userRoutes = require("src/routes/api/v1/users");
+const profileRoutes = require("src/routes/api/v1/profiles");
+const projectRoutes = require("src/routes/api/v1/projects");
   
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/profiles", profileRoutes);

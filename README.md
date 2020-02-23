@@ -81,23 +81,23 @@ YOU SHOULD SEE THE APPLICATION BY GOING TO `http://localhost:3000` ON YOUR BROWS
 ### HOSTS & PORTS
 By default the server is running on localhost:5000, to change this modify your .env file
 
-### The app symlink trick
+### The Symlink - taken from https://gist.github.com/branneman/8048520
+Stolen from: [focusaurus](https://github.com/focusaurus) / [express_code_structure](https://github.com/focusaurus/express_code_structure) # [the-app-symlink-trick](https://github.com/focusaurus/express_code_structure#the-app-symlink-trick)
 
-There are many approaches outlined and discussed at length by the community in the great gist [Better local require() paths for Node.js](https://gist.github.com/branneman/8048520). I may soon decide to prefer either "just deal with lots of ../../../.." or use the [requireFrom](https://github.com/DSKrepps/requireFrom) modlue. However, at the moment, I've been using the symlink trick detailed below.
+1. Create a symlink under `node_modules` to your app directory:  
+Linux: `ln -nsf node_modules app`  
+Windows: `mklink /D app node_modules`
 
-So one way to avoid intra-project requires with annoying relative paths like `require("../../../config")` is to use the following trick:
+2. Now you can require local modules like this from anywhere:
+    ```js
+    const Article = require('models/article');
+    ```
 
-* create a symlink under node_modules for your src folder
-  * cd node_modules && ln -nsf ../src
-* add **just the node_modules/app symlink itself**, not the entire node_modules folder, to git
-  * git add -f node_modules/src
-  * and you can not ignore it in your .gitignore file by adding:
-    * /node_modules/*
-    * !node_modules/src
-  * Yes, you should still have "node_modules" in your `.gitignore` file
-  * No, you should not put "node_modules" into your git repository. Some people will recommend you do this. They are incorrect.
-* Now you can require intra-project modules using this prefix
-  * `var config = require("app/config");`
-  * `var DealModel = require("app/deals/deal-model");`
-* Basically, this makes intra-project requires work very similarly to requires for external npm modules.
-* Sorry, Windows users, you need to stick with parent directory relative paths.
+Note: you can **not** have a symlink like this inside a Git repo, since Git does not handle symlinks cross-platform. If you can live with a post-clone git-hook and/or the instruction for the next developer to create a symlink, then sure.
+
+Alternatively, you can create the symlink on the npm `postinstall` hook, as described by [scharf](https://github.com/scharf) in [this awesome comment](https://gist.github.com/branneman/8048520#gistcomment-1412502). Put this inside your `package.json`:
+```js
+"scripts": {
+    "postinstall" : "node -e \"var s='../src',d='node_modules/src',fs=require('fs');fs.exists(d,function(e){e||fs.symlinkSync(s,d,'dir')});\""
+  }
+```

@@ -5,6 +5,7 @@ import WelcomeListItem from "src/components/items/WelcomeListItem";
 class WelcomeList extends Component {
   render() {
     const { items } = this.props;
+    console.log(this.props);
 
     return (
       <div className='welcomelist'>
