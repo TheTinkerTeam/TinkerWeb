@@ -87,10 +87,13 @@ There are many approaches outlined and discussed at length by the community in t
 
 So one way to avoid intra-project requires with annoying relative paths like `require("../../../config")` is to use the following trick:
 
-* create a symlink under node_modules for your app
-  * cd node_modules && ln -nsf ../app
+* create a symlink under node_modules for your src folder
+  * cd node_modules && ln -nsf ../src
 * add **just the node_modules/app symlink itself**, not the entire node_modules folder, to git
-  * git add -f node_modules/app
+  * git add -f node_modules/src
+  * and you can not ignore it in your .gitignore file by adding:
+    * /node_modules/*
+    * !node_modules/src
   * Yes, you should still have "node_modules" in your `.gitignore` file
   * No, you should not put "node_modules" into your git repository. Some people will recommend you do this. They are incorrect.
 * Now you can require intra-project modules using this prefix
