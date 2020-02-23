@@ -1,16 +1,8 @@
 import React, { Component } from "react";
 import { Segment, Form, Button } from "semantic-ui-react";
-import cuid from "cuid";
 import { connect } from "react-redux";
-import { createProject } from "../../dashboard/projectsActions";
 
-const mapStateToProps = state => ({
-  projects: state.projects
-});
-
-const mapDispatchToProps = {
-  createProject
-};
+import { createProject } from "src/actions/projects";
 
 class ProjectForm extends Component {
   state = {
@@ -136,4 +128,13 @@ class ProjectForm extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  projects: state.projects
+});
+
+const mapDispatchToProps = {
+  createProject
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectForm);

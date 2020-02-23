@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import WelcomeListItem from "./WelcomeListItem";
+
+import WelcomeListItem from "src/components/items/WelcomeListItem";
 
 class WelcomeList extends Component {
   render() {

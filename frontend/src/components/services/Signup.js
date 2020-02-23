@@ -1,8 +1,9 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setAlert } from '../../actions/alert';
-import { signup } from '../../actions/auth';
+
+import { setAlert } from 'src/actions/alerts';
+import { signup } from 'src/actions/auth';
 
 const Signup = ({ setAlert, signup }) => {
 

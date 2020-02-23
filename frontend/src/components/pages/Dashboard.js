@@ -1,20 +1,16 @@
 import React, { Component } from "react";
-// import "./Dashboard.css";
-import WelcomeComponent from "./WelcomeComponent";
-import TinkerNewsComponent from "./TinkerNewsComponent";
-import ProjectsList from "./ProjectsList";
-import tinkercart from "./img/tinkercart.png";
 import { connect } from "react-redux";
-import ProjectForm from "../projects/projectForm/ProjectForm";
-import {createProject} from './projectsActions';
 
-const mapStateToProps = state => ({
-  projects: state.projects
-});
+// import "./Dashboard.css";
 
-const mapDispatchToProps = {
-	createProject
-}
+import WelcomeComponent from "src/components/sections/WelcomeComponent";
+import TinkerNewsComponent from "src/components/sections/TinkerNewsComponent";
+import ProjectsList from "src/components/lists/ProjectsList";
+
+import tinkercart from "src/img/tinkercart.png";
+
+import ProjectForm from "src/components/services/ProjectForm";
+import {createProject} from 'src/actions/projects';
 
 class Dashboard extends Component {
 
@@ -71,6 +67,14 @@ class Dashboard extends Component {
       </div>
     );
   }
+}
+
+const mapStateToProps = state => ({
+  projects: state.projects
+});
+
+const mapDispatchToProps = {
+	createProject
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

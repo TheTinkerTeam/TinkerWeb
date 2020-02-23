@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import "./projects.css";
-import "../dashboard/Dashboard.css";
-import ProjectsDisplayedList from "./ProjectsDisplayedList";
 import { connect } from "react-redux";
-import SearchBarComponent from "./searchBar/SearchBarComponent";
 
-const mapStateToProps = state => ({
-  projects: state.projects,
-  categories: state.projectsCategory
-});
+import "src/css/projects.css";
+import "src/css/Dashboard.css";
+import ProjectsDisplayedList from "src/components/lists/ProjectsDisplayedList";
+import SearchBarComponent from "src/components/sections/SearchBarComponent";
 
 class ProjectsPage extends Component {
   constructor(props) {
@@ -100,5 +96,10 @@ class ProjectsPage extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  projects: state.projects,
+  categories: state.projectsCategory
+});
 
 export default connect(mapStateToProps)(ProjectsPage);

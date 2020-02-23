@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import TinkerNewsItem from "./TinkerNewsItem";
+
+import TinkerNewsItem from "src/components/items/TinkerNewsItem";
 
 class TinkerNewsList extends Component {
   render() {

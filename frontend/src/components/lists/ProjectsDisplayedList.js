@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import ProjectsDisplayedItem from "./ProjectsDisplayedItem";
+
+import ProjectsDisplayedItem from "src/components/items/ProjectsDisplayedItem";
 
 class ProjectsDisplayedList extends Component {
   render() {

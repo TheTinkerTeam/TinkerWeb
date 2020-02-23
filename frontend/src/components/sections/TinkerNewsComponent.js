@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import TinkerNewsList from "./TinkerNewsList";
 import { connect } from "react-redux";
+
+import TinkerNewsList from "src/components/lists/TinkerNewsList";
 
 const mapStateToProps = state => ({
   news: state.news

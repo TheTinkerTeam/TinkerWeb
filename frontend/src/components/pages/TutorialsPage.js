@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { Input } from "semantic-ui-react";
-import CategoryBubblesList from "../projects/categoriesBubbleComponent/CategoryBubblesList";
-import TutoDisplayedList from "./TutoDisplayedList";
 import { connect } from "react-redux";
 
-const mapStateToProps = state => ({
-  tutorials: state.tutorials,
-  tutoCat: state.tutorialsCategory
-});
+import CategoryBubblesList from "src/components/lists/CategoryBubblesList";
+import TutoDisplayedList from "src/components/lists/TutoDisplayedList";
 
 class TutorialsPage extends Component {
   constructor(props) {
@@ -96,5 +92,10 @@ class TutorialsPage extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  tutorials: state.tutorials,
+  tutoCat: state.tutorialsCategory
+});
 
 export default connect(mapStateToProps)(TutorialsPage);

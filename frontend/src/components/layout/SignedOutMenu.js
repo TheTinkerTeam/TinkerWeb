@@ -1,4 +1,5 @@
 import React from "react";
+import { Component } from "react";
 import {
   Menu,
   Button,
@@ -8,8 +9,8 @@ import {
   Segment,
   Form
 } from "semantic-ui-react";
-import "./SignedOutMenu.css";
-import { Component } from "react";
+
+import "src/css/SignedOutMenu.css";
 
 class SignedOutMenu extends Component {
   state = {

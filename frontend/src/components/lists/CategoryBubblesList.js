@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import BubbleItem from "./BubbleItem";
+
+import BubbleItem from "src/components/items/BubbleItem";
 
 class CategoryBubblesList extends Component {
   render() {

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import CarouselItem from "./CarouselItem";
+
+import CarouselItem from "src/components/items/CarouselItem";
 
 class ProjectsList extends Component {
   render() {

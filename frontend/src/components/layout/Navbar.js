@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Menu, Input } from "semantic-ui-react";
-import logo from "../img/SHlogo.png";
 import { NavLink, withRouter } from "react-router-dom";
-import SignedOutMenu from "../menus/SignedOutMenu";
-import SignedInMenu from "../menus/SignedInMenu";
 import cuid from "cuid";
+
+import logo from "src/img/SHlogo.png";
+import SignedOutMenu from "src/components/layout/SignedOutMenu";
+import SignedInMenu from "src/components/layout/SignedInMenu";
 
 class NavBar extends Component {
   // We put the constructor so it will rerender the component if the props are updated

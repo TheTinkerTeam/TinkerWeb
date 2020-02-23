@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Input } from "semantic-ui-react";
-import CategoryBubblesList from "../categoriesBubbleComponent/CategoryBubblesList";
+
+import CategoryBubblesList from "src/components/lists/CategoryBubblesList";
 
 class SearchBarComponent extends Component {
   render() {

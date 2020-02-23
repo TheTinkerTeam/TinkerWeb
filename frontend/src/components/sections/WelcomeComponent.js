@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import WelcomeList from "./WelcomeList";
 import { connect } from "react-redux";
+
+import WelcomeList from "src/components/lists/WelcomeList";
 
 const mapStateToProps = state => ({
   welcomeItems: state.welcomeItems

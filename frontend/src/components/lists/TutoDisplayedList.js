@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import TutoDisplayedItem from "./TutoDisplayedItem";
+
+import TutoDisplayedItem from "src/components/items/TutoDisplayedItem";
 
 class ProjectsDisplayedList extends Component {
   render() {

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Dropdown, Menu, Image } from 'semantic-ui-react';
-import avatar from '../img/avatar.png';
 import { Link } from 'react-router-dom';
+
+import avatar from 'src/img/avatar.png';
 
 const SignedInMenu = ({signOut}) => {
 	return (

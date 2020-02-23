@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import CarouselItem from "./CarouselItem";
 import InfiniteCarousel from "react-leaf-carousel";
+
+import CarouselItem from "src/components/items/CarouselItem";
 
 class CarouselComponent extends Component {
   constructor(props) {
