@@ -1,6 +1,4 @@
-import { CREATE_NEWS } from "./tinkerNewsConstants";
-
-const initialState = [
+const news = [
   {
     id: "1",
     title: "Weekly challenge!",
@@ -25,14 +23,3 @@ const initialState = [
       "Miaourem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper."
   }
 ];
-
-const newsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case CREATE_NEWS:
-      return [...state, action.payload];
-    default:
-      return state;
-  }
-};
-
-export default newsReducer;

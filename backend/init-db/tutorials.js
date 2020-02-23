@@ -1,5 +1,3 @@
-import { CREATE_TUTO } from "./tutorialsConstants";
-
 const initialState = [
   {
     id: "1",
@@ -23,14 +21,3 @@ const initialState = [
     tags: ["Coding"],
   },
 ];
-
-const tutoReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case CREATE_TUTO:
-      return [...state, action.payload]
-    default:
-      return state
-  }
-}
-
-export default tutoReducer;

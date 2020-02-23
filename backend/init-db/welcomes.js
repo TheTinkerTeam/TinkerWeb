@@ -1,4 +1,4 @@
-import { CREATE_WELCOME } from "./welcomeConstants";
+
 
 const initialState = [
   {
@@ -18,14 +18,3 @@ const initialState = [
     description: "wow"
   }
 ];
-
-const welcomeReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case CREATE_WELCOME:
-      return [...state, action.payload];
-    default:
-      return state;
-  }
-};
-
-export default welcomeReducer;
