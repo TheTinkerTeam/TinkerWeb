@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 
 import "src/css/projects.css";
 import "src/css/Dashboard.css";
+
 import ProjectsDisplayedList from "src/components/lists/ProjectsDisplayedList";
 import SearchBarComponent from "src/components/sections/SearchBarComponent";
+import { getProjects } from "src/actions/projects";
 
 class ProjectsPage extends Component {
   constructor(props) {
@@ -58,21 +60,25 @@ class ProjectsPage extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.getProjects();
+  }
+
   render() {
     const { activeItems } = this.state;
     const { projects, categories } = this.props;
 
     return (
-      <div className='projects-container'>
-        <div className='red-title rotate-title'>
+      <div className="projects-container">
+        <div className="red-title rotate-title">
           <span>Super </span>
-          <span className='superprojects-text'>Pro</span>
-          <span className='superprojects-text' id='supertinker-i'>
+          <span className="superprojects-text">Pro</span>
+          <span className="superprojects-text" id="supertinker-i">
             j
           </span>
-          <span className='superprojects-text'>ects</span>
+          <span className="superprojects-text">ects</span>
         </div>
-        <div className='projects-card'>
+        <div className="projects-card">
           <SearchBarComponent
             handleSelection={this.handleSelection}
             handleUnselection={this.handleUnselection}
@@ -99,7 +105,36 @@ class ProjectsPage extends Component {
 
 const mapStateToProps = state => ({
   projects: state.projects,
-  categories: state.projectsCategory
+  categories: [
+    {
+      id: "1",
+      name: "All"
+    },
+    {
+      id: "2",
+      name: "Science"
+    },
+    {
+      id: "3",
+      name: "Wood-working"
+    },
+    {
+      id: "4",
+      name: "Coding"
+    },
+    {
+      id: "5",
+      name: "Cooking"
+    },
+    {
+      id: "6",
+      name: "Innovation"
+    }
+  ]
 });
 
-export default connect(mapStateToProps)(ProjectsPage);
+const mapDispatchToProps = {
+  getProjects
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsPage);
