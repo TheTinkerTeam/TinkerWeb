@@ -1,4 +1,4 @@
-import * as types from "src/actions/types"
+import * as types from "./types";
 
 export const createEvent = event => {
   return {

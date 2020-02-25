@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "semantic-ui-react";
 
-import "src/css/projects.css";
+import "../../css/projects.css";
 
 class BubbleItem extends Component {
   render() {

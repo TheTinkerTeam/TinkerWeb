@@ -5,7 +5,7 @@ const initialState = [];
 const projectReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_PROJECTS:
-      return [...state, ...action.payload];
+      return [...action.payload];
 
     case types.CREATE_PROJECT:
       return [...state, action.payload];

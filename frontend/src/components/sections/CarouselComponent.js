@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import InfiniteCarousel from "react-leaf-carousel";
 
-import CarouselItem from "src/components/items/CarouselItem";
+import CarouselItem from "../items/CarouselItem";
 
 class CarouselComponent extends Component {
   constructor(props) {
     super(props);
   }
 
-//   shouldComponentUpdate(nextProps) {
-//     const projectAdded = this.props.projects.length !== nextProps.projects.length;
-//     return projectAdded;
-// }
-
+  //   shouldComponentUpdate(nextProps) {
+  //     const projectAdded = this.props.projects.length !== nextProps.projects.length;
+  //     return projectAdded;
+  // }
 
   // shouldComponentUpdate(nextProps, nextState) {
   //   if (this.props.projects != nextProps.projects) {
@@ -30,16 +29,14 @@ class CarouselComponent extends Component {
   render() {
     const { projects, category } = this.props;
 
-    console.log('in carousel')
-    console.log(projects)
+    console.log("in carousel");
+    console.log(projects);
     return (
       <div>
         <div>{projects.length}</div>
         {projects.map((project, index) => (
-            <div key={index}>
-              {project.title}
-            </div>
-          ))}
+          <div key={index}>{project.title}</div>
+        ))}
         {console.log("test" + projects)}
 
         <InfiniteCarousel

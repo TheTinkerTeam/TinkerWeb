@@ -3,7 +3,7 @@ import { Segment, Form, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import cuid from "cuid";
 
-import { createProject } from "src/actions/projects";
+import { createProject } from "../../actions/projectActions";
 
 class ProjectForm extends Component {
   state = {
@@ -27,7 +27,7 @@ class ProjectForm extends Component {
         imageURL: "https://via.placeholder.com/150"
       },
       () => {
-        console.log('test')
+        console.log("test");
         console.log(this.props.createProject(this.state));
       }
     );
@@ -60,69 +60,69 @@ class ProjectForm extends Component {
     } = this.state;
 
     return (
-      <div style={{ "gridColumn": "1/6" }}>
-        <hr color='#181C3F' />
+      <div style={{ gridColumn: "1/6" }}>
+        <hr color="#181C3F" />
         <h1>Create a project TEST</h1>
         <Segment>
-          <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
+          <Form onSubmit={this.handleFormSubmit} autoComplete="off">
             <Form.Field>
               <label>Project Title</label>
               <input
-                name='title'
+                name="title"
                 onChange={this.handleInputChange}
                 value={title}
-                placeholder='Project Title'
+                placeholder="Project Title"
               />
             </Form.Field>
             <Form.Field>
               <label>Description</label>
               <input
-                name='description'
+                name="description"
                 onChange={this.handleInputChange}
                 value={description}
-                placeholder='Project Description'
+                placeholder="Project Description"
               />
             </Form.Field>
             <Form.Field>
               <label>Learning Objectives</label>
               <input
-                name='learning_objectives'
+                name="learning_objectives"
                 onChange={this.handleInputChange}
                 value={learning_objectives}
-                placeholder='Write the Learning Objectives'
+                placeholder="Write the Learning Objectives"
               />
             </Form.Field>
             <Form.Field>
               <label>Subject</label>
               <input
-                name='subjects'
+                name="subjects"
                 onChange={this.handleInputChange}
                 value={subjects}
-                placeholder='Enter the subject of the project'
+                placeholder="Enter the subject of the project"
               />
             </Form.Field>
             <Form.Field>
               <label>Tags</label>
               <input
-                name='tags'
+                name="tags"
                 onChange={this.handleInputChange}
                 value={tags}
-                placeholder='Enter the tags'
+                placeholder="Enter the tags"
               />
             </Form.Field>
             <Form.Field>
               <label>Grade</label>
               <input
-                name='grades'
+                name="grades"
                 onChange={this.handleInputChange}
                 value={grades}
                 placeholder="What's your class grade?"
               />
             </Form.Field>
-            <Button positive type='submit'>
+            <Button positive type="submit">
               Submit
             </Button>
-            <Button type='button'>Cancel</Button>
+            <Button type="button">Cancel</Button>
           </Form>
         </Segment>
       </div>

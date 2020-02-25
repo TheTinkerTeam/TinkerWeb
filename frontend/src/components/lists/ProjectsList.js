@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import CarouselItem from "src/components/items/CarouselItem";
+import CarouselItem from "../items/CarouselItem";
 
 class ProjectsList extends Component {
   render() {
@@ -29,8 +29,8 @@ class ProjectsList extends Component {
     };
 
     return (
-      <div className='projects-list card'>
-        <div className='red-title'>{category} projects</div>
+      <div className="projects-list card">
+        <div className="red-title">{category} projects</div>
         <Carousel
           swipeable={true}
           draggable={true}
@@ -39,17 +39,18 @@ class ProjectsList extends Component {
           ssr={true} // means to render carousel on server-side.
           infinite={true}
           keyBoardControl={true}
-          customTransition='all .5'
+          customTransition="all .5"
           transitionDuration={500}
-          containerClass='carousel-container'
+          containerClass="carousel-container"
           removeArrowOnDeviceType={["tablet", "mobile"]}
           deviceType={this.props.deviceType}
-          dotListClass='custom-dot-list-style'
-          itemClass='carousel-item-padding-40-px'
+          dotListClass="custom-dot-list-style"
+          itemClass="carousel-item-padding-40-px"
         >
-          {projects.map((project, index) => (
-            <CarouselItem key={index} category={category} project={project} />
-          ))}
+          {projects &&
+            projects.map((project, index) => (
+              <CarouselItem key={index} category={category} project={project} />
+            ))}
         </Carousel>
         {/* <CarouselComponent projects={projects} category={category} /> */}
       </div>

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import "src/css/projects.css";
-import "src/css/Dashboard.css";
+import "../../../css/projects.css";
+import "../../../css/Dashboard.css";
 
-import ProjectsDisplayedList from "src/components/lists/ProjectsDisplayedList";
-import SearchBarComponent from "src/components/sections/SearchBarComponent";
-import { getProjects } from "src/actions/projects";
+import ProjectsDisplayedList from "../../lists/ProjectsDisplayedList";
+import SearchBarComponent from "../../sections/SearchBarComponent";
+import { getProjects } from "../../../actions/projectActions";
 
 class ProjectsPage extends Component {
   constructor(props) {

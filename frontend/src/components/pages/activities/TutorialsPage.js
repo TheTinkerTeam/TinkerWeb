@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Input } from "semantic-ui-react";
 import { connect } from "react-redux";
 
-import CategoryBubblesList from "src/components/lists/CategoryBubblesList";
-import TutoDisplayedList from "src/components/lists/TutoDisplayedList";
+import CategoryBubblesList from "../../lists/CategoryBubblesList";
+import TutoDisplayedList from "../../lists/TutoDisplayedList";
 
 class TutorialsPage extends Component {
   constructor(props) {
@@ -62,22 +62,22 @@ class TutorialsPage extends Component {
     const { tutorials, tutoCat } = this.props;
 
     return (
-      <div className='projects-container'>
-        <div className='red-title rotate-title'>
+      <div className="projects-container">
+        <div className="red-title rotate-title">
           <span>Super </span>
-          <span className='superprojects-text'>Tutor</span>
-          <span className='superprojects-text' id='supertinker-i'>
+          <span className="superprojects-text">Tutor</span>
+          <span className="superprojects-text" id="supertinker-i">
             i
           </span>
-          <span className='superprojects-text'>als</span>
+          <span className="superprojects-text">als</span>
         </div>
-        <div className='projects-card'>
+        <div className="projects-card">
           <div>
             <Input
-              className='icon'
-              icon='search'
-              placeholder='Search...'
-              id='search-bar-projects'
+              className="icon"
+              icon="search"
+              placeholder="Search..."
+              id="search-bar-projects"
             />
           </div>
           <CategoryBubblesList

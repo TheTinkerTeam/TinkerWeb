@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import BubbleItem from "src/components/items/BubbleItem";
+import BubbleItem from "../items/BubbleItem";
 
 class CategoryBubblesList extends Component {
   render() {
@@ -12,16 +12,17 @@ class CategoryBubblesList extends Component {
     } = this.props;
 
     return (
-      <div className='categories-bubble-list'>
-        {categories.map(category => (
-          <BubbleItem
-            key={category.id}
-            isActive={activeItems.indexOf(category.name) !== -1}
-            category={category}
-            handleSelection={handleSelection}
-            handleUnselection={handleUnselection}
-          />
-        ))}
+      <div className="categories-bubble-list">
+        {categories &&
+          categories.map(category => (
+            <BubbleItem
+              key={category.id}
+              isActive={activeItems.indexOf(category.name) !== -1}
+              category={category}
+              handleSelection={handleSelection}
+              handleUnselection={handleUnselection}
+            />
+          ))}
       </div>
     );
   }

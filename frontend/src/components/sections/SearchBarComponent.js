@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Input } from "semantic-ui-react";
 
-import CategoryBubblesList from "src/components/lists/CategoryBubblesList";
+import CategoryBubblesList from "../lists/CategoryBubblesList";
 
 class SearchBarComponent extends Component {
   render() {
@@ -16,10 +16,10 @@ class SearchBarComponent extends Component {
       <div>
         <div>
           <Input
-            className='icon'
-            icon='search'
-            placeholder='Search...'
-            id='search-bar-projects'
+            className="icon"
+            icon="search"
+            placeholder="Search..."
+            id="search-bar-projects"
           />
         </div>
         <CategoryBubblesList

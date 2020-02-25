@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import TinkerNewsList from "src/components/lists/TinkerNewsList";
+import TinkerNewsList from "../lists/TinkerNewsList";
 
 const mapStateToProps = state => ({
   news: state.news
@@ -13,7 +13,7 @@ class TinkerNews extends Component {
 
     return (
       <div>
-        <div className='red-title'>Tinker News</div>
+        <div className="red-title">Tinker News</div>
         <TinkerNewsList news={news} />
       </div>
     );
