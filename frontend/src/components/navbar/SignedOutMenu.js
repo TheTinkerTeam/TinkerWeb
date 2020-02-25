@@ -9,10 +9,10 @@ import {
   Segment,
   Form
 } from "semantic-ui-react";
+import { connect } from "react-redux";
 
 import "../../css/SignedOutMenu.css";
 import { login } from "../../actions/authActions";
-import { connect } from "react-redux";
 
 const SignedOutMenu = ({ login }) => {
   /*

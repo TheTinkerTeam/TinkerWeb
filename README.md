@@ -54,6 +54,7 @@ DB_USER=<YOUR_DB_USER>
 DB_PASS=<YOUR_DB_PASSWORD>
 JWT_SECRET=<YOUR_JWT_SECRET>
 ```
+
 \*\*Replace all <PLACE_HOLDERS> with your variables
 
 **OR Move your exesting `.env` file to the backend folder**
@@ -95,26 +96,3 @@ YOU SHOULD SEE THE APPLICATION BY GOING TO `http://localhost:3000` ON YOUR BROWS
 ### HOSTS & PORTS
 
 By default the server is running on localhost:5000, to change this modify your .env file
-
-### The Symlink - taken from https://gist.github.com/branneman/8048520
-
-Stolen from: [focusaurus](https://github.com/focusaurus) / [express_code_structure](https://github.com/focusaurus/express_code_structure) # [the-app-symlink-trick](https://github.com/focusaurus/express_code_structure#the-app-symlink-trick)
-
-1. Create a symlink under `node_modules` to your app directory:  
-   Linux: `ln -nsf node_modules ../src`  
-   Windows: `mklink /D app node_modules`
-
-2. Now you can require local modules like this from anywhere:
-   ```js
-   const Article = require("models/article");
-   ```
-
-Note: you can **not** have a symlink like this inside a Git repo, since Git does not handle symlinks cross-platform. If you can live with a post-clone git-hook and/or the instruction for the next developer to create a symlink, then sure.
-
-Alternatively, you can create the symlink on the npm `postinstall` hook, as described by [scharf](https://github.com/scharf) in [this awesome comment](https://gist.github.com/branneman/8048520#gistcomment-1412502). Put this inside your `package.json`:
-
-```js
-"scripts": {
-    "postinstall" : "node -e \"var s='../src',d='node_modules/src',fs=require('fs');fs.exists(d,function(e){e||fs.symlinkSync(s,d,'dir')});\""
-  }
-```

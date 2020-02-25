@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-// import "./Dashboard.css";
+import "../../../css/Dashboard.css";
 
 import WelcomeComponent from "../../sections/WelcomeComponent";
 import TinkerNewsComponent from "../../sections/TinkerNewsComponent";
