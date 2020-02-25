@@ -48,7 +48,7 @@ export const signup = ({ email, username, password }) => async dispatch => {
 
     if (errors) {
       errors.forEach(error => {
-        dispatch(setAlert(error.msg, "danger"));
+        dispatch(setAlert(error.msg, "error"));
       });
     }
     dispatch({
@@ -72,7 +72,7 @@ export const login = ({ username, password }) => async dispatch => {
 
     if (errors) {
       errors.forEach(error => {
-        dispatch(setAlert(error.msg, "danger"));
+        dispatch(setAlert(error.msg, "error"));
       });
     }
 

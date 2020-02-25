@@ -16,11 +16,15 @@ exports.createUser = async (req, res) => {
     // Check if user already exists with the email given
     let user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ errors: [{ msg: "Email already exists" }] });
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Email already exists" }] });
     }
     user = await User.findOne({ username });
     if (user) {
-      return res.status(400).json({ errors: [{ msg: "Username already exists" }] });
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Username already exists" }] });
     }
 
     // Create user object
@@ -44,16 +48,10 @@ exports.createUser = async (req, res) => {
       }
     };
 
-    jwt.sign(
-      payload,
-      jwtSecret,
-      { expiresIn: 3600 },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }
-    );
-
+    jwt.sign(payload, jwtSecret, { expiresIn: 3600 }, (err, token) => {
+      if (err) throw err;
+      res.json({ token });
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -99,15 +97,10 @@ exports.loginUser = async (req, res) => {
       }
     };
 
-    jwt.sign(
-      payload,
-      jwtSecret,
-      { expiresIn: 3600 },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }
-    );
+    jwt.sign(payload, jwtSecret, { expiresIn: 3600 }, (err, token) => {
+      if (err) throw err;
+      res.json({ token });
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -118,5 +111,5 @@ exports.loginUser = async (req, res) => {
 // @desc    Log Out User
 // @access  Private
 exports.logoutUser = async (req, res) => {
-    // TODO!
+  // TODO!
 };
