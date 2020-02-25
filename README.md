@@ -39,15 +39,13 @@ Create the .env file in the backend folder
 Edit the `.env` file in your favorite editor by adding these variables:
 `NODE_ENV=dev`
 
-`DEV_DB_HOST=<YOUR_DB_HOST>`
-
-`DEV_APP_PORT=5000`
-
-`DB_USER=<YOUR_DB_USER>`
-`DB_PASS=<YOUR_DB_PASSWORD>`
-
-`JWT_SECRET=<YOUR_JWT_SECRET>`
-
+```
+DEV_DB_HOST=<YOUR_DB_HOST>
+DEV_APP_PORT=5000
+DB_USER=<YOUR_DB_USER>
+DB_PASS=<YOUR_DB_PASSWORD>
+JWT_SECRET=<YOUR_JWT_SECRET>
+```
 \*\*Replace all <PLACE_HOLDERS> with your variables
 
 **OR Move your exesting `.env` file to the backend folder**
