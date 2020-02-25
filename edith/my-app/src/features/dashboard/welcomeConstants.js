@@ -1,1 +1,0 @@
-export const CREATE_WELCOME = "CREATE_WELCOME";
