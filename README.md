@@ -60,6 +60,7 @@ Move to the sub-directory called 'backend' (~/TinkerWeb/backend)
 
 Start the server inside the backend folder
 `npm start`
+
 **--> NOW THE SERVER IS RUNNING IN THE BACKGROUND OF THE TERMINAL <--**
 
 ### `npm start` the Frontend (Client)
