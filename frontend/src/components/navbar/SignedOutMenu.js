@@ -62,10 +62,7 @@ const SignedOutMenu = ({ login }) => {
           </Button>
         }
       >
-        <Modal.Content>
-          <AuthForm />
-        </Modal.Content>
-        <Alert />
+        <AuthForm />
       </Modal>
     </Menu.Item>
   );

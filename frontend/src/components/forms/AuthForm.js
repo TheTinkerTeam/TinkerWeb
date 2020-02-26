@@ -2,10 +2,11 @@ import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { Form, Button, Message } from "semantic-ui-react";
+import { Form, Button, Message, Modal, Image, Header } from "semantic-ui-react";
 
 import { signup, login } from "../../actions/authActions";
 import checkEmail from "../../utils/checkEmail";
+import Alert from "../services/Alert";
 
 const AuthForm = ({ signup, login }) => {
   //const [state, setState] = useState(initialState);
@@ -260,15 +261,31 @@ const AuthForm = ({ signup, login }) => {
   }
 
   return (
-    <Form
-      size="massive"
-      onSubmit={e => {
-        handleSubmit(e);
-      }}
-      autoComplete="off"
-    >
-      {template}
-    </Form>
+    <Modal.Content image>
+      <Image
+        wrapped
+        size="medium"
+        src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
+      />
+      <Modal.Description>
+        <Header>Default Profile Image</Header>
+        <p>
+          We've found the following gravatar image associated with your e-mail
+          address.
+        </p>
+        <p>Is it okay to use this photo?</p>
+      </Modal.Description>
+      <Form
+        size="massive"
+        onSubmit={e => {
+          handleSubmit(e);
+        }}
+        autoComplete="off"
+      >
+        {template}
+      </Form>
+      <Alert />
+    </Modal.Content>
   );
 };
 
