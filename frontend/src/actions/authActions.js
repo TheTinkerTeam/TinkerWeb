@@ -33,8 +33,7 @@ export const loadUser = () => async dispatch => {
   }
 };
 
-export const signup = ({ email, username, password }) => async dispatch => {
-  const body = { username, email, password };
+export const signup = body => async dispatch => {
   try {
     const res = await axios.post("/api/v1/users", body);
 
@@ -56,10 +55,9 @@ export const signup = ({ email, username, password }) => async dispatch => {
   }
 };
 
-export const login = ({ username, password }) => async dispatch => {
-  const body = { username, password };
+export const login = ({ email, password }) => async dispatch => {
   try {
-    const res = await axios.post("/api/v1/users/auth", body);
+    const res = await axios.post("/api/v1/users/auth", { email, password });
 
     dispatch({
       type: LOGIN_SUCCESS,

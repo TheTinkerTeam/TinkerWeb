@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 
 import { Form, Button, Message } from "semantic-ui-react";
 
-import { login } from "../../actions/authActions";
+import { signup, login } from "../../actions/authActions";
+import checkEmail from "../../utils/checkEmail";
 
-const AuthForm = ({ login }) => {
+const AuthForm = ({ signup, login }) => {
   //const [state, setState] = useState(initialState);
 
   const initialState = {
@@ -16,11 +17,29 @@ const AuthForm = ({ login }) => {
 
   const [state, setState] = useState(initialState);
 
+  const emailExists = async email => {
+    const user = await checkEmail(email);
+    if (user) {
+      setState({
+        ...state,
+        position: "login",
+        template: "input"
+      });
+    } else {
+      setState({
+        ...state,
+        position: "userType",
+        template: "buttons"
+      });
+    }
+  };
+
   const initialUser = {
     email: "",
-    newUser: null,
     userType: "",
-    username: "",
+    firstName: "",
+    lastName: "",
+    school: "",
     password: ""
   };
 
@@ -33,12 +52,10 @@ const AuthForm = ({ login }) => {
   const [buttons, setButtons] = useState(initialButtons);
 
   useEffect(() => {
-    let newState;
     let newInputs;
     let newButtons;
     switch (state.position) {
       case "email":
-        newState = {};
         newInputs = [
           {
             name: "email",
@@ -53,14 +70,55 @@ const AuthForm = ({ login }) => {
           }
         ];
         break;
-      case "code":
-        newState = {};
+      case "userType":
+        newInputs = [];
+        newButtons = [
+          {
+            onClick: () => {
+              setUser({
+                ...user,
+                userType: "student",
+                email: user.email
+              });
+            },
+            text: "I'm a Student",
+            color: "violet"
+          },
+          {
+            onClick: () => {
+              setUser({
+                ...user,
+                userType: "teacher"
+              });
+            },
+            text: "I'm a Teacher",
+            color: "purple"
+          },
+          {
+            onClick: () => {
+              setUser({
+                ...user,
+                userType: "school"
+              });
+            },
+            text: "I'm a School Admin",
+            color: "pink"
+          }
+        ];
+        break;
+      case "fullname":
         newInputs = [
           {
-            name: "code",
-            label: "Check your email!",
+            name: "firstName",
+            label: "First Name",
             type: "input",
-            placeholder: "Enter code here"
+            placeholder: "Barack"
+          },
+          {
+            name: "lastName",
+            label: "Last Name",
+            type: "input",
+            placeholder: "Obama"
           }
         ];
         newButtons = [
@@ -69,35 +127,46 @@ const AuthForm = ({ login }) => {
           }
         ];
         break;
-      case "password":
-        newState = {};
+      case "school":
+        newInputs = [
+          {
+            name: "school",
+            label: "What's the name of your school",
+            type: "input",
+            placeholder: "Harvard"
+          }
+        ];
+        newButtons = [
+          {
+            text: "Confirm"
+          }
+        ];
+        break;
+      case "signup":
+      case "login":
         newInputs = [
           {
             name: "password",
-            label: "New Account, enter your password",
+            label: "Enter your password",
             type: "password",
             placeholder: "***"
           }
         ];
         newButtons = [
           {
-            text: "Confirm"
+            text: "Start Tinkering"
           }
         ];
         break;
       default:
     }
-    setState({
-      ...state,
-      ...newState
-    });
     setInputs(newInputs);
     setButtons(newButtons);
   }, [state.position]);
 
   const handleChange = e => {
-    setState({
-      ...state,
+    setUser({
+      ...user,
       [e.target.name]: e.target.value
     });
   };
@@ -106,46 +175,89 @@ const AuthForm = ({ login }) => {
     e.preventDefault();
     switch (state.position) {
       case "email":
-        setState({
-          ...state,
-          position: "userType"
-        });
+        emailExists(user.email);
         break;
       case "userType":
         setState({
           ...state,
-          position: ""
+          position: "fullname",
+          template: "input"
         });
+        break;
+      case "fullname":
+        setState({
+          ...state,
+          position: "school",
+          template: "input"
+        });
+        break;
+      case "school":
+        setState({
+          ...state,
+          position: "signup",
+          template: "input"
+        });
+        break;
+      case "signup":
+        console.log(user);
+        signup(user);
+        break;
+      case "login":
+        console.log(user);
+        login({
+          email: user.email,
+          password: user.password
+        });
+        break;
+      case "another":
         break;
       default:
         setState({
-          ...state
+          ...state,
+          position: "email",
+          template: "input"
         });
         break;
     }
   };
-
-  const templates = {
-    input: {
-      inputs: inputs.map(input => (
-        <Fragment>
-          <Form.Input
-            label={input.label}
-            type={input.type}
-            placeholder={input.placeholder}
-            name={input.name}
-            value={state[input.name]}
-            onChange={handleChange}
-          />
-        </Fragment>
+  let template = <Fragment></Fragment>;
+  if (state.template === "input") {
+    template = [
+      inputs.map((input, i) => (
+        <Form.Input
+          key={i}
+          label={input.label}
+          type={input.type}
+          placeholder={input.placeholder}
+          name={input.name}
+          value={user[input.name] || ""}
+          onChange={handleChange}
+        />
       )),
-      buttons: buttons.map(button => (
-        <Button fluid size="massive" positive type="submit">
+      buttons.map((button, i) => (
+        <Button fluid size="massive" positive type="submit" key={i}>
           {button.text}
         </Button>
       ))
-    }
-  };
+    ];
+  } else if (state.template === "buttons") {
+    template = [
+      <Button.Group widths={buttons.length} key="0">
+        {buttons.map((button, i) => (
+          <Button
+            key={i}
+            onClick={button.onClick}
+            inverted
+            size="massive"
+            color={button.color}
+            type="submit"
+          >
+            {button.text}
+          </Button>
+        ))}
+      </Button.Group>
+    ];
+  }
 
   return (
     <Form
@@ -155,8 +267,7 @@ const AuthForm = ({ login }) => {
       }}
       autoComplete="off"
     >
-      {templates[state.template].inputs}
-      {templates[state.template].buttons}
+      {template}
     </Form>
   );
 };
@@ -166,6 +277,7 @@ AuthForm.propTypes = {};
 const mapStateToProps = null;
 
 const mapDispatchToProps = {
+  signup,
   login
 };
 
