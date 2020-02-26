@@ -26,6 +26,7 @@ const Alert = ({ alerts }) => {
           duration="300"
         >
           <Message
+            size="massive"
             error={alert.type === "error"}
             warning={alert.type === "warning"}
             positive={alert.type === "positive"}
