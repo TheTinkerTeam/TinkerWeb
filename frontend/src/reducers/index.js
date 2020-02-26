@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   projects: projectReducer,
   tutorials: tutorialReducer,
   news: newsReducer,
-  welcomes: welcomeReducer
+  welcome: welcomeReducer
 });
 
 export default rootReducer;

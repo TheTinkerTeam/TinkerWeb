@@ -7,12 +7,15 @@ import {
   Modal,
   Header,
   Segment,
-  Form
+  Form,
+  Transition
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import "../../css/SignedOutMenu.css";
 import { login } from "../../actions/authActions";
+import AuthForm from "../forms/AuthForm";
+import Alert from "../services/Alert";
 
 const SignedOutMenu = ({ login }) => {
   /*
@@ -29,25 +32,6 @@ const SignedOutMenu = ({ login }) => {
   // const { loggedIn, closeOnEscape, closeOnDimmerClick } = this.state;
 
   //    const { signIn, handleFormSubmit, handleInputChange } = this.props;
-
-  const [formData, setFormData] = useState({
-    username: "",
-    password: ""
-  });
-
-  const { username, password } = formData;
-
-  const onChange = e => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleFormSubmit = e => {
-    e.preventDefault();
-    login(formData);
-  };
 
   return (
     <Menu.Item position="right">
@@ -78,50 +62,10 @@ const SignedOutMenu = ({ login }) => {
           </Button>
         }
       >
-        <Modal.Header>Super Humanics</Modal.Header>
         <Modal.Content>
-          <Modal.Description>
-            <Header>Hello!</Header>
-            <p>
-              We've found the following gravatar image associated with your
-              e-mail address.
-            </p>
-            <Segment>
-              <Form
-                onSubmit={e => {
-                  // signIn();
-                  // close();
-                  handleFormSubmit(e);
-                }}
-                autoComplete="off"
-              >
-                <Form.Field>
-                  <label>Username</label>
-                  <input
-                    name="username"
-                    onChange={e => onChange(e)}
-                    value={username}
-                    placeholder="Username or Email"
-                    required
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>Password</label>
-                  <input
-                    name="password"
-                    onChange={e => onChange(e)}
-                    value={password}
-                    placeholder="Password"
-                    required
-                  />
-                </Form.Field>
-                <Button positive type="submit">
-                  Sign In
-                </Button>
-              </Form>
-            </Segment>
-          </Modal.Description>
+          <AuthForm />
         </Modal.Content>
+        <Alert />
       </Modal>
     </Menu.Item>
   );

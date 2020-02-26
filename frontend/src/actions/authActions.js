@@ -33,8 +33,7 @@ export const loadUser = () => async dispatch => {
   }
 };
 
-export const signup = ({ email, username, password }) => async dispatch => {
-  const body = { username, email, password };
+export const signup = body => async dispatch => {
   try {
     const res = await axios.post("/api/v1/users", body);
 
@@ -42,13 +41,12 @@ export const signup = ({ email, username, password }) => async dispatch => {
       type: SIGNUP_SUCCESS,
       payload: res.data
     });
-    dispatch(setAlert("SUCCESSFULLY SIGNED UP!", "positive"));
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
       errors.forEach(error => {
-        dispatch(setAlert(error.msg, "danger"));
+        dispatch(setAlert(error.msg, "error"));
       });
     }
     dispatch({
@@ -57,22 +55,20 @@ export const signup = ({ email, username, password }) => async dispatch => {
   }
 };
 
-export const login = ({ username, password }) => async dispatch => {
-  const body = { username, password };
+export const login = ({ email, password }) => async dispatch => {
   try {
-    const res = await axios.post("/api/v1/users/auth", body);
+    const res = await axios.post("/api/v1/users/auth", { email, password });
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data
     });
-    dispatch(setAlert("SUCCESSFULLY LOGGED IN!", "positive"));
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
       errors.forEach(error => {
-        dispatch(setAlert(error.msg, "danger"));
+        dispatch(setAlert(error.msg, "error"));
       });
     }
 
