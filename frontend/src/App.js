@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 
 import NavBar from "./components/navbar/Navbar";
@@ -11,7 +11,20 @@ import ProjectsPage from "./components/pages/activities/ProjectsPage";
 import ProjectDetailsPage from "./components/pages/activities/ProjectDetailsPage";
 import SettingsDashboard from "./components/pages//settings";
 
+import { loadUser } from "./actions/authActions";
+import setAuthToken from "./utils/setAuthToken";
+
+import store from "./store";
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 class App extends React.Component {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
+
   render() {
     return (
       <div>

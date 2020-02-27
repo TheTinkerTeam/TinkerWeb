@@ -11,29 +11,15 @@ import Alert from "../services/Alert";
 const AuthForm = ({ signup, login }) => {
   //const [state, setState] = useState(initialState);
 
-  const initialState = {
+  const initialmodal = {
     position: "email",
-    template: "input"
+    template: "input",
+    header: "First, enter your email",
+    img:
+      "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
   };
 
-  const [state, setState] = useState(initialState);
-
-  const emailExists = async email => {
-    const user = await checkEmail(email);
-    if (user) {
-      setState({
-        ...state,
-        position: "login",
-        template: "input"
-      });
-    } else {
-      setState({
-        ...state,
-        position: "userType",
-        template: "buttons"
-      });
-    }
-  };
+  const [modal, setModal] = useState(initialmodal);
 
   const initialUser = {
     email: "",
@@ -52,15 +38,41 @@ const AuthForm = ({ signup, login }) => {
   const [inputs, setInputs] = useState(initialInputs);
   const [buttons, setButtons] = useState(initialButtons);
 
+  const emailExists = async email => {
+    const res = await checkEmail(email);
+    setUser({
+      ...user,
+      email: email
+    });
+    if (res) {
+      setModal({
+        ...modal,
+        position: "login",
+        template: "input",
+        header: "Login",
+        img:
+          "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+      });
+    } else {
+      setModal({
+        ...modal,
+        position: "userType",
+        template: "buttons",
+        header: "Choose your account type",
+        img:
+          "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+      });
+    }
+  };
+
   useEffect(() => {
     let newInputs;
     let newButtons;
-    switch (state.position) {
+    switch (modal.position) {
       case "email":
         newInputs = [
           {
             name: "email",
-            label: "First, enter your email",
             type: "input",
             placeholder: "name@example.com"
           }
@@ -78,8 +90,7 @@ const AuthForm = ({ signup, login }) => {
             onClick: () => {
               setUser({
                 ...user,
-                userType: "student",
-                email: user.email
+                userType: "student"
               });
             },
             text: "I'm a Student",
@@ -163,7 +174,7 @@ const AuthForm = ({ signup, login }) => {
     }
     setInputs(newInputs);
     setButtons(newButtons);
-  }, [state.position]);
+  }, [modal.position]);
 
   const handleChange = e => {
     setUser({
@@ -174,37 +185,44 @@ const AuthForm = ({ signup, login }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    switch (state.position) {
+    switch (modal.position) {
       case "email":
         emailExists(user.email);
         break;
       case "userType":
-        setState({
-          ...state,
+        setModal({
+          ...modal,
           position: "fullname",
-          template: "input"
+          template: "input",
+          header: "What is your name?",
+          img:
+            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "fullname":
-        setState({
-          ...state,
+        setModal({
+          ...modal,
           position: "school",
-          template: "input"
+          template: "input",
+          header: "And your school's name?",
+          img:
+            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "school":
-        setState({
-          ...state,
+        setModal({
+          ...modal,
           position: "signup",
-          template: "input"
+          template: "input",
+          header: "Sign Up",
+          img:
+            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "signup":
-        console.log(user);
         signup(user);
         break;
       case "login":
-        console.log(user);
         login({
           email: user.email,
           password: user.password
@@ -213,17 +231,38 @@ const AuthForm = ({ signup, login }) => {
       case "another":
         break;
       default:
-        setState({
-          ...state,
+        setModal({
+          ...modal,
           position: "email",
-          template: "input"
+          template: "input",
+          header: "First, enter your email",
+          img:
+            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
     }
   };
-  let template = <Fragment></Fragment>;
-  if (state.template === "input") {
-    template = [
+  let modalTemplate = (
+    <Modal.Content>
+      <Modal.Description>
+        <p>{modal.text}</p>
+      </Modal.Description>
+      <Image
+        size="medium"
+        src={modal.img}
+        style={{
+          paddingBottom: 100,
+          display: `block`,
+          marginLeft: `auto`,
+          marginRight: `auto`
+        }}
+      />
+    </Modal.Content>
+  );
+
+  let formTemplate;
+  if (modal.template === "input") {
+    formTemplate = [
       inputs.map((input, i) => (
         <Form.Input
           key={i}
@@ -241,9 +280,9 @@ const AuthForm = ({ signup, login }) => {
         </Button>
       ))
     ];
-  } else if (state.template === "buttons") {
-    template = [
-      <Button.Group widths={buttons.length} key="0">
+  } else if (modal.template === "buttons") {
+    formTemplate = (
+      <Button.Group widths={buttons.length}>
         {buttons.map((button, i) => (
           <Button
             key={i}
@@ -257,39 +296,33 @@ const AuthForm = ({ signup, login }) => {
           </Button>
         ))}
       </Button.Group>
-    ];
+    );
   }
 
   return (
-    <Modal.Content image>
-      <Image
-        wrapped
-        size="medium"
-        src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
-      />
-      <Modal.Description>
-        <Header>Default Profile Image</Header>
-        <p>
-          We've found the following gravatar image associated with your e-mail
-          address.
-        </p>
-        <p>Is it okay to use this photo?</p>
-      </Modal.Description>
-      <Form
-        size="massive"
-        onSubmit={e => {
-          handleSubmit(e);
-        }}
-        autoComplete="off"
-      >
-        {template}
-      </Form>
+    <Fragment>
+      <Header size="huge">{modal.header}</Header>
+      <Modal.Content>
+        <Form
+          size="massive"
+          onSubmit={e => {
+            handleSubmit(e);
+          }}
+          autoComplete="off"
+        >
+          {formTemplate}
+        </Form>
+      </Modal.Content>
+      {modalTemplate}
       <Alert />
-    </Modal.Content>
+    </Fragment>
   );
 };
 
-AuthForm.propTypes = {};
+AuthForm.propTypes = {
+  signup: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired
+};
 
 const mapStateToProps = null;
 

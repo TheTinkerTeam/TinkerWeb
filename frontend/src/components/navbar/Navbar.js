@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import logo from "../../img/SHlogo.png";
 import SignedOutMenu from "../navbar/SignedOutMenu";
 import SignedInMenu from "../navbar/SignedInMenu";
-import { logout } from "../../actions/authActions";
 
 const NavBar = ({ auth }) => {
   return (
@@ -55,8 +54,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = {
-  logout
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));
