@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Follow the Instructions below to build & run Tinker Web in your local environment.",
   "main": "index.js",
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {},
   "devDependencies": {
     "concurrently": "^5.1.0"

@@ -6,7 +6,7 @@ const appConfig = require("./src/config/app");
 
 connectDB();
 
-const port = appConfig.port;
+const port = process.env.PORT || appConfig.port;
 app.listen(port, () => {
   console.log(`Server listening on port ${port}.`);
 });
