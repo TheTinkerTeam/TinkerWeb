@@ -61,7 +61,6 @@ const Dashboard = ({ projects, getProjects, createProject }) => {
           return project.tags.indexOf("Cooking") !== -1;
         })}
       />
-      <ProjectForm createProject={createProject} />
     </div>
   );
 };
