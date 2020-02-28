@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
+import React, { Fragment, useEffect } from "react";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import NavBar from "./components/navbar/Navbar";
 import Dashboard from "./components/pages/dashboard/Dashboard";

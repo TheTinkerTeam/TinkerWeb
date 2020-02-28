@@ -13,6 +13,8 @@ router
 
 router.route("/me").get(auth, profileController.getMyProfile);
 
+router.route("/me").get(auth, profileController.getMyProfile);
+
 router
   .route("/:profileID")
   .get(auth, profileController.getProfile)
