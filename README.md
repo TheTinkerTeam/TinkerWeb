@@ -47,7 +47,9 @@ Create the .env file in the backend folder
 Edit the `.env` file in your favorite editor by adding these variables:
 
 ```
-DEV_DB_HOST=<YOUR_DB_HOST>
+DEV_DB_HOST=<YOUR_DEV_DB_HOST>
+PROD_DB_HOST=<YOUR_PROD_DB_HOST>
+TEST_DB_HOST=<YOUR_TEST_DB_HOST>
 DB_USER=<YOUR_DB_USER>
 DB_PASS=<YOUR_DB_PASSWORD>
 JWT_SECRET=<YOUR_JWT_SECRET>
