@@ -30,7 +30,7 @@ class App extends React.Component {
       <Router>
         <Fragment>
           <NavBar />
-          <div className="container">
+          <section className="container">
             <Switch>
               <Route exact path="/" component={Dashboard} />
               <Route path="/membership" component={MembershipPage} />
@@ -40,7 +40,7 @@ class App extends React.Component {
               <Route path="/projects/:id" component={ProjectDetailsPage} />
               <Route path="/tutorials/:id" component={TutorialDetailsPage} />
             </Switch>
-          </div>
+          </section>
         </Fragment>
       </Router>
     );
