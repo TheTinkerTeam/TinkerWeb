@@ -1,7 +1,7 @@
-const config = require('./index');
+const config = require("./index");
 
 const app = {
-    port: config.app.port
-}
+  port: 5000
+};
 
 module.exports = app;
