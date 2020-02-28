@@ -1,7 +1,4 @@
-const dev = {
-  app: {
-    port: parseInt(process.env.DEV_APP_PORT) || 5000
-  },
+const development = {
   db: {
     host: process.env.DEV_DB_HOST,
     user: process.env.DB_USER,
@@ -9,10 +6,7 @@ const dev = {
   }
 };
 
-const prod = {
-  app: {
-    port: parseInt(process.env.TEST_APP_PORT) || 5000
-  },
+const production = {
   db: {
     host: process.env.PROD_DB_HOST,
     user: process.env.DB_USER,
@@ -20,10 +14,7 @@ const prod = {
   }
 };
 
-const test = {
-  app: {
-    port: parseInt(process.env.TEST_APP_PORT) || 5000
-  },
+const testing = {
   db: {
     host: process.env.TEST_DB_HOST,
     user: process.env.DB_USER,
@@ -32,11 +23,11 @@ const test = {
 };
 
 const config = {
-  dev,
-  prod,
-  test
+  development,
+  production,
+  testing
 };
 
-const env = "dev"; // 'dev', 'prod' or 'test'
+const env = "development"; // 'dev', 'prod' or 'test'
 
 module.exports = config[env];
