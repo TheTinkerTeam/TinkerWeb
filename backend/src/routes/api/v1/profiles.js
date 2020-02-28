@@ -11,6 +11,8 @@ router
   .get(auth, profileController.getProfiles)
   .post(auth, profileController.createProfile);
 
+router.route("/me").get(auth, profileController.getMyProfile);
+
 router
   .route("/:profileID")
   .get(auth, profileController.getProfile)

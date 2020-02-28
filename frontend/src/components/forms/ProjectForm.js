@@ -57,61 +57,49 @@ class ProjectForm extends Component {
       <div style={{ gridColumn: "1/6", padding: "20px" }}>
         <h2>Create a project</h2>
         <hr style={{ marginBottom: "20px" }} />
-        <Form size="medium" onSubmit={this.handleFormSubmit} autoComplete="off">
-          <Form.Field>
-            <label>Project Title</label>
-            <input
-              name="title"
-              onChange={this.handleInputChange}
-              value={title}
-              placeholder="Project Title"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Description</label>
-            <input
-              name="description"
-              onChange={this.handleInputChange}
-              value={description}
-              placeholder="Project Description"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Learning Objectives</label>
-            <input
-              name="learning_objectives"
-              onChange={this.handleInputChange}
-              value={learning_objectives}
-              placeholder="Write the Learning Objectives"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Subject</label>
-            <input
-              name="subjects"
-              onChange={this.handleInputChange}
-              value={subjects}
-              placeholder="Enter the subject of the project"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Tags</label>
-            <input
-              name="tags"
-              onChange={this.handleInputChange}
-              value={tags}
-              placeholder="Enter the tags"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Grade</label>
-            <input
-              name="grades"
-              onChange={this.handleInputChange}
-              value={grades}
-              placeholder="What's your class grade?"
-            />
-          </Form.Field>
+        <Form size="large" onSubmit={this.handleFormSubmit} autoComplete="off">
+          <Form.Input
+            name="title"
+            label="Project Title"
+            onChange={this.handleInputChange}
+            value={title}
+            placeholder="Project Title"
+          />
+          <Form.Input
+            name="description"
+            label="Description"
+            onChange={this.handleInputChange}
+            value={description}
+            placeholder="Project Description"
+          />
+          <Form.Input
+            name="learning_objectives"
+            label="Learning Objectives"
+            onChange={this.handleInputChange}
+            value={learning_objectives}
+            placeholder="Write the Learning Objectives"
+          />
+          <Form.Input
+            name="subjects"
+            label="Subject"
+            onChange={this.handleInputChange}
+            value={subjects}
+            placeholder="Enter the subject of the project"
+          />
+          <Form.Input
+            name="tags"
+            label="Tags"
+            onChange={this.handleInputChange}
+            value={tags}
+            placeholder="Enter the tags"
+          />
+          <Form.Input
+            name="grades"
+            label="Grade"
+            onChange={this.handleInputChange}
+            value={grades}
+            placeholder="What's your class grade?"
+          />
           <Button positive type="submit">
             Submit
           </Button>

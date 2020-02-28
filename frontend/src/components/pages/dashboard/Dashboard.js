@@ -7,9 +7,8 @@ import WelcomeComponent from "../../sections/WelcomeComponent";
 import TinkerNewsComponent from "../../sections/TinkerNewsComponent";
 import ProjectsList from "../../lists/ProjectsList";
 
-import tinkercart from "../../../img/tinkercart.png";
+import tinkercartPlus from "../../../img/tinkercart.png";
 
-import ProjectForm from "../../forms/ProjectForm";
 import { getProjects, createProject } from "../../../actions/projectActions";
 
 const Dashboard = ({ projects, getProjects, createProject }) => {
@@ -20,7 +19,7 @@ const Dashboard = ({ projects, getProjects, createProject }) => {
     <div className="dashboardcontainer">
       <div className="welcome-item card">
         <img
-          src={tinkercart}
+          src={tinkercartPlus}
           className="tinkercart-img-position"
           alt="Tinker Cart model"
           height="100em"

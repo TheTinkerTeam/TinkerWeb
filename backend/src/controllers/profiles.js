@@ -19,6 +19,25 @@ exports.getProfiles = async (req, res) => {
   }
 };
 
+// @route   GET /profiles/me
+// @desc    Get current user's profile by his req.userID
+// @access  Private
+exports.getMyProfile = async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    if (!profile) {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
+    res.json(profile);
+  } catch (err) {
+    if (err.kind == "ObjectId") {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
 // @route   GET /profiles/:profileID
 // @desc    Get profile by profileID
 // @access  Private
@@ -46,12 +65,10 @@ exports.createProfile = async (req, res) => {
     let profile = await Profile.findOne({ user: req.user.id });
     if (profile) {
       // Return error because profile already exists
-      return res.status(401).json({error: 'Profile exists'});
+      return res.status(401).json({ error: "Profile exists" });
     } else {
       // Create
-      const {
-        name
-      } = req.body;
+      const { name } = req.body;
       profile = new Profile({
         user: req.user.id,
         name
@@ -73,10 +90,14 @@ exports.updateProfile = async (req, res) => {
     let profile = await Profile.findById(req.params.profileID);
     if (!profile) {
       // Return error because profile doesn't exists
-      return res.status(401).json({error: 'Profile does not exists'});
+      return res.status(401).json({ error: "Profile does not exists" });
     } else {
       // Update
-      profile = await Profile.findByIdAndUpdate(req.params.profileID, req.body, {new: true});
+      profile = await Profile.findByIdAndUpdate(
+        req.params.profileID,
+        req.body,
+        { new: true }
+      );
     }
     res.json(profile);
   } catch (err) {
