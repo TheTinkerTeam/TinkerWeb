@@ -9,6 +9,7 @@ import TutorialsPage from "./components/pages/activities/TutorialsPage";
 import TutorialDetailsPage from "./components/pages/activities/TutorialDetailsPage";
 import ProjectsPage from "./components/pages/activities/ProjectsPage";
 import ProjectDetailsPage from "./components/pages/activities/ProjectDetailsPage";
+import ProfilePage from "./components/pages/profile/ProfilePage";
 import SettingsDashboard from "./components/pages//settings";
 
 import { loadUser } from "./actions/authActions";
@@ -27,22 +28,26 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <Fragment>
-          <NavBar />
-          <section className="container">
-            <Switch>
-              <Route exact path="/" component={Dashboard} />
-              <Route path="/membership" component={MembershipPage} />
-              <Route exact path="/tutorials" component={TutorialsPage} />
-              <Route exact path="/projects" component={ProjectsPage} />
-              <Route path="/settings" component={SettingsDashboard} />
-              <Route path="/projects/:id" component={ProjectDetailsPage} />
-              <Route path="/tutorials/:id" component={TutorialDetailsPage} />
-            </Switch>
-          </section>
-        </Fragment>
-      </Router>
+      <div>
+        <NavBar />
+        <div className="container">
+          <Route exact path="/" component={Dashboard} />
+          <Route
+            path="/(.+)"
+            render={() => (
+              <div>
+                <Route path="/membership" component={MembershipPage} />
+                <Route exact path="/tutorials" component={TutorialsPage} />
+                <Route exact path="/projects" component={ProjectsPage} />
+                <Route path="/projects/:id" component={ProjectDetailsPage} />
+                <Route path="/tutorials/:id" component={TutorialDetailsPage} />
+                <Route exact path="/me" component={ProfilePage} />
+                <Route path="/settings" component={SettingsDashboard} />
+              </div>
+            )}
+          />
+        </div>
+      </div>
     );
   }
 }

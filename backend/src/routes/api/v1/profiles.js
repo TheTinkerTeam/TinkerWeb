@@ -9,7 +9,9 @@ const auth = require("../../../middleware/auth");
 router
   .route("/")
   .get(auth, profileController.getProfiles)
-  .post(auth, profileController.createProfile);
+  .post(profileController.createProfile);
+
+router.route("/me").get(auth, profileController.getMyProfile);
 
 router.route("/me").get(auth, profileController.getMyProfile);
 
