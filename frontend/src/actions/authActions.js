@@ -20,11 +20,12 @@ export const loadUser = () => async dispatch => {
   }
 
   try {
-    const res = await axios.get("/api/v1/users/auth");
+    const userResponse = await axios.get("/api/v1/users/auth");
+    const profileResponse = await axios.get("/api/v1/profiles/me");
 
     dispatch({
       type: USER_LOADED,
-      payload: res.data
+      payload: { user: userResponse.data, profile: profileResponse.data }
     });
   } catch (err) {
     dispatch({
@@ -66,7 +67,7 @@ export const login = ({ email, password }) => async dispatch => {
     });
     dispatch(loadUser());
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response && err.response.data.errors;
 
     if (errors) {
       errors.forEach(error => {

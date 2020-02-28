@@ -44,7 +44,7 @@ const NavBar = ({ auth }) => {
               onClick={handleItemClick}
             />
           </Menu.Menu> */}
-        {auth.isAuth ? <SignedInMenu /> : <SignedOutMenu />}
+        {auth.isAuth && auth.profile ? <SignedInMenu /> : <SignedOutMenu />}
       </Menu>
     </div>
   );

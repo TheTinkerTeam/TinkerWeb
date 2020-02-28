@@ -5,6 +5,7 @@ const authConfig = require("../config/auth");
 const jwtSecret = authConfig.jwt.secret;
 
 const User = require("../models/User");
+const Profile = require("../models/Profile");
 
 // @route   GET /users/:email
 // @desc    Check if email exists
@@ -56,13 +57,6 @@ exports.createUser = async (req, res) => {
     // Create user object
     user = new User({
       email,
-      username,
-      userType,
-      name: {
-        first: firstName,
-        last: lastName
-      },
-      school,
       password
     });
 
@@ -71,7 +65,21 @@ exports.createUser = async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
 
     // Add user to the database
-    await user.save();
+    const userSaved = await user.save();
+
+    // Create profile object
+    const profile = new Profile({
+      user: userSaved._id,
+      username,
+      userType,
+      name: {
+        first: firstName,
+        last: lastName
+      },
+      school
+    });
+    // Add profile to the database
+    await profile.save();
 
     // Return jwt (json web token)
     const payload = {

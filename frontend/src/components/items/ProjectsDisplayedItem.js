@@ -4,20 +4,20 @@ class ProjectsDisplayedItem extends Component {
   render() {
     const { project } = this.props;
     return (
-      <div className='wrapper'>
-        <div className='displayed-projects-item'>
-          <div className='child'>
-            <a href={`/projects/${project.id}`}>
+      <div className="wrapper">
+        <div className="displayed-projects-item">
+          <div className="child">
+            <a href={`/projects/${project._id}`}>
               <img
                 src={project.imageURL}
-                className=''
+                className=""
                 alt={project.title}
-                height='100em'
-                width='100em'
+                height="100em"
+                width="100em"
               />
             </a>
           </div>
-          <div className='child'>{project.title}</div>
+          <div className="child">{project.title}</div>
         </div>
       </div>
     );
