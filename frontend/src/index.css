@@ -45,6 +45,10 @@ code {
   /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
 }
 
+.ui.secondary.pointing.menu .item {
+  min-height: 4em;
+}
+
 .ui.menu.secondary .item{
   padding-inline-start: 10px;
 }
