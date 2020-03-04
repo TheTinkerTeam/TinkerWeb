@@ -1,29 +1,72 @@
-import React from "react";
-import { Menu, Input, Responsive, Button } from "semantic-ui-react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+
+import {
+  Menu,
+  Input,
+  Responsive,
+  Button,
+  Sidebar,
+  Icon,
+  Image,
+  Segment,
+  Header
+} from "semantic-ui-react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import logo from "../../img/SHlogo.png";
 import SignedOutMenu from "../navbar/SignedOutMenu";
 import SignedInMenu from "../navbar/SignedInMenu";
+import {toggleVisibility} from '../../actions/sidebarActions'
 
-const NavBar = ({ auth }) => {
+const NavBar = ({ auth, toggleVisibility }) => {
+  // const initialSideBar = {
+  //   animation: "overlay",
+  //   direction: "left",
+  //   dimmed: false,
+  //   visible: false
+  // };
+
+  // const [sideBar, setVisible] = useState(initialSideBar);
+
+  // const handlePusher = () => {
+  //   if (sideBar.visible) {
+  //     setVisible({ visible: false });
+  //   }
+  // };
+
+  // const handleToggle = () => {
+  //   setVisible({ visible: !sideBar.visible });
+  // };
+
+  // const handleSideBarClick = () => {
+  //   setVisible({ visible: !sideBar.visible });
+  // };
+
   return (
     <div>
       <Menu pointing secondary fixed='top'>
-        <Menu.Item as={NavLink} exact to='/' name='Home'>
+        {/* <Menu.Item as={NavLink} exact to='/' name='Home'> */}
+        <Menu.Item >
+          {/* <Responsive
+            {...Responsive.onlyMobile}
+            as={Image}
+            src={logo}
+            id='navlogo'
+            labelPosition='left'
+            size='small'
+            onClick={handleSideBarClick}
+          /> */}
           <Responsive
             {...Responsive.onlyMobile}
             as={Button}
-            content='dropdown menu(mobile)'
-            icon='list'
+            content='menu(mobile)'
+            icon='bars'
             labelPosition='left'
+            onClick={toggleVisibility}
           />
-          {/* <Responsive
-              as={Button}
-              content='desktop version'
-              minWidth={Responsive.onlyTablet.minWidth}
-            /> */}
+
           <Responsive minWidth={Responsive.onlyTablet.minWidth}>
             <img src={logo} alt='SHlogo' id='navlogo' />
           </Responsive>
@@ -71,7 +114,7 @@ const NavBar = ({ auth }) => {
         <Responsive minWidth={Responsive.onlyTablet.minWidth && 1100}>
           <Menu.Item>
             <Input
-            style={{ marginTop: "0.4em" }}
+              style={{ marginTop: "0.4em" }}
               className='icon'
               icon='search'
               placeholder='Search...'
@@ -98,9 +141,10 @@ const NavBar = ({ auth }) => {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  visible: state.sidebar.visible
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {toggleVisibility};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));

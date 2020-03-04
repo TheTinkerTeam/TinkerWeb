@@ -18,6 +18,10 @@ body {
   height: 100%;
 }
 
+.pushable>.pusher {
+  background: #F5DBDF;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

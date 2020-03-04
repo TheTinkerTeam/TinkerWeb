@@ -6,7 +6,9 @@
   "engines": {
     "node": "12.x"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@stardust-ui/docs-components": "^0.40.0"
+  },
   "devDependencies": {
     "concurrently": "^5.1.0"
   },
