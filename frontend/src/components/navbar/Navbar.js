@@ -47,7 +47,6 @@ const NavBar = ({ auth, toggleVisibility }) => {
   return (
     <div>
       <Menu pointing secondary fixed='top'>
-        {/* <Menu.Item as={NavLink} exact to='/' name='Home'> */}
         <Menu.Item >
           {/* <Responsive
             {...Responsive.onlyMobile}
@@ -68,7 +67,7 @@ const NavBar = ({ auth, toggleVisibility }) => {
           />
 
           <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-            <img src={logo} alt='SHlogo' id='navlogo' />
+            <Image style={{'width':'7em'}} as={NavLink} exact to='/' src={logo} alt='SHlogo' id='navlogo' />
           </Responsive>
         </Menu.Item>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>

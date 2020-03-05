@@ -41,7 +41,6 @@ class App extends React.Component {
             as={Menu}
             animation='overlay'
             icon='labeled'
-            inverted
             vertical
             onHide={() => {
               if (this.props.sidebar.visible === true) {
@@ -51,10 +50,10 @@ class App extends React.Component {
             visible={this.props.sidebar.visible}
             width='thin'
           >
-          <img src={logo} alt='SHlogo' id='navlogo' />
-
+            <img src={logo} alt='SHlogo' id='navlogo' />
             <Menu.Item
               as={NavLink}
+              exact
               to='/'
               name='Home'
               onClick={this.props.toggleVisibility}
@@ -68,7 +67,7 @@ class App extends React.Component {
               name='Projects'
               onClick={this.props.toggleVisibility}
             >
-              <Icon name='file outline' />
+              <Icon name='file' />
               Projects
             </Menu.Item>
             <Menu.Item
