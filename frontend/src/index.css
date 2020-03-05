@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: #F5DBDF;
+  background-color: #f5dbdf;
   /* background-color: #FAFAFA; */
   /* background-color: #EEE2DC; */
   /* background-color: #F2F2F2; */
@@ -10,20 +10,20 @@ body {
   /* background-color: rgba(24, 28, 63, 0.1); */
   /* background-color: rgba(245, 219, 223, 0.1); */
   /* background: url("http://ghaa.ae/wp-content/uploads/2016/09/Wood-Acoustic-Panels-05.jpg"); */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
 }
 
-.pushable>.pusher {
-  background: #F5DBDF;
+.pushable > .pusher {
+  background: #f5dbdf;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -32,90 +32,86 @@ code {
   margin-right: 6%;
   margin-top: 6em;
 }
-.ui.pointing.secondary.top.fixed.menu{
+.ui.pointing.secondary.top.fixed.menu {
   /* box-shadow: 0px 0px 10px rgba(24,28,63, 0.2); */
-  box-shadow: 1px 1px 15px rgba(0,0,0, 0.1);
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
   /* box-shadow: 0 1px 1px rgba(0,0,0,0.11),
               0 2px 2px rgba(0,0,0,0.11),
               0 4px 4px rgba(0,0,0,0.11),
               0 6px 8px rgba(0,0,0,0.11); */
-              /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+  /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
 
-.ui.pointing.secondary.top.fixed.menu:hover{
+.ui.pointing.secondary.top.fixed.menu:hover {
   /* box-shadow: 0px 0px 10px rgba(24,28,63, 0.2); */
   /* box-shadow: 1px 1px 15px rgba(0,0,0, 0.1); */
   /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
   /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
 }
 
-.ui.secondary.pointing.menu .item {
-  min-height: 4em;
-}
-
-.ui.menu.secondary .item{
+.ui.menu.secondary .item {
   padding-inline-start: 10px;
 }
 
 .ui.menu.secondary {
   background-color: white;
   min-height: 4em;
-  font-family: 'Roboto Mono', monospace;
-  color: #181C3F;
+  font-family: "Roboto Mono", monospace;
+  color: #181c3f;
 }
 
 .ui.secondary.pointing.menu {
-  border-bottom: 0px solid #181C3F;
+  border-bottom: 0px solid #181c3f;
 }
 
 .ui.secondary.pointing.menu .active.item {
-  color: #181C3F;
-  border-color: #181C3F;
+  color: #181c3f;
+  border-color: #181c3f;
 
   /* border-color: #F5514C; */
 }
 
 .ui.secondary.pointing.menu .item {
-  min-height: 4em;
+  min-height: 5.5em;
   vertical-align: center;
 
   /* border-color: #F5514C; */
 }
 
 .ui.menu.pointing.secondary.menu .item:hover {
-  color: #F5514C;
+  color: #f5514c;
 }
 
 .ui.menu.pointing.menu .active.item:hover {
-  color: #F5514C;
-  border-color: #F5514C;
-  font-family: 'Roboto Mono';
+  color: #f5514c;
+  border-color: #f5514c;
+  font-family: "Roboto Mono";
   /* border-style:none; */
   /* border-color:transparent; */
 }
 
 .ui.menu.pointing.secondary.menu .item {
-  color: #181C3F;
+  color: #181c3f;
 }
 
 .ui.menu.pointing.secondary.menu.item .item {
-  font-family: 'Roboto Mono';
+  font-family: "Roboto Mono";
 }
 
 #search-menubar {
-  font-family: 'Roboto Mono';
+  font-family: "Roboto Mono";
   font-size: 1em;
 }
 
-#search-menubar ::after{
-  font-family: 'Roboto Mono';
+#search-menubar ::after {
+  font-family: "Roboto Mono";
   font-size: 1em;
 }
 
 #navlogo {
   height: 2.5em;
   width: auto;
-  margin-right: 0.75em;
+  margin: 0.75em;
   /* padding-top: 0em;
   padding-left: 1em;
   padding-right: 2em;
@@ -123,36 +119,36 @@ code {
 }
 
 .ui.input .content {
-  color: #181C3F;
+  color: #181c3f;
 }
 
 .ui.icon.input.icon {
-  color: #F5514C;
-  font-family: 'Roboto Mono';
-  padding-inline-start: 3em;;
+  color: #f5514c;
+  font-family: "Roboto Mono";
+  padding-inline-start: 3em;
 }
 
-.ui.icon.input.icon :focus{
-  color: #F5514C;
-  border-color: #F5514C;
+.ui.icon.input.icon :focus {
+  color: #f5514c;
+  border-color: #f5514c;
 }
 
-.ui.icon.input.icon ::after{
-  color: #F5514C;
-  border-color: #F5514C;
+.ui.icon.input.icon ::after {
+  color: #f5514c;
+  border-color: #f5514c;
 }
 
-.ui.input>input {
-  color: #DEDEDE;
+.ui.input > input {
+  color: #dedede;
 }
 
-.ui.icon.input.icon ::selection{
+.ui.icon.input.icon ::selection {
   color: white;
-  background-color: #f5514C;
-  border-color: #F5514C;
+  background-color: #f5514c;
+  border-color: #f5514c;
 }
 
-.ui.pointing.secondary.menu .item{
+.ui.pointing.secondary.menu .item {
   padding-inline-end: 1.5em;
 }
 
@@ -160,3 +156,30 @@ code {
   padding-inline-end: 1.5em;
 }
 
+/* =================== */
+/*    SideBar style    */
+/* =================== */
+
+.ui.labeled.icon.menu .item > .icon:not(.dropdown) {
+  color: #181c3f;
+}
+
+/* .ui.labeled.icon.menu .item > .icon:not(.dropdown):hover {
+  color: #f5514c;
+} */
+
+.ui.labeled.icon.menu .item {
+  color: #181c3f;
+  font-family: "Roboto Mono";
+}
+
+/* .ui.labeled.icon.menu .item:hover{
+  color: #f5514c;
+} */
+
+.ui.vertical.menu .active.item {
+  background: rgb(24, 28, 63, 0.08);
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

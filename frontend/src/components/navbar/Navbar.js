@@ -60,9 +60,7 @@ const NavBar = ({ auth, toggleVisibility }) => {
           <Responsive
             {...Responsive.onlyMobile}
             as={Button}
-            content='menu(mobile)'
             icon='bars'
-            labelPosition='left'
             onClick={toggleVisibility}
           />
 
@@ -100,14 +98,6 @@ const NavBar = ({ auth, toggleVisibility }) => {
             as={NavLink}
             to='/membership'
             name='Membership'
-          />
-        </Responsive>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-          <Menu.Item
-            style={{ marginTop: "0.6em" }}
-            as={NavLink}
-            to='/test'
-            name='Test'
           />
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth && 1100}>
