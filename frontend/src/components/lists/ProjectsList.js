@@ -31,6 +31,7 @@ class ProjectsList extends Component {
     return (
       <div className="projects-list card">
         <div className="red-title">{category} projects</div>
+        <div style={{width: "100%"}}>
         <Carousel
           swipeable={true}
           draggable={true}
@@ -51,7 +52,7 @@ class ProjectsList extends Component {
             projects.map((project, index) => (
               <CarouselItem key={index} category={category} project={project} />
             ))}
-        </Carousel>
+        </Carousel></div>
         {/* <CarouselComponent projects={projects} category={category} /> */}
       </div>
     );
