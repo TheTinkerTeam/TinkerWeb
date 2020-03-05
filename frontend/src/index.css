@@ -156,6 +156,15 @@ code {
   padding-inline-end: 1.5em;
 }
 
+/* ========================== */
+/*    SideBar Button style    */
+/* ========================== */
+
+.ui.menu:not(.vertical) .item>.button {
+  color: #181c3f;
+  background: white;
+}
+
 /* =================== */
 /*    SideBar style    */
 /* =================== */
@@ -182,4 +191,8 @@ code {
   border-radius: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+.ui.thin.left.sidebar, .ui.thin.right.sidebar {
+  width: 160px;
 }

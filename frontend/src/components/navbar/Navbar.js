@@ -61,6 +61,15 @@ const NavBar = ({ auth, toggleVisibility }) => {
             {...Responsive.onlyMobile}
             as={Button}
             icon='bars'
+            size='big'
+            onClick={toggleVisibility}
+          />
+
+          <Responsive
+            {...Responsive.onlyTablet}
+            as={Button}
+            icon='bars'
+            size='big'
             onClick={toggleVisibility}
           />
 
@@ -68,7 +77,7 @@ const NavBar = ({ auth, toggleVisibility }) => {
             <Image style={{'width':'7em'}} as={NavLink} exact to='/' src={logo} alt='SHlogo' id='navlogo' />
           </Responsive>
         </Menu.Item>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+        <Responsive minWidth={1024}>
           <Menu.Item
             style={{ marginTop: "0.6em" }}
             as={NavLink}
@@ -76,15 +85,15 @@ const NavBar = ({ auth, toggleVisibility }) => {
             name='Projects'
           />
         </Responsive>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+        {/* <Responsive minWidth={1024}>
           <Menu.Item
             style={{ marginTop: "0.6em" }}
             as={NavLink}
             to='/tutorials'
             name='Tutorials'
           />
-        </Responsive>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+        </Responsive> */}
+        <Responsive minWidth={1024}>
           <Menu.Item
             style={{ marginTop: "0.6em", whiteSpace: "nowrap" }}
             as={NavLink}
@@ -92,7 +101,7 @@ const NavBar = ({ auth, toggleVisibility }) => {
             name='TinkerCart'
           />
         </Responsive>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+        <Responsive minWidth={1024}>
           <Menu.Item
             style={{ marginTop: "0.6em" }}
             as={NavLink}
@@ -100,7 +109,7 @@ const NavBar = ({ auth, toggleVisibility }) => {
             name='Membership'
           />
         </Responsive>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth && 1100}>
+        <Responsive minWidth={1024}>
           <Menu.Item>
             <Input
               style={{ marginTop: "0.4em" }}
