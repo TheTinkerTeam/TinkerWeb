@@ -109,7 +109,7 @@ const NavBar = ({ auth, toggleVisibility }) => {
             name='Membership'
           />
         </Responsive>
-        <Responsive minWidth={1024}>
+        <Responsive minWidth={500}>
           <Menu.Item>
             <Input
               style={{ marginTop: "0.4em" }}
