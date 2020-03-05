@@ -98,7 +98,6 @@ class App extends React.Component {
               Membership
             </Menu.Item>
           </Sidebar>
-
           <Sidebar.Pusher dimmed={this.props.sidebar.visible}>
             <NavBar />
             <div className='container'>

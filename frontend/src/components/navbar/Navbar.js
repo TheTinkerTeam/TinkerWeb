@@ -18,45 +18,13 @@ import { connect } from "react-redux";
 import logo from "../../img/SHlogo.png";
 import SignedOutMenu from "../navbar/SignedOutMenu";
 import SignedInMenu from "../navbar/SignedInMenu";
-import {toggleVisibility} from '../../actions/sidebarActions'
+import { toggleVisibility } from "../../actions/sidebarActions";
 
 const NavBar = ({ auth, toggleVisibility }) => {
-  // const initialSideBar = {
-  //   animation: "overlay",
-  //   direction: "left",
-  //   dimmed: false,
-  //   visible: false
-  // };
-
-  // const [sideBar, setVisible] = useState(initialSideBar);
-
-  // const handlePusher = () => {
-  //   if (sideBar.visible) {
-  //     setVisible({ visible: false });
-  //   }
-  // };
-
-  // const handleToggle = () => {
-  //   setVisible({ visible: !sideBar.visible });
-  // };
-
-  // const handleSideBarClick = () => {
-  //   setVisible({ visible: !sideBar.visible });
-  // };
-
   return (
     <div>
       <Menu pointing secondary fixed='top'>
-        <Menu.Item >
-          {/* <Responsive
-            {...Responsive.onlyMobile}
-            as={Image}
-            src={logo}
-            id='navlogo'
-            labelPosition='left'
-            size='small'
-            onClick={handleSideBarClick}
-          /> */}
+        <Menu.Item>
           <Responsive
             {...Responsive.onlyMobile}
             as={Button}
@@ -64,7 +32,6 @@ const NavBar = ({ auth, toggleVisibility }) => {
             size='big'
             onClick={toggleVisibility}
           />
-
           <Responsive
             {...Responsive.onlyTablet}
             as={Button}
@@ -72,9 +39,16 @@ const NavBar = ({ auth, toggleVisibility }) => {
             size='big'
             onClick={toggleVisibility}
           />
-
           <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-            <Image style={{'width':'7em'}} as={NavLink} exact to='/' src={logo} alt='SHlogo' id='navlogo' />
+            <Image
+              style={{ width: "7em" }}
+              as={NavLink}
+              exact
+              to='/'
+              src={logo}
+              alt='SHlogo'
+              id='navlogo'
+            />
           </Responsive>
         </Menu.Item>
         <Responsive minWidth={1024}>
@@ -120,18 +94,6 @@ const NavBar = ({ auth, toggleVisibility }) => {
             />
           </Menu.Item>
         </Responsive>
-        {/* <Menu.Menu position='right'>
-            <Menu.Item
-              name='Join Supertinker'
-              active={activeItem === "Join Supertinker"}
-              onClick={handleItemClick}
-            />
-            <Menu.Item
-              name='Sign in'
-              active={activeItem === "Sign in"}
-              onClick={handleItemClick}
-            />
-          </Menu.Menu> */}
         {auth.isAuth && auth.profile ? <SignedInMenu /> : <SignedOutMenu />}
       </Menu>
     </div>
@@ -143,6 +105,6 @@ const mapStateToProps = state => ({
   visible: state.sidebar.visible
 });
 
-const mapDispatchToProps = {toggleVisibility};
+const mapDispatchToProps = { toggleVisibility };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));
