@@ -123,11 +123,20 @@
 .categories-bubble-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  align-self: center;
   margin: 1em 3em 2em 3em;
 }
 
+.categories-bubble-list::after {
+  content:'';
+  flex: auto;
+}
+
+
+
 .ui.button.bubble-container {
-  margin: 0em 1em 0em 0em;
+  margin: 0em 1em 1em 0em;
   color: #f5514c;
   font-family: "Poppins", sans-serif;
   font-weight: 200;
@@ -151,16 +160,20 @@
   display: inline-block;
   width: 10em;
 }
+
 .projects-display-flex-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-.projects-display-flex-container {
+  /* justify-content: flex-start; */
+  justify-content: space-evenly;
   margin: 1.5em;
   text-align: center;
 }
+
+/* .projects-display-flex-container::after {
+  content:'';
+  flex: auto;
+} */
 
 .displayed-projects-item {
   margin: 1em;

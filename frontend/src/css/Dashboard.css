@@ -60,13 +60,13 @@
 
 .welcome-item {
   height: 100%;
-  flex-grow: 2;
+  /* flex-grow: 2; */
   min-height: min(35vw, 400px);
 }
 
 .tinker-news-item {
   height: 100%;
-  flex-grow: 1;
+  /* flex-grow: 1; */
   min-height: min(35vw, 400px);
 }
 
