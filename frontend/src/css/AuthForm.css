@@ -1,0 +1,47 @@
+/* ========================= */
+/*      Modal container      */
+/* ========================= */
+
+
+
+/* =====  Modal size  ====== */
+
+.modals.dimmer .ui.scrolling.modal {
+    width: 40%;
+}
+
+/* for mobile */
+@media only screen and (max-width: 425px) {
+	.modals.dimmer .ui.scrolling.modal {
+		width: 85%;
+		height: 100%;
+	}
+}
+
+
+/* =====  Modal content  ====== */
+
+.ui.modal>.content {
+	background-color: #f5dbdf;
+}
+
+
+/* =====  Modal content (image)  ====== */
+
+.modals.dimmer .ui.scrolling.modal {
+	background-color: #f5dbdf;
+}
+
+
+/* =======  Header  ======== */
+
+.ui.modal>.header:not(.ui) {
+    font-size: 1.42857143rem;
+    line-height: 1.28571429em;
+    font-weight: 700;
+	background: white;
+	color: #181c3f;
+	font-family: "Roboto Mono";
+	font-weight: 200;
+	border: none;
+}
