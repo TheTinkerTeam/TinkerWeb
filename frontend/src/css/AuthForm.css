@@ -1,47 +1,152 @@
-/* ========================= */
-/*      Modal container      */
-/* ========================= */
-
-
+/* ================================ */
+/*         Modal container          */
+/* ================================ */
 
 /* =====  Modal size  ====== */
 
 .modals.dimmer .ui.scrolling.modal {
-    width: 40%;
+  width: 40%;
 }
 
 /* for mobile */
 @media only screen and (max-width: 425px) {
-	.modals.dimmer .ui.scrolling.modal {
-		width: 85%;
-		height: 100%;
-	}
+  .modals.dimmer .ui.scrolling.modal {
+    width: 85%;
+    height: 100%;
+  }
 }
-
 
 /* =====  Modal content  ====== */
 
-.ui.modal>.content {
-	background-color: #f5dbdf;
+.ui.modal > .content {
+  background-color: #f5dbdf;
 }
-
 
 /* =====  Modal content (image)  ====== */
 
 .modals.dimmer .ui.scrolling.modal {
-	background-color: #f5dbdf;
+  background-color: #f5dbdf;
 }
-
 
 /* =======  Header  ======== */
 
-.ui.modal>.header:not(.ui) {
-    font-size: 1.42857143rem;
-    line-height: 1.28571429em;
-    font-weight: 700;
+.ui.modal > .header:not(.ui) {
+  font-size: 1.42857143rem;
+  line-height: 1.28571429em;
+  font-weight: 700;
+  background: white;
+  color: #181c3f;
+  font-family: "Roboto Mono";
+  font-weight: 200;
+  border: none;
+}
+
+/* =======  Button  ======== */
+
+#button-auth {
+  background-color: #f5514c;
+  border-width: 0.05em;
+  border-style: solid;
+  /* border-radius: 2em; */
+  /* width: 30%; */
+  margin: auto;
+  /* border-color: #181c3f; */
+  /* color:#181c3f; */
+  border-color: #f5514c;
+  color: white;
+  font-family: "Poppins";
+  font-weight: 300;
+  font-size: 0.9em;
+}
+
+#button-auth:hover {
+  background-color: #f5514c;
+  border-color: #f5514c;
+  font-weight: 600;
+}
+
+#user-type-button {
+  font-family: "Poppins";
+  font-weight: 300;
+  min-height: 2em;
+  border-width: 0.1em;
+  border-color: #f5dbdf;
+  overflow: hidden;
+  word-wrap: normal;
+}
+
+/* @media only screen and (max-width: 1023px) {
+  #user-type-button {
+    font-size: 1.1rem;
+  }
+} */
+
+/* @media only screen and (max-width: 768px) {
+  #user-type-button {
+    font-size: 0.95rem;
+  }
+} */
+
+.ui.three.buttons {
+	width: 100%;
 	background: white;
-	color: #181c3f;
-	font-family: "Roboto Mono";
-	font-weight: 200;
-	border: none;
+	border-radius: 5px;
+}
+
+#user-type-button:hover {
+  /* font-weight: 400; */
+}
+
+.ui.inverted.button:hover {
+  box-shadow: 0 0 0 0.1rem #f5514c inset !important;
+  background: #f5514c;
+  color: #fff;
+}
+
+.ui.inverted.button {
+  box-shadow: 0 0 0 0.1rem #fff inset !important;
+  background: #fff;
+  color: #f5514c;
+}
+
+.ui.buttons .or {
+  height: auto;
+  font-family: "Roboto Mono";
+  font-weight: 200;
+  font-size: 0.8rem;
+  background-color: #f5dbdf;
+  color: #181c3f;
+}
+
+@media only screen and (max-width: 950px) {
+  .ui.buttons .or {
+    margin: 2% 50%;
+  }
+}
+
+/* =======  Input - Auth form field  ======== */
+
+#input-auth {
+  width: auto;
+  /* color: #181c3f; */
+  color: #f5514c;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 0.9em;
+  border-color: transparent;
+  /* border-color: #f5514c; */
+}
+
+#input-auth::placeholder {
+  color: #dededf;
+  font-family: "Poppins";
+  font-weight: 300;
+}
+
+.ui.form .field > label {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1em;
+  color: #181c3f;
+  margin-bottom: 0.7em;
 }

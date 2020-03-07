@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { Form, Button, Modal, Image, Header, Card } from "semantic-ui-react";
+import { Form, Button, Modal, Image, Header, Card, Segment, Responsive } from "semantic-ui-react";
 
 import { signup, login } from "../../actions/authActions";
 import checkEmail from "../../utils/checkEmail";
@@ -57,7 +57,7 @@ const AuthForm = ({ signup, login }) => {
         header: "Login",
         img: SH_eyes
         //img:
-          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
       });
     } else {
       setModal({
@@ -67,7 +67,7 @@ const AuthForm = ({ signup, login }) => {
         header: "Choose your account type",
         img: SH_eyes
         //img:
-          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
       });
     }
   };
@@ -100,8 +100,8 @@ const AuthForm = ({ signup, login }) => {
                 userType: "student"
               });
             },
-            text: "I'm a Student",
-            color: "violet"
+            text: "I'm a Student"
+            //color: "violet"
           },
           {
             onClick: () => {
@@ -110,8 +110,9 @@ const AuthForm = ({ signup, login }) => {
                 userType: "teacher"
               });
             },
-            text: "I'm a Teacher",
-            color: "purple"
+            text: "I'm a Teacher"
+            //color: "purple"
+            // color: "#181c3f"
           },
           {
             onClick: () => {
@@ -120,8 +121,8 @@ const AuthForm = ({ signup, login }) => {
                 userType: "school"
               });
             },
-            text: "I'm a School Admin",
-            color: "pink"
+            text: "I'm a School Admin"
+            //color: "pink"
           }
         ];
         break;
@@ -202,8 +203,9 @@ const AuthForm = ({ signup, login }) => {
           position: "fullname",
           template: "input",
           header: "What is your name?",
-          img:
-            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+          img: SH_eyes
+          //img:
+            //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "fullname":
@@ -212,8 +214,9 @@ const AuthForm = ({ signup, login }) => {
           position: "school",
           template: "input",
           header: "And your school's name?",
-          img:
-            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+          img: SH_eyes
+          //img:
+            //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "school":
@@ -222,8 +225,9 @@ const AuthForm = ({ signup, login }) => {
           position: "signup",
           template: "input",
           header: "Sign Up",
-          img:
-            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+          img: SH_eyes
+          //img:
+            //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "signup":
@@ -278,6 +282,7 @@ const AuthForm = ({ signup, login }) => {
     formTemplate = [
       inputs.map((input, i) => (
         <Form.Input
+          id='input-auth'
           key={i}
           label={input.label}
           type={input.type}
@@ -288,27 +293,62 @@ const AuthForm = ({ signup, login }) => {
         />
       )),
       buttons.map((button, i) => (
-        <Button fluid size='big' positive type='submit' key={i}>
+        <Button
+          id='button-auth'
+          fluid
+          size='big'
+          positive
+          type='submit'
+          key={i}
+        >
           {button.text}
         </Button>
       ))
     ];
   } else if (modal.template === "buttons") {
     formTemplate = (
-      <Button.Group widths={buttons.length}>
-        {buttons.map((button, i) => (
-          <Button
-            key={i}
-            onClick={button.onClick}
-            inverted
-            size='massive'
-            color={button.color}
-            type='submit'
-          >
-            {button.text}
-          </Button>
-        ))}
-      </Button.Group>
+      <Fragment>
+        <Responsive minWidth={950}>
+          <Button.Group widths={buttons.length}>
+            {buttons.map((button, i) => (
+              <Fragment>
+                <Button
+                  id='user-type-button'
+                  key={i}
+                  onClick={button.onClick}
+                  inverted
+                  size='big'
+                  color={button.color}
+                  type='submit'
+                >
+                  {button.text}
+                </Button>
+                {i + 1 < buttons.length ? <Button.Or /> : null}
+              </Fragment>
+            ))}
+          </Button.Group>
+        </Responsive>
+        <Responsive maxWidth={950}>
+          <Button.Group vertical widths={buttons.length}>
+            {buttons.map((button, i) => (
+              <Fragment>
+                <Button
+                  id='user-type-button'
+                  key={i}
+                  onClick={button.onClick}
+                  inverted
+                  size='big'
+                  color={button.color}
+                  type='submit'
+                >
+                  {button.text}
+                </Button>
+                {i + 1 < buttons.length ? <Button.Or /> : null}
+              </Fragment>
+            ))}
+          </Button.Group>
+        </Responsive>
+      </Fragment>
     );
   }
 
