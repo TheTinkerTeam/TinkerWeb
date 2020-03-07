@@ -2,7 +2,18 @@ import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { Form, Button, Modal, Image, Header, Card, Segment, Responsive } from "semantic-ui-react";
+import {
+  Form,
+  Button,
+  Modal,
+  Image,
+  Header,
+  Card,
+  Segment,
+  Responsive,
+  Divider,
+  Icon
+} from "semantic-ui-react";
 
 import { signup, login } from "../../actions/authActions";
 import checkEmail from "../../utils/checkEmail";
@@ -204,8 +215,6 @@ const AuthForm = ({ signup, login }) => {
           template: "input",
           header: "What is your name?",
           img: SH_eyes
-          //img:
-            //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "fullname":
@@ -215,8 +224,6 @@ const AuthForm = ({ signup, login }) => {
           template: "input",
           header: "And your school's name?",
           img: SH_eyes
-          //img:
-            //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "school":
@@ -226,8 +233,6 @@ const AuthForm = ({ signup, login }) => {
           template: "input",
           header: "Sign Up",
           img: SH_eyes
-          //img:
-            //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "signup":
@@ -248,8 +253,6 @@ const AuthForm = ({ signup, login }) => {
           template: "input",
           header: "First, enter your email",
           img: "./img/SH_heads.png"
-          //img:
-          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
     }
@@ -259,6 +262,20 @@ const AuthForm = ({ signup, login }) => {
     <Fragment>
       <Modal.Description>
         <p>{modal.text}</p>
+      </Modal.Description>
+      <Modal.Description>
+        {modal.position == "email" ? (
+          <Fragment>
+            <Divider style={{ margin: "6% 0", fontFamily: 'Roboto Mono', color: '#9C9C9C' }} horizontal>
+              Or
+            </Divider>
+            <Button
+              id='google-button'
+              color='teal'
+              content='Sign in/up with Google'
+            />
+          </Fragment>
+        ) : null}
       </Modal.Description>
       <Modal.Content image>
         <Image
