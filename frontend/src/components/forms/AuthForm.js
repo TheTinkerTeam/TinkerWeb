@@ -2,11 +2,15 @@ import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { Form, Button, Message, Modal, Image, Header } from "semantic-ui-react";
+import { Form, Button, Modal, Image, Header, Card, Segment, Responsive } from "semantic-ui-react";
 
 import { signup, login } from "../../actions/authActions";
 import checkEmail from "../../utils/checkEmail";
 import Alert from "../services/Alert";
+
+import "../../css/AuthForm.css";
+import SH_heads from "../../img/SH_heads.png";
+import SH_eyes from "../../img/SH_eyes.png";
 
 const AuthForm = ({ signup, login }) => {
   //const [state, setState] = useState(initialState);
@@ -15,8 +19,9 @@ const AuthForm = ({ signup, login }) => {
     position: "email",
     template: "input",
     header: "First, enter your email",
-    img:
-      "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+    img: SH_eyes
+    //img:
+    //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
   };
 
   const [modal, setModal] = useState(initialmodal);
@@ -50,8 +55,9 @@ const AuthForm = ({ signup, login }) => {
         position: "login",
         template: "input",
         header: "Login",
-        img:
-          "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        img: SH_eyes
+        //img:
+        //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
       });
     } else {
       setModal({
@@ -59,8 +65,9 @@ const AuthForm = ({ signup, login }) => {
         position: "userType",
         template: "buttons",
         header: "Choose your account type",
-        img:
-          "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        img: SH_eyes
+        //img:
+        //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
       });
     }
   };
@@ -93,8 +100,8 @@ const AuthForm = ({ signup, login }) => {
                 userType: "student"
               });
             },
-            text: "I'm a Student",
-            color: "violet"
+            text: "I'm a Student"
+            //color: "violet"
           },
           {
             onClick: () => {
@@ -103,8 +110,9 @@ const AuthForm = ({ signup, login }) => {
                 userType: "teacher"
               });
             },
-            text: "I'm a Teacher",
-            color: "purple"
+            text: "I'm a Teacher"
+            //color: "purple"
+            // color: "#181c3f"
           },
           {
             onClick: () => {
@@ -113,8 +121,8 @@ const AuthForm = ({ signup, login }) => {
                 userType: "school"
               });
             },
-            text: "I'm a School Admin",
-            color: "pink"
+            text: "I'm a School Admin"
+            //color: "pink"
           }
         ];
         break;
@@ -195,8 +203,9 @@ const AuthForm = ({ signup, login }) => {
           position: "fullname",
           template: "input",
           header: "What is your name?",
-          img:
-            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+          img: SH_eyes
+          //img:
+            //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "fullname":
@@ -205,8 +214,9 @@ const AuthForm = ({ signup, login }) => {
           position: "school",
           template: "input",
           header: "And your school's name?",
-          img:
-            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+          img: SH_eyes
+          //img:
+            //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "school":
@@ -215,8 +225,9 @@ const AuthForm = ({ signup, login }) => {
           position: "signup",
           template: "input",
           header: "Sign Up",
-          img:
-            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+          img: SH_eyes
+          //img:
+            //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
       case "signup":
@@ -236,28 +247,34 @@ const AuthForm = ({ signup, login }) => {
           position: "email",
           template: "input",
           header: "First, enter your email",
-          img:
-            "https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+          img: "./img/SH_heads.png"
+          //img:
+          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
         break;
     }
   };
+
   let modalTemplate = (
-    <Modal.Content>
+    <Fragment>
       <Modal.Description>
         <p>{modal.text}</p>
       </Modal.Description>
-      <Image
-        size="medium"
-        src={modal.img}
-        style={{
-          paddingBottom: 100,
-          display: `block`,
-          marginLeft: `auto`,
-          marginRight: `auto`
-        }}
-      />
-    </Modal.Content>
+      <Modal.Content image>
+        <Image
+          size='medium'
+          src={modal.img}
+          style={{
+            //paddingBottom: 100,
+            display: `block`,
+            marginTop: `1em`,
+            marginLeft: `auto`,
+            marginRight: `auto`,
+            marginBottom: `-1.5em`
+          }}
+        />
+      </Modal.Content>
+    </Fragment>
   );
 
   let formTemplate;
@@ -265,6 +282,7 @@ const AuthForm = ({ signup, login }) => {
     formTemplate = [
       inputs.map((input, i) => (
         <Form.Input
+          id='input-auth'
           key={i}
           label={input.label}
           type={input.type}
@@ -275,46 +293,81 @@ const AuthForm = ({ signup, login }) => {
         />
       )),
       buttons.map((button, i) => (
-        <Button fluid size="massive" positive type="submit" key={i}>
+        <Button
+          id='button-auth'
+          fluid
+          size='big'
+          positive
+          type='submit'
+          key={i}
+        >
           {button.text}
         </Button>
       ))
     ];
   } else if (modal.template === "buttons") {
     formTemplate = (
-      <Button.Group widths={buttons.length}>
-        {buttons.map((button, i) => (
-          <Button
-            key={i}
-            onClick={button.onClick}
-            inverted
-            size="massive"
-            color={button.color}
-            type="submit"
-          >
-            {button.text}
-          </Button>
-        ))}
-      </Button.Group>
+      <Fragment>
+        <Responsive minWidth={950}>
+          <Button.Group widths={buttons.length}>
+            {buttons.map((button, i) => (
+              <Fragment>
+                <Button
+                  id='user-type-button'
+                  key={i}
+                  onClick={button.onClick}
+                  inverted
+                  size='big'
+                  color={button.color}
+                  type='submit'
+                >
+                  {button.text}
+                </Button>
+                {i + 1 < buttons.length ? <Button.Or /> : null}
+              </Fragment>
+            ))}
+          </Button.Group>
+        </Responsive>
+        <Responsive maxWidth={950}>
+          <Button.Group vertical widths={buttons.length}>
+            {buttons.map((button, i) => (
+              <Fragment>
+                <Button
+                  id='user-type-button'
+                  key={i}
+                  onClick={button.onClick}
+                  inverted
+                  size='big'
+                  color={button.color}
+                  type='submit'
+                >
+                  {button.text}
+                </Button>
+                {i + 1 < buttons.length ? <Button.Or /> : null}
+              </Fragment>
+            ))}
+          </Button.Group>
+        </Responsive>
+      </Fragment>
     );
   }
 
   return (
     <Fragment>
-      <Header size="huge">{modal.header}</Header>
+      <Modal.Header size='big'>{modal.header}</Modal.Header>
       <Modal.Content>
         <Form
-          size="massive"
+          size='big'
           onSubmit={e => {
             handleSubmit(e);
           }}
-          autoComplete="off"
+          autoComplete='off'
         >
           {formTemplate}
         </Form>
+        <Alert />
+        {modalTemplate}
       </Modal.Content>
-      {modalTemplate}
-      <Alert />
     </Fragment>
   );
 };

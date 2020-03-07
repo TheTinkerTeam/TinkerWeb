@@ -14,13 +14,14 @@ class WelcomeComponent extends Component {
     return (
       <div>
         <div className="title-tinkercart-image">
-          <div className="red-title rotate-title">
-            <span>Welcome to </span>
+          <div className="red-title rotate-title welcome-title">
+            <span style={{whiteSpace: "no wrap"}}>Welcome to </span>
+            <span style={{whiteSpace: "pre"}}>
             <span className="supertinker-text">SuperT</span>
             <span className="supertinker-text" id="supertinker-i">
               i
             </span>
-            <span className="supertinker-text">nker</span>
+            <span className="supertinker-text">nker</span></span>
           </div>
         </div>
         <WelcomeList items={welcomeItems} />

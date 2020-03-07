@@ -29,15 +29,12 @@ class CarouselComponent extends Component {
   render() {
     const { projects, category } = this.props;
 
-    console.log("in carousel");
-    console.log(projects);
     return (
       <div>
         <div>{projects.length}</div>
         {projects.map((project, index) => (
           <div key={index}>{project.title}</div>
         ))}
-        {console.log("test" + projects)}
 
         <InfiniteCarousel
           breakpoints={[

@@ -1,20 +1,18 @@
-/* ==================================== */
-/* Dahboard cards style and disposition */
-/* ==================================== */
+/* ========================================= */
+/* Dahboard cards style and grid disposition */
+/* ========================================= */
 
-.card {
-  box-shadow:
-    1px 1px 15px rgba(0,0,0, 0.1)
-  ;
+/* .card {
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   background: white;
   padding: 1em;
-}
+} */
 
-.card:hover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-
+/* .card:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+} */
+/*
 .welcome-item {
   grid-column: 1 / 4;
   grid-row: 1/2;
@@ -43,6 +41,59 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 1.7em;
+} */
+
+/* ========================================= */
+/* Dahboard cards style and flex disposition */
+/* ========================================= */
+
+.card {
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  background: white;
+  padding: 1em;
+}
+
+.card:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.welcome-item {
+  height: 100%;
+  /* flex-grow: 2; */
+  min-height: min(35vw, 400px);
+}
+
+.tinker-news-item {
+  height: 100%;
+  /* flex-grow: 1; */
+  min-height: min(35vw, 400px);
+}
+
+.projects-list {
+  width: 90%;
+  height: 100%;
+}
+
+.dashboardcontainer {
+  margin-top: 7em;
+  font-family: "Poppins", sans-serif;
+  color: #181c3f;
+  font-weight: 200;
+  font-size: 1em;
+  min-height: 30em;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: flex-start;
+  padding: 1em;
+}
+
+.dashboardcontainer > div{
+  flex:1 1 auto;
+  margin:1em;
 }
 
 /* ====== */
