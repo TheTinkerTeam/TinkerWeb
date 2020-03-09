@@ -1,0 +1,33 @@
+type User {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+
+  email: String! @unique
+  password: String!
+  role: String!
+  projects: Project @relation(link: INLINE)
+  profileId: Profile @relation(link: INLINE)
+}
+
+type Project {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+
+  title: String!
+  description: String
+  published: Boolean! @default(value: false)
+  author: User!
+}
+
+type Profile {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+
+  userId: User!
+  username: String!
+  name: String!
+  role: String!
+}
