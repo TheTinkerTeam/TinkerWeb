@@ -1,16 +1,11 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 
 import {
   Menu,
   Input,
   Responsive,
   Button,
-  Sidebar,
-  Icon,
   Image,
-  Segment,
-  Header
 } from "semantic-ui-react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Modal, Form, Button } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
-import cuid from "cuid";
 
 import { createProject } from "../../actions/projectActions";
 

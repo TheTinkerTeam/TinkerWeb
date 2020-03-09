@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getProjects } from "../../../actions/projectActions";
 
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
@@ -42,6 +40,7 @@ const ProjectDetailsPage = props => {
       <div>learning objectives: {project.learning_objectives}</div>
     </div>
   );
+
 };
 
 export default ProjectDetailsPage;
