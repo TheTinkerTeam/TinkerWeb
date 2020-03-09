@@ -1,21 +1,16 @@
 import React from "react";
-import { useState } from "react";
 import {
   Menu,
   Button,
   Icon,
   Modal,
-  Header,
-  Segment,
-  Form,
-  Transition
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import "../../css/SignedOutMenu.css";
 import { login } from "../../actions/authActions";
 import AuthForm from "../forms/AuthForm";
-import Alert from "../services/Alert";
+// import Alert from "../services/Alert";
 
 const SignedOutMenu = ({ login }) => {
   /*
