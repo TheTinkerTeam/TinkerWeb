@@ -7,12 +7,8 @@ import {
   Button,
   Modal,
   Image,
-  Header,
-  Card,
-  Segment,
   Responsive,
   Divider,
-  Icon
 } from "semantic-ui-react";
 
 import { signup, login } from "../../actions/authActions";
@@ -20,7 +16,7 @@ import checkEmail from "../../utils/checkEmail";
 import Alert from "../services/Alert";
 
 import "../../css/AuthForm.css";
-import SH_heads from "../../img/SH_heads.png";
+// import SH_heads from "../../img/SH_heads.png";
 import SH_eyes from "../../img/SH_eyes.png";
 
 const AuthForm = ({ signup, login }) => {
@@ -264,7 +260,7 @@ const AuthForm = ({ signup, login }) => {
         <p>{modal.text}</p>
       </Modal.Description>
       <Modal.Description>
-        {modal.position == "email" ? (
+        {modal.position === "email" ? (
           <Fragment>
             <Divider style={{ margin: "6% 0", fontFamily: 'Roboto Mono', color: '#9C9C9C' }} horizontal>
               Or
