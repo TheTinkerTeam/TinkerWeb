@@ -39,8 +39,8 @@ class App extends React.Component {
         <Sidebar.Pushable as={Segment}>
           <Sidebar
             as={Menu}
-            animation='overlay'
-            icon='labeled'
+            animation="overlay"
+            icon="labeled"
             vertical
             onHide={() => {
               if (this.props.sidebar.visible === true) {
@@ -48,77 +48,80 @@ class App extends React.Component {
               }
             }}
             visible={this.props.sidebar.visible}
-            width='thin'
+            width="thin"
           >
-            <img src={logo} alt='SHlogo' id='navlogo' />
+            <img src={logo} alt="SHlogo" id="navlogo" />
             <Menu.Item
               as={NavLink}
               exact
-              to='/'
-              name='Home'
+              to="/"
+              name="Home"
               onClick={this.props.toggleVisibility}
             >
-              <Icon name='user' />
+              <Icon name="user" />
               Home
             </Menu.Item>
             <Menu.Item
               as={NavLink}
-              to='/projects'
-              name='Projects'
+              to="/projects"
+              name="Projects"
               onClick={this.props.toggleVisibility}
             >
-              <Icon name='file' />
+              <Icon name="file" />
               Projects
             </Menu.Item>
             <Menu.Item
               as={NavLink}
-              to='/tutorials'
-              name='Tutorials'
+              to="/tutorials"
+              name="Tutorials"
               onClick={this.props.toggleVisibility}
             >
-              <Icon name='cut' />
+              <Icon name="cut" />
               Tutorials
             </Menu.Item>
             <Menu.Item
               as={NavLink}
-              to='/tinkercart'
-              name='Tinker Cart'
+              to="/tinkercart"
+              name="Tinker Cart"
               onClick={this.props.toggleVisibility}
             >
-              <Icon name='star' />
+              <Icon name="star" />
               Tinker Cart
             </Menu.Item>
             <Menu.Item
               as={NavLink}
-              to='/membership'
-              name='Membership'
+              to="/membership"
+              name="Membership"
               onClick={this.props.toggleVisibility}
             >
-              <Icon name='heart' />
+              <Icon name="heart" />
               Membership
             </Menu.Item>
           </Sidebar>
-          <Sidebar.Pusher style={{height: "100vh"}} dimmed={this.props.sidebar.visible}>
+          <Sidebar.Pusher
+            style={{ minHeight: "100vh" }}
+            dimmed={this.props.sidebar.visible}
+          >
             <NavBar />
-            <div className='container'>
-              <Route exact path='/' component={Dashboard} />
+            <div className="container">
+              <Route exact path="/" component={Dashboard} />
               <Route
-                path='/(.+)'
+                path="/(.+)"
                 render={() => (
                   <div>
-                    <Route path='/membership' component={MembershipPage} />
-                    <Route exact path='/tutorials' component={TutorialsPage} />
-                    <Route exact path='/projects' component={ProjectsPage} />
+                    <Route path="/membership" component={MembershipPage} />
+                    <Route exact path="/tutorials" component={TutorialsPage} />
+                    <Route exact path="/projects" component={ProjectsPage} />
                     <Route
-                      path='/projects/:id'
+                      path="/projects/:id"
                       component={ProjectDetailsPage}
                     />
                     <Route
-                      path='/tutorials/:id'
+                      path="/tutorials/:id"
                       component={TutorialDetailsPage}
                     />
-                    <Route exact path='/me' component={ProfilePage} />
-                    <Route path='/settings' component={SettingsDashboard} />
+                    <Route exact path="/me" component={ProfilePage} />
+                    <Route path="/settings" component={SettingsDashboard} />
                   </div>
                 )}
               />

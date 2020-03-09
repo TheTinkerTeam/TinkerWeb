@@ -39,9 +39,9 @@ const AuthForm = ({ signup, login }) => {
 
   const initialUser = {
     email: "",
-    userType: "",
     firstName: "",
     lastName: "",
+    userType: "",
     school: "",
     password: ""
   };
@@ -55,31 +55,35 @@ const AuthForm = ({ signup, login }) => {
   const [buttons, setButtons] = useState(initialButtons);
 
   const emailExists = async email => {
-    const res = await checkEmail(email);
-    setUser({
-      ...user,
-      email: email
-    });
-    if (res) {
-      setModal({
-        ...modal,
-        position: "login",
-        template: "input",
-        header: "Login",
-        img: SH_eyes
-        //img:
-        //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+    try {
+      const exists = await checkEmail(email);
+      setUser({
+        ...user,
+        email: email
       });
-    } else {
-      setModal({
-        ...modal,
-        position: "userType",
-        template: "buttons",
-        header: "Choose your account type",
-        img: SH_eyes
-        //img:
-        //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
-      });
+      if (exists) {
+        setModal({
+          ...modal,
+          position: "login",
+          template: "input",
+          header: "Login",
+          img: SH_eyes
+          //img:
+          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        });
+      } else {
+        setModal({
+          ...modal,
+          position: "userType",
+          template: "buttons",
+          header: "Choose your account type",
+          img: SH_eyes
+          //img:
+          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        });
+      }
+    } catch (err) {
+      console.log("ERRROR");
     }
   };
 
@@ -266,20 +270,27 @@ const AuthForm = ({ signup, login }) => {
       <Modal.Description>
         {modal.position == "email" ? (
           <Fragment>
-            <Divider style={{ margin: "6% 0", fontFamily: 'Roboto Mono', color: '#9C9C9C' }} horizontal>
+            <Divider
+              style={{
+                margin: "6% 0",
+                fontFamily: "Roboto Mono",
+                color: "#9C9C9C"
+              }}
+              horizontal
+            >
               Or
             </Divider>
             <Button
-              id='google-button'
-              color='teal'
-              content='Sign in/up with Google'
+              id="google-button"
+              color="teal"
+              content="Sign in/up with Google"
             />
           </Fragment>
         ) : null}
       </Modal.Description>
       <Modal.Content image>
         <Image
-          size='medium'
+          size="medium"
           src={modal.img}
           style={{
             //paddingBottom: 100,
@@ -299,7 +310,7 @@ const AuthForm = ({ signup, login }) => {
     formTemplate = [
       inputs.map((input, i) => (
         <Form.Input
-          id='input-auth'
+          id="input-auth"
           key={i}
           label={input.label}
           type={input.type}
@@ -311,11 +322,11 @@ const AuthForm = ({ signup, login }) => {
       )),
       buttons.map((button, i) => (
         <Button
-          id='button-auth'
+          id="button-auth"
           fluid
-          size='big'
+          size="big"
           positive
-          type='submit'
+          type="submit"
           key={i}
         >
           {button.text}
@@ -330,13 +341,13 @@ const AuthForm = ({ signup, login }) => {
             {buttons.map((button, i) => (
               <Fragment>
                 <Button
-                  id='user-type-button'
+                  id="user-type-button"
                   key={i}
                   onClick={button.onClick}
                   inverted
-                  size='big'
+                  size="big"
                   color={button.color}
-                  type='submit'
+                  type="submit"
                 >
                   {button.text}
                 </Button>
@@ -350,13 +361,13 @@ const AuthForm = ({ signup, login }) => {
             {buttons.map((button, i) => (
               <Fragment>
                 <Button
-                  id='user-type-button'
+                  id="user-type-button"
                   key={i}
                   onClick={button.onClick}
                   inverted
-                  size='big'
+                  size="big"
                   color={button.color}
-                  type='submit'
+                  type="submit"
                 >
                   {button.text}
                 </Button>
@@ -371,14 +382,14 @@ const AuthForm = ({ signup, login }) => {
 
   return (
     <Fragment>
-      <Modal.Header size='big'>{modal.header}</Modal.Header>
+      <Modal.Header size="big">{modal.header}</Modal.Header>
       <Modal.Content>
         <Form
-          size='big'
+          size="big"
           onSubmit={e => {
             handleSubmit(e);
           }}
-          autoComplete='off'
+          autoComplete="off"
         >
           {formTemplate}
         </Form>

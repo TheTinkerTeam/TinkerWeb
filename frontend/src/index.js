@@ -9,6 +9,14 @@ import * as serviceWorker from "./serviceWorker";
 
 import store from "./store";
 
+// Add Apollo Client
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
+
+const client = new ApolloClient({
+  uri: "http://localhost:5000/api/v2"
+});
+
 // console.log(store.getState());
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -17,11 +25,13 @@ const rootEl = document.getElementById("root");
 
 let render = () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>,
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ApolloProvider>,
     rootEl
   );
 };

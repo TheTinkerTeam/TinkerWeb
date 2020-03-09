@@ -9,12 +9,33 @@ import ProjectsList from "../../lists/ProjectsList";
 
 import tinkercartPlus from "../../../img/tinkercart.png";
 
-import { getProjects, createProject } from "../../../actions/projectActions";
+//import { getProjects, createProject } from "../../../actions/projectActions";
 
-const Dashboard = ({ projects, getProjects, createProject }) => {
-  useEffect(() => {
-    getProjects();
-  }, []);
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+
+const GET_PROJECTS = gql`
+  {
+    projects {
+      id
+      title
+      description
+      imageURL
+      learning_objectives
+      subjects
+      tags
+      grades
+    }
+  }
+`;
+
+const Dashboard = ({ createProject }) => {
+  const { loading, error, data } = useQuery(GET_PROJECTS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+  const projects = data.projects;
+
   return (
     <div className="dashboardcontainer">
       <div className="welcome-item card">
@@ -64,13 +85,4 @@ const Dashboard = ({ projects, getProjects, createProject }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  projects: state.projects
-});
-
-const mapDispatchToProps = {
-  getProjects,
-  createProject
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default Dashboard;

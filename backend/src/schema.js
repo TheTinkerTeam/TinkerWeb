@@ -9,6 +9,7 @@ const typeDefs = gql`
     user(id: ID!): User
     me: User
     # Project
+    projects: [Project!]!
     feed: [Project!]!
     project(id: ID!): Project
     filterProjects(searchString: String): [Project!]!
@@ -43,7 +44,12 @@ const typeDefs = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
     title: String!
+    imageURL: String
     description: String
+    learning_objectives: String
+    subjects: [String]
+    tags: [String]
+    grades: [String]
     content: String
     author: User!
   }

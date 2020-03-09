@@ -13,8 +13,12 @@ import ProjectForm from "../forms/ProjectForm";
 const SignedInMenu = ({ logout, profile }) => {
   return (
     <Menu.Item position="right">
-      <Image avatar spaced="right" src={profile.avatar || avatar} />
-      <Dropdown pointing="top right" text={profile.name.first}>
+      <Image
+        avatar
+        spaced="right"
+        src={(profile && profile.avatar) || avatar}
+      />
+      <Dropdown pointing="top right" text={profile.name && profile.name.first}>
         <Dropdown.Menu>
           <Modal
             //loggedIn={loggedIn}
@@ -39,11 +43,6 @@ const SignedInMenu = ({ logout, profile }) => {
       </Dropdown>
     </Menu.Item>
   );
-};
-
-SignedInMenu.propTypes = {
-  logout: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
