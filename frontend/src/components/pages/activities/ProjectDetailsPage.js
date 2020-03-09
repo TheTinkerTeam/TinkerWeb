@@ -2,39 +2,46 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProjects } from "../../../actions/projectActions";
 
-class ProjectDetailsPage extends Component {
-  constructor(props) {
-    super(props);
-    this.routeParam = props.match.params.id;
-  }
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 
-  componentDidMount() {
-    this.props.getProjects();
-  }
+const ProjectDetailsPage = props => {
+  const routeParam = props.match.params.id;
+  console.log(routeParam);
 
-  render() {
-    const { projects } = this.props;
+  const GET_PROJECT = gql`
+    query getProject($id: ID!) {
+      project(id: $id) {
+        id
+        title
+        description
+        imageURL
+        learning_objectives
+        subjects
+        tags
+        grades
+      }
+    }
+  `;
 
-    console.log(projects);
+  const { loading, error, data } = useQuery(GET_PROJECT, {
+    variables: { id: routeParam }
+  });
 
-    return (
-      <div>
-        <h1>This is the ProjectDetails Page</h1>
-        <div>I am trying to display the project details from Redux</div>
-        {/* <div>{projects[0].title }</div> */}
-        <div>{this.routeParam}</div>
-        {/* <div>{projects[0].learning_objectives}</div> */}
-      </div>
-    );
-  }
-}
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
 
-const mapStateToProps = state => ({
-  projects: state.projects
-});
-
-const mapDispatchToProps = {
-  getProjects
+  const project = data.project;
+  return (
+    <div>
+      <h1>This is the ProjectDetails Page</h1>
+      <div>I am trying to display the project details from the GRAPHQL API</div>
+      <div>id: {project.id}</div>
+      <div>title: {project.title}</div>
+      <div>description: {project.description}</div>
+      <div>learning objectives: {project.learning_objectives}</div>
+    </div>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetailsPage);
+export default ProjectDetailsPage;
