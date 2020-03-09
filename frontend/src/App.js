@@ -98,7 +98,7 @@ class App extends React.Component {
               Membership
             </Menu.Item>
           </Sidebar>
-          <Sidebar.Pusher style={{height: "100vh"}} dimmed={this.props.sidebar.visible}>
+          <Sidebar.Pusher style={{minHeight: "100vh"}} dimmed={this.props.sidebar.visible}>
             <NavBar />
             <div className='container'>
               <Route exact path='/' component={Dashboard} />
