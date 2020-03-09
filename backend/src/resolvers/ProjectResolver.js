@@ -24,7 +24,7 @@ module.exports = {
     },
     project: async (parent, { id }, { prisma }) => {
       try {
-        const project = await prisma.project(id);
+        const project = await prisma.project({id});
         return project;
       } catch (err) {
         console.error(err);

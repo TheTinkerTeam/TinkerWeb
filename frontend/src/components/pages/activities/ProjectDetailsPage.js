@@ -1,68 +1,46 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getProjects } from "../../../actions/projectActions";
 
-// Link React Doc for fetching external data
-// https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#fetching-external-data
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 
-class ProjectDetailsPage extends Component {
-  constructor(props) {
-    super(props);
-    this.routeParam = props.match.params.id;
-  }
+const ProjectDetailsPage = props => {
+  const routeParam = props.match.params.id;
+  console.log(routeParam);
 
-  state = {
-    externalData: null
-  };
-
-  componentDidMount() {
-    this._asyncRequest = this.props.getProjects().then(externalData => {
-      this._asyncRequest = null;
-      this.setState({ externalData });
-    });
-  }
-
-  componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel();
+  const GET_PROJECT = gql`
+    query getProject($id: ID!) {
+      project(id: $id) {
+        id
+        title
+        description
+        imageURL
+        learning_objectives
+        subjects
+        tags
+        grades
+      }
     }
-  }
+  `;
 
-  render() {
-    const { projects } = this.props;
+  const { loading, error, data } = useQuery(GET_PROJECT, {
+    variables: { id: routeParam }
+  });
 
-    console.log("here are the projects");
-    console.log(projects);
-    console.log("done");
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
 
-    const project = projects.filter(project => {
-      return project._id.indexOf(this.routeParam) !== -1;
-    });
+  const project = data.project;
+  return (
+    <div>
+      <h1>This is the ProjectDetails Page</h1>
+      <div>I am trying to display the project details from the GRAPHQL API</div>
+      <div>id: {project.id}</div>
+      <div>title: {project.title}</div>
+      <div>description: {project.description}</div>
+      <div>learning objectives: {project.learning_objectives}</div>
+    </div>
+  );
 
-    console.log({project});
-
-    if (this.state.externalData === null) {
-      return <div>loading...</div>;
-    } else {
-      return (
-        <div>
-          <h1>This is the ProjectDetails Page</h1>
-          <div>I am trying to display the project details from Redux</div>
-          <div>{project[0].title}</div>
-          <div>{this.routeParam}</div>
-          <div>{project[0].learning_objectives}</div>
-        </div>
-      );
-    }
-  }
-}
-
-const mapStateToProps = state => ({
-  projects: state.projects
-});
-
-const mapDispatchToProps = {
-  getProjects
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetailsPage);
+export default ProjectDetailsPage;
