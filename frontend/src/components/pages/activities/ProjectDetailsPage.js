@@ -31,7 +31,7 @@ class ProjectDetailsPage extends Component {
   render() {
     const { projects } = this.props;
 
-    console.log("these are the projects");
+    console.log("here are the projects");
     console.log(projects);
     console.log("done");
 
