@@ -179,6 +179,24 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type ProjectOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "title_ASC"
+  | "title_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "imageURL_ASC"
+  | "imageURL_DESC"
+  | "learning_objectives_ASC"
+  | "learning_objectives_DESC"
+  | "published_ASC"
+  | "published_DESC";
+
 export type ProfileOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -192,20 +210,6 @@ export type ProfileOrderByInput =
   | "name_DESC"
   | "role_ASC"
   | "role_DESC";
-
-export type ProjectOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "title_ASC"
-  | "title_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "published_ASC"
-  | "published_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -226,6 +230,177 @@ export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 export type ProfileWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
+
+export interface ProjectWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  imageURL_not?: Maybe<String>;
+  imageURL_in?: Maybe<String[] | String>;
+  imageURL_not_in?: Maybe<String[] | String>;
+  imageURL_lt?: Maybe<String>;
+  imageURL_lte?: Maybe<String>;
+  imageURL_gt?: Maybe<String>;
+  imageURL_gte?: Maybe<String>;
+  imageURL_contains?: Maybe<String>;
+  imageURL_not_contains?: Maybe<String>;
+  imageURL_starts_with?: Maybe<String>;
+  imageURL_not_starts_with?: Maybe<String>;
+  imageURL_ends_with?: Maybe<String>;
+  imageURL_not_ends_with?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  learning_objectives_not?: Maybe<String>;
+  learning_objectives_in?: Maybe<String[] | String>;
+  learning_objectives_not_in?: Maybe<String[] | String>;
+  learning_objectives_lt?: Maybe<String>;
+  learning_objectives_lte?: Maybe<String>;
+  learning_objectives_gt?: Maybe<String>;
+  learning_objectives_gte?: Maybe<String>;
+  learning_objectives_contains?: Maybe<String>;
+  learning_objectives_not_contains?: Maybe<String>;
+  learning_objectives_starts_with?: Maybe<String>;
+  learning_objectives_not_starts_with?: Maybe<String>;
+  learning_objectives_ends_with?: Maybe<String>;
+  learning_objectives_not_ends_with?: Maybe<String>;
+  published?: Maybe<Boolean>;
+  published_not?: Maybe<Boolean>;
+  author?: Maybe<UserWhereInput>;
+  AND?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
+}
+
+export interface UserWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  password?: Maybe<String>;
+  password_not?: Maybe<String>;
+  password_in?: Maybe<String[] | String>;
+  password_not_in?: Maybe<String[] | String>;
+  password_lt?: Maybe<String>;
+  password_lte?: Maybe<String>;
+  password_gt?: Maybe<String>;
+  password_gte?: Maybe<String>;
+  password_contains?: Maybe<String>;
+  password_not_contains?: Maybe<String>;
+  password_starts_with?: Maybe<String>;
+  password_not_starts_with?: Maybe<String>;
+  password_ends_with?: Maybe<String>;
+  password_not_ends_with?: Maybe<String>;
+  role?: Maybe<String>;
+  role_not?: Maybe<String>;
+  role_in?: Maybe<String[] | String>;
+  role_not_in?: Maybe<String[] | String>;
+  role_lt?: Maybe<String>;
+  role_lte?: Maybe<String>;
+  role_gt?: Maybe<String>;
+  role_gte?: Maybe<String>;
+  role_contains?: Maybe<String>;
+  role_not_contains?: Maybe<String>;
+  role_starts_with?: Maybe<String>;
+  role_not_starts_with?: Maybe<String>;
+  role_ends_with?: Maybe<String>;
+  role_not_ends_with?: Maybe<String>;
+  projects_some?: Maybe<ProjectWhereInput>;
+  profileId?: Maybe<ProfileWhereInput>;
+  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
+}
 
 export interface ProfileWhereInput {
   id?: Maybe<ID_Input>;
@@ -304,85 +479,146 @@ export interface ProfileWhereInput {
   AND?: Maybe<ProfileWhereInput[] | ProfileWhereInput>;
 }
 
-export interface UserWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
+export type ProjectWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
   email?: Maybe<String>;
-  email_not?: Maybe<String>;
-  email_in?: Maybe<String[] | String>;
-  email_not_in?: Maybe<String[] | String>;
-  email_lt?: Maybe<String>;
-  email_lte?: Maybe<String>;
-  email_gt?: Maybe<String>;
-  email_gte?: Maybe<String>;
-  email_contains?: Maybe<String>;
-  email_not_contains?: Maybe<String>;
-  email_starts_with?: Maybe<String>;
-  email_not_starts_with?: Maybe<String>;
-  email_ends_with?: Maybe<String>;
-  email_not_ends_with?: Maybe<String>;
-  password?: Maybe<String>;
-  password_not?: Maybe<String>;
-  password_in?: Maybe<String[] | String>;
-  password_not_in?: Maybe<String[] | String>;
-  password_lt?: Maybe<String>;
-  password_lte?: Maybe<String>;
-  password_gt?: Maybe<String>;
-  password_gte?: Maybe<String>;
-  password_contains?: Maybe<String>;
-  password_not_contains?: Maybe<String>;
-  password_starts_with?: Maybe<String>;
-  password_not_starts_with?: Maybe<String>;
-  password_ends_with?: Maybe<String>;
-  password_not_ends_with?: Maybe<String>;
-  role?: Maybe<String>;
-  role_not?: Maybe<String>;
-  role_in?: Maybe<String[] | String>;
-  role_not_in?: Maybe<String[] | String>;
-  role_lt?: Maybe<String>;
-  role_lte?: Maybe<String>;
-  role_gt?: Maybe<String>;
-  role_gte?: Maybe<String>;
-  role_contains?: Maybe<String>;
-  role_not_contains?: Maybe<String>;
-  role_starts_with?: Maybe<String>;
-  role_not_starts_with?: Maybe<String>;
-  role_ends_with?: Maybe<String>;
-  role_not_ends_with?: Maybe<String>;
-  projects?: Maybe<ProjectWhereInput>;
-  profileId?: Maybe<ProfileWhereInput>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
+}>;
+
+export interface ProfileCreateInput {
+  id?: Maybe<ID_Input>;
+  userId: UserCreateOneWithoutProfileIdInput;
+  username: String;
+  name: String;
+  role: String;
 }
 
-export interface ProjectWhereInput {
+export interface UserCreateOneWithoutProfileIdInput {
+  create?: Maybe<UserCreateWithoutProfileIdInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutProfileIdInput {
+  id?: Maybe<ID_Input>;
+  email: String;
+  password: String;
+  role: String;
+  projects?: Maybe<ProjectCreateManyWithoutAuthorInput>;
+}
+
+export interface ProjectCreateManyWithoutAuthorInput {
+  create?: Maybe<
+    ProjectCreateWithoutAuthorInput[] | ProjectCreateWithoutAuthorInput
+  >;
+  connect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+}
+
+export interface ProjectCreateWithoutAuthorInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  description?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  subjects?: Maybe<ProjectCreatesubjectsInput>;
+  tags?: Maybe<ProjectCreatetagsInput>;
+  grades?: Maybe<ProjectCreategradesInput>;
+  published?: Maybe<Boolean>;
+}
+
+export interface ProjectCreatesubjectsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ProjectCreatetagsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ProjectCreategradesInput {
+  set?: Maybe<Int[] | Int>;
+}
+
+export interface ProfileUpdateInput {
+  userId?: Maybe<UserUpdateOneRequiredWithoutProfileIdInput>;
+  username?: Maybe<String>;
+  name?: Maybe<String>;
+  role?: Maybe<String>;
+}
+
+export interface UserUpdateOneRequiredWithoutProfileIdInput {
+  create?: Maybe<UserCreateWithoutProfileIdInput>;
+  update?: Maybe<UserUpdateWithoutProfileIdDataInput>;
+  upsert?: Maybe<UserUpsertWithoutProfileIdInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutProfileIdDataInput {
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  role?: Maybe<String>;
+  projects?: Maybe<ProjectUpdateManyWithoutAuthorInput>;
+}
+
+export interface ProjectUpdateManyWithoutAuthorInput {
+  create?: Maybe<
+    ProjectCreateWithoutAuthorInput[] | ProjectCreateWithoutAuthorInput
+  >;
+  delete?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+  connect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+  set?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+  disconnect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+  update?: Maybe<
+    | ProjectUpdateWithWhereUniqueWithoutAuthorInput[]
+    | ProjectUpdateWithWhereUniqueWithoutAuthorInput
+  >;
+  upsert?: Maybe<
+    | ProjectUpsertWithWhereUniqueWithoutAuthorInput[]
+    | ProjectUpsertWithWhereUniqueWithoutAuthorInput
+  >;
+  deleteMany?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
+  updateMany?: Maybe<
+    | ProjectUpdateManyWithWhereNestedInput[]
+    | ProjectUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ProjectUpdateWithWhereUniqueWithoutAuthorInput {
+  where: ProjectWhereUniqueInput;
+  data: ProjectUpdateWithoutAuthorDataInput;
+}
+
+export interface ProjectUpdateWithoutAuthorDataInput {
+  title?: Maybe<String>;
+  description?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  subjects?: Maybe<ProjectUpdatesubjectsInput>;
+  tags?: Maybe<ProjectUpdatetagsInput>;
+  grades?: Maybe<ProjectUpdategradesInput>;
+  published?: Maybe<Boolean>;
+}
+
+export interface ProjectUpdatesubjectsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ProjectUpdatetagsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ProjectUpdategradesInput {
+  set?: Maybe<Int[] | Int>;
+}
+
+export interface ProjectUpsertWithWhereUniqueWithoutAuthorInput {
+  where: ProjectWhereUniqueInput;
+  update: ProjectUpdateWithoutAuthorDataInput;
+  create: ProjectCreateWithoutAuthorInput;
+}
+
+export interface ProjectScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -441,93 +677,55 @@ export interface ProjectWhereInput {
   description_not_starts_with?: Maybe<String>;
   description_ends_with?: Maybe<String>;
   description_not_ends_with?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  imageURL_not?: Maybe<String>;
+  imageURL_in?: Maybe<String[] | String>;
+  imageURL_not_in?: Maybe<String[] | String>;
+  imageURL_lt?: Maybe<String>;
+  imageURL_lte?: Maybe<String>;
+  imageURL_gt?: Maybe<String>;
+  imageURL_gte?: Maybe<String>;
+  imageURL_contains?: Maybe<String>;
+  imageURL_not_contains?: Maybe<String>;
+  imageURL_starts_with?: Maybe<String>;
+  imageURL_not_starts_with?: Maybe<String>;
+  imageURL_ends_with?: Maybe<String>;
+  imageURL_not_ends_with?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  learning_objectives_not?: Maybe<String>;
+  learning_objectives_in?: Maybe<String[] | String>;
+  learning_objectives_not_in?: Maybe<String[] | String>;
+  learning_objectives_lt?: Maybe<String>;
+  learning_objectives_lte?: Maybe<String>;
+  learning_objectives_gt?: Maybe<String>;
+  learning_objectives_gte?: Maybe<String>;
+  learning_objectives_contains?: Maybe<String>;
+  learning_objectives_not_contains?: Maybe<String>;
+  learning_objectives_starts_with?: Maybe<String>;
+  learning_objectives_not_starts_with?: Maybe<String>;
+  learning_objectives_ends_with?: Maybe<String>;
+  learning_objectives_not_ends_with?: Maybe<String>;
   published?: Maybe<Boolean>;
   published_not?: Maybe<Boolean>;
-  author?: Maybe<UserWhereInput>;
-  AND?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
+  AND?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
+  OR?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
+  NOT?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
 }
 
-export type ProjectWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface ProfileCreateInput {
-  id?: Maybe<ID_Input>;
-  userId: UserCreateOneWithoutProfileIdInput;
-  username: String;
-  name: String;
-  role: String;
+export interface ProjectUpdateManyWithWhereNestedInput {
+  where: ProjectScalarWhereInput;
+  data: ProjectUpdateManyDataInput;
 }
 
-export interface UserCreateOneWithoutProfileIdInput {
-  create?: Maybe<UserCreateWithoutProfileIdInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserCreateWithoutProfileIdInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  password: String;
-  role: String;
-  projects?: Maybe<ProjectCreateOneWithoutAuthorInput>;
-}
-
-export interface ProjectCreateOneWithoutAuthorInput {
-  create?: Maybe<ProjectCreateWithoutAuthorInput>;
-  connect?: Maybe<ProjectWhereUniqueInput>;
-}
-
-export interface ProjectCreateWithoutAuthorInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  description?: Maybe<String>;
-  published?: Maybe<Boolean>;
-}
-
-export interface ProfileUpdateInput {
-  userId?: Maybe<UserUpdateOneRequiredWithoutProfileIdInput>;
-  username?: Maybe<String>;
-  name?: Maybe<String>;
-  role?: Maybe<String>;
-}
-
-export interface UserUpdateOneRequiredWithoutProfileIdInput {
-  create?: Maybe<UserCreateWithoutProfileIdInput>;
-  update?: Maybe<UserUpdateWithoutProfileIdDataInput>;
-  upsert?: Maybe<UserUpsertWithoutProfileIdInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateWithoutProfileIdDataInput {
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  role?: Maybe<String>;
-  projects?: Maybe<ProjectUpdateOneWithoutAuthorInput>;
-}
-
-export interface ProjectUpdateOneWithoutAuthorInput {
-  create?: Maybe<ProjectCreateWithoutAuthorInput>;
-  update?: Maybe<ProjectUpdateWithoutAuthorDataInput>;
-  upsert?: Maybe<ProjectUpsertWithoutAuthorInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<ProjectWhereUniqueInput>;
-}
-
-export interface ProjectUpdateWithoutAuthorDataInput {
+export interface ProjectUpdateManyDataInput {
   title?: Maybe<String>;
   description?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  subjects?: Maybe<ProjectUpdatesubjectsInput>;
+  tags?: Maybe<ProjectUpdatetagsInput>;
+  grades?: Maybe<ProjectUpdategradesInput>;
   published?: Maybe<Boolean>;
-}
-
-export interface ProjectUpsertWithoutAuthorInput {
-  update: ProjectUpdateWithoutAuthorDataInput;
-  create: ProjectCreateWithoutAuthorInput;
 }
 
 export interface UserUpsertWithoutProfileIdInput {
@@ -545,8 +743,13 @@ export interface ProjectCreateInput {
   id?: Maybe<ID_Input>;
   title: String;
   description?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  subjects?: Maybe<ProjectCreatesubjectsInput>;
+  tags?: Maybe<ProjectCreatetagsInput>;
+  grades?: Maybe<ProjectCreategradesInput>;
   published?: Maybe<Boolean>;
-  author: UserCreateOneWithoutProjectsInput;
+  author?: Maybe<UserCreateOneWithoutProjectsInput>;
 }
 
 export interface UserCreateOneWithoutProjectsInput {
@@ -577,14 +780,21 @@ export interface ProfileCreateWithoutUserIdInput {
 export interface ProjectUpdateInput {
   title?: Maybe<String>;
   description?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  subjects?: Maybe<ProjectUpdatesubjectsInput>;
+  tags?: Maybe<ProjectUpdatetagsInput>;
+  grades?: Maybe<ProjectUpdategradesInput>;
   published?: Maybe<Boolean>;
-  author?: Maybe<UserUpdateOneRequiredWithoutProjectsInput>;
+  author?: Maybe<UserUpdateOneWithoutProjectsInput>;
 }
 
-export interface UserUpdateOneRequiredWithoutProjectsInput {
+export interface UserUpdateOneWithoutProjectsInput {
   create?: Maybe<UserCreateWithoutProjectsInput>;
   update?: Maybe<UserUpdateWithoutProjectsDataInput>;
   upsert?: Maybe<UserUpsertWithoutProjectsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
@@ -623,6 +833,11 @@ export interface UserUpsertWithoutProjectsInput {
 export interface ProjectUpdateManyMutationInput {
   title?: Maybe<String>;
   description?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  subjects?: Maybe<ProjectUpdatesubjectsInput>;
+  tags?: Maybe<ProjectUpdatetagsInput>;
+  grades?: Maybe<ProjectUpdategradesInput>;
   published?: Maybe<Boolean>;
 }
 
@@ -631,7 +846,7 @@ export interface UserCreateInput {
   email: String;
   password: String;
   role: String;
-  projects?: Maybe<ProjectCreateOneWithoutAuthorInput>;
+  projects?: Maybe<ProjectCreateManyWithoutAuthorInput>;
   profileId?: Maybe<ProfileCreateOneWithoutUserIdInput>;
 }
 
@@ -639,7 +854,7 @@ export interface UserUpdateInput {
   email?: Maybe<String>;
   password?: Maybe<String>;
   role?: Maybe<String>;
-  projects?: Maybe<ProjectUpdateOneWithoutAuthorInput>;
+  projects?: Maybe<ProjectUpdateManyWithoutAuthorInput>;
   profileId?: Maybe<ProfileUpdateOneWithoutUserIdInput>;
 }
 
@@ -739,7 +954,15 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   email: () => Promise<String>;
   password: () => Promise<String>;
   role: () => Promise<String>;
-  projects: <T = ProjectPromise>() => T;
+  projects: <T = FragmentableArray<Project>>(args?: {
+    where?: ProjectWhereInput;
+    orderBy?: ProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   profileId: <T = ProfilePromise>() => T;
 }
 
@@ -752,7 +975,15 @@ export interface UserSubscription
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   role: () => Promise<AsyncIterator<String>>;
-  projects: <T = ProjectSubscription>() => T;
+  projects: <T = Promise<AsyncIterator<ProjectSubscription>>>(args?: {
+    where?: ProjectWhereInput;
+    orderBy?: ProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   profileId: <T = ProfileSubscription>() => T;
 }
 
@@ -765,7 +996,15 @@ export interface UserNullablePromise
   email: () => Promise<String>;
   password: () => Promise<String>;
   role: () => Promise<String>;
-  projects: <T = ProjectPromise>() => T;
+  projects: <T = FragmentableArray<Project>>(args?: {
+    where?: ProjectWhereInput;
+    orderBy?: ProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   profileId: <T = ProfilePromise>() => T;
 }
 
@@ -775,7 +1014,12 @@ export interface Project {
   updatedAt?: DateTimeOutput;
   title: String;
   description?: String;
-  published: Boolean;
+  imageURL?: String;
+  learning_objectives?: String;
+  subjects: String[];
+  tags: String[];
+  grades: Int[];
+  published?: Boolean;
 }
 
 export interface ProjectPromise extends Promise<Project>, Fragmentable {
@@ -784,6 +1028,11 @@ export interface ProjectPromise extends Promise<Project>, Fragmentable {
   updatedAt: () => Promise<DateTimeOutput>;
   title: () => Promise<String>;
   description: () => Promise<String>;
+  imageURL: () => Promise<String>;
+  learning_objectives: () => Promise<String>;
+  subjects: () => Promise<String[]>;
+  tags: () => Promise<String[]>;
+  grades: () => Promise<Int[]>;
   published: () => Promise<Boolean>;
   author: <T = UserPromise>() => T;
 }
@@ -796,6 +1045,11 @@ export interface ProjectSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   title: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
+  imageURL: () => Promise<AsyncIterator<String>>;
+  learning_objectives: () => Promise<AsyncIterator<String>>;
+  subjects: () => Promise<AsyncIterator<String[]>>;
+  tags: () => Promise<AsyncIterator<String[]>>;
+  grades: () => Promise<AsyncIterator<Int[]>>;
   published: () => Promise<AsyncIterator<Boolean>>;
   author: <T = UserSubscription>() => T;
 }
@@ -808,6 +1062,11 @@ export interface ProjectNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
   title: () => Promise<String>;
   description: () => Promise<String>;
+  imageURL: () => Promise<String>;
+  learning_objectives: () => Promise<String>;
+  subjects: () => Promise<String[]>;
+  tags: () => Promise<String[]>;
+  grades: () => Promise<Int[]>;
   published: () => Promise<Boolean>;
   author: <T = UserPromise>() => T;
 }
@@ -1100,7 +1359,12 @@ export interface ProjectPreviousValues {
   updatedAt?: DateTimeOutput;
   title: String;
   description?: String;
-  published: Boolean;
+  imageURL?: String;
+  learning_objectives?: String;
+  subjects: String[];
+  tags: String[];
+  grades: Int[];
+  published?: Boolean;
 }
 
 export interface ProjectPreviousValuesPromise
@@ -1111,6 +1375,11 @@ export interface ProjectPreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
   title: () => Promise<String>;
   description: () => Promise<String>;
+  imageURL: () => Promise<String>;
+  learning_objectives: () => Promise<String>;
+  subjects: () => Promise<String[]>;
+  tags: () => Promise<String[]>;
+  grades: () => Promise<Int[]>;
   published: () => Promise<Boolean>;
 }
 
@@ -1122,6 +1391,11 @@ export interface ProjectPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   title: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
+  imageURL: () => Promise<AsyncIterator<String>>;
+  learning_objectives: () => Promise<AsyncIterator<String>>;
+  subjects: () => Promise<AsyncIterator<String[]>>;
+  tags: () => Promise<AsyncIterator<String[]>>;
+  grades: () => Promise<AsyncIterator<Int[]>>;
   published: () => Promise<AsyncIterator<Boolean>>;
 }
 

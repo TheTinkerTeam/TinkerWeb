@@ -6,7 +6,7 @@ type User {
   email: String! @unique
   password: String!
   role: String!
-  projects: Project @relation(link: INLINE)
+  projects: [Project] @relation(link: INLINE)
   profileId: Profile @relation(link: INLINE)
 }
 
@@ -17,8 +17,15 @@ type Project {
 
   title: String!
   description: String
-  published: Boolean! @default(value: false)
-  author: User!
+  imageURL: String
+  learning_objectives: String
+  
+  subjects: [String!]!
+  tags: [String!]!
+  grades: [Int!]!
+
+  published: Boolean @default(value: false)
+  author: User
 }
 
 type Profile {

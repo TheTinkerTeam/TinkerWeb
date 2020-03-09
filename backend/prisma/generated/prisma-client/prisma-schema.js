@@ -262,8 +262,13 @@ type Project {
   updatedAt: DateTime
   title: String!
   description: String
-  published: Boolean!
-  author: User!
+  imageURL: String
+  learning_objectives: String
+  subjects: [String!]!
+  tags: [String!]!
+  grades: [Int!]!
+  published: Boolean
+  author: User
 }
 
 type ProjectConnection {
@@ -272,23 +277,45 @@ type ProjectConnection {
   aggregate: AggregateProject!
 }
 
+input ProjectCreategradesInput {
+  set: [Int!]
+}
+
 input ProjectCreateInput {
   id: ID
   title: String!
   description: String
+  imageURL: String
+  learning_objectives: String
+  subjects: ProjectCreatesubjectsInput
+  tags: ProjectCreatetagsInput
+  grades: ProjectCreategradesInput
   published: Boolean
-  author: UserCreateOneWithoutProjectsInput!
+  author: UserCreateOneWithoutProjectsInput
 }
 
-input ProjectCreateOneWithoutAuthorInput {
-  create: ProjectCreateWithoutAuthorInput
-  connect: ProjectWhereUniqueInput
+input ProjectCreateManyWithoutAuthorInput {
+  create: [ProjectCreateWithoutAuthorInput!]
+  connect: [ProjectWhereUniqueInput!]
+}
+
+input ProjectCreatesubjectsInput {
+  set: [String!]
+}
+
+input ProjectCreatetagsInput {
+  set: [String!]
 }
 
 input ProjectCreateWithoutAuthorInput {
   id: ID
   title: String!
   description: String
+  imageURL: String
+  learning_objectives: String
+  subjects: ProjectCreatesubjectsInput
+  tags: ProjectCreatetagsInput
+  grades: ProjectCreategradesInput
   published: Boolean
 }
 
@@ -308,6 +335,10 @@ enum ProjectOrderByInput {
   title_DESC
   description_ASC
   description_DESC
+  imageURL_ASC
+  imageURL_DESC
+  learning_objectives_ASC
+  learning_objectives_DESC
   published_ASC
   published_DESC
 }
@@ -318,7 +349,106 @@ type ProjectPreviousValues {
   updatedAt: DateTime
   title: String!
   description: String
-  published: Boolean!
+  imageURL: String
+  learning_objectives: String
+  subjects: [String!]!
+  tags: [String!]!
+  grades: [Int!]!
+  published: Boolean
+}
+
+input ProjectScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  imageURL: String
+  imageURL_not: String
+  imageURL_in: [String!]
+  imageURL_not_in: [String!]
+  imageURL_lt: String
+  imageURL_lte: String
+  imageURL_gt: String
+  imageURL_gte: String
+  imageURL_contains: String
+  imageURL_not_contains: String
+  imageURL_starts_with: String
+  imageURL_not_starts_with: String
+  imageURL_ends_with: String
+  imageURL_not_ends_with: String
+  learning_objectives: String
+  learning_objectives_not: String
+  learning_objectives_in: [String!]
+  learning_objectives_not_in: [String!]
+  learning_objectives_lt: String
+  learning_objectives_lte: String
+  learning_objectives_gt: String
+  learning_objectives_gte: String
+  learning_objectives_contains: String
+  learning_objectives_not_contains: String
+  learning_objectives_starts_with: String
+  learning_objectives_not_starts_with: String
+  learning_objectives_ends_with: String
+  learning_objectives_not_ends_with: String
+  published: Boolean
+  published_not: Boolean
+  AND: [ProjectScalarWhereInput!]
+  OR: [ProjectScalarWhereInput!]
+  NOT: [ProjectScalarWhereInput!]
 }
 
 type ProjectSubscriptionPayload {
@@ -337,35 +467,87 @@ input ProjectSubscriptionWhereInput {
   AND: [ProjectSubscriptionWhereInput!]
 }
 
+input ProjectUpdategradesInput {
+  set: [Int!]
+}
+
 input ProjectUpdateInput {
   title: String
   description: String
+  imageURL: String
+  learning_objectives: String
+  subjects: ProjectUpdatesubjectsInput
+  tags: ProjectUpdatetagsInput
+  grades: ProjectUpdategradesInput
   published: Boolean
-  author: UserUpdateOneRequiredWithoutProjectsInput
+  author: UserUpdateOneWithoutProjectsInput
+}
+
+input ProjectUpdateManyDataInput {
+  title: String
+  description: String
+  imageURL: String
+  learning_objectives: String
+  subjects: ProjectUpdatesubjectsInput
+  tags: ProjectUpdatetagsInput
+  grades: ProjectUpdategradesInput
+  published: Boolean
 }
 
 input ProjectUpdateManyMutationInput {
   title: String
   description: String
+  imageURL: String
+  learning_objectives: String
+  subjects: ProjectUpdatesubjectsInput
+  tags: ProjectUpdatetagsInput
+  grades: ProjectUpdategradesInput
   published: Boolean
 }
 
-input ProjectUpdateOneWithoutAuthorInput {
-  create: ProjectCreateWithoutAuthorInput
-  update: ProjectUpdateWithoutAuthorDataInput
-  upsert: ProjectUpsertWithoutAuthorInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: ProjectWhereUniqueInput
+input ProjectUpdateManyWithoutAuthorInput {
+  create: [ProjectCreateWithoutAuthorInput!]
+  delete: [ProjectWhereUniqueInput!]
+  connect: [ProjectWhereUniqueInput!]
+  set: [ProjectWhereUniqueInput!]
+  disconnect: [ProjectWhereUniqueInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutAuthorInput!]
+  deleteMany: [ProjectScalarWhereInput!]
+  updateMany: [ProjectUpdateManyWithWhereNestedInput!]
+}
+
+input ProjectUpdateManyWithWhereNestedInput {
+  where: ProjectScalarWhereInput!
+  data: ProjectUpdateManyDataInput!
+}
+
+input ProjectUpdatesubjectsInput {
+  set: [String!]
+}
+
+input ProjectUpdatetagsInput {
+  set: [String!]
 }
 
 input ProjectUpdateWithoutAuthorDataInput {
   title: String
   description: String
+  imageURL: String
+  learning_objectives: String
+  subjects: ProjectUpdatesubjectsInput
+  tags: ProjectUpdatetagsInput
+  grades: ProjectUpdategradesInput
   published: Boolean
 }
 
-input ProjectUpsertWithoutAuthorInput {
+input ProjectUpdateWithWhereUniqueWithoutAuthorInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutAuthorDataInput!
+}
+
+input ProjectUpsertWithWhereUniqueWithoutAuthorInput {
+  where: ProjectWhereUniqueInput!
   update: ProjectUpdateWithoutAuthorDataInput!
   create: ProjectCreateWithoutAuthorInput!
 }
@@ -429,6 +611,34 @@ input ProjectWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  imageURL: String
+  imageURL_not: String
+  imageURL_in: [String!]
+  imageURL_not_in: [String!]
+  imageURL_lt: String
+  imageURL_lte: String
+  imageURL_gt: String
+  imageURL_gte: String
+  imageURL_contains: String
+  imageURL_not_contains: String
+  imageURL_starts_with: String
+  imageURL_not_starts_with: String
+  imageURL_ends_with: String
+  imageURL_not_ends_with: String
+  learning_objectives: String
+  learning_objectives_not: String
+  learning_objectives_in: [String!]
+  learning_objectives_not_in: [String!]
+  learning_objectives_lt: String
+  learning_objectives_lte: String
+  learning_objectives_gt: String
+  learning_objectives_gte: String
+  learning_objectives_contains: String
+  learning_objectives_not_contains: String
+  learning_objectives_starts_with: String
+  learning_objectives_not_starts_with: String
+  learning_objectives_ends_with: String
+  learning_objectives_not_ends_with: String
   published: Boolean
   published_not: Boolean
   author: UserWhereInput
@@ -465,7 +675,7 @@ type User {
   email: String!
   password: String!
   role: String!
-  projects: Project
+  projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
   profileId: Profile
 }
 
@@ -480,7 +690,7 @@ input UserCreateInput {
   email: String!
   password: String!
   role: String!
-  projects: ProjectCreateOneWithoutAuthorInput
+  projects: ProjectCreateManyWithoutAuthorInput
   profileId: ProfileCreateOneWithoutUserIdInput
 }
 
@@ -499,7 +709,7 @@ input UserCreateWithoutProfileIdInput {
   email: String!
   password: String!
   role: String!
-  projects: ProjectCreateOneWithoutAuthorInput
+  projects: ProjectCreateManyWithoutAuthorInput
 }
 
 input UserCreateWithoutProjectsInput {
@@ -559,7 +769,7 @@ input UserUpdateInput {
   email: String
   password: String
   role: String
-  projects: ProjectUpdateOneWithoutAuthorInput
+  projects: ProjectUpdateManyWithoutAuthorInput
   profileId: ProfileUpdateOneWithoutUserIdInput
 }
 
@@ -576,10 +786,12 @@ input UserUpdateOneRequiredWithoutProfileIdInput {
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneRequiredWithoutProjectsInput {
+input UserUpdateOneWithoutProjectsInput {
   create: UserCreateWithoutProjectsInput
   update: UserUpdateWithoutProjectsDataInput
   upsert: UserUpsertWithoutProjectsInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
@@ -587,7 +799,7 @@ input UserUpdateWithoutProfileIdDataInput {
   email: String
   password: String
   role: String
-  projects: ProjectUpdateOneWithoutAuthorInput
+  projects: ProjectUpdateManyWithoutAuthorInput
 }
 
 input UserUpdateWithoutProjectsDataInput {
@@ -680,7 +892,7 @@ input UserWhereInput {
   role_not_starts_with: String
   role_ends_with: String
   role_not_ends_with: String
-  projects: ProjectWhereInput
+  projects_some: ProjectWhereInput
   profileId: ProfileWhereInput
   AND: [UserWhereInput!]
 }

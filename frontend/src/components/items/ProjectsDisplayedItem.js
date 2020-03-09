@@ -7,7 +7,7 @@ class ProjectsDisplayedItem extends Component {
       <div className="wrapper">
         <div className="displayed-projects-item">
           <div className="child">
-            <a href={`/projects/${project._id}`}>
+            <a href={`/projects/${project.id}`}>
               <img
                 src={project.imageURL}
                 className=""

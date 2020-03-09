@@ -11,6 +11,17 @@ module.exports = {
     filterProjects: async (parent, { searchString }, context) => {
       return null;
     },
+    projects: async (parent, { id }, { prisma }) => {
+      try {
+        console.log("TEST");
+        const projects = await prisma.projects();
+        console.log("@222");
+        console.log(projects);
+        return projects;
+      } catch (err) {
+        console.error(err);
+      }
+    },
     project: async (parent, { id }, { prisma }) => {
       try {
         const project = await prisma.project(id);
