@@ -38,27 +38,44 @@ const ProjectDetailsPage = props => {
       <div className='project-title-style'>{project.title}</div>
       <Segment.Group className='paragraph-style display-in-box'>
         <Segment>
-          <div className='paragraph-title-style'>{"About this project".toUpperCase()}</div>
+          <div className='paragraph-title-style'>
+            {"About this project".toUpperCase()}
+          </div>
           <br />
           <div>{project.description}</div>
         </Segment>
         <Segment>
           <div className='paragraph-title-style'>{"Topics".toUpperCase()}</div>
           <br />
-          import the topics from the database
+          {/* <div>{project.subjects}</div> */}
+          {/* This shouldn't be school subjects in the database but wider topics such as Gravity, Forces and Motion, Classifying Objects, Speed, Velocity, Acceleration, Aerodynamics/Air, Resistance, Surface Area */}
+          <div>
+            {project.subjects &&
+              project.subjects.map((subject, index) => (
+                <List bulleted key={index}>
+                  <List.Item>{subject}</List.Item>
+                </List>
+              ))}
+          </div>
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>{"Standards".toUpperCase()}</div>
+          <div className='paragraph-title-style'>
+            {"Standards".toUpperCase()}
+          </div>
           <br />
           import the standards from the database
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>{"Learning Objectives".toUpperCase()}</div>
+          <div className='paragraph-title-style'>
+            {"Learning Objectives".toUpperCase()}
+          </div>
           <br />
           <div>{project.learning_objectives}</div>
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>{"Getting started".toUpperCase()}</div>
+          <div className='paragraph-title-style'>
+            {"Getting started".toUpperCase()}
+          </div>
           <br />
           <div>
             1. Show the “The One Moment” music video.
@@ -78,7 +95,9 @@ const ProjectDetailsPage = props => {
           </div>
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>{"Materials".toUpperCase()}</div>
+          <div className='paragraph-title-style'>
+            {"Materials".toUpperCase()}
+          </div>
           <br />
           <List bulleted>
             <List.Item>Paper</List.Item>
