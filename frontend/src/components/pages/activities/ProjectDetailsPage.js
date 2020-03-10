@@ -40,7 +40,7 @@ const ProjectDetailsPage = props => {
         <Segment>
           <div className='paragraph-title-style'>{"About this project".toUpperCase()}</div>
           <br />
-          {project.description}
+          <div>{project.description}</div>
         </Segment>
         <Segment>
           <div className='paragraph-title-style'>{"Topics".toUpperCase()}</div>
