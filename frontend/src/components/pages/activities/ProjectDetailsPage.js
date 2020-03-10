@@ -1,4 +1,7 @@
 import React from "react";
+import {
+  withRouter
+} from 'react-router-dom'
 
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
@@ -171,4 +174,4 @@ String.prototype.capitalize = function() {
   return this.charAt(0).toUpperCase() + this.slice(1)
 }
 
-export default ProjectDetailsPage;
+export default withRouter(ProjectDetailsPage);
