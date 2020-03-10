@@ -2,7 +2,7 @@ import React from "react";
 
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import { Segment, Divider, Container, List } from "semantic-ui-react";
+import { Segment, Divider, Container, List, Image } from "semantic-ui-react";
 
 //https://www.apollographql.com/docs/react/data/queries/
 
@@ -38,6 +38,9 @@ const ProjectDetailsPage = props => {
       <div className='project-title-style'>{project.title}</div>
       <Segment.Group className='paragraph-style display-in-box'>
         <Segment>
+          <Image src={project.imageURL} size='small'/>
+        </Segment>
+        <Segment>
           <div className='paragraph-title-style'>
             {"About this project".toUpperCase()}
           </div>
@@ -63,7 +66,7 @@ const ProjectDetailsPage = props => {
             {"Standards".toUpperCase()}
           </div>
           <br />
-          read the standards from the database
+          Read the standards from the database
         </Segment>
         <Segment>
           <div className='paragraph-title-style'>
