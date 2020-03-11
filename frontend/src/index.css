@@ -199,3 +199,48 @@ code {
 .ui.thin.left.sidebar, .ui.thin.right.sidebar {
   width: 160px;
 }
+
+/* ==================== */
+/*      Text style      */
+/* ==================== */
+
+.paragraph-style{
+  font-family: "Poppins";
+  color: #181c3f;
+  font-weight: 200;
+}
+
+.paragraph-title-style{
+  font-family: "Poppins";
+  color: #181c3f;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.project-title-style{
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 4rem;
+  color: #f5514c;
+  margin-top: 8rem;
+  margin-bottom: 1rem;
+  line-height: normal;
+}
+
+/* ==== */
+/* Card */
+/* ==== */
+
+.ui.segment .display-in-box {
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  background: white;
+  border-color: transparent;
+  padding: 1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.ui.segment .display-in-box:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
