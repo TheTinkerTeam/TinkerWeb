@@ -1,24 +1,30 @@
 import React from "react";
 import { Modal, Dropdown, Menu, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
-import { logout } from "../../actions/authActions";
+import { useFirebase } from "react-redux-firebase";
 
 import avatar from "../../img/avatar.png";
 
 import ProjectForm from "../forms/ProjectForm";
 
-const SignedInMenu = ({ logout, profile }) => {
+import { logout } from "../../actions/authActions";
+
+const SignedInMenu = () => {
+  const dispatch = useDispatch();
+  const firebase = useFirebase();
+  const auth = firebase.auth;
+
   return (
     <Menu.Item position="right">
       <Image
         avatar
         spaced="right"
-        src={(profile && profile.avatar) || avatar}
+        src={(auth.isAuth && auth.imageUrl) || avatar}
       />
-      <Dropdown pointing="top right" text={profile.name && profile.name.first}>
+      <Dropdown pointing="top right" text={auth.displayName}>
         <Dropdown.Menu>
           <Modal
             //loggedIn={loggedIn}
@@ -38,19 +44,15 @@ const SignedInMenu = ({ logout, profile }) => {
             text="Settings"
             icon="settings"
           />
-          <Dropdown.Item onClick={logout} text="Log Out" icon="power" />
+          <Dropdown.Item
+            onClick={() => dispatch(logout())}
+            text="Log Out"
+            icon="power"
+          />
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Item>
   );
 };
 
-const mapStateToProps = state => ({
-  profile: state.auth.profile
-});
-
-const mapDispatchToProps = {
-  logout
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignedInMenu);
+export default SignedInMenu;

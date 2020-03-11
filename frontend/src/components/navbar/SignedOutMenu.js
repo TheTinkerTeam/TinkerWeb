@@ -1,18 +1,12 @@
 import React from "react";
-import {
-  Menu,
-  Button,
-  Icon,
-  Modal,
-} from "semantic-ui-react";
+import { Menu, Button, Icon, Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import "../../css/SignedOutMenu.css";
-import { login } from "../../actions/authActions";
 import AuthForm from "../forms/AuthForm";
 // import Alert from "../services/Alert";
 
-const SignedOutMenu = ({ login }) => {
+const SignedOutMenu = () => {
   /*
   state = {
     loggedIn: false
@@ -63,10 +57,4 @@ const SignedOutMenu = ({ login }) => {
   );
 };
 
-const mapStateToProps = null;
-
-const mapDispatchToProps = {
-  login
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignedOutMenu);
+export default SignedOutMenu;

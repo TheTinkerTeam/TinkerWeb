@@ -13,6 +13,11 @@ import store from "./store";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import reactReduxFirebaseProps from "./utils/firebase";
+
+require("dotenv").config();
+
 const client = new ApolloClient({
   uri: "http://localhost:5000/api/v2"
 });
@@ -27,9 +32,11 @@ let render = () => {
   ReactDOM.render(
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <ReactReduxFirebaseProvider {...reactReduxFirebaseProps}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ReactReduxFirebaseProvider>
       </Provider>
     </ApolloProvider>,
     rootEl

@@ -28,8 +28,7 @@ const { prisma } = require("../prisma/generated/prisma-client");
 const server = new ApolloServer({
   schema,
   context: ({ req, res }) => ({
-    prisma,
-    res
+    prisma
   })
 });
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 import {
   Form,
@@ -8,20 +8,22 @@ import {
   Modal,
   Image,
   Responsive,
-  Divider,
+  Divider
 } from "semantic-ui-react";
 
 import { signup, login } from "../../actions/authActions";
-import checkEmail from "../../utils/checkEmail";
 import Alert from "../services/Alert";
 
 import "../../css/AuthForm.css";
 // import SH_heads from "../../img/SH_heads.png";
 import SH_eyes from "../../img/SH_eyes.png";
 
-const AuthForm = ({ signup, login }) => {
-  //const [state, setState] = useState(initialState);
+import checkEmail from "../../utils/checkEmail";
 
+import { googleSignIn } from "../../actions/authActions";
+
+const AuthForm = ({ signup, login }) => {
+  const dispatch = useDispatch();
   const initialmodal = {
     position: "email",
     template: "input",
@@ -37,7 +39,7 @@ const AuthForm = ({ signup, login }) => {
     email: "",
     firstName: "",
     lastName: "",
-    userType: "",
+    role: "",
     school: "",
     password: ""
   };
@@ -49,39 +51,6 @@ const AuthForm = ({ signup, login }) => {
 
   const [inputs, setInputs] = useState(initialInputs);
   const [buttons, setButtons] = useState(initialButtons);
-
-  const emailExists = async email => {
-    try {
-      const exists = await checkEmail(email);
-      setUser({
-        ...user,
-        email: email
-      });
-      if (exists) {
-        setModal({
-          ...modal,
-          position: "login",
-          template: "input",
-          header: "Login",
-          img: SH_eyes
-          //img:
-          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
-        });
-      } else {
-        setModal({
-          ...modal,
-          position: "userType",
-          template: "buttons",
-          header: "Choose your account type",
-          img: SH_eyes
-          //img:
-          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
-        });
-      }
-    } catch (err) {
-      console.log("ERRROR");
-    }
-  };
 
   useEffect(() => {
     let newInputs;
@@ -101,14 +70,14 @@ const AuthForm = ({ signup, login }) => {
           }
         ];
         break;
-      case "userType":
+      case "role":
         newInputs = [];
         newButtons = [
           {
             onClick: () => {
               setUser({
                 ...user,
-                userType: "student"
+                role: "student"
               });
             },
             text: "I'm a Student"
@@ -118,7 +87,7 @@ const AuthForm = ({ signup, login }) => {
             onClick: () => {
               setUser({
                 ...user,
-                userType: "teacher"
+                role: "teacher"
               });
             },
             text: "I'm a Teacher"
@@ -129,7 +98,7 @@ const AuthForm = ({ signup, login }) => {
             onClick: () => {
               setUser({
                 ...user,
-                userType: "school"
+                role: "school"
               });
             },
             text: "I'm a School Admin"
@@ -202,13 +171,46 @@ const AuthForm = ({ signup, login }) => {
     });
   };
 
+  const emailExists = async email => {
+    try {
+      const exists = await checkEmail(email);
+      if (exists) {
+        setModal({
+          ...modal,
+          position: "login",
+          template: "input",
+          header: "Login",
+          img: SH_eyes
+          //img:
+          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        });
+      } else {
+        setModal({
+          ...modal,
+          position: "role",
+          template: "buttons",
+          header: "Choose your account type",
+          img: SH_eyes
+          //img:
+          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        });
+      }
+      setUser({
+        ...user,
+        email: user.email
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     switch (modal.position) {
       case "email":
         emailExists(user.email);
         break;
-      case "userType":
+      case "role":
         setModal({
           ...modal,
           position: "fullname",
@@ -279,7 +281,8 @@ const AuthForm = ({ signup, login }) => {
             <Button
               id="google-button"
               color="teal"
-              content="Sign in/up with Google"
+              content="Sign In with Google"
+              onClick={() => dispatch(googleSignIn())}
             />
           </Fragment>
         ) : null}

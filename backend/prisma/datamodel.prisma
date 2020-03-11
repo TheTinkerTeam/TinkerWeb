@@ -1,15 +1,3 @@
-type User {
-  id: ID! @id
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-
-  email: String! @unique
-  password: String!
-  role: String!
-  projects: [Project] @relation(link: INLINE)
-  profileId: Profile @relation(link: INLINE)
-}
-
 type Project {
   id: ID! @id
   createdAt: DateTime @createdAt
@@ -28,13 +16,17 @@ type Project {
   author: User
 }
 
-type Profile {
+type User {
   id: ID! @id
+  uid: String! @unique
+  email: String! @unique
   createdAt: DateTime @createdAt
   updatedAt: DateTime @updatedAt
 
-  userId: User!
-  username: String!
-  name: String!
-  role: String!
+  firstName: String
+  lastName: String
+  username: String @unique
+  role: String
+  school: String
+  projects: [Project] @relation(link: INLINE)
 }

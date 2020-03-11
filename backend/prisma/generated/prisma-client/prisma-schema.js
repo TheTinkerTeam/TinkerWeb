@@ -3,11 +3,7 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateProfile {
-  count: Int!
-}
-
-type AggregateProject {
+/* GraphQL */ `type AggregateProject {
   count: Int!
 }
 
@@ -24,12 +20,6 @@ scalar DateTime
 scalar Long
 
 type Mutation {
-  createProfile(data: ProfileCreateInput!): Profile!
-  updateProfile(data: ProfileUpdateInput!, where: ProfileWhereUniqueInput!): Profile
-  updateManyProfiles(data: ProfileUpdateManyMutationInput!, where: ProfileWhereInput): BatchPayload!
-  upsertProfile(where: ProfileWhereUniqueInput!, create: ProfileCreateInput!, update: ProfileUpdateInput!): Profile!
-  deleteProfile(where: ProfileWhereUniqueInput!): Profile
-  deleteManyProfiles(where: ProfileWhereInput): BatchPayload!
   createProject(data: ProjectCreateInput!): Project!
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
   updateManyProjects(data: ProjectUpdateManyMutationInput!, where: ProjectWhereInput): BatchPayload!
@@ -59,201 +49,6 @@ type PageInfo {
   hasPreviousPage: Boolean!
   startCursor: String
   endCursor: String
-}
-
-type Profile {
-  id: ID!
-  createdAt: DateTime
-  updatedAt: DateTime
-  userId: User!
-  username: String!
-  name: String!
-  role: String!
-}
-
-type ProfileConnection {
-  pageInfo: PageInfo!
-  edges: [ProfileEdge]!
-  aggregate: AggregateProfile!
-}
-
-input ProfileCreateInput {
-  id: ID
-  userId: UserCreateOneWithoutProfileIdInput!
-  username: String!
-  name: String!
-  role: String!
-}
-
-input ProfileCreateOneWithoutUserIdInput {
-  create: ProfileCreateWithoutUserIdInput
-  connect: ProfileWhereUniqueInput
-}
-
-input ProfileCreateWithoutUserIdInput {
-  id: ID
-  username: String!
-  name: String!
-  role: String!
-}
-
-type ProfileEdge {
-  node: Profile!
-  cursor: String!
-}
-
-enum ProfileOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  username_ASC
-  username_DESC
-  name_ASC
-  name_DESC
-  role_ASC
-  role_DESC
-}
-
-type ProfilePreviousValues {
-  id: ID!
-  createdAt: DateTime
-  updatedAt: DateTime
-  username: String!
-  name: String!
-  role: String!
-}
-
-type ProfileSubscriptionPayload {
-  mutation: MutationType!
-  node: Profile
-  updatedFields: [String!]
-  previousValues: ProfilePreviousValues
-}
-
-input ProfileSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: ProfileWhereInput
-  AND: [ProfileSubscriptionWhereInput!]
-}
-
-input ProfileUpdateInput {
-  userId: UserUpdateOneRequiredWithoutProfileIdInput
-  username: String
-  name: String
-  role: String
-}
-
-input ProfileUpdateManyMutationInput {
-  username: String
-  name: String
-  role: String
-}
-
-input ProfileUpdateOneWithoutUserIdInput {
-  create: ProfileCreateWithoutUserIdInput
-  update: ProfileUpdateWithoutUserIdDataInput
-  upsert: ProfileUpsertWithoutUserIdInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: ProfileWhereUniqueInput
-}
-
-input ProfileUpdateWithoutUserIdDataInput {
-  username: String
-  name: String
-  role: String
-}
-
-input ProfileUpsertWithoutUserIdInput {
-  update: ProfileUpdateWithoutUserIdDataInput!
-  create: ProfileCreateWithoutUserIdInput!
-}
-
-input ProfileWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  userId: UserWhereInput
-  username: String
-  username_not: String
-  username_in: [String!]
-  username_not_in: [String!]
-  username_lt: String
-  username_lte: String
-  username_gt: String
-  username_gte: String
-  username_contains: String
-  username_not_contains: String
-  username_starts_with: String
-  username_not_starts_with: String
-  username_ends_with: String
-  username_not_ends_with: String
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  role: String
-  role_not: String
-  role_in: [String!]
-  role_not_in: [String!]
-  role_lt: String
-  role_lte: String
-  role_gt: String
-  role_gte: String
-  role_contains: String
-  role_not_contains: String
-  role_starts_with: String
-  role_not_starts_with: String
-  role_ends_with: String
-  role_not_ends_with: String
-  AND: [ProfileWhereInput!]
-}
-
-input ProfileWhereUniqueInput {
-  id: ID
 }
 
 type Project {
@@ -650,9 +445,6 @@ input ProjectWhereUniqueInput {
 }
 
 type Query {
-  profile(where: ProfileWhereUniqueInput!): Profile
-  profiles(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Profile]!
-  profilesConnection(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProfileConnection!
   project(where: ProjectWhereUniqueInput!): Project
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
@@ -663,20 +455,22 @@ type Query {
 }
 
 type Subscription {
-  profile(where: ProfileSubscriptionWhereInput): ProfileSubscriptionPayload
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User {
   id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  uid: String!
   email: String!
-  password: String!
-  role: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+  firstName: String
+  lastName: String
+  username: String
+  role: String
+  school: String
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
-  profileId: Profile
 }
 
 type UserConnection {
@@ -687,16 +481,14 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
+  uid: String!
   email: String!
-  password: String!
-  role: String!
+  firstName: String
+  lastName: String
+  username: String
+  role: String
+  school: String
   projects: ProjectCreateManyWithoutAuthorInput
-  profileId: ProfileCreateOneWithoutUserIdInput
-}
-
-input UserCreateOneWithoutProfileIdInput {
-  create: UserCreateWithoutProfileIdInput
-  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutProjectsInput {
@@ -704,20 +496,15 @@ input UserCreateOneWithoutProjectsInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateWithoutProfileIdInput {
-  id: ID
-  email: String!
-  password: String!
-  role: String!
-  projects: ProjectCreateManyWithoutAuthorInput
-}
-
 input UserCreateWithoutProjectsInput {
   id: ID
+  uid: String!
   email: String!
-  password: String!
-  role: String!
-  profileId: ProfileCreateOneWithoutUserIdInput
+  firstName: String
+  lastName: String
+  username: String
+  role: String
+  school: String
 }
 
 type UserEdge {
@@ -728,25 +515,37 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
+  uid_ASC
+  uid_DESC
+  email_ASC
+  email_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  email_ASC
-  email_DESC
-  password_ASC
-  password_DESC
+  firstName_ASC
+  firstName_DESC
+  lastName_ASC
+  lastName_DESC
+  username_ASC
+  username_DESC
   role_ASC
   role_DESC
+  school_ASC
+  school_DESC
 }
 
 type UserPreviousValues {
   id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  uid: String!
   email: String!
-  password: String!
-  role: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+  firstName: String
+  lastName: String
+  username: String
+  role: String
+  school: String
 }
 
 type UserSubscriptionPayload {
@@ -766,24 +565,24 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
+  uid: String
   email: String
-  password: String
+  firstName: String
+  lastName: String
+  username: String
   role: String
+  school: String
   projects: ProjectUpdateManyWithoutAuthorInput
-  profileId: ProfileUpdateOneWithoutUserIdInput
 }
 
 input UserUpdateManyMutationInput {
+  uid: String
   email: String
-  password: String
+  firstName: String
+  lastName: String
+  username: String
   role: String
-}
-
-input UserUpdateOneRequiredWithoutProfileIdInput {
-  create: UserCreateWithoutProfileIdInput
-  update: UserUpdateWithoutProfileIdDataInput
-  upsert: UserUpsertWithoutProfileIdInput
-  connect: UserWhereUniqueInput
+  school: String
 }
 
 input UserUpdateOneWithoutProjectsInput {
@@ -795,23 +594,14 @@ input UserUpdateOneWithoutProjectsInput {
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateWithoutProfileIdDataInput {
-  email: String
-  password: String
-  role: String
-  projects: ProjectUpdateManyWithoutAuthorInput
-}
-
 input UserUpdateWithoutProjectsDataInput {
+  uid: String
   email: String
-  password: String
+  firstName: String
+  lastName: String
+  username: String
   role: String
-  profileId: ProfileUpdateOneWithoutUserIdInput
-}
-
-input UserUpsertWithoutProfileIdInput {
-  update: UserUpdateWithoutProfileIdDataInput!
-  create: UserCreateWithoutProfileIdInput!
+  school: String
 }
 
 input UserUpsertWithoutProjectsInput {
@@ -834,6 +624,34 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  uid: String
+  uid_not: String
+  uid_in: [String!]
+  uid_not_in: [String!]
+  uid_lt: String
+  uid_lte: String
+  uid_gt: String
+  uid_gte: String
+  uid_contains: String
+  uid_not_contains: String
+  uid_starts_with: String
+  uid_not_starts_with: String
+  uid_ends_with: String
+  uid_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -850,34 +668,48 @@ input UserWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  email: String
-  email_not: String
-  email_in: [String!]
-  email_not_in: [String!]
-  email_lt: String
-  email_lte: String
-  email_gt: String
-  email_gte: String
-  email_contains: String
-  email_not_contains: String
-  email_starts_with: String
-  email_not_starts_with: String
-  email_ends_with: String
-  email_not_ends_with: String
-  password: String
-  password_not: String
-  password_in: [String!]
-  password_not_in: [String!]
-  password_lt: String
-  password_lte: String
-  password_gt: String
-  password_gte: String
-  password_contains: String
-  password_not_contains: String
-  password_starts_with: String
-  password_not_starts_with: String
-  password_ends_with: String
-  password_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
   role: String
   role_not: String
   role_in: [String!]
@@ -892,14 +724,29 @@ input UserWhereInput {
   role_not_starts_with: String
   role_ends_with: String
   role_not_ends_with: String
+  school: String
+  school_not: String
+  school_in: [String!]
+  school_not_in: [String!]
+  school_lt: String
+  school_lte: String
+  school_gt: String
+  school_gte: String
+  school_contains: String
+  school_not_contains: String
+  school_starts_with: String
+  school_not_starts_with: String
+  school_ends_with: String
+  school_not_ends_with: String
   projects_some: ProjectWhereInput
-  profileId: ProfileWhereInput
   AND: [UserWhereInput!]
 }
 
 input UserWhereUniqueInput {
   id: ID
+  uid: String
   email: String
+  username: String
 }
 `
       }

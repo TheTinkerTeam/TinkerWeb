@@ -7,8 +7,10 @@ import tutorialReducer from "./tutorialReducer";
 import newsReducer from "./newsReducer";
 import welcomeReducer from "./welcomeReducer";
 import sidebarReducer from "./sidebarReducer";
+import { firebaseReducer } from "react-redux-firebase";
 
 const rootReducer = combineReducers({
+  firebase: firebaseReducer,
   auth: authReducer,
   alerts: alertReducer,
   projects: projectReducer,

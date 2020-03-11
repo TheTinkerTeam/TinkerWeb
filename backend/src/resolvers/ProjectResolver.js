@@ -13,10 +13,7 @@ module.exports = {
     },
     projects: async (parent, { id }, { prisma }) => {
       try {
-        console.log("TEST");
         const projects = await prisma.projects();
-        console.log("@222");
-        console.log(projects);
         return projects;
       } catch (err) {
         console.error(err);
@@ -24,7 +21,7 @@ module.exports = {
     },
     project: async (parent, { id }, { prisma }) => {
       try {
-        const project = await prisma.project({id});
+        const project = await prisma.project({ id });
         return project;
       } catch (err) {
         console.error(err);
