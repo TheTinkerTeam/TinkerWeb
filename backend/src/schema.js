@@ -3,40 +3,16 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   scalar DateTime
 
-  type Query {
-    # User
-    users: [User]
-    user(id: ID!): User
-    me: User
-    # Project
-    projects: [Project!]!
-    feed: [Project!]!
-    project(id: ID!): Project
-    filterProjects(searchString: String): [Project!]!
-  }
-
-  type Mutation {
-    signup(
-      email: String!
-      password: String!
-      name: String!
-      role: String!
-    ): AuthPayload!
-    login(email: String!, password: String!): AuthPayload
-    createProject(title: String!, description: String!): Project!
-    updateProject(id: ID!, title: String, description: String): Project
-    deleteProject(id: ID!): Project
-  }
-
-  type AuthPayload {
-    token: String!
-    user: User!
-  }
-
   type User {
     id: ID!
+    uid: String!
     email: String!
-    role: String
+    firstName: String!
+    lastName: String!
+    username: String!
+    school: String!
+    role: String!
+    projects: [Project]
   }
 
   type Project {
@@ -52,6 +28,35 @@ const typeDefs = gql`
     grades: [String]
     content: String
     author: User!
+  }
+
+  type Query {
+    # User
+    users: [User]
+    user(uid: String!): User
+    me: User
+    checkEmail(email: String!): Boolean
+    # Project
+    projects: [Project!]!
+    feed: [Project!]!
+    project(id: ID!): Project
+    filterProjects(searchString: String): [Project!]!
+  }
+
+  type Mutation {
+    signup(
+      uid: String!
+      email: String!
+      password: String!
+      firstName: String!
+      lastName: String!
+      school: String!
+      role: String!
+    ): User!
+    login(email: String!, password: String!): User
+    createProject(title: String!, description: String!): Project!
+    updateProject(id: ID!, title: String, description: String): Project
+    deleteProject(id: ID!): Project
   }
 `;
 

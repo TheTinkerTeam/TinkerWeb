@@ -16,7 +16,6 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  profile: (where?: ProfileWhereInput) => Promise<boolean>;
   project: (where?: ProjectWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
@@ -40,25 +39,6 @@ export interface Prisma {
    * Queries
    */
 
-  profile: (where: ProfileWhereUniqueInput) => ProfileNullablePromise;
-  profiles: (args?: {
-    where?: ProfileWhereInput;
-    orderBy?: ProfileOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<Profile>;
-  profilesConnection: (args?: {
-    where?: ProfileWhereInput;
-    orderBy?: ProfileOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => ProfileConnectionPromise;
   project: (where: ProjectWhereUniqueInput) => ProjectNullablePromise;
   projects: (args?: {
     where?: ProjectWhereInput;
@@ -103,22 +83,6 @@ export interface Prisma {
    * Mutations
    */
 
-  createProfile: (data: ProfileCreateInput) => ProfilePromise;
-  updateProfile: (args: {
-    data: ProfileUpdateInput;
-    where: ProfileWhereUniqueInput;
-  }) => ProfilePromise;
-  updateManyProfiles: (args: {
-    data: ProfileUpdateManyMutationInput;
-    where?: ProfileWhereInput;
-  }) => BatchPayloadPromise;
-  upsertProfile: (args: {
-    where: ProfileWhereUniqueInput;
-    create: ProfileCreateInput;
-    update: ProfileUpdateInput;
-  }) => ProfilePromise;
-  deleteProfile: (where: ProfileWhereUniqueInput) => ProfilePromise;
-  deleteManyProfiles: (where?: ProfileWhereInput) => BatchPayloadPromise;
   createProject: (data: ProjectCreateInput) => ProjectPromise;
   updateProject: (args: {
     data: ProjectUpdateInput;
@@ -160,9 +124,6 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  profile: (
-    where?: ProfileSubscriptionWhereInput
-  ) => ProfileSubscriptionPayloadSubscription;
   project: (
     where?: ProjectSubscriptionWhereInput
   ) => ProjectSubscriptionPayloadSubscription;
@@ -197,37 +158,31 @@ export type ProjectOrderByInput =
   | "published_ASC"
   | "published_DESC";
 
-export type ProfileOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "username_ASC"
-  | "username_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "role_ASC"
-  | "role_DESC";
-
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "uid_ASC"
+  | "uid_DESC"
+  | "email_ASC"
+  | "email_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC"
-  | "email_ASC"
-  | "email_DESC"
-  | "password_ASC"
-  | "password_DESC"
+  | "firstName_ASC"
+  | "firstName_DESC"
+  | "lastName_ASC"
+  | "lastName_DESC"
+  | "username_ASC"
+  | "username_DESC"
   | "role_ASC"
-  | "role_DESC";
+  | "role_DESC"
+  | "school_ASC"
+  | "school_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type ProfileWhereUniqueInput = AtLeastOne<{
+export type ProjectWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
@@ -339,22 +294,20 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
+  uid?: Maybe<String>;
+  uid_not?: Maybe<String>;
+  uid_in?: Maybe<String[] | String>;
+  uid_not_in?: Maybe<String[] | String>;
+  uid_lt?: Maybe<String>;
+  uid_lte?: Maybe<String>;
+  uid_gt?: Maybe<String>;
+  uid_gte?: Maybe<String>;
+  uid_contains?: Maybe<String>;
+  uid_not_contains?: Maybe<String>;
+  uid_starts_with?: Maybe<String>;
+  uid_not_starts_with?: Maybe<String>;
+  uid_ends_with?: Maybe<String>;
+  uid_not_ends_with?: Maybe<String>;
   email?: Maybe<String>;
   email_not?: Maybe<String>;
   email_in?: Maybe<String[] | String>;
@@ -369,54 +322,6 @@ export interface UserWhereInput {
   email_not_starts_with?: Maybe<String>;
   email_ends_with?: Maybe<String>;
   email_not_ends_with?: Maybe<String>;
-  password?: Maybe<String>;
-  password_not?: Maybe<String>;
-  password_in?: Maybe<String[] | String>;
-  password_not_in?: Maybe<String[] | String>;
-  password_lt?: Maybe<String>;
-  password_lte?: Maybe<String>;
-  password_gt?: Maybe<String>;
-  password_gte?: Maybe<String>;
-  password_contains?: Maybe<String>;
-  password_not_contains?: Maybe<String>;
-  password_starts_with?: Maybe<String>;
-  password_not_starts_with?: Maybe<String>;
-  password_ends_with?: Maybe<String>;
-  password_not_ends_with?: Maybe<String>;
-  role?: Maybe<String>;
-  role_not?: Maybe<String>;
-  role_in?: Maybe<String[] | String>;
-  role_not_in?: Maybe<String[] | String>;
-  role_lt?: Maybe<String>;
-  role_lte?: Maybe<String>;
-  role_gt?: Maybe<String>;
-  role_gte?: Maybe<String>;
-  role_contains?: Maybe<String>;
-  role_not_contains?: Maybe<String>;
-  role_starts_with?: Maybe<String>;
-  role_not_starts_with?: Maybe<String>;
-  role_ends_with?: Maybe<String>;
-  role_not_ends_with?: Maybe<String>;
-  projects_some?: Maybe<ProjectWhereInput>;
-  profileId?: Maybe<ProfileWhereInput>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
-}
-
-export interface ProfileWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -433,7 +338,34 @@ export interface ProfileWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  userId?: Maybe<UserWhereInput>;
+  firstName?: Maybe<String>;
+  firstName_not?: Maybe<String>;
+  firstName_in?: Maybe<String[] | String>;
+  firstName_not_in?: Maybe<String[] | String>;
+  firstName_lt?: Maybe<String>;
+  firstName_lte?: Maybe<String>;
+  firstName_gt?: Maybe<String>;
+  firstName_gte?: Maybe<String>;
+  firstName_contains?: Maybe<String>;
+  firstName_not_contains?: Maybe<String>;
+  firstName_starts_with?: Maybe<String>;
+  firstName_not_starts_with?: Maybe<String>;
+  firstName_ends_with?: Maybe<String>;
+  firstName_not_ends_with?: Maybe<String>;
+  lastName?: Maybe<String>;
+  lastName_not?: Maybe<String>;
+  lastName_in?: Maybe<String[] | String>;
+  lastName_not_in?: Maybe<String[] | String>;
+  lastName_lt?: Maybe<String>;
+  lastName_lte?: Maybe<String>;
+  lastName_gt?: Maybe<String>;
+  lastName_gte?: Maybe<String>;
+  lastName_contains?: Maybe<String>;
+  lastName_not_contains?: Maybe<String>;
+  lastName_starts_with?: Maybe<String>;
+  lastName_not_starts_with?: Maybe<String>;
+  lastName_ends_with?: Maybe<String>;
+  lastName_not_ends_with?: Maybe<String>;
   username?: Maybe<String>;
   username_not?: Maybe<String>;
   username_in?: Maybe<String[] | String>;
@@ -448,20 +380,6 @@ export interface ProfileWhereInput {
   username_not_starts_with?: Maybe<String>;
   username_ends_with?: Maybe<String>;
   username_not_ends_with?: Maybe<String>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
   role?: Maybe<String>;
   role_not?: Maybe<String>;
   role_in?: Maybe<String[] | String>;
@@ -476,36 +394,140 @@ export interface ProfileWhereInput {
   role_not_starts_with?: Maybe<String>;
   role_ends_with?: Maybe<String>;
   role_not_ends_with?: Maybe<String>;
-  AND?: Maybe<ProfileWhereInput[] | ProfileWhereInput>;
+  school?: Maybe<String>;
+  school_not?: Maybe<String>;
+  school_in?: Maybe<String[] | String>;
+  school_not_in?: Maybe<String[] | String>;
+  school_lt?: Maybe<String>;
+  school_lte?: Maybe<String>;
+  school_gt?: Maybe<String>;
+  school_gte?: Maybe<String>;
+  school_contains?: Maybe<String>;
+  school_not_contains?: Maybe<String>;
+  school_starts_with?: Maybe<String>;
+  school_not_starts_with?: Maybe<String>;
+  school_ends_with?: Maybe<String>;
+  school_not_ends_with?: Maybe<String>;
+  projects_some?: Maybe<ProjectWhereInput>;
+  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
-
-export type ProjectWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  uid?: Maybe<String>;
   email?: Maybe<String>;
+  username?: Maybe<String>;
 }>;
 
-export interface ProfileCreateInput {
+export interface ProjectCreateInput {
   id?: Maybe<ID_Input>;
-  userId: UserCreateOneWithoutProfileIdInput;
-  username: String;
-  name: String;
-  role: String;
+  title: String;
+  description?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  subjects?: Maybe<ProjectCreatesubjectsInput>;
+  tags?: Maybe<ProjectCreatetagsInput>;
+  grades?: Maybe<ProjectCreategradesInput>;
+  published?: Maybe<Boolean>;
+  author?: Maybe<UserCreateOneWithoutProjectsInput>;
 }
 
-export interface UserCreateOneWithoutProfileIdInput {
-  create?: Maybe<UserCreateWithoutProfileIdInput>;
+export interface ProjectCreatesubjectsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ProjectCreatetagsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ProjectCreategradesInput {
+  set?: Maybe<Int[] | Int>;
+}
+
+export interface UserCreateOneWithoutProjectsInput {
+  create?: Maybe<UserCreateWithoutProjectsInput>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface UserCreateWithoutProfileIdInput {
+export interface UserCreateWithoutProjectsInput {
   id?: Maybe<ID_Input>;
+  uid: String;
   email: String;
-  password: String;
-  role: String;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  username?: Maybe<String>;
+  role?: Maybe<String>;
+  school?: Maybe<String>;
+}
+
+export interface ProjectUpdateInput {
+  title?: Maybe<String>;
+  description?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  subjects?: Maybe<ProjectUpdatesubjectsInput>;
+  tags?: Maybe<ProjectUpdatetagsInput>;
+  grades?: Maybe<ProjectUpdategradesInput>;
+  published?: Maybe<Boolean>;
+  author?: Maybe<UserUpdateOneWithoutProjectsInput>;
+}
+
+export interface ProjectUpdatesubjectsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ProjectUpdatetagsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ProjectUpdategradesInput {
+  set?: Maybe<Int[] | Int>;
+}
+
+export interface UserUpdateOneWithoutProjectsInput {
+  create?: Maybe<UserCreateWithoutProjectsInput>;
+  update?: Maybe<UserUpdateWithoutProjectsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutProjectsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutProjectsDataInput {
+  uid?: Maybe<String>;
+  email?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  username?: Maybe<String>;
+  role?: Maybe<String>;
+  school?: Maybe<String>;
+}
+
+export interface UserUpsertWithoutProjectsInput {
+  update: UserUpdateWithoutProjectsDataInput;
+  create: UserCreateWithoutProjectsInput;
+}
+
+export interface ProjectUpdateManyMutationInput {
+  title?: Maybe<String>;
+  description?: Maybe<String>;
+  imageURL?: Maybe<String>;
+  learning_objectives?: Maybe<String>;
+  subjects?: Maybe<ProjectUpdatesubjectsInput>;
+  tags?: Maybe<ProjectUpdatetagsInput>;
+  grades?: Maybe<ProjectUpdategradesInput>;
+  published?: Maybe<Boolean>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  uid: String;
+  email: String;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  username?: Maybe<String>;
+  role?: Maybe<String>;
+  school?: Maybe<String>;
   projects?: Maybe<ProjectCreateManyWithoutAuthorInput>;
 }
 
@@ -528,36 +550,14 @@ export interface ProjectCreateWithoutAuthorInput {
   published?: Maybe<Boolean>;
 }
 
-export interface ProjectCreatesubjectsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface ProjectCreatetagsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface ProjectCreategradesInput {
-  set?: Maybe<Int[] | Int>;
-}
-
-export interface ProfileUpdateInput {
-  userId?: Maybe<UserUpdateOneRequiredWithoutProfileIdInput>;
-  username?: Maybe<String>;
-  name?: Maybe<String>;
-  role?: Maybe<String>;
-}
-
-export interface UserUpdateOneRequiredWithoutProfileIdInput {
-  create?: Maybe<UserCreateWithoutProfileIdInput>;
-  update?: Maybe<UserUpdateWithoutProfileIdDataInput>;
-  upsert?: Maybe<UserUpsertWithoutProfileIdInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateWithoutProfileIdDataInput {
+export interface UserUpdateInput {
+  uid?: Maybe<String>;
   email?: Maybe<String>;
-  password?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  username?: Maybe<String>;
   role?: Maybe<String>;
+  school?: Maybe<String>;
   projects?: Maybe<ProjectUpdateManyWithoutAuthorInput>;
 }
 
@@ -598,18 +598,6 @@ export interface ProjectUpdateWithoutAuthorDataInput {
   tags?: Maybe<ProjectUpdatetagsInput>;
   grades?: Maybe<ProjectUpdategradesInput>;
   published?: Maybe<Boolean>;
-}
-
-export interface ProjectUpdatesubjectsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface ProjectUpdatetagsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface ProjectUpdategradesInput {
-  set?: Maybe<Int[] | Int>;
 }
 
 export interface ProjectUpsertWithWhereUniqueWithoutAuthorInput {
@@ -728,149 +716,14 @@ export interface ProjectUpdateManyDataInput {
   published?: Maybe<Boolean>;
 }
 
-export interface UserUpsertWithoutProfileIdInput {
-  update: UserUpdateWithoutProfileIdDataInput;
-  create: UserCreateWithoutProfileIdInput;
-}
-
-export interface ProfileUpdateManyMutationInput {
-  username?: Maybe<String>;
-  name?: Maybe<String>;
-  role?: Maybe<String>;
-}
-
-export interface ProjectCreateInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  description?: Maybe<String>;
-  imageURL?: Maybe<String>;
-  learning_objectives?: Maybe<String>;
-  subjects?: Maybe<ProjectCreatesubjectsInput>;
-  tags?: Maybe<ProjectCreatetagsInput>;
-  grades?: Maybe<ProjectCreategradesInput>;
-  published?: Maybe<Boolean>;
-  author?: Maybe<UserCreateOneWithoutProjectsInput>;
-}
-
-export interface UserCreateOneWithoutProjectsInput {
-  create?: Maybe<UserCreateWithoutProjectsInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserCreateWithoutProjectsInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  password: String;
-  role: String;
-  profileId?: Maybe<ProfileCreateOneWithoutUserIdInput>;
-}
-
-export interface ProfileCreateOneWithoutUserIdInput {
-  create?: Maybe<ProfileCreateWithoutUserIdInput>;
-  connect?: Maybe<ProfileWhereUniqueInput>;
-}
-
-export interface ProfileCreateWithoutUserIdInput {
-  id?: Maybe<ID_Input>;
-  username: String;
-  name: String;
-  role: String;
-}
-
-export interface ProjectUpdateInput {
-  title?: Maybe<String>;
-  description?: Maybe<String>;
-  imageURL?: Maybe<String>;
-  learning_objectives?: Maybe<String>;
-  subjects?: Maybe<ProjectUpdatesubjectsInput>;
-  tags?: Maybe<ProjectUpdatetagsInput>;
-  grades?: Maybe<ProjectUpdategradesInput>;
-  published?: Maybe<Boolean>;
-  author?: Maybe<UserUpdateOneWithoutProjectsInput>;
-}
-
-export interface UserUpdateOneWithoutProjectsInput {
-  create?: Maybe<UserCreateWithoutProjectsInput>;
-  update?: Maybe<UserUpdateWithoutProjectsDataInput>;
-  upsert?: Maybe<UserUpsertWithoutProjectsInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateWithoutProjectsDataInput {
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  role?: Maybe<String>;
-  profileId?: Maybe<ProfileUpdateOneWithoutUserIdInput>;
-}
-
-export interface ProfileUpdateOneWithoutUserIdInput {
-  create?: Maybe<ProfileCreateWithoutUserIdInput>;
-  update?: Maybe<ProfileUpdateWithoutUserIdDataInput>;
-  upsert?: Maybe<ProfileUpsertWithoutUserIdInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<ProfileWhereUniqueInput>;
-}
-
-export interface ProfileUpdateWithoutUserIdDataInput {
-  username?: Maybe<String>;
-  name?: Maybe<String>;
-  role?: Maybe<String>;
-}
-
-export interface ProfileUpsertWithoutUserIdInput {
-  update: ProfileUpdateWithoutUserIdDataInput;
-  create: ProfileCreateWithoutUserIdInput;
-}
-
-export interface UserUpsertWithoutProjectsInput {
-  update: UserUpdateWithoutProjectsDataInput;
-  create: UserCreateWithoutProjectsInput;
-}
-
-export interface ProjectUpdateManyMutationInput {
-  title?: Maybe<String>;
-  description?: Maybe<String>;
-  imageURL?: Maybe<String>;
-  learning_objectives?: Maybe<String>;
-  subjects?: Maybe<ProjectUpdatesubjectsInput>;
-  tags?: Maybe<ProjectUpdatetagsInput>;
-  grades?: Maybe<ProjectUpdategradesInput>;
-  published?: Maybe<Boolean>;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  password: String;
-  role: String;
-  projects?: Maybe<ProjectCreateManyWithoutAuthorInput>;
-  profileId?: Maybe<ProfileCreateOneWithoutUserIdInput>;
-}
-
-export interface UserUpdateInput {
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  role?: Maybe<String>;
-  projects?: Maybe<ProjectUpdateManyWithoutAuthorInput>;
-  profileId?: Maybe<ProfileUpdateOneWithoutUserIdInput>;
-}
-
 export interface UserUpdateManyMutationInput {
+  uid?: Maybe<String>;
   email?: Maybe<String>;
-  password?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  username?: Maybe<String>;
   role?: Maybe<String>;
-}
-
-export interface ProfileSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ProfileWhereInput>;
-  AND?: Maybe<ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput>;
+  school?: Maybe<String>;
 }
 
 export interface ProjectSubscriptionWhereInput {
@@ -893,119 +746,6 @@ export interface UserSubscriptionWhereInput {
 
 export interface NodeNode {
   id: ID_Output;
-}
-
-export interface Profile {
-  id: ID_Output;
-  createdAt?: DateTimeOutput;
-  updatedAt?: DateTimeOutput;
-  username: String;
-  name: String;
-  role: String;
-}
-
-export interface ProfilePromise extends Promise<Profile>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  userId: <T = UserPromise>() => T;
-  username: () => Promise<String>;
-  name: () => Promise<String>;
-  role: () => Promise<String>;
-}
-
-export interface ProfileSubscription
-  extends Promise<AsyncIterator<Profile>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  userId: <T = UserSubscription>() => T;
-  username: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  role: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ProfileNullablePromise
-  extends Promise<Profile | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  userId: <T = UserPromise>() => T;
-  username: () => Promise<String>;
-  name: () => Promise<String>;
-  role: () => Promise<String>;
-}
-
-export interface User {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  email: String;
-  password: String;
-  role: String;
-}
-
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-  role: () => Promise<String>;
-  projects: <T = FragmentableArray<Project>>(args?: {
-    where?: ProjectWhereInput;
-    orderBy?: ProjectOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  profileId: <T = ProfilePromise>() => T;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  role: () => Promise<AsyncIterator<String>>;
-  projects: <T = Promise<AsyncIterator<ProjectSubscription>>>(args?: {
-    where?: ProjectWhereInput;
-    orderBy?: ProjectOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  profileId: <T = ProfileSubscription>() => T;
-}
-
-export interface UserNullablePromise
-  extends Promise<User | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-  role: () => Promise<String>;
-  projects: <T = FragmentableArray<Project>>(args?: {
-    where?: ProjectWhereInput;
-    orderBy?: ProjectOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  profileId: <T = ProfilePromise>() => T;
 }
 
 export interface Project {
@@ -1071,25 +811,108 @@ export interface ProjectNullablePromise
   author: <T = UserPromise>() => T;
 }
 
-export interface ProfileConnection {
-  pageInfo: PageInfo;
-  edges: ProfileEdge[];
+export interface User {
+  id: ID_Output;
+  uid: String;
+  email: String;
+  createdAt?: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
+  firstName?: String;
+  lastName?: String;
+  username?: String;
+  role?: String;
+  school?: String;
 }
 
-export interface ProfileConnectionPromise
-  extends Promise<ProfileConnection>,
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  uid: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  username: () => Promise<String>;
+  role: () => Promise<String>;
+  school: () => Promise<String>;
+  projects: <T = FragmentableArray<Project>>(args?: {
+    where?: ProjectWhereInput;
+    orderBy?: ProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  uid: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  username: () => Promise<AsyncIterator<String>>;
+  role: () => Promise<AsyncIterator<String>>;
+  school: () => Promise<AsyncIterator<String>>;
+  projects: <T = Promise<AsyncIterator<ProjectSubscription>>>(args?: {
+    where?: ProjectWhereInput;
+    orderBy?: ProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface UserNullablePromise
+  extends Promise<User | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  uid: () => Promise<String>;
+  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  username: () => Promise<String>;
+  role: () => Promise<String>;
+  school: () => Promise<String>;
+  projects: <T = FragmentableArray<Project>>(args?: {
+    where?: ProjectWhereInput;
+    orderBy?: ProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface ProjectConnection {
+  pageInfo: PageInfo;
+  edges: ProjectEdge[];
+}
+
+export interface ProjectConnectionPromise
+  extends Promise<ProjectConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ProfileEdge>>() => T;
-  aggregate: <T = AggregateProfilePromise>() => T;
+  edges: <T = FragmentableArray<ProjectEdge>>() => T;
+  aggregate: <T = AggregateProjectPromise>() => T;
 }
 
-export interface ProfileConnectionSubscription
-  extends Promise<AsyncIterator<ProfileConnection>>,
+export interface ProjectConnectionSubscription
+  extends Promise<AsyncIterator<ProjectConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ProfileEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateProfileSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ProjectEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateProjectSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -1113,60 +936,6 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ProfileEdge {
-  node: Profile;
-  cursor: String;
-}
-
-export interface ProfileEdgePromise extends Promise<ProfileEdge>, Fragmentable {
-  node: <T = ProfilePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ProfileEdgeSubscription
-  extends Promise<AsyncIterator<ProfileEdge>>,
-    Fragmentable {
-  node: <T = ProfileSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateProfile {
-  count: Int;
-}
-
-export interface AggregateProfilePromise
-  extends Promise<AggregateProfile>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateProfileSubscription
-  extends Promise<AsyncIterator<AggregateProfile>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ProjectConnection {
-  pageInfo: PageInfo;
-  edges: ProjectEdge[];
-}
-
-export interface ProjectConnectionPromise
-  extends Promise<ProjectConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ProjectEdge>>() => T;
-  aggregate: <T = AggregateProjectPromise>() => T;
-}
-
-export interface ProjectConnectionSubscription
-  extends Promise<AsyncIterator<ProjectConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ProjectEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateProjectSubscription>() => T;
 }
 
 export interface ProjectEdge {
@@ -1272,62 +1041,6 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface ProfileSubscriptionPayload {
-  mutation: MutationType;
-  node: Profile;
-  updatedFields: String[];
-  previousValues: ProfilePreviousValues;
-}
-
-export interface ProfileSubscriptionPayloadPromise
-  extends Promise<ProfileSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ProfilePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ProfilePreviousValuesPromise>() => T;
-}
-
-export interface ProfileSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ProfileSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ProfileSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ProfilePreviousValuesSubscription>() => T;
-}
-
-export interface ProfilePreviousValues {
-  id: ID_Output;
-  createdAt?: DateTimeOutput;
-  updatedAt?: DateTimeOutput;
-  username: String;
-  name: String;
-  role: String;
-}
-
-export interface ProfilePreviousValuesPromise
-  extends Promise<ProfilePreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  username: () => Promise<String>;
-  name: () => Promise<String>;
-  role: () => Promise<String>;
-}
-
-export interface ProfilePreviousValuesSubscription
-  extends Promise<AsyncIterator<ProfilePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  username: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  role: () => Promise<AsyncIterator<String>>;
-}
-
 export interface ProjectSubscriptionPayload {
   mutation: MutationType;
   node: Project;
@@ -1426,33 +1139,45 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
+  uid: String;
   email: String;
-  password: String;
-  role: String;
+  createdAt?: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
+  firstName?: String;
+  lastName?: String;
+  username?: String;
+  role?: String;
+  school?: String;
 }
 
 export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  uid: () => Promise<String>;
+  email: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  username: () => Promise<String>;
   role: () => Promise<String>;
+  school: () => Promise<String>;
 }
 
 export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  uid: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  username: () => Promise<AsyncIterator<String>>;
   role: () => Promise<AsyncIterator<String>>;
+  school: () => Promise<AsyncIterator<String>>;
 }
 
 /*
@@ -1477,14 +1202,14 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
-
-/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
 
 export type Long = string;
 
@@ -1494,15 +1219,11 @@ export type Long = string;
 
 export const models: Model[] = [
   {
-    name: "User",
-    embedded: false
-  },
-  {
     name: "Project",
     embedded: false
   },
   {
-    name: "Profile",
+    name: "User",
     embedded: false
   }
 ];
