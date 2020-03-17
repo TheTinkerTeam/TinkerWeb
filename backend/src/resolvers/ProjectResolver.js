@@ -1,8 +1,10 @@
+const Project = require("../models/Project");
+
 module.exports = {
   Query: {
     feed: async (parent, args, { prisma }) => {
       try {
-        const publishedProjects = await prisma.projects({ published: true });
+        const publishedProjects = await Project.find();
         return publishedProjects;
       } catch (err) {
         console.error(err);
@@ -13,7 +15,7 @@ module.exports = {
     },
     projects: async (parent, { id }, { prisma }) => {
       try {
-        const projects = await prisma.projects();
+        const projects = await Project.find();
         return projects;
       } catch (err) {
         console.error(err);
@@ -21,7 +23,7 @@ module.exports = {
     },
     project: async (parent, { id }, { prisma }) => {
       try {
-        const project = await prisma.project({ id });
+        const project = await Project.findById(id);
         return project;
       } catch (err) {
         console.error(err);
@@ -35,7 +37,7 @@ module.exports = {
       { prisma, user }
     ) => {
       const userId = user.id;
-      const project = await prisma.createProject({
+      const project = await Project.create({
         title,
         description,
         author: userId
@@ -43,13 +45,13 @@ module.exports = {
       return project;
     },
     updateProject: async (parent, { id }, { prisma }) => {
-      return prisma.updateProject({
-        where: { id },
-        data: { published: true }
+      return Project.findOneAndUpdate({
+        filter: { id },
+        update: { published: true }
       });
     },
     deleteProject: async (parent, { id }, { prisma }) => {
-      return context.prisma.deleteProject({ id });
+      return Project.deleteOne({ id });
     }
   }
 };

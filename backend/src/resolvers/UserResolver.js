@@ -1,9 +1,11 @@
+const User = require("../models/User");
+
 module.exports = {
   Query: {
-    users: async (parent, args, { prisma }) => await prisma.users(),
-    user: async (parent, { uid }, { prisma }) => await prisma.user({ uid }),
+    users: async (parent, args, { prisma }) => await User.find(),
+    user: async (parent, { uid }, { prisma }) => await User.findOne({ uid }),
     checkEmail: async (parent, { email }, { prisma }) => {
-      const res = await prisma.user({ email });
+      const res = await User.findOne({ email });
       if (res) {
         return true;
       } else {
@@ -19,7 +21,7 @@ module.exports = {
         let username;
         for (let i = 1; i <= body.firstName.length; i++) {
           username = (body.firstName.slice(0, i) + body.lastName).toLowerCase();
-          response = await ctx.prisma.user({ username });
+          response = await User.findOne({ username });
           if (!response) {
             break;
           }
@@ -29,7 +31,7 @@ module.exports = {
             username = (
               body.fistName + body.lastName.slice(0, i)
             ).toLowerCase();
-            response = await ctx.prisma.user({ username });
+            response = await User.findOne({ username });
             if (!response) {
               break;
             }
@@ -38,7 +40,7 @@ module.exports = {
         let i = 1;
         while (response) {
           username = body.firstName + body.lastName + i;
-          response = await ctx.prisma.user({ username });
+          response = await User.findOne({ username });
           i++;
         }
 
@@ -51,14 +53,14 @@ module.exports = {
           role: body.role,
           school: body.school
         };
-        const user = await ctx.prisma.createUser(newUser);
+        const user = await User.create(newUser);
         return user;
       } catch (err) {
         console.error(err);
       }
     },
     login: async (parent, { email, password }, { prisma, res }) => {
-      const user = await prisma.user({ email });
+      const user = await User.findOne({ email });
       if (!user) {
         throw new Error(`No user found for email: ${email}`);
       }

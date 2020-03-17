@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Dropdown, Menu, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
 import { useFirebase } from "react-redux-firebase";
@@ -14,17 +14,16 @@ import { logout } from "../../actions/authActions";
 
 const SignedInMenu = () => {
   const dispatch = useDispatch();
-  const firebase = useFirebase();
-  const auth = firebase.auth;
+  const profile = useSelector(state => state.auth.profile);
 
   return (
     <Menu.Item position="right">
       <Image
         avatar
         spaced="right"
-        src={(auth.isAuth && auth.imageUrl) || avatar}
+        src={(profile && profile.imageUrl) || avatar}
       />
-      <Dropdown pointing="top right" text={auth.displayName}>
+      <Dropdown pointing="top right" text={profile && profile.username}>
         <Dropdown.Menu>
           <Modal
             //loggedIn={loggedIn}

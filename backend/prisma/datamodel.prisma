@@ -6,7 +6,7 @@ type Project {
   title: String!
   description: String
   imageURL: String
-  learning_objectives: String
+  learningObjectives: String
   
   subjects: [String!]!
   tags: [String!]!
