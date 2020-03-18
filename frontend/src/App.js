@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
+
+import logo from "./img/SHlogo.png";
 
 import NavBar from "./components/navbar/Navbar";
 import Dashboard from "./components/pages/dashboard/Dashboard";
@@ -8,8 +10,9 @@ import MembershipPage from "./components/pages/membership/MembershipPage";
 import TutorialsPage from "./components/pages/activities/TutorialsPage";
 import TutorialDetailsPage from "./components/pages/activities/TutorialDetailsPage";
 import ProjectsPage from "./components/pages/activities/ProjectsPage";
-import ClassesPage from "./components/pages/activities/ClassesPage";
 import ProjectDetailsPage from "./components/pages/activities/ProjectDetailsPage";
+import ClassesPage from "./components/pages/activities/ClassesPage";
+import ClassDetailsPage from "./components/pages/activities/ClassesDetailsPage";
 import ProfilePage from "./components/pages/profile/ProfilePage";
 import SettingsDashboard from "./components/pages//settings";
 
@@ -23,11 +26,12 @@ import { Sidebar, Segment, Menu, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { toggleVisibility } from "./actions/sidebarActions";
 
-import logo from "./img/SHlogo.png";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
+import { getFirebase, useFirebase } from "react-redux-firebase";
+import { ApolloProvider } from "@apollo/react-hooks";
 
 const App = props => {
   const auth = useSelector(state => state.firebase.auth);
-  console.log(auth);
   useEffect(() => {
     if (auth && auth.uid) {
       store.dispatch(loadUser(auth.uid));
@@ -111,7 +115,6 @@ const App = props => {
               render={() => (
                 <div>
                   <Route path="/membership" component={MembershipPage} />
-                  <Route path="/classes" component={ClassesPage} />
                   <Route exact path="/tutorials" component={TutorialsPage} />
                   <Route exact path="/projects" component={ProjectsPage} />
                   <Route path="/projects/:id" component={ProjectDetailsPage} />
@@ -119,6 +122,8 @@ const App = props => {
                     path="/tutorials/:id"
                     component={TutorialDetailsPage}
                   />
+                  <Route exact path="/classes" component={ClassesPage} />
+                  <Route path="/classes/:id" component={ClassDetailsPage} />
                   <Route exact path="/me" component={ProfilePage} />
                   <Route path="/settings" component={SettingsDashboard} />
                 </div>

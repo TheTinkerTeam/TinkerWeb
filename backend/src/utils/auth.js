@@ -1,6 +1,41 @@
 const { sign, verify } = require("jsonwebtoken");
 const User = require("../models/User");
 
+var admin = require("firebase-admin");
+
+var serviceAccount = require("../config/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://supertinker.firebaseio.com"
+});
+
+exports.checkAuth = async (req, res) => {
+  const { authorization } = req.headers;
+
+  if (!authorization) return null;
+
+  if (!authorization.startsWith("Bearer")) return null;
+
+  const split = authorization.split("Bearer ");
+  if (split.length !== 2) return null;
+
+  const token = split[1];
+
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    console.log("decodedToken", JSON.stringify(decodedToken));
+    return {
+      uid: decodedToken.uid,
+      role: decodedToken.role,
+      email: decodedToken.email
+    };
+  } catch (err) {
+    console.error(`${err.code} -  ${err.message}`);
+    return null;
+  }
+};
+
 exports.createAccessToken = user => {
   return sign({ userId: user.id }, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: "1d"

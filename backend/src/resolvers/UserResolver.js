@@ -15,6 +15,7 @@ module.exports = {
   },
   Mutation: {
     signup: async (parent, body, ctx) => {
+      console.log(body);
       try {
         // TODO: MOVE to different file as function
         // Generate username from full name:
@@ -43,6 +44,7 @@ module.exports = {
           response = await User.findOne({ username });
           i++;
         }
+        console.log(body);
 
         const newUser = {
           uid: body.uid,
@@ -51,12 +53,14 @@ module.exports = {
           lastName: body.lastName,
           username,
           role: body.role,
-          school: body.school
+          school: body.school,
+          avatar: body.avatar
         };
         const user = await User.create(newUser);
         return user;
       } catch (err) {
-        console.error(err);
+        console.log(newUser);
+        console.error(err.message);
       }
     },
     login: async (parent, { email, password }, { prisma, res }) => {

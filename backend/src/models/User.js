@@ -27,6 +27,9 @@ const UserSchema = new mongoose.Schema({
   school: {
     type: String
   },
+  avatar: {
+    type: String
+  },
   projects: [
     {
       type: mongoose.Schema.Types.ObjectId

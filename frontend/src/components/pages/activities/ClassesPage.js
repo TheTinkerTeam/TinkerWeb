@@ -5,8 +5,8 @@ import gql from "graphql-tag";
 import { useSelector } from "react-redux";
 
 const GET_CLASSES = gql`
-  query getClasses($uid: String) {
-    classes(uid: $uid) {
+  query {
+    classes {
       title
     }
   }

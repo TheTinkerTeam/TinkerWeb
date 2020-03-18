@@ -22,11 +22,12 @@ const permissions = require("./permissions");
 schema = applyMiddleware(schema, permissions);
 
 const { prisma } = require("../prisma/generated/prisma-client");
-
+const { checkAuth } = require("./utils/auth");
 const server = new ApolloServer({
   schema,
   context: ({ req, res }) => ({
-    prisma
+    prisma,
+    user: checkAuth(req, res)
   })
 });
 

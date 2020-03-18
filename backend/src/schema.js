@@ -13,6 +13,7 @@ const typeDefs = gql`
     school: String!
     role: String!
     projects: [Project]
+    avatar: String
   }
 
   type Project {
@@ -30,6 +31,13 @@ const typeDefs = gql`
     author: User!
   }
 
+  type Class {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    title: String!
+  }
+
   type Query {
     # User
     users: [User]
@@ -41,6 +49,8 @@ const typeDefs = gql`
     feed: [Project!]!
     project(id: ID!): Project
     filterProjects(searchString: String): [Project!]!
+    # Class
+    classes: [Class]
   }
 
   type Mutation {
@@ -52,6 +62,7 @@ const typeDefs = gql`
       lastName: String!
       school: String!
       role: String!
+      avatar: String
     ): User!
     login(email: String!, password: String!): User
     createProject(title: String!, description: String!): Project!

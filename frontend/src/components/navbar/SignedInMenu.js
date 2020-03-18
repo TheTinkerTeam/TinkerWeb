@@ -21,7 +21,7 @@ const SignedInMenu = () => {
       <Image
         avatar
         spaced="right"
-        src={(profile && profile.imageUrl) || avatar}
+        src={(profile && profile.avatar) || avatar}
       />
       <Dropdown pointing="top right" text={profile && profile.username}>
         <Dropdown.Menu>
@@ -34,7 +34,12 @@ const SignedInMenu = () => {
           >
             <ProjectForm />
           </Modal>
-          <Dropdown.Item text="My Classes" icon="calendar" />
+          <Dropdown.Item
+            as={Link}
+            to="/classes"
+            text="My Classes"
+            icon="calendar"
+          />
           <Dropdown.Item text="My Teams" icon="users" />
           <Dropdown.Item as={Link} to="/me" text="My Profile" icon="user" />
           <Dropdown.Item
