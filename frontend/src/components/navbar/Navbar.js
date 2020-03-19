@@ -45,6 +45,22 @@ const NavBar = props => {
           <Menu.Item
             style={{ marginTop: "0.6em" }}
             as={NavLink}
+            to="/classes"
+            name="Classes"
+          />
+        </Responsive>
+        <Responsive minWidth={1024}>
+          <Menu.Item
+            style={{ marginTop: "0.6em" }}
+            as={NavLink}
+            to="/classrooms"
+            name="Classrooms"
+          />
+        </Responsive>
+        <Responsive minWidth={1024}>
+          <Menu.Item
+            style={{ marginTop: "0.6em" }}
+            as={NavLink}
             to="/projects"
             name="Projects"
           />
