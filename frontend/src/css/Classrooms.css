@@ -119,3 +119,44 @@ a {
   background-color: transparent;
   border-color: transparent;
 }
+
+/* ========================== */
+/*   Classroom Details Page   */
+/* ========================== */
+
+.section-title{
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 4rem;
+  margin-top: 8rem;
+  margin-bottom: 1rem;
+  line-height: normal;
+}
+
+.flexbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ui.circular.button.arrow-down-button-classroom{
+  background-color: transparent;
+  color: #181c3f;
+}
+
+.ui.circular.button.arrow-down-button-classroom:hover{
+  color: white;
+  background-color: #181c3f;
+  opacity: 0.3;
+}
+
+/* .ui.segment .display-in-box .flexbox-container{
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  background: white;
+  border-color: transparent;
+  padding: 1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+} */
