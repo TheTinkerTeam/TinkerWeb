@@ -77,7 +77,7 @@ const ProjectsPage = props => {
 
   return (
     <div className="projects-container">
-      <div className="red-title rotate-title">
+      <div className="red-title rotate-title"> 
         <span>Super </span>
         <span className="superprojects-text">Pro</span>
         <span className="superprojects-text" id="supertinker-i">
