@@ -1,16 +1,23 @@
 import React, { Component } from "react";
-import { Segment, Header } from "semantic-ui-react";
-import '../../css/Classrooms.css';
-
-const square = { width: 175, height: 175, margin: "100px" };
+import "../../css/Classrooms.css";
 
 class FlexClassroomItem extends Component {
   render() {
     const { item } = this.props;
     return (
-      <a href={`/classrooms/${item.id}`} className="classroomListItem">
-          <div className="class-text">{item.class}</div>
-          <div className="students-text">{item.nb_students} students</div>
+      <a href={`/classrooms/${item.id}`} className='classroomListItem'>
+        <div className='class-text'>{item.class}</div>
+        {item.subject && <div className='subject-text'>{item.subject}</div>}
+        {item.assignement && item.assignement.length !== 0 ? (
+          item.assignement.slice(0, 3).map(due => (
+            <div className='assignement-text'>
+              {due.date} - {`${due.task}`.slice(0, 30)}{(`${due.task}`.length >= 31) && <span>(.....)</span>}
+            </div>
+          ))
+        ) : (
+          <div className='assignement-text'>Nothing due, yay!</div>
+        )}
+        <div className='students-text'>{item.nb_students} students</div>
       </a>
     );
   }
