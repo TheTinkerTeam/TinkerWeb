@@ -10,6 +10,7 @@ import TutorialDetailsPage from "./components/pages/activities/TutorialDetailsPa
 import ProjectsPage from "./components/pages/activities/ProjectsPage";
 import ClassesPage from "./components/pages/activities/ClassesPage";
 import ClassroomsPage from "./components/pages/classrooms/ClassroomsPage";
+import ClassroomDetailsPage from "./components/pages/classrooms/ClassroomDetailsPage";
 import ProjectDetailsPage from "./components/pages/activities/ProjectDetailsPage";
 import ProfilePage from "./components/pages/profile/ProfilePage";
 import SettingsDashboard from "./components/pages//settings";
@@ -113,7 +114,8 @@ const App = props => {
                 <div>
                   <Route path="/membership" component={MembershipPage} />
                   <Route path="/classes" component={ClassesPage} />
-                  <Route path="/classrooms" component={ClassroomsPage} />
+                  <Route exact path="/classrooms" component={ClassroomsPage} />
+                  <Route path="/classrooms/:id" component={ClassroomDetailsPage} />
                   <Route exact path="/tutorials" component={TutorialsPage} />
                   <Route exact path="/projects" component={ProjectsPage} />
                   <Route path="/projects/:id" component={ProjectDetailsPage} />
