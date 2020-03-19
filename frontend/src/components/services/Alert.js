@@ -38,7 +38,7 @@ const Alert = ({ alerts }) => {
       );
     });
   } else {
-    return <div></div>;
+    return null;
   }
 };
 

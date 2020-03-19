@@ -1,18 +1,18 @@
 import React from "react";
-import {
-  withRouter
-} from 'react-router-dom'
+import { withRouter, Redirect, Route } from "react-router-dom";
 
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { Segment, Divider, Container, List, Image } from "semantic-ui-react";
+import { setAlert } from "../../../actions/alertActions";
+import { useDispatch } from "react-redux";
+import { push } from "react-router-redux";
 
 //https://www.apollographql.com/docs/react/data/queries/
 
 const ProjectDetailsPage = props => {
   const routeParam = props.match.params.id;
-  console.log(routeParam);
-
+  const dispatch = useDispatch();
   const GET_PROJECT = gql`
     query getProject($id: ID!) {
       project(id: $id) {
@@ -36,22 +36,33 @@ const ProjectDetailsPage = props => {
   if (error) return <p>Error :(</p>;
 
   const project = data.project;
+  if (!project) {
+    return (
+      <Redirect
+        push
+        to={{
+          pathname: "/",
+          state: { alert: "No Such Project" }
+        }}
+      />
+    );
+  }
   return (
     <div>
-      <div className='project-title-style'>{project.title}</div>
-      <Segment.Group className='paragraph-style display-in-box'>
+      <div className="project-title-style">{project.title}</div>
+      <Segment.Group className="paragraph-style display-in-box">
         <Segment>
-          <Image src={project.imageURL} size='small'/>
+          <Image src={project.imageURL} size="small" />
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>
+          <div className="paragraph-title-style">
             {"About this project".toUpperCase()}
           </div>
           <br />
           <div>{project.description}</div>
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>{"Topics".toUpperCase()}</div>
+          <div className="paragraph-title-style">{"Topics".toUpperCase()}</div>
           <br />
           {/* <div>{project.subjects}</div> */}
           {/* This shouldn't be school subjects in the database but wider topics such as Gravity, Forces and Motion, Classifying Objects, Speed, Velocity, Acceleration, Aerodynamics/Air, Resistance, Surface Area */}
@@ -65,21 +76,21 @@ const ProjectDetailsPage = props => {
           </div>
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>
+          <div className="paragraph-title-style">
             {"Standards".toUpperCase()}
           </div>
           <br />
           Read the standards from the database
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>
+          <div className="paragraph-title-style">
             {"Learning Objectives".toUpperCase()}
           </div>
           <br />
           <div>{project.learning_objectives}</div>
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>
+          <div className="paragraph-title-style">
             {"Getting started".toUpperCase()}
           </div>
           <br />
@@ -101,7 +112,7 @@ const ProjectDetailsPage = props => {
           </div>
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>
+          <div className="paragraph-title-style">
             {"Materials".toUpperCase()}
           </div>
           <br />
@@ -114,7 +125,7 @@ const ProjectDetailsPage = props => {
           </List>
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>PART ONE: INQUIRY</div>
+          <div className="paragraph-title-style">PART ONE: INQUIRY</div>
           <br />
           <div>
             Discover the rate that different objects fall at
@@ -134,7 +145,7 @@ const ProjectDetailsPage = props => {
           </div>
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>PART TWO: CHALLENGE</div>
+          <div className="paragraph-title-style">PART TWO: CHALLENGE</div>
           <br />
           <div>
             Have two objects hit the floor at the same time
@@ -151,7 +162,7 @@ const ProjectDetailsPage = props => {
           </div>
         </Segment>
         <Segment>
-          <div className='paragraph-title-style'>GUIDING QUESTIONS</div>
+          <div className="paragraph-title-style">GUIDING QUESTIONS</div>
           <br />
           <div>
             What did you learn about gravity in this activity?
@@ -171,7 +182,7 @@ const ProjectDetailsPage = props => {
 };
 
 String.prototype.capitalize = function() {
-  return this.charAt(0).toUpperCase() + this.slice(1)
-}
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
 
 export default withRouter(ProjectDetailsPage);

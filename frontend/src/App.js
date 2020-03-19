@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 
 import logo from "./img/SHlogo.png";
 
@@ -19,7 +19,7 @@ import SettingsDashboard from "./components/pages//settings";
 import { loadUser } from "./actions/authActions";
 import setAuthToken from "./utils/setAuthToken";
 
-import { connect, useSelector } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 
 import store from "./store";
 import { Sidebar, Segment, Menu, Icon } from "semantic-ui-react";
@@ -30,7 +30,11 @@ import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { getFirebase, useFirebase } from "react-redux-firebase";
 import { ApolloProvider } from "@apollo/react-hooks";
 
+import Alert from "./components/services/Alert";
+import { setAlert } from "./actions/alertActions";
+
 const App = props => {
+  console.log(props);
   const auth = useSelector(state => state.firebase.auth);
   useEffect(() => {
     if (auth && auth.uid) {
@@ -39,8 +43,21 @@ const App = props => {
       store.dispatch(loadUser(null));
     }
   }, [auth]);
+
+  const sidebar = useSelector(state => state.sidebar);
+  const dispatch = useDispatch();
+
+  if (props.location.state && props.location.state.alert) {
+    dispatch(setAlert(props.location.state.alert, "error", 2000));
+    props.history.replace({
+      pathname: props.location.pathname,
+      state: {}
+    });
+  }
+
   return (
     <div>
+      <Alert />
       <Sidebar.Pushable as={Segment}>
         <Sidebar
           as={Menu}
@@ -48,11 +65,11 @@ const App = props => {
           icon="labeled"
           vertical
           onHide={() => {
-            if (props.sidebar.visible === true) {
+            if (sidebar.visible === true) {
               store.dispatch(toggleVisibility());
             }
           }}
-          visible={props.sidebar.visible}
+          visible={sidebar.visible}
           width="thin"
         >
           <img src={logo} alt="SHlogo" id="navlogo" />
@@ -103,10 +120,7 @@ const App = props => {
             Membership
           </Menu.Item>
         </Sidebar>
-        <Sidebar.Pusher
-          style={{ minHeight: "100vh" }}
-          dimmed={props.sidebar.visible}
-        >
+        <Sidebar.Pusher style={{ minHeight: "100vh" }} dimmed={sidebar.visible}>
           <NavBar />
           <div className="container">
             <Route exact path="/" component={Dashboard} />
@@ -136,13 +150,7 @@ const App = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  sidebar: state.sidebar
-});
-
-const mapDispatchToProps = { toggleVisibility };
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(App);
 
 // class App extends React.Component {
 //   render() {
