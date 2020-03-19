@@ -27,6 +27,7 @@
   align-self: center;
   margin: 1em;
 }
+
 a {
   color: white;
 }
@@ -38,8 +39,10 @@ a {
 
 .classroomListItem {
   background-color: #f5514c;
-  width: 175px;
-  height: 175px;
+  padding: 1em;
+
+  width: 275px;
+  height: 275px;
   margin: 1em;
   border-radius: 50%;
   text-align: center;
@@ -49,22 +52,34 @@ a {
 
 .classroomListItem:hover {
   background-color: white;
+  width: 275px;
+  height: 275px;
   font-weight: 700;
-  color: rgb(245, 81, 76);
+  /* color: rgb(245, 81, 76); */
   color: #181c3f;
-  width: 175px;
-  height: 175px;
-  margin: 1em;
+  margin: 1em 1.3em;
   border-radius: 50%;
   text-align: center;
-  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.4);
-  box-shadow: 1px 1px 15px rgba(24, 28, 63, 0.4);
-  /* box-shadow: 1px 1px 15px rgba(245, 81, 76, 0.4); */
+  box-shadow: 1px 1px 15px rgba(24, 28, 63, 0.15);
+  transition: 0.5s;
 }
 
 .class-text {
-  margin-top: 30%;
+  margin-top: 25%;
   font-size: 1.5em;
+}
+
+.subject-text {
+  margin-top: 3%;
+  margin-bottom: 6%;
+  font-size: 1.2em;
+  font-weight: 200;
+}
+
+.assignement-text {
+  margin-top: 2%;
+  font-size: 1em;
+  font-weight: 200;
 }
 
 .students-text {
@@ -94,7 +109,7 @@ a {
 
 .ui.button.transparent-button:hover {
   font-family: "Poppins";
-  font-weight:500;
+  font-weight: 500;
   color: #181c3f;
   background-color: transparent;
   opacity: 1;
