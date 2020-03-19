@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Segment, Header, Icon, Button, Divider } from "semantic-ui-react";
+import { Icon, Button, Divider } from "semantic-ui-react";
 import FlexClassroomList from "../../lists/FlexClassroomList";
-
-const square = { width: 175, height: 175 };
+import "../../../css/Classrooms.css";
 
 class ClassroomsPage extends Component {
   render() {
@@ -13,12 +12,6 @@ class ClassroomsPage extends Component {
         </div>
         <FlexClassroomList />
         <Divider style={{marginTop: "3em"}}/>
-        {/* <Segment circular inverted style={square}>
-          <Header inverted as='h2'>
-            Add a new class
-          </Header>
-          <Button circular icon='add' />
-        </Segment> */}
         <div>
           <Button className='transparent-button' icon labelPosition='left'>
             <Icon name='plus' />
