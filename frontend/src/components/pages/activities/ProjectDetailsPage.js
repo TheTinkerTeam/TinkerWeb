@@ -11,7 +11,7 @@ import { Segment, Divider, Container, List, Image } from "semantic-ui-react";
 
 const ProjectDetailsPage = props => {
   const routeParam = props.match.params.id;
-  console.log(routeParam);
+  // console.log(routeParam);
 
   const GET_PROJECT = gql`
     query getProject($id: ID!) {
