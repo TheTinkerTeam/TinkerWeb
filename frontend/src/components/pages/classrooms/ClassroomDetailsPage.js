@@ -6,7 +6,8 @@ class ClassroomDetailsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isStudentsActive: true,
+	  isStudentsActive: true,
+	  isWorkspaceActive: true,
       currentStudentName: "",
       classList: []
     };
@@ -29,8 +30,14 @@ class ClassroomDetailsPage extends Component {
     }));
   };
 
+  toggleWorkspaceButton = () => {
+    this.setState(prevState => ({
+      isWorkspaceActive: !prevState.isWorkspaceActive
+    }));
+  };
+
   render() {
-    const { isStudentsActive, currentStudentName, classList } = this.state;
+    const { isStudentsActive, isWorkspaceActive, currentStudentName, classList } = this.state;
 
     // const toggleButton = () => {
     //   this.setState(({ isStudentsActive }) => ({
@@ -68,6 +75,55 @@ class ClassroomDetailsPage extends Component {
             {/* {isStudentsActive && <div>Blabla</div>} */}
           </Segment>
           {isStudentsActive && (
+            <Segment>
+              {/* <div>Blabla</div> */}
+              <Form autoComplete="off" onSubmit={this.handleSubmit}>
+                <Form.Group>
+                  <Form.Input
+                    placeholder='Student Name'
+                    name='currentStudentName'
+                    value={currentStudentName}
+                    onChange={this.handleChange}
+                  />
+                  <Form.Button content='Add' />
+                </Form.Group>
+              </Form>
+              {classList.length === 0 ? (
+                <div>Yay, add students to your class <Icon name='heart outline'/></div>
+              ) : (
+                classList.map((student, index) => (
+                  <List bulleted key={index}>
+                    <List.Item>{`${student}`.capitalize()}</List.Item>
+                  </List>
+                ))
+              )}
+            </Segment>
+          )}
+        </Segment.Group>
+
+        <Segment.Group className='paragraph-style display-in-box'>
+          <Segment className='section-title'>
+            <div className='flexbox-container'>
+              <div>WORKSPACE</div>
+              {isWorkspaceActive ? (
+                <Button
+                  className='arrow-down-button-classroom'
+                  circular
+                  icon='angle up'
+                  onClick={this.toggleWorkspaceButton}
+                />
+              ) : (
+                <Button
+                  className='arrow-down-button-classroom'
+                  circular
+                  icon='angle down'
+                  onClick={this.toggleWorkspaceButton}
+                />
+              )}
+            </div>
+            {/* {isStudentsActive && <div>Blabla</div>} */}
+          </Segment>
+          {isWorkspaceActive && (
             <Segment>
               {/* <div>Blabla</div> */}
               <Form autoComplete="off" onSubmit={this.handleSubmit}>
