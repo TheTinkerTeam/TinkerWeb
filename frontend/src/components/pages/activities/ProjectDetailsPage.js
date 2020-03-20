@@ -12,7 +12,8 @@ import { push } from "react-router-redux";
 
 const ProjectDetailsPage = props => {
   const routeParam = props.match.params.id;
-  const dispatch = useDispatch();
+  // console.log(routeParam);
+
   const GET_PROJECT = gql`
     query getProject($id: ID!) {
       project(id: $id) {
