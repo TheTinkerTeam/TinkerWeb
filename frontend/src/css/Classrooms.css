@@ -167,6 +167,12 @@ a {
 
 .ui.segment.inWorkspaceContainer {
   box-shadow: none;
+  border: 1px solid rgba(34,36,38,.15);
+}
+
+.ui.segment.inWorkspaceContainer:hover{
+  box-shadow: none;
+  border: 1px solid rgb(245, 81, 76, 1);
 }
 
 .ui.segment.inWorkspaceContainer:hover {
@@ -177,6 +183,7 @@ a {
 
 .ui.stackable.two.column.grid.currentProjectGrid:hover {
   background: rgb(245, 81, 76, 1);
+  border-color: rgb(245, 81, 76, 1) !important;
   color: white;
   border-radius: 0.28571429rem;
   transition: 0.4s;
