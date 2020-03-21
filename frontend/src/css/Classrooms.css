@@ -124,7 +124,7 @@ a {
 /*   Classroom Details Page   */
 /* ========================== */
 
-.section-title{
+.section-title {
   font-family: "Poppins";
   font-weight: 600;
   font-size: 4rem;
@@ -140,12 +140,12 @@ a {
   align-items: center;
 }
 
-.ui.circular.button.arrow-down-button-classroom{
+.ui.circular.button.arrow-down-button-classroom {
   background-color: transparent;
   color: #181c3f;
 }
 
-.ui.circular.button.arrow-down-button-classroom:hover{
+.ui.circular.button.arrow-down-button-classroom:hover {
   color: white;
   background-color: #181c3f;
   opacity: 0.3;
@@ -160,3 +160,71 @@ a {
   width: 100%;
   margin-bottom: 2rem;
 } */
+
+/* ============================================== */
+/*   Classroom Details Page - Workspace section   */
+/* ============================================== */
+
+.ui.segment.inWorkspaceContainer {
+  box-shadow: none;
+}
+
+.ui.segment.inWorkspaceContainer:hover {
+  background: rgb(245, 81, 76, 1);
+  color: white;
+  transition: 0.4s;
+}
+
+.ui.stackable.two.column.grid.currentProjectGrid:hover {
+  background: rgb(245, 81, 76, 1);
+  color: white;
+  border-radius: 0.28571429rem;
+  transition: 0.4s;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.stackable.two.column.grid.currentProjectGrid > div:first-child {
+    min-height: 20vh;
+    margin-left: -1rem !important;
+    margin-right: -1rem !important;
+    width: 120% !important;
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0.22rem !important;
+    border-top-right-radius: 0.22rem !important;
+  }
+
+  .ui.segment.inWorkspaceContainer {
+    box-shadow: none;
+  }
+
+  .ui.stackable.grid > .wide.column {
+    margin: 0 -1rem !important;
+  }
+}
+
+.ui.stackable.two.column.grid.currentProjectGrid > div:first-child {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  /* background-image: url(https://media.edutopia.org/styles/responsive_2880px_original/s3/masters/d7_images/sutherland-inset4-ugcflex_0.jpg); */
+  /* min-height: 20vh; */
+  background-size: cover;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0.22rem;
+  border-top-left-radius: 0.22rem;
+  border-top-right-radius: 0;
+  background-image: url(https://via.placeholder.com/150);
+  background-position: center;
+}
+
+/* .ui.segment.currentContainert:hover{
+  background: rgb(245, 81, 76, 1);
+  color: white;
+} */
+
+.ui.segment.currentProjectColumn {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+}
