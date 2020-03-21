@@ -1,13 +1,36 @@
 import React, { Component, useState } from "react";
 import "../../../css/Classrooms.css";
-import { Segment, Button, Form, List, Icon } from "semantic-ui-react";
+import {
+  Segment,
+  Button,
+  Form,
+  List,
+  Icon,
+  Grid,
+  Image
+} from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-const GET_PROJECT = gql`
-  query getProject($id: ID!) {
-    project(id: $id) {
+// const GET_PROJECT = gql`
+//   query getProject($id: ID!) {
+//     project(id: $id) {
+//       id
+//       title
+//       description
+//       imageURL
+//       learning_objectives
+//       subjects
+//       tags
+//       grades
+//     }
+//   }
+// `;
+
+const GET_PROJECTS = gql`
+  {
+    projects {
       id
       title
       description
@@ -70,18 +93,15 @@ const ClassroomDetailsPage = props => {
   //   }));
   // };
 
-  const routeParam = props.match.params.id;
-
-  const { loading, error, data } = useQuery(GET_PROJECT, {
-    variables: { id: routeParam }
-  });
+  const { loading, error, data } = useQuery(GET_PROJECTS);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  const project = data.project;
+  const projects = data.projects;
 
   console.log(state);
+  console.log(projects);
 
   return (
     <div>
@@ -182,10 +202,33 @@ const ClassroomDetailsPage = props => {
               </List.Item>
               <List.Item>Archived projects</List.Item>
             </List>
-            <Segment className='currentProjectContainer'>
-              Current Project
+            <Segment className='currentProjectContainer inWorkspaceContainer'>
+              <Grid className='currentProjectGrid' stackable columns={2}>
+                <Grid.Column width={4}>
+                  {/* <Segment className="currentProjectColumn"> */}
+                    {/* <Image centered src={projects[0].imageURL} /> */}
+                  {/* </Segment> */}
+                </Grid.Column>
+                <Grid.Column width={12}>
+                  <Segment className="currentProjectColumn">
+                    <div>Current Project: {projects[0].title}</div>
+                    <div>{projects[0].description} (Read from db)</div>
+                    {/* <div>{projects[0].learning_objectives}</div> */}
+                    <div>
+                      <div className=''>
+                        {"Standards".toUpperCase()}
+                      </div>
+                      Read the standards from the database
+                    </div>
+                  </Segment>
+                </Grid.Column>
+              </Grid>
+
+              {/* Current Project
+			  {projects[0].title} */}
             </Segment>
-            <Segment className='feedContainer'>Feed</Segment>
+
+            <Segment className='feedContainer inWorkspaceContainer'>Feed</Segment>
           </Segment>
         )}
       </Segment.Group>
