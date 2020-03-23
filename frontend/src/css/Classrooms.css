@@ -161,6 +161,135 @@ a {
   margin-bottom: 2rem;
 } */
 
+/* =================================================== */
+/*   Classroom Details Page - Student name container   */
+/* =================================================== */
+
+.ui.segment.student-name-container{
+  box-shadow: none;
+  border: none;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+.ui.segment.student-name-container:hover{
+  font-weight: bolder;
+  color: #f5514c;
+}
+
+/* ================================================== */
+/*   Classroom Details Page - Delete student button   */
+/* ================================================== */
+
+.ui.segment.student-name-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ui.segment.student-name-container .ui.circular.button.student-button-classroom {
+  visibility: hidden;
+}
+
+.ui.segment.student-name-container:hover .ui.circular.button.student-button-classroom {
+  visibility: visible;
+}
+
+/* .ui.segment.student-name-container .ui.buttons.student-button-classroom {
+  visibility: hidden;
+  border: 1px solid rgb(245, 81, 76, 1);
+  border-radius: 50px;;
+} */
+
+/* .ui.segment.student-name-container:hover .ui.buttons.student-button-classroom {
+  visibility: visible;
+} */
+
+/* =============================================== */
+/*    Classroom Details Page - TeamsCount input    */
+/* =============================================== */
+
+#teamCountInput {
+  font-family: "Poppins";
+}
+
+.ui.form.teamCountForm .field > label {
+  font-family: "Poppins";
+  font-weight: 300;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+#teamCountInput:focus {
+  border-color: #dedede;
+}
+
+.ui.active.visible.selection.dropdown > .visible.menu.transition{
+  border-color: #dedede;
+}
+
+.ui.active.visible.selection.dropdown:active {
+  border-color: #dedede;
+}
+
+.ui.visible.selection.dropdown:active {
+  border-color: #dedede;
+}
+
+.ui.selection.active.dropdown #teamCountInput{
+  border-color: #dedede;
+}
+
+.ui.selection.active.dropdown:hover {
+  border-color: #dedede;
+}
+
+.ui.selection.dropdown .menu {
+  border-color: #dedede;
+}
+
+.ui.selection.active.dropdown .menu {
+  border-color: #dedede;
+}
+
+.ui.selection.active.dropdown .menu:hover {
+  border-color: #dedede;
+}
+
+.visible.menu.transition {
+  border-color: #dedede;
+}
+
+/* =============================================== */
+/*    Classroom Details Page - TeamsCount input    */
+/* =============================================== */
+
+.ui.form.newStudentInput .field .ui.input input, .ui.form.newStudentInput .fields .field .ui.input input {
+  width: auto;
+  min-width: 20vw;
+  font-family: "Roboto Mono";
+}
+
+.ui.form.newStudentInput input[type=text] {
+  border-color: #cacbcd;
+  color: #f5514c;
+  font-family: "Poppins";
+  font-weight: 400;
+}
+.ui.form.newStudentInput input[type=text]:focus {
+  border-color: #cacbcd;
+  color: #f5514c;
+  font-family: "Poppins";
+  font-weight: 400;
+}
+.ui.form.newStudentInput input[type=text]:focus::selection{
+  background-color: #f5514c;
+  color: white;
+}
+
+
 /* ============================================== */
 /*   Classroom Details Page - Workspace section   */
 /* ============================================== */
@@ -234,4 +363,20 @@ a {
   background: inherit;
   border: none;
   box-shadow: none;
+}
+
+/* ============================================== */
+/*   Classroom Details Page - Title in sections   */
+/* ============================================== */
+
+.section-classroom-title{
+  font-family: "Poppins";
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: normal;
+}
+
+.flexbox-container.in-section-margin {
+  margin-top: 3rem;
 }

@@ -81,7 +81,6 @@ const AuthForm = ({ signup, login }) => {
               });
             },
             text: "I'm a Student"
-            //color: "violet"
           },
           {
             onClick: () => {
@@ -91,8 +90,6 @@ const AuthForm = ({ signup, login }) => {
               });
             },
             text: "I'm a Teacher"
-            //color: "purple"
-            // color: "#181c3f"
           },
           {
             onClick: () => {
@@ -102,7 +99,6 @@ const AuthForm = ({ signup, login }) => {
               });
             },
             text: "I'm a School Admin"
-            //color: "pink"
           }
         ];
         break;
