@@ -48,7 +48,9 @@ const ClassroomDetailsPage = props => {
     isStudentsActive: true,
     isWorkspaceActive: true,
     currentStudentName: "",
-    classList: []
+	classList: [],
+	tasksList:[],
+	currentTask:""
   };
 
   const [state, setState] = useState(initialState);
@@ -62,6 +64,16 @@ const ClassroomDetailsPage = props => {
         ...prevState,
         classList: [...prevState.classList, prevState.currentStudentName],
         currentStudentName: ""
+      }));
+    }
+  };
+
+  const handleSubmitTask = () => {
+    if (state.currentTask.length !== 0) {
+      setState(prevState => ({
+        ...prevState,
+        tasksList: [...prevState.tasksList, prevState.currentTask],
+        currentTask: ""
       }));
     }
   };
@@ -84,7 +96,9 @@ const ClassroomDetailsPage = props => {
     isStudentsActive,
     isWorkspaceActive,
     currentStudentName,
-    classList
+	classList,
+	tasksList,
+	currentTask,
   } = state;
 
   // const toggleButton = () => {
@@ -228,7 +242,35 @@ const ClassroomDetailsPage = props => {
 			  {projects[0].title} */}
             </Segment>
 
-            <Segment className='feedContainer inWorkspaceContainer'>Feed</Segment>
+
+        {isWorkspaceActive && (
+          <div>
+            <Form autoComplete='off' onSubmit={handleSubmitTask}>
+              <Form.Group>
+                <Form.Input
+                  placeholder='Share a message with your students'
+                  name='currentTask'
+                  value={currentTask}
+                  onChange={handleChange}
+				  style={{width: "300px"}}
+                />
+                <Form.Button content='Post' />
+              </Form.Group>
+            </Form>
+            {tasksList && tasksList.length === 0 ? (
+              <div>
+                No task assigned! <Icon name='heart outline' />
+              </div>
+            ) : (
+              tasksList.map((task, index) => (
+				  <Segment className="feedContainer inWorkspaceContainer" key={index}>
+				  	<List.Item>{`${task}`.capitalize()}</List.Item>
+				  </Segment>
+              ))
+            )}
+          </div>
+        )}
+            {/* <Segment className='feedContainer inWorkspaceContainer'>Feed</Segment> */}
           </Segment>
         )}
       </Segment.Group>
