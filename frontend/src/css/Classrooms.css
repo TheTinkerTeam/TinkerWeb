@@ -189,21 +189,21 @@ a {
   justify-content: space-between;
 }
 
-.ui.segment.student-name-container .ui.circular.button.delete-student-button-classroom {
+.ui.segment.student-name-container .ui.circular.button.student-button-classroom {
   visibility: hidden;
 }
 
-.ui.segment.student-name-container:hover .ui.circular.button.delete-student-button-classroom {
+.ui.segment.student-name-container:hover .ui.circular.button.student-button-classroom {
   visibility: visible;
 }
 
-/* .ui.segment.student-name-container .ui.buttons.delete-student-button-classroom {
+/* .ui.segment.student-name-container .ui.buttons.student-button-classroom {
   visibility: hidden;
   border: 1px solid rgb(245, 81, 76, 1);
   border-radius: 50px;;
 } */
 
-/* .ui.segment.student-name-container:hover .ui.buttons.delete-student-button-classroom {
+/* .ui.segment.student-name-container:hover .ui.buttons.student-button-classroom {
   visibility: visible;
 } */
 

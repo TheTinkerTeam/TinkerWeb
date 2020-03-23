@@ -70,13 +70,22 @@ const ClassroomDetailsPage = props => {
     }
   };
 
-  const handleDeleteStudent = id => {
+  const handleDeleteStudent = name => {
     console.log("delete student");
-    console.log("id");
+    console.log(name);
     setState(prevState => ({
       ...prevState,
-      classList: prevState.classList.filter(student => student !== id)
+      classList: prevState.classList.filter(student => student !== name)
     }));
+  };
+
+  const handleStudentProfile = name => {
+    console.log("open student profile");
+    console.log(name);
+    // setState(prevState => ({
+    //   ...prevState,
+    //   classList: prevState.classList.filter(student => student !== name)
+    // }));
   };
 
   const handleSubmitTask = () => {
@@ -171,15 +180,15 @@ const ClassroomDetailsPage = props => {
                   <div>{`${student}`.capitalize()}</div>
                   <div>
                     <Button
-                      className='delete-student-button-classroom'
+                      className='student-button-classroom'
                       circular
                       icon='user'
                       onClick={() => {
-                        handleDeleteStudent(`${student}`);
+                        handleStudentProfile(`${student}`);
                       }}
                     />
                     <Button
-                      className='delete-student-button-classroom'
+                      className='student-button-classroom'
                       circular
                       icon='delete'
                       onClick={() => {
@@ -187,7 +196,7 @@ const ClassroomDetailsPage = props => {
                       }}
                     />
                   </div>
-                  {/* <Button className='delete-student-button-classroom'>
+                  {/* <Button className='student-button-classroom'>
                     <Dropdown
                       floating
                       className='button icon'
