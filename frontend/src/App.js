@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route, withRouter } from "react-router-dom";
+
+import logo from "./img/SHlogo.png";
 
 import NavBar from "./components/navbar/Navbar";
 import Dashboard from "./components/pages/dashboard/Dashboard";
@@ -12,24 +14,30 @@ import ClassesPage from "./components/pages/activities/ClassesPage";
 import ClassroomsPage from "./components/pages/classrooms/ClassroomsPage";
 import ClassroomDetailsPage from "./components/pages/classrooms/ClassroomDetailsPage";
 import ProjectDetailsPage from "./components/pages/activities/ProjectDetailsPage";
+import ClassDetailsPage from "./components/pages/activities/ClassesDetailsPage";
 import ProfilePage from "./components/pages/profile/ProfilePage";
 import SettingsDashboard from "./components/pages//settings";
 
 import { loadUser } from "./actions/authActions";
 import setAuthToken from "./utils/setAuthToken";
 
-import { connect, useSelector } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 
 import store from "./store";
 import { Sidebar, Segment, Menu, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { toggleVisibility } from "./actions/sidebarActions";
 
-import logo from "./img/SHlogo.png";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
+import { getFirebase, useFirebase } from "react-redux-firebase";
+import { ApolloProvider } from "@apollo/react-hooks";
+
+import Alert from "./components/services/Alert";
+import { setAlert } from "./actions/alertActions";
 
 const App = props => {
+  console.log(props);
   const auth = useSelector(state => state.firebase.auth);
-  console.log(auth);
   useEffect(() => {
     if (auth && auth.uid) {
       store.dispatch(loadUser(auth.uid));
@@ -37,8 +45,21 @@ const App = props => {
       store.dispatch(loadUser(null));
     }
   }, [auth]);
+
+  const sidebar = useSelector(state => state.sidebar);
+  const dispatch = useDispatch();
+
+  if (props.location.state && props.location.state.alert) {
+    dispatch(setAlert(props.location.state.alert, "error", 2000));
+    props.history.replace({
+      pathname: props.location.pathname,
+      state: {}
+    });
+  }
+
   return (
     <div>
+      <Alert />
       <Sidebar.Pushable as={Segment}>
         <Sidebar
           as={Menu}
@@ -46,11 +67,11 @@ const App = props => {
           icon="labeled"
           vertical
           onHide={() => {
-            if (props.sidebar.visible === true) {
+            if (sidebar.visible === true) {
               store.dispatch(toggleVisibility());
             }
           }}
-          visible={props.sidebar.visible}
+          visible={sidebar.visible}
           width="thin"
         >
           <img src={logo} alt="SHlogo" id="navlogo" />
@@ -101,10 +122,7 @@ const App = props => {
             Membership
           </Menu.Item>
         </Sidebar>
-        <Sidebar.Pusher
-          style={{ minHeight: "100vh" }}
-          dimmed={props.sidebar.visible}
-        >
+        <Sidebar.Pusher style={{ minHeight: "100vh" }} dimmed={sidebar.visible}>
           <NavBar />
           <div className="container">
             <Route exact path="/" component={Dashboard} />
@@ -113,7 +131,6 @@ const App = props => {
               render={() => (
                 <div>
                   <Route path="/membership" component={MembershipPage} />
-                  <Route path="/classes" component={ClassesPage} />
                   <Route exact path="/classrooms" component={ClassroomsPage} />
                   <Route path="/classrooms/:id" component={ClassroomDetailsPage} />
                   <Route exact path="/tutorials" component={TutorialsPage} />
@@ -123,6 +140,8 @@ const App = props => {
                     path="/tutorials/:id"
                     component={TutorialDetailsPage}
                   />
+                  <Route exact path="/classes" component={ClassesPage} />
+                  <Route path="/classes/:id" component={ClassDetailsPage} />
                   <Route exact path="/me" component={ProfilePage} />
                   <Route path="/settings" component={SettingsDashboard} />
                 </div>
@@ -135,13 +154,7 @@ const App = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  sidebar: state.sidebar
-});
-
-const mapDispatchToProps = { toggleVisibility };
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(App);
 
 // class App extends React.Component {
 //   render() {

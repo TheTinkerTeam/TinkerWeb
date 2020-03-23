@@ -13,7 +13,7 @@ import {
   LOGOUT
 } from "./types.js";
 
-export const loadUser = uid => async dispatch => {
+export const loadUser = (uid, newUser = false) => async dispatch => {
   if (!uid) {
     return dispatch({
       type: USER_LOADED,
@@ -30,7 +30,8 @@ export const loadUser = uid => async dispatch => {
               firstName,
               lastName,
               school,
-              role
+              role,
+              avatar
             }
           }
         `,
@@ -40,7 +41,7 @@ export const loadUser = uid => async dispatch => {
     });
     dispatch({
       type: USER_LOADED,
-      payload: { profile: profileResponse.data.data.user }
+      payload: { profile: { ...profileResponse.data.data.user, newUser } }
     });
   } catch (err) {
     dispatch({
@@ -67,15 +68,17 @@ export const signup = user => async dispatch => {
           $firstName: String!,
           $lastName: String!,
           $role: String!,
-          $school: String!
+          $school: String!,
+          $avatar: String!
         ) {
-            signup(uid: $uid, email: $email, password: $password, firstName: $firstName, lastName: $lastName, role: $role, school: $school) {
+            signup(uid: $uid, email: $email, password: $password, firstName: $firstName, lastName: $lastName, role: $role, school: $school, avatar: $avatar) {
               email,
               username,
               firstName,
               lastName,
               school,
-              role
+              role,
+              avatar
             }
           }
         `,
@@ -86,7 +89,8 @@ export const signup = user => async dispatch => {
           firstName: user.firstName,
           lastName: user.lastName,
           school: user.school,
-          role: user.role
+          role: user.role,
+          avatar: user.imageUrl || "defaultImgUrl"
         }
       },
       {
@@ -120,7 +124,7 @@ export const login = ({ email, password }) => async dispatch => {
       type: LOGIN_SUCCESS,
       payload: res.data
     });
-    dispatch(loadUser());
+    dispatch(loadUser(res.user.uid));
   } catch (err) {
     const errors = err.response && err.response.data.errors;
 
@@ -141,6 +145,7 @@ export const googleSignIn = () => async dispatch => {
   const res = await firebase.login({ provider: "google", type: "popup" });
   const user = res.user;
   if (res.additionalUserInfo.isNewUser) {
+    console.log(user);
     const res = await axios.post(
       "http://localhost:5000/api/v2",
       {
@@ -153,14 +158,16 @@ export const googleSignIn = () => async dispatch => {
           $lastName: String!,
           $role: String!,
           $school: String!
+          $avatar: String!
         ) {
-            signup(uid: $uid, email: $email, password: $password, firstName: $firstName, lastName: $lastName, role: $role, school: $school) {
+            signup(uid: $uid, email: $email, password: $password, firstName: $firstName, lastName: $lastName, role: $role, school: $school, avatar: $avatar) {
               email,
               username,
               firstName,
               lastName,
               school,
-              role
+              role,
+              avatar
             }
           }
         `,
@@ -171,7 +178,8 @@ export const googleSignIn = () => async dispatch => {
           firstName: user.displayName.split(" ")[0],
           lastName: user.displayName.split(" ")[1],
           school: "public",
-          role: "student"
+          role: "student",
+          avatar: user.photoURL || "defaultImgUrl"
         }
       },
       {
@@ -181,6 +189,7 @@ export const googleSignIn = () => async dispatch => {
       }
     );
   }
+  dispatch(loadUser(user.uid, true));
 };
 
 export const logout = () => dispatch => {

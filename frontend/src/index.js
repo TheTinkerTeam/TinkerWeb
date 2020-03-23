@@ -9,17 +9,40 @@ import * as serviceWorker from "./serviceWorker";
 
 import store from "./store";
 
-// Add Apollo Client
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "@apollo/react-hooks";
-
-import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 import reactReduxFirebaseProps from "./utils/firebase";
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
+import { setContext } from "apollo-link-context";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloProvider } from "@apollo/react-hooks";
 
 require("dotenv").config();
 
-const client = new ApolloClient({
+const httpLink = new createHttpLink({
   uri: "http://localhost:5000/api/v2"
+});
+
+const authLink = setContext(async (_, { headers }) => {
+  const currentUser = getFirebase().auth().currentUser;
+  // get the authentication token from local storage if it exists
+  let token = null;
+  if (currentUser) {
+    token = await currentUser.getIdToken(true);
+    console.log(token);
+  }
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ""
+    }
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
 });
 
 // console.log(store.getState());
