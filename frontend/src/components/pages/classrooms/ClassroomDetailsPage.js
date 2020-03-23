@@ -7,7 +7,8 @@ import {
   List,
   Icon,
   Grid,
-  Image
+  Image,
+  Divider
 } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
@@ -48,9 +49,9 @@ const ClassroomDetailsPage = props => {
     isStudentsActive: true,
     isWorkspaceActive: true,
     currentStudentName: "",
-	classList: [],
-	tasksList:[],
-	currentTask:""
+    classList: [],
+    tasksList: [],
+    currentTask: ""
   };
 
   const [state, setState] = useState(initialState);
@@ -67,6 +68,15 @@ const ClassroomDetailsPage = props => {
       }));
     }
   };
+
+  const handleDeleteStudent = (id) => {
+    console.log('delete student');
+    console.log('id');
+    setState((prevState) => ({
+      ...prevState,
+      classList: prevState.classList.filter(student => student !== id),
+  }))
+  }
 
   const handleSubmitTask = () => {
     if (state.currentTask.length !== 0) {
@@ -96,16 +106,10 @@ const ClassroomDetailsPage = props => {
     isStudentsActive,
     isWorkspaceActive,
     currentStudentName,
-	classList,
-	tasksList,
-	currentTask,
+    classList,
+    tasksList,
+    currentTask
   } = state;
-
-  // const toggleButton = () => {
-  //   this.setState(({ isStudentsActive }) => ({
-  //     isStudentsActive: !isStudentsActive
-  //   }));
-  // };
 
   const { loading, error, data } = useQuery(GET_PROJECTS);
 
@@ -162,11 +166,18 @@ const ClassroomDetailsPage = props => {
               </div>
             ) : (
               classList.map((student, index) => (
-                <List bulleted key={index}>
-                  <List.Item>{`${student}`.capitalize()}</List.Item>
-                </List>
+                <Segment className="student-name-container" key={index}>
+                  <div>{`${student}`.capitalize()}</div>
+                  <Button
+                    className='delete-student-button-classroom'
+                    circular
+                    icon='delete'
+                    onClick={() => {handleDeleteStudent(`${student}`)}}
+                  />
+                </Segment>
               ))
             )}
+            <Divider />
             <List bulleted>
               <div>What's in this section?</div>
               <List.Item>Option to make groups/team</List.Item>
@@ -220,18 +231,16 @@ const ClassroomDetailsPage = props => {
               <Grid className='currentProjectGrid' stackable columns={2}>
                 <Grid.Column width={4}>
                   {/* <Segment className="currentProjectColumn"> */}
-                    {/* <Image centered src={projects[0].imageURL} /> */}
+                  {/* <Image centered src={projects[0].imageURL} /> */}
                   {/* </Segment> */}
                 </Grid.Column>
                 <Grid.Column width={12}>
-                  <Segment className="currentProjectColumn">
+                  <Segment className='currentProjectColumn'>
                     <div>Current Project: {projects[0].title}</div>
                     <div>{projects[0].description} (Read from db)</div>
                     {/* <div>{projects[0].learning_objectives}</div> */}
                     <div>
-                      <div className=''>
-                        {"Standards".toUpperCase()}
-                      </div>
+                      <div className=''>{"Standards".toUpperCase()}</div>
                       Read the standards from the database
                     </div>
                   </Segment>
@@ -242,34 +251,36 @@ const ClassroomDetailsPage = props => {
 			  {projects[0].title} */}
             </Segment>
 
-
-        {isWorkspaceActive && (
-          <div>
-            <Form autoComplete='off' onSubmit={handleSubmitTask}>
-              <Form.Group>
-                <Form.Input
-                  placeholder='Share a message with your students'
-                  name='currentTask'
-                  value={currentTask}
-                  onChange={handleChange}
-				  style={{width: "300px"}}
-                />
-                <Form.Button content='Post' />
-              </Form.Group>
-            </Form>
-            {tasksList && tasksList.length === 0 ? (
+            {isWorkspaceActive && (
               <div>
-                No task assigned! <Icon name='heart outline' />
+                <Form autoComplete='off' onSubmit={handleSubmitTask}>
+                  <Form.Group>
+                    <Form.Input
+                      placeholder='Share a message with your students'
+                      name='currentTask'
+                      value={currentTask}
+                      onChange={handleChange}
+                      style={{ width: "300px" }}
+                    />
+                    <Form.Button content='Post' />
+                  </Form.Group>
+                </Form>
+                {tasksList && tasksList.length === 0 ? (
+                  <div>
+                    No task assigned! <Icon name='heart outline' />
+                  </div>
+                ) : (
+                  tasksList.map((task, index) => (
+                    <Segment
+                      className='feedContainer inWorkspaceContainer'
+                      key={index}
+                    >
+                      <List.Item>{`${task}`.capitalize()}</List.Item>
+                    </Segment>
+                  ))
+                )}
               </div>
-            ) : (
-              tasksList.map((task, index) => (
-				  <Segment className="feedContainer inWorkspaceContainer" key={index}>
-				  	<List.Item>{`${task}`.capitalize()}</List.Item>
-				  </Segment>
-              ))
             )}
-          </div>
-        )}
             {/* <Segment className='feedContainer inWorkspaceContainer'>Feed</Segment> */}
           </Segment>
         )}

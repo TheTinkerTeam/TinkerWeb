@@ -161,6 +161,42 @@ a {
   margin-bottom: 2rem;
 } */
 
+/* =================================================== */
+/*   Classroom Details Page - Student name container   */
+/* =================================================== */
+
+.ui.segment.student-name-container{
+  box-shadow: none;
+  border: none;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+.ui.segment.student-name-container:hover{
+  font-weight: bolder;
+  color: #f5514c;
+}
+
+/* ================================================== */
+/*   Classroom Details Page - Delete student button   */
+/* ================================================== */
+
+.ui.segment.student-name-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ui.segment.student-name-container .ui.circular.button.delete-student-button-classroom {
+  visibility: hidden;
+}
+
+.ui.segment.student-name-container:hover .ui.circular.button.delete-student-button-classroom {
+  visibility: visible;
+}
+
 /* ============================================== */
 /*   Classroom Details Page - Workspace section   */
 /* ============================================== */
