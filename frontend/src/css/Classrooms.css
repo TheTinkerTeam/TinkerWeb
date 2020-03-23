@@ -1,0 +1,237 @@
+/* =========================== */
+/*  Classroom Title Container  */
+/* =========================== */
+
+.classroom-title-style {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 4rem;
+  color: #f5514c;
+  line-height: normal;
+  margin-top: 8rem;
+  margin-bottom: 1rem;
+  line-height: normal;
+}
+
+/* ========================== */
+/*  Classroom List Container  */
+/* ========================== */
+
+.classroomListContainer {
+  /* color: #181c3f; */
+  color: white;
+  font-family: Poppins;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: center;
+  margin: 1em;
+}
+
+a {
+  color: white;
+}
+
+.classroomListContainer::after {
+  content: "";
+  flex: auto;
+}
+
+.classroomListItem {
+  background-color: #f5514c;
+  padding: 1em;
+
+  width: 275px;
+  height: 275px;
+  margin: 1em;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 400;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
+}
+
+.classroomListItem:hover {
+  background-color: white;
+  width: 275px;
+  height: 275px;
+  font-weight: 700;
+  /* color: rgb(245, 81, 76); */
+  color: #181c3f;
+  margin: 1em 1.3em;
+  border-radius: 50%;
+  text-align: center;
+  box-shadow: 1px 1px 15px rgba(24, 28, 63, 0.15);
+  transition: 0.5s;
+}
+
+.class-text {
+  margin-top: 25%;
+  font-size: 1.5em;
+}
+
+.subject-text {
+  margin-top: 3%;
+  margin-bottom: 6%;
+  font-size: 1.2em;
+  font-weight: 200;
+}
+
+.assignement-text {
+  margin-top: 2%;
+  font-size: 1em;
+  font-weight: 200;
+}
+
+.students-text {
+  margin-top: 10%;
+  font-size: 1em;
+  font-weight: 300;
+}
+
+.classroomListItem .students-text {
+  visibility: hidden;
+}
+
+.classroomListItem:hover .students-text {
+  visibility: visible;
+}
+
+/* ============================ */
+/*   'Add a new class' Button   */
+/* ============================ */
+
+.ui.button.transparent-button {
+  font-family: "Poppins";
+  font-weight: 300;
+  background-color: transparent;
+  opacity: 0.5;
+}
+
+.ui.button.transparent-button:hover {
+  font-family: "Poppins";
+  font-weight: 500;
+  color: #181c3f;
+  background-color: transparent;
+  opacity: 1;
+}
+
+.ui.labeled.icon.button.transparent-button > .icon {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/* ========================== */
+/*   Classroom Details Page   */
+/* ========================== */
+
+.section-title {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 4rem;
+  margin-top: 8rem;
+  margin-bottom: 1rem;
+  line-height: normal;
+}
+
+.flexbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ui.circular.button.arrow-down-button-classroom {
+  background-color: transparent;
+  color: #181c3f;
+}
+
+.ui.circular.button.arrow-down-button-classroom:hover {
+  color: white;
+  background-color: #181c3f;
+  opacity: 0.3;
+}
+
+/* .ui.segment .display-in-box .flexbox-container{
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  background: white;
+  border-color: transparent;
+  padding: 1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+} */
+
+/* ============================================== */
+/*   Classroom Details Page - Workspace section   */
+/* ============================================== */
+
+.ui.segment.inWorkspaceContainer {
+  box-shadow: none;
+  border: 1px solid rgba(34,36,38,.15);
+}
+
+.ui.segment.inWorkspaceContainer:hover{
+  box-shadow: none;
+  border: 1px solid rgb(245, 81, 76, 1);
+}
+
+.ui.segment.inWorkspaceContainer:hover {
+  background: rgb(245, 81, 76, 1);
+  color: white;
+  transition: 0.4s;
+}
+
+.ui.stackable.two.column.grid.currentProjectGrid:hover {
+  background: rgb(245, 81, 76, 1);
+  border-color: rgb(245, 81, 76, 1) !important;
+  color: white;
+  border-radius: 0.28571429rem;
+  transition: 0.4s;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.stackable.two.column.grid.currentProjectGrid > div:first-child {
+    min-height: 20vh;
+    margin-left: -1rem !important;
+    margin-right: -1rem !important;
+    width: 120% !important;
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0.22rem !important;
+    border-top-right-radius: 0.22rem !important;
+  }
+
+  .ui.segment.inWorkspaceContainer {
+    box-shadow: none;
+  }
+
+  .ui.stackable.grid > .wide.column {
+    margin: 0 -1rem !important;
+  }
+}
+
+.ui.stackable.two.column.grid.currentProjectGrid > div:first-child {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  /* background-image: url(https://media.edutopia.org/styles/responsive_2880px_original/s3/masters/d7_images/sutherland-inset4-ugcflex_0.jpg); */
+  /* min-height: 20vh; */
+  background-size: cover;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0.22rem;
+  border-top-left-radius: 0.22rem;
+  border-top-right-radius: 0;
+  background-image: url(https://via.placeholder.com/150);
+  background-position: center;
+}
+
+/* .ui.segment.currentContainert:hover{
+  background: rgb(245, 81, 76, 1);
+  color: white;
+} */
+
+.ui.segment.currentProjectColumn {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+}
