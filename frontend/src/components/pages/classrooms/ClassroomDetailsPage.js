@@ -14,6 +14,8 @@ import {
 import { withRouter } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import DragAndDropComponent from "../../sections/DragAndDropComponent";
+import DragAndDropCard from "../../sections/DragAndDropCard";
 
 // const GET_PROJECT = gql`
 //   query getProject($id: ID!) {
@@ -221,6 +223,20 @@ const ClassroomDetailsPage = props => {
                 </Segment>
               ))
             )}
+            <Divider />
+            <div className='flexbox'>
+              <DragAndDropComponent id='board_1' className='board'>
+                <DragAndDropCard id='card_1' className='card' draggable='true'>
+                  <p>Card 1</p>
+                </DragAndDropCard>
+              </DragAndDropComponent>
+
+              <DragAndDropComponent id='board_2' className='board'>
+                <DragAndDropCard id='card_2' className='card' draggable='true'>
+                  <p>Card 2</p>
+                </DragAndDropCard>
+              </DragAndDropComponent>
+            </div>
             <Divider />
             <List bulleted>
               <div>What's in this section?</div>

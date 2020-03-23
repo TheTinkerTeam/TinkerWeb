@@ -244,3 +244,43 @@ code {
 .ui.segment .display-in-box:hover {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
+
+/* ============================= */
+/*    Drag and Drop Component    */
+/* ============================= */
+
+.flexbox{
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 768px;
+  height: 100vh;
+
+  overflow: hidden;
+
+  margin: 0 auto;
+
+  padding: 15px;
+}
+
+.flexbox .board{
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 300px;
+
+  background-color: red;
+
+  padding: 15px;
+}
+
+.flexbox .board .card {
+  padding: 15px 25px;
+  background-color: aqua;
+
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
