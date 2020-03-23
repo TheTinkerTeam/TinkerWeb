@@ -8,7 +8,8 @@ import {
   Icon,
   Grid,
   Image,
-  Divider
+  Divider,
+  Dropdown
 } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
@@ -69,14 +70,14 @@ const ClassroomDetailsPage = props => {
     }
   };
 
-  const handleDeleteStudent = (id) => {
-    console.log('delete student');
-    console.log('id');
-    setState((prevState) => ({
+  const handleDeleteStudent = id => {
+    console.log("delete student");
+    console.log("id");
+    setState(prevState => ({
       ...prevState,
-      classList: prevState.classList.filter(student => student !== id),
-  }))
-  }
+      classList: prevState.classList.filter(student => student !== id)
+    }));
+  };
 
   const handleSubmitTask = () => {
     if (state.currentTask.length !== 0) {
@@ -162,18 +163,52 @@ const ClassroomDetailsPage = props => {
             </Form>
             {classList && classList.length === 0 ? (
               <div>
-                Yay, add students to your class <Icon name='heart outline' />
+                Add students to your class <Icon name='heart outline' />
               </div>
             ) : (
               classList.map((student, index) => (
-                <Segment className="student-name-container" key={index}>
+                <Segment className='student-name-container' key={index}>
                   <div>{`${student}`.capitalize()}</div>
-                  <Button
-                    className='delete-student-button-classroom'
-                    circular
-                    icon='delete'
-                    onClick={() => {handleDeleteStudent(`${student}`)}}
-                  />
+                  <div>
+                    <Button
+                      className='delete-student-button-classroom'
+                      circular
+                      icon='user'
+                      onClick={() => {
+                        handleDeleteStudent(`${student}`);
+                      }}
+                    />
+                    <Button
+                      className='delete-student-button-classroom'
+                      circular
+                      icon='delete'
+                      onClick={() => {
+                        handleDeleteStudent(`${student}`);
+                      }}
+                    />
+                  </div>
+                  {/* <Button className='delete-student-button-classroom'>
+                    <Dropdown
+                      floating
+                      className='button icon'
+                      trigger={<React.Fragment />}
+                      text='File'
+                    >
+                      <Dropdown.Menu>
+                        <Dropdown.Item
+                          icon='user'
+                          text='Display Learning Profile'
+                        />
+                        <Dropdown.Item
+                          icon='delete'
+                          text='Delete'
+                          onClick={() => {
+                            handleDeleteStudent(`${student}`);
+                          }}
+                        />
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </Button> */}
                 </Segment>
               ))
             )}

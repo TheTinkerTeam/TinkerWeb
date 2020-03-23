@@ -197,6 +197,16 @@ a {
   visibility: visible;
 }
 
+/* .ui.segment.student-name-container .ui.buttons.delete-student-button-classroom {
+  visibility: hidden;
+  border: 1px solid rgb(245, 81, 76, 1);
+  border-radius: 50px;;
+} */
+
+/* .ui.segment.student-name-container:hover .ui.buttons.delete-student-button-classroom {
+  visibility: visible;
+} */
+
 /* ============================================== */
 /*   Classroom Details Page - Workspace section   */
 /* ============================================== */
