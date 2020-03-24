@@ -31,7 +31,7 @@ const typeDefs = gql`
     author: User!
   }
 
-  type Class {
+  type Classroom {
     id: ID!
     createdAt: DateTime!
     updatedAt: DateTime!
@@ -49,8 +49,8 @@ const typeDefs = gql`
     feed: [Project!]!
     project(id: ID!): Project
     filterProjects(searchString: String): [Project!]!
-    # Class
-    classes: [Class]
+    # Classroom
+    classrooms: [Classroom]
   }
 
   type Mutation {

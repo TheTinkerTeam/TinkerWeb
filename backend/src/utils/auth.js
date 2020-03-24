@@ -21,6 +21,7 @@ exports.checkAuth = async (req, res) => {
   if (split.length !== 2) return null;
 
   const token = split[1];
+  console.log("HEEEEERERE" + token);
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(token);

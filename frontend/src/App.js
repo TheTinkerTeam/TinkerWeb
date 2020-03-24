@@ -36,7 +36,6 @@ import Alert from "./components/services/Alert";
 import { setAlert } from "./actions/alertActions";
 
 const App = props => {
-  console.log(props);
   const auth = useSelector(state => state.firebase.auth);
   useEffect(() => {
     if (auth && auth.uid) {
@@ -133,7 +132,10 @@ const App = props => {
                   <Route path="/membership" component={MembershipPage} />
                   <Route path="/classes" component={ClassesPage} />
                   <Route exact path="/classrooms" component={ClassroomsPage} />
-                  <Route path="/classrooms/:id" component={ClassroomDetailsPage} />
+                  <Route
+                    path="/classrooms/:id"
+                    component={ClassroomDetailsPage}
+                  />
                   <Route exact path="/tutorials" component={TutorialsPage} />
                   <Route exact path="/projects" component={ProjectsPage} />
                   <Route path="/projects/:id" component={ProjectDetailsPage} />

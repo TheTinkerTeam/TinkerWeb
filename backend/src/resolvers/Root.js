@@ -1,23 +1,23 @@
 const UserResolver = require("./UserResolver");
 const ProjectResolver = require("./ProjectResolver");
-const ClassResolver = require("./ClassResolver");
+const ClassroomResolver = require("./ClassroomResolver");
 const TeamResolver = require("./TeamResolver");
 
 const Root = {
   ...UserResolver,
   ...ProjectResolver,
-  ...ClassResolver,
+  ...ClassroomResolver,
   ...TeamResolver,
   Query: {
     ...UserResolver.Query,
     ...ProjectResolver.Query,
-    ...ClassResolver.Query,
+    ...ClassroomResolver.Query,
     ...TeamResolver.Query
   },
   Mutation: {
     ...UserResolver.Mutation,
     ...ProjectResolver.Mutation,
-    ...ClassResolver.Mutation,
+    ...ClassroomResolver.Mutation,
     ...TeamResolver.Mutation
   }
 };
