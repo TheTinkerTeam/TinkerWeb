@@ -130,7 +130,6 @@ const App = props => {
               render={() => (
                 <div>
                   <Route path="/membership" component={MembershipPage} />
-                  <Route path="/classes" component={ClassesPage} />
                   <Route exact path="/classrooms" component={ClassroomsPage} />
                   <Route
                     path="/classrooms/:id"

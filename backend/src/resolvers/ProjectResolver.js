@@ -10,9 +10,6 @@ module.exports = {
         console.error(err);
       }
     },
-    filterProjects: async (parent, { searchString }, context) => {
-      return null;
-    },
     projects: async (parent, { id }, { prisma }) => {
       try {
         const projects = await Project.find();

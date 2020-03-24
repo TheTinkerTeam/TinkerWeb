@@ -12,6 +12,7 @@ admin.initializeApp({
 
 exports.checkAuth = async (req, res) => {
   const { authorization } = req.headers;
+  console.log("Auth: " + authorization);
 
   if (!authorization) return null;
 
@@ -21,16 +22,14 @@ exports.checkAuth = async (req, res) => {
   if (split.length !== 2) return null;
 
   const token = split[1];
-  console.log("HEEEEERERE" + token);
 
   try {
-    const decodedToken = await admin.auth().verifyIdToken(token);
-    console.log("decodedToken", JSON.stringify(decodedToken));
-    return {
-      uid: decodedToken.uid,
-      role: decodedToken.role,
-      email: decodedToken.email
-    };
+    return admin
+      .auth()
+      .verifyIdToken(token)
+      .then(decodedToken => {
+        return decodedToken.uid;
+      });
   } catch (err) {
     console.error(`${err.code} -  ${err.message}`);
     return null;

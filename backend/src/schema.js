@@ -14,6 +14,7 @@ const typeDefs = gql`
     role: String!
     projects: [Project]
     avatar: String
+    classrooms: [Classroom]
   }
 
   type Project {
@@ -31,11 +32,19 @@ const typeDefs = gql`
     author: User!
   }
 
+  type Assignment {
+    date: DateTime
+    task: String
+  }
+
   type Classroom {
     id: ID!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-    title: String!
+    class: String
+    subject: String
+    students: [User]
+    assignments: [Assignment]
+    current_project: Project
+    archived_projects: [Project]
   }
 
   type Query {

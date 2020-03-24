@@ -8,7 +8,12 @@ import gql from "graphql-tag";
 const GET_CLASSROOMS = gql`
   query {
     classrooms {
-      title
+      id
+      class
+      assignments {
+        date
+        task
+      }
     }
   }
 `;
