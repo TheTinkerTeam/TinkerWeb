@@ -251,15 +251,16 @@ code {
 
 .flexbox{
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
   width: 100%;
-  max-width: 768px;
-  height: 100vh;
+  /* max-width: 768px; */
+  /* height: 100vh; */
 
   overflow: hidden;
 
-  margin: 0 auto;
+  margin: 1em auto;
 
   padding: 15px;
 }
@@ -270,17 +271,24 @@ code {
 
   width: 100%;
   max-width: 300px;
-
+  /* min-width: 300px; */
+  min-height: 400px;
   background-color: red;
 
   padding: 15px;
+  margin: 0 0.5em 0.5em 0.5em;
 }
 
-.flexbox .board .card {
-  padding: 15px 25px;
-  background-color: aqua;
+.flexbox .board .card{
+  /* padding: 15px 25px; */
+  /* background-color: aqua; */
 
-  cursor: pointer;
+  cursor: move; /* fallback: no `url()` support or images disabled */
+    cursor: -webkit-grab; /* Chrome 1-21, Safari 4+ */
+    cursor:    -moz-grab; /* Firefox 1.5-26 */
+    cursor:         grab;
+
   margin-bottom: 15px;
 }
+
 

@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import "../../../css/Classrooms.css";
 import {
   Segment,
@@ -52,7 +52,7 @@ const ClassroomDetailsPage = props => {
     isStudentsActive: true,
     isWorkspaceActive: true,
     currentStudentName: "",
-    classList: [],
+    classList: ["Lucas", "Edith", "Toto", "Joseph", "Mike", "Chat", "chien", "banane", "loup", "lion", "tigre", "grenade"],
     tasksList: [],
     currentTask: ""
   };
@@ -177,28 +177,28 @@ const ClassroomDetailsPage = props => {
                 Add students to your class <Icon name='heart outline' />
               </div>
             ) : (
-              classList.map((student, index) => (
-                <Segment className='student-name-container' key={index}>
-                  <div>{`${student}`.capitalize()}</div>
-                  <div>
-                    <Button
-                      className='student-button-classroom'
-                      circular
-                      icon='user'
-                      onClick={() => {
-                        handleStudentProfile(`${student}`);
-                      }}
-                    />
-                    <Button
-                      className='student-button-classroom'
-                      circular
-                      icon='delete'
-                      onClick={() => {
-                        handleDeleteStudent(`${student}`);
-                      }}
-                    />
-                  </div>
-                  {/* <Button className='student-button-classroom'>
+                  classList.map((student, index) => (
+                    <Segment className='student-name-container' key={index}>
+                      <div>{`${student}`.capitalize()}</div>
+                      <div>
+                        <Button
+                          className='student-button-classroom'
+                          circular
+                          icon='user'
+                          onClick={() => {
+                            handleStudentProfile(`${student}`);
+                          }}
+                        />
+                        <Button
+                          className='student-button-classroom'
+                          circular
+                          icon='delete'
+                          onClick={() => {
+                            handleDeleteStudent(`${student}`);
+                          }}
+                        />
+                      </div>
+                      {/* <Button className='student-button-classroom'>
                     <Dropdown
                       floating
                       className='button icon'
@@ -220,10 +220,56 @@ const ClassroomDetailsPage = props => {
                       </Dropdown.Menu>
                     </Dropdown>
                   </Button> */}
-                </Segment>
-              ))
+                    </Segment>
+                  ))
             )}
             <Divider />
+            {classList && classList.length === 0 ? (
+              <div>
+                Add students to your class <Icon name='heart outline' />
+              </div>
+            ) : (
+              <div className='flexbox'>
+                <DragAndDropComponent id='team_board_1' className='board'>
+                  {classList.map((student, index) => (
+                  <DragAndDropCard
+                    id={"card_" + `${index}`}
+                    className='card'
+                    draggable='true'
+                  >
+                    <Segment className='student-name-container' key={index}>
+                      <div>{`${student}`.capitalize()}</div>
+                      {/* <div>
+                        <Button
+                          className='student-button-classroom'
+                          circular
+                          icon='user'
+                          onClick={() => {
+                            handleStudentProfile(`${student}`);
+                          }}
+                        />
+                        <Button
+                          className='student-button-classroom'
+                          circular
+                          icon='delete'
+                          onClick={() => {
+                            handleDeleteStudent(`${student}`);
+                          }}
+                        />
+                      </div> */}
+                    </Segment>
+                  </DragAndDropCard>
+                  ))}
+                </DragAndDropComponent>
+                <DragAndDropComponent id='team_board_2' className='board'>
+
+                </DragAndDropComponent>
+                <DragAndDropComponent id='team_board_3' className='board'>
+
+                </DragAndDropComponent>
+              </div>
+            )}
+            {/* <Divider />
             <div className='flexbox'>
               <DragAndDropComponent id='board_1' className='board'>
                 <DragAndDropCard id='card_1' className='card' draggable='true'>
@@ -236,7 +282,7 @@ const ClassroomDetailsPage = props => {
                   <p>Card 2</p>
                 </DragAndDropCard>
               </DragAndDropComponent>
-            </div>
+            </div> */}
             <Divider />
             <List bulleted>
               <div>What's in this section?</div>
