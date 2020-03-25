@@ -12,7 +12,6 @@ admin.initializeApp({
 
 exports.checkAuth = async (req, res) => {
   const { authorization } = req.headers;
-  console.log("Auth: " + authorization);
 
   if (!authorization) return null;
 

@@ -41,14 +41,16 @@ const NavBar = props => {
             />
           </Responsive>
         </Menu.Item>
-        <Responsive minWidth={1024}>
-          <Menu.Item
-            style={{ marginTop: "0.6em" }}
-            as={NavLink}
-            to="/classrooms"
-            name="Classrooms"
-          />
-        </Responsive>
+        {auth.isEmpty ? null : (
+          <Responsive minWidth={1024}>
+            <Menu.Item
+              style={{ marginTop: "0.6em" }}
+              as={NavLink}
+              to="/classrooms"
+              name="Classrooms"
+            />
+          </Responsive>
+        )}
         <Responsive minWidth={1024}>
           <Menu.Item
             style={{ marginTop: "0.6em" }}

@@ -42,9 +42,9 @@ const ClassroomSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId
   },
   */
-  students: [
+  students_name: [
     {
-      type: mongoose.Schema.Types.ObjectId
+      type: String
     }
   ],
   assignments: [
@@ -55,6 +55,14 @@ const ClassroomSchema = new mongoose.Schema({
       task: {
         type: String
       }
+    }
+  ],
+  currentProject: {
+    type: mongoose.Schema.Types.ObjectId
+  },
+  archivedProjects: [
+    {
+      type: mongoose.Schema.Types.ObjectId
     }
   ],
   date: {

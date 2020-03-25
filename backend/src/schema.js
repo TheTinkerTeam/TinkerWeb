@@ -41,10 +41,10 @@ const typeDefs = gql`
     id: ID!
     class: String
     subject: String
-    students: [User]
+    students_name: [String]
     assignments: [Assignment]
-    current_project: Project
-    archived_projects: [Project]
+    currentProject: Project
+    archivedProjects: [Project]
   }
 
   type Query {
@@ -60,6 +60,7 @@ const typeDefs = gql`
     filterProjects(searchString: String): [Project!]!
     # Classroom
     classrooms: [Classroom]
+    classroom(id: ID!): Classroom
   }
 
   type Mutation {
@@ -77,6 +78,10 @@ const typeDefs = gql`
     createProject(title: String!, description: String!): Project!
     updateProject(id: ID!, title: String, description: String): Project
     deleteProject(id: ID!): Project
+    createClassroom(title: String!, description: String!): Classroom!
+    updateClassroom(id: ID!, title: String, description: String): Classroom
+    deleteClassroom(id: ID!): Classroom
+    addStudent(id: ID, name: String): Boolean
   }
 `;
 

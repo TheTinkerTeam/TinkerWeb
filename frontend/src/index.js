@@ -30,7 +30,6 @@ const authLink = setContext(async (_, { headers }) => {
   if (currentUser) {
     token = await currentUser.getIdToken(true);
   }
-  console.log("IN and token: " + token);
   // return the headers to the context so httpLink can read them
   return {
     headers: {
