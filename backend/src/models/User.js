@@ -35,6 +35,11 @@ const UserSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId
     }
   ],
+  classrooms: [
+    {
+      type: mongoose.Schema.Types.ObjectId
+    }
+  ],
   date: {
     created: {
       type: Date,

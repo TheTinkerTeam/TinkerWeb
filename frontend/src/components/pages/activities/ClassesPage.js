@@ -6,15 +6,14 @@ import { useSelector } from "react-redux";
 
 const GET_CLASSES = gql`
   query {
-    classes {
-      title
+    classrooms {
+      id
     }
   }
 `;
 
 const ClassesPage = props => {
-  const uid = useSelector(state => state.auth);
-  const { loading, error, data } = useQuery(GET_CLASSES, { uid });
+  const { loading, error, data } = useQuery(GET_CLASSES);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   const classes = data.classes;

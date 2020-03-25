@@ -23,13 +23,12 @@ exports.checkAuth = async (req, res) => {
   const token = split[1];
 
   try {
-    const decodedToken = await admin.auth().verifyIdToken(token);
-    console.log("decodedToken", JSON.stringify(decodedToken));
-    return {
-      uid: decodedToken.uid,
-      role: decodedToken.role,
-      email: decodedToken.email
-    };
+    return admin
+      .auth()
+      .verifyIdToken(token)
+      .then(decodedToken => {
+        return decodedToken.uid;
+      });
   } catch (err) {
     console.error(`${err.code} -  ${err.message}`);
     return null;

@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
-const ClassSchema = new mongoose.Schema({
+const ClassroomSchema = new mongoose.Schema({
+  class: {
+    type: String
+  },
+  /*
   title: {
     type: String,
     required: true
@@ -37,6 +41,30 @@ const ClassSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId
   },
+  */
+  students_name: [
+    {
+      type: String
+    }
+  ],
+  assignments: [
+    {
+      date: {
+        type: String
+      },
+      task: {
+        type: String
+      }
+    }
+  ],
+  currentProject: {
+    type: mongoose.Schema.Types.ObjectId
+  },
+  archivedProjects: [
+    {
+      type: mongoose.Schema.Types.ObjectId
+    }
+  ],
   date: {
     created: {
       type: Date,
@@ -45,6 +73,6 @@ const ClassSchema = new mongoose.Schema({
   }
 });
 
-const Class = mongoose.model("class", ClassSchema);
+const Classroom = mongoose.model("classroom", ClassroomSchema);
 
-module.exports = Class;
+module.exports = Classroom;
