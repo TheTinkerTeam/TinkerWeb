@@ -36,7 +36,7 @@ import Alert from "./components/services/Alert";
 import { setAlert } from "./actions/alertActions";
 
 const App = props => {
-  console.log(props);
+  // console.log(props);
   const auth = useSelector(state => state.firebase.auth);
   useEffect(() => {
     if (auth && auth.uid) {

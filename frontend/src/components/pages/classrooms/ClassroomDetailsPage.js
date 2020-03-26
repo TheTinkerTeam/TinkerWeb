@@ -9,7 +9,9 @@ import {
   Grid,
   Image,
   Divider,
-  Dropdown
+  Dropdown,
+  Select,
+  Input
 } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
@@ -51,6 +53,7 @@ const ClassroomDetailsPage = props => {
   const initialState = {
     isStudentsActive: true,
     isWorkspaceActive: true,
+    isMakeTeamsActive: false,
     currentStudentName: "",
     classList: [
       "Lucas",
@@ -59,16 +62,17 @@ const ClassroomDetailsPage = props => {
       "Joseph",
       "Mike",
       "Chat",
-      "chien",
-      "banane",
-      "loup",
-      "lion",
-      "tigre",
-      "grenade"
+      "Chien",
+      "Banane",
+      "Loup",
+      "Lion",
+      "Tigre",
+      "Grenade"
     ],
     tasksList: [],
     currentTask: "",
-    teams: []
+    teams: [],
+    teams_number: ""
   };
 
   const [state, setState] = useState(initialState);
@@ -77,21 +81,46 @@ const ClassroomDetailsPage = props => {
     setState(prevState => ({ ...prevState, [name]: value }));
 
   const handleSubmit = () => {
+    var boards = document.getElementsByClassName("board");
+
+    if (boards.length != 0) {
+      const teams = Array.from(boards).map(board => {
+        return Array.from(board.children).map(card => card.innerText);
+      });
+    }
+
     if (state.currentStudentName.length !== 0) {
       setState(prevState => ({
         ...prevState,
         classList: [...prevState.classList, prevState.currentStudentName],
-        currentStudentName: ""
+        currentStudentName: "",
+        teams: teams
       }));
     }
+    console.log("the state is", state);
+  };
+
+  const handleNumberSubmit = () => {
+    const { teams_number } = state;
+
+    setState(prevState => ({ ...prevState, teams_number: teams_number }));
   };
 
   const handleDeleteStudent = name => {
     console.log("delete student");
     console.log(name);
+
+    const old_teams = state.teams;
+
+    let new_teams = [];
+    new_teams = old_teams.map((team) => {
+      return team.filter(student => student !== name)
+    })
+
     setState(prevState => ({
       ...prevState,
-      classList: prevState.classList.filter(student => student !== name)
+      classList: prevState.classList.filter(student => student !== name),
+      teams: new_teams
     }));
   };
 
@@ -128,11 +157,18 @@ const ClassroomDetailsPage = props => {
     }));
   };
 
+  const toggleMakeTeamsButton = () => {
+    setState(prevState => ({
+      ...prevState,
+      isMakeTeamsActive: !prevState.isMakeTeamsActive
+    }));
+  };
+
   const makeTeams = () => {
     var boards = document.getElementsByClassName("board");
 
     const teams = Array.from(boards).map(board => {
-      return Array.from(board.children).map(card => card.id);
+      return Array.from(board.children).map(card => card.innerText);
     });
 
     // console.log(teams);
@@ -149,7 +185,10 @@ const ClassroomDetailsPage = props => {
     currentStudentName,
     classList,
     tasksList,
-    currentTask
+    currentTask,
+    teams,
+    isMakeTeamsActive,
+    teams_number
   } = state;
 
   const { loading, error, data } = useQuery(GET_PROJECTS);
@@ -159,11 +198,72 @@ const ClassroomDetailsPage = props => {
 
   const projects = data.projects;
 
-  console.log(state);
-  console.log(projects);
+  const createDnDteam = number => {
+    if (number > state.classList.length / 2) {
+      return (
+        <div style={{ textAlign: "center" }}>
+          <div>Wow, that's a lot of teams!</div>{" "}
+          <div>Please, select a smaller team number!</div>
+        </div>
+      );
+    }
+    let teams = [];
+
+    // Outer loop to create parent
+    for (let i = 0; i < number; i++) {
+      let children = [];
+      //Inner loop to create children
+      if (i === 0) {
+        state.classList
+          .slice(i, state.classList.length / number)
+          .map((student, index) =>
+            children.push(
+              <DragAndDropCard
+                id={"card_" + `${student}`.capitalize()}
+                className='card'
+                draggable='true'
+                key={index}
+              >
+                <Segment className='student-name-container'>
+                  <div>{`${student}`.capitalize()}</div>
+                </Segment>
+              </DragAndDropCard>
+            )
+          );
+      } else {
+        state.classList
+          .slice(
+            i * (state.classList.length / number),
+            (i + 1) * (state.classList.length / number)
+          )
+          .map((student, index) =>
+            children.push(
+              <DragAndDropCard
+                id={"card_" + `${student}`.capitalize()}
+                className='card'
+                draggable='true'
+                key={index}
+              >
+                <Segment className='student-name-container'>
+                  <div>{`${student}`.capitalize()}</div>
+                </Segment>
+              </DragAndDropCard>
+            )
+          );
+      }
+      //Create the parent and add the children
+      teams.push(
+        <DragAndDropComponent key={i} id={"team_board_" + `${i}`} className='board'>
+          {children}
+        </DragAndDropComponent>
+      );
+    }
+    return teams;
+  };
 
   return (
     <div>
+      {console.log(state)}
       <div className='classroom-title-style'>
         Hi, I am the "GRADE" ClassroomDetailsPage!
       </div>
@@ -230,6 +330,27 @@ const ClassroomDetailsPage = props => {
                 </Segment>
               ))
             )}
+
+            <div className='flexbox-container in-section-margin'>
+              <div className='section-classroom-title'>TEAMS</div>
+
+              {isMakeTeamsActive ? (
+                <Button
+                  className='arrow-down-button-classroom'
+                  circular
+                  icon='angle up'
+                  onClick={toggleMakeTeamsButton}
+                />
+              ) : (
+                <Button
+                  className='arrow-down-button-classroom'
+                  circular
+                  icon='angle down'
+                  onClick={toggleMakeTeamsButton}
+                />
+              )}
+            </div>
+
             <Divider />
             {classList && classList.length === 0 ? (
               <div>
@@ -237,60 +358,111 @@ const ClassroomDetailsPage = props => {
               </div>
             ) : (
               <div>
-                <div className='flexbox'>
-                  <Button
-                    style={{ width: "95%" }}
-                    content='Assign Teams'
-                    onClick={makeTeams}
-                  />
-                </div>
-                <div className='flexbox'>
-                  <DragAndDropComponent id='team_board_1' className='board'>
-                    {classList.slice(0, 4).map((student, index) => (
-                      <DragAndDropCard
-                        id={"card_" + `${student}`.capitalize()}
-                        className='card'
-                        draggable='true'
-                        key={index}
-                      >
-                        <Segment className='student-name-container'>
-                          <div>{`${student}`.capitalize()}</div>
-                        </Segment>
-                      </DragAndDropCard>
-                    ))}
-                  </DragAndDropComponent>
-                  <DragAndDropComponent id='team_board_2' className='board'>
-                    {classList.slice(4, 8).map((student, index) => (
-                      <DragAndDropCard
-                        id={"card_" + `${student}`.capitalize()}
-                        className='card'
-                        key={index}
-                        draggable='true'
-                      >
-                        <Segment className='student-name-container'>
-                          <div>{`${student}`.capitalize()}</div>
-                        </Segment>
-                      </DragAndDropCard>
-                    ))}
-                  </DragAndDropComponent>
-                  <DragAndDropComponent id='team_board_3' className='board'>
-                    {classList.slice(8, 12).map((student, index) => (
-                      <DragAndDropCard
-                        id={"card_" + `${student}`.capitalize()}
-                        className='card'
-                        draggable='true'
-                        key={index}
-                      >
-                        <Segment className='student-name-container'>
-                          <div>{`${student}`.capitalize()}</div>
-                        </Segment>
-                      </DragAndDropCard>
-                    ))}
-                  </DragAndDropComponent>
-                  {/* <Button content='Make Teams' onClick={makeTeams} /> */}
-                </div>
+                {teams.length === 0 ? (
+                  <div>
+                    <div className='flexbox'>
+                      <div>You haven't assigned students a team yet.</div>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <div className='flexbox'>
+                      <div>
+                        You have assigned students a team for the "
+                        {projects[0].title}" project.
+                      </div>
+                    </div>
+
+                    <div className='flexbox'>
+                      {teams.map((team, index) => (
+                        <div key={index} style={{ textAlign: "center" }}>
+                          <div style={{ fontWeight: "bolder" }}>
+                            Team {index + 1}
+                          </div>
+                          {team.map((student, index) => (
+                            <div key={index}>{student}</div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {isMakeTeamsActive && (
+                  <div>
+                    <div className='flexbox'>
+
+                      <Button
+                        style={{ width: "95%" }}
+                        content={
+                          teams.length === 0
+                            ? `Make Teams for the current project: ${projects[0].title}`
+                            : `Make New Teams for the current project: ${projects[0].title}`
+                        }
+                        onClick={makeTeams}
+                      />
+                    </div>
+
+                    <Form autoComplete='off' onSubmit={handleNumberSubmit}>
+                      <Form.Input
+                        placeholder='How many teams?'
+                        label='How many teams?'
+                        name='teams_number'
+                        value={teams_number}
+                        onChange={handleChange}
+                      />
+                    </Form>
+
+                    <div className='flexbox'>
+                      {teams_number != "" && createDnDteam(`${teams_number}`)}
+                      {/* <DragAndDropComponent id='team_board_1' className='board'>
+                        {classList.slice(0, 5).map((student, index) => (
+                          <DragAndDropCard
+                            id={"card_" + `${student}`.capitalize()}
+                            className='card'
+                            draggable='true'
+                            key={index}
+                          >
+                            <Segment className='student-name-container'>
+                              <div>{`${student}`.capitalize()}</div>
+                            </Segment>
+                          </DragAndDropCard>
+                        ))}
+                      </DragAndDropComponent>
+                      <DragAndDropComponent id='team_board_2' className='board'>
+                        {classList.slice(5, 9).map((student, index) => (
+                          <DragAndDropCard
+                            id={"card_" + `${student}`.capitalize()}
+                            className='card'
+                            key={index}
+                            draggable='true'
+                          >
+                            <Segment className='student-name-container'>
+                              <div>{`${student}`.capitalize()}</div>
+                            </Segment>
+                          </DragAndDropCard>
+                        ))}
+                      </DragAndDropComponent>
+                      <DragAndDropComponent id='team_board_3' className='board'>
+                        {classList.slice(9, 18).map((student, index) => (
+                          <DragAndDropCard
+                            id={"card_" + `${student}`.capitalize()}
+                            className='card'
+                            draggable='true'
+                            key={index}
+                          >
+                            <Segment className='student-name-container'>
+                              <div>{`${student}`.capitalize()}</div>
+                            </Segment>
+                          </DragAndDropCard>
+                        ))}
+                      </DragAndDropComponent> */}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
+
             <Divider />
             <Divider />
             <Divider />

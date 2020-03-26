@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
 const DragAndDropComponent = props => {
-	const [wasDropped, setDropFlag] = useState(false);
 
   const drop = e => {
 	e.preventDefault();

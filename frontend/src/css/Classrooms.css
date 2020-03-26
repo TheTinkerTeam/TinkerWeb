@@ -281,3 +281,19 @@ a {
   border: none;
   box-shadow: none;
 }
+
+/* ============================================== */
+/*   Classroom Details Page - Title in sections   */
+/* ============================================== */
+
+.section-classroom-title{
+  font-family: "Poppins";
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: normal;
+}
+
+.flexbox-container.in-section-margin {
+  margin-top: 3rem;
+}
