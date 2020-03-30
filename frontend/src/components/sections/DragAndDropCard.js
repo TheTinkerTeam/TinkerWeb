@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
 const DragAndDropCard = props => {
-//   const isDragged = false;
+  //   const isDragged = false;
 
-//   const [isDragged, setFlag] = useState(false);
+  //   const [isDragged, setFlag] = useState(false);
 
-//   const handleDragChange = () => {
-// 	  setFlag(true);
-//   }
+  //   const handleDragChange = () => {
+  // 	  setFlag(true);
+  //   }
 
   const dragStart = e => {
     const target = e.target;
@@ -25,24 +25,24 @@ const DragAndDropCard = props => {
   };
 
   const dragOver = e => {
-	// e.preventDefault();
+    // e.preventDefault();
     e.stopPropagation();
   };
 
   const dragEnd = e => {
-
     console.log("dragEnd");
 
-	e.preventDefault();
+    e.preventDefault();
 
-	console.log(e.target.className);
+    console.log(e.target.className);
 
-	if (e.target.className === "test") {
-		setTimeout(() => {
-			e.target.style.display = "visible";
-		  }, 0);
-	}
+    // if (e.target.className === "test") {
+    // 	setTimeout(() => {
+    // 		e.target.style.display = "visible";
+    // 	  }, 0);
+    // }
     console.log("in dragend e.dataTransfer.items:", e.dataTransfer.items);
+
 
     // const card_data = JSON.parse(e.dataTransfer.getData("card"));
 
