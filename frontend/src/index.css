@@ -1,4 +1,5 @@
-html, body{
+html,
+body {
   min-height: 100vh;
   overflow: auto;
 }
@@ -163,7 +164,7 @@ code {
 /*    SideBar Button style    */
 /* ========================== */
 
-.ui.menu:not(.vertical) .item>.button {
+.ui.menu:not(.vertical) .item > .button {
   color: #181c3f;
   background: white;
 }
@@ -196,7 +197,8 @@ code {
   box-shadow: none;
 }
 
-.ui.thin.left.sidebar, .ui.thin.right.sidebar {
+.ui.thin.left.sidebar,
+.ui.thin.right.sidebar {
   width: 160px;
 }
 
@@ -204,20 +206,20 @@ code {
 /*      Text style      */
 /* ==================== */
 
-.paragraph-style{
+.paragraph-style {
   font-family: "Poppins";
   color: #181c3f;
   font-weight: 200;
 }
 
-.paragraph-title-style{
+.paragraph-title-style {
   font-family: "Poppins";
   color: #181c3f;
   font-size: 1.1rem;
   font-weight: 600;
 }
 
-.project-title-style{
+.project-title-style {
   font-family: "Poppins";
   font-weight: 600;
   font-size: 4rem;
@@ -249,7 +251,7 @@ code {
 /*    Drag and Drop Component    */
 /* ============================= */
 
-.flexbox{
+.flexbox {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -265,30 +267,30 @@ code {
   padding: 15px;
 }
 
-.flexbox .board{
+.flexbox .board {
   display: flex;
   flex-direction: column;
 
   width: 100%;
-  max-width: 300px;
+  max-width: 250px;
   /* min-width: 300px; */
-  min-height: 400px;
-  background-color: red;
+  min-height: 350px;
+  background-color: #f5514c;
+  border: 2px solid #f5514c;
+  border-radius: 50px 20px 50px 20px ;
 
-  padding: 15px;
+  padding: 35px;
   margin: 0 0.5em 0.5em 0.5em;
 }
 
-.flexbox .board .card{
+.flexbox .board .card {
   /* padding: 15px 25px; */
   /* background-color: aqua; */
 
   cursor: move; /* fallback: no `url()` support or images disabled */
-    cursor: -webkit-grab; /* Chrome 1-21, Safari 4+ */
-    cursor:    -moz-grab; /* Firefox 1.5-26 */
-    cursor:         grab;
+  cursor: -webkit-grab; /* Chrome 1-21, Safari 4+ */
+  cursor: -moz-grab; /* Firefox 1.5-26 */
+  cursor: grab;
 
   margin-bottom: 15px;
 }
-
-
