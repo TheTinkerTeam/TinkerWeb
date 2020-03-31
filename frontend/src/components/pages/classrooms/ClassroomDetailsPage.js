@@ -18,21 +18,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import DragAndDropComponent from "../../sections/DragAndDropComponent";
 import DragAndDropCard from "../../sections/DragAndDropCard";
-
-// const GET_PROJECT = gql`
-//   query getProject($id: ID!) {
-//     project(id: $id) {
-//       id
-//       title
-//       description
-//       imageURL
-//       learning_objectives
-//       subjects
-//       tags
-//       grades
-//     }
-//   }
-// `;
+import TeamMaker from "./TeamMaker";
 
 const GET_PROJECTS = gql`
   {
@@ -50,10 +36,11 @@ const GET_PROJECTS = gql`
 `;
 
 const ClassroomDetailsPage = props => {
+
   const initialState = {
     isStudentsActive: true,
     isWorkspaceActive: true,
-    isMakeTeamsActive: false,
+    isMakeTeamsActive: true,
     currentStudentName: "",
     classList: [
       "Lucas",
@@ -71,12 +58,12 @@ const ClassroomDetailsPage = props => {
     ],
     tasksList: [],
     currentTask: "",
-    teams: [
-      ["Lucas", "Edith", "Toto", "Joseph"],
-      ["Mike", "Chat", "Chien", "Banane"],
-      ["Loup", "Lion", "Tigre", "Grenade"]
-    ],
-    // teams: [],
+    // teams: [
+    //   ["Lucas", "Edith", "Toto", "Joseph"],
+    //   ["Mike", "Chat", "Chien", "Banane"],
+    //   ["Loup", "Lion", "Tigre", "Grenade"]
+    // ],
+    teams: [],
     teamCount: 3
   };
 
@@ -84,33 +71,80 @@ const ClassroomDetailsPage = props => {
 
   const [state, setState] = useState(initialState);
 
+  const generateRandomTeams = (teamCount, students) => {
+    let teamsCreated = [];
+    for (let i = 0; i < teamCount; i++) {
+      let children = [];
+      if (i === 0) {
+        students
+          .slice(i, students.length / teamCount)
+          .map((student, index) => children.push(`${student}`.capitalize()));
+      } else {
+        students
+          .slice(
+            i * (students.length / teamCount),
+            (i + 1) * (students.length / teamCount)
+          )
+          .map((student, index) => children.push(`${student}`.capitalize()));
+      }
+      //Create the parent and add the children
+      teamsCreated.push(children);
+    }
+    return teamsCreated;
+  };
+
+  const [teams, setTeams] = useState(generateRandomTeams(state.teamCount, state.classList));
+
+  const moveStudent = (studentId, originTeamId, destinationTeamId, teams) => {
+    const newTeams = [...teams];
+
+    newTeams[originTeamId] = newTeams[originTeamId].filter(
+      sid => sid !== studentId
+    );
+
+    newTeams[destinationTeamId].push(studentId);
+
+    console.log("newTeams", newTeams);
+    return newTeams;
+  };
+
   useEffect(() => {
-    generateTeams(state.classList);
-    // setState(prevState => ({
-    //   ...prevState,
-    //   teams: teams
-    // }));
+    setTeams(generateRandomTeams(state.teamCount, state.classList));
   }, [state.teamCount]);
+
+  const handleChangeDnd = (studentId, originTeamId, destinationTeamId) => {
+    // console.log("studentId =", studentId);
+    // console.log("originTeamId =", originTeamId);
+    // console.log("destinationTeamId =", destinationTeamId);
+
+    // console.log("Before moving, these are the teams:", teams);
+    setTeams(moveStudent(studentId, originTeamId, destinationTeamId, teams));
+    // console.log("After moving, these are the teams:", teams);
+  };
 
   const handleChange = (e, { name, value }) =>
     setState(prevState => ({ ...prevState, [name]: value }));
 
   const handleNewStudentSubmit = () => {
-    var boards = document.getElementsByClassName("board");
+    // var boards = document.getElementsByClassName("board");
 
-    if (boards.length != 0) {
-      const teams = Array.from(boards).map(board => {
-        return Array.from(board.children).map(card => card.innerText);
-      });
-    }
+    // if (boards.length != 0) {
+    //   const teams = Array.from(boards).map(board => {
+    //     return Array.from(board.children).map(card => card.innerText);
+    //   });
+    // }
+
+    let newTeams = teams;
+
+    newTeams[0] = [...teams[0], state.currentStudentName.capitalize()];
 
     if (state.currentStudentName.length !== 0) {
       setState(prevState => ({
         ...prevState,
-        classList: [...prevState.classList, prevState.currentStudentName],
+        classList: [...prevState.classList, prevState.currentStudentName.capitalize()],
         currentStudentName: "",
-        teams: teams
       }));
+      setTeams(newTeams);
     }
     console.log("the state is", state);
   };
@@ -123,20 +157,20 @@ const ClassroomDetailsPage = props => {
 
   const handleDeleteStudent = name => {
     // console.log("delete student");
-    // console.log(name);
+    console.log("name", name);
 
-    const old_teams = state.teams;
+    const oldTeams = teams;
 
-    let new_teams = [];
-    new_teams = old_teams.map(team => {
+    let newTeams = [];
+    newTeams = oldTeams.map(team => {
       return team.filter(student => student !== name);
     });
 
     setState(prevState => ({
       ...prevState,
       classList: prevState.classList.filter(student => student !== name),
-      teams: new_teams
     }));
+    setTeams(newTeams);
   };
 
   const handleStudentProfile = name => {
@@ -179,22 +213,22 @@ const ClassroomDetailsPage = props => {
     }));
   };
 
-  const makeTeams = () => {
-    var boards = document.getElementsByClassName("board");
+  // const makeTeams = () => {
+  //   var boards = document.getElementsByClassName("board");
 
-    console.log("boards:", boards);
+  //   console.log("boards:", boards);
 
-    const teams = Array.from(boards).map(board => {
-      return Array.from(board.children).map(card => card.innerText);
-    });
+  //   const teams = Array.from(boards).map(board => {
+  //     return Array.from(board.children).map(card => card.innerText);
+  //   });
 
-    console.log("teams:", teams);
+  //   console.log("teams:", teams);
 
-    setState(prevState => ({
-      ...prevState,
-      teams: teams
-    }));
-  };
+  //   setState(prevState => ({
+  //     ...prevState,
+  //     teams: teams
+  //   }));
+  // };
 
   const generateTeams = classList => {
     let teamCount = state.teamCount;
@@ -222,132 +256,132 @@ const ClassroomDetailsPage = props => {
     }));
   };
 
-  const createDnDteam = teamCount => {
-    if (teamCount > state.classList.length / 2) {
-      return (
-        <div style={{ textAlign: "center" }}>
-          <div>Wow, that`s a lot of teams!</div>{" "}
-          <div>Please, select a smaller team teamCount!</div>
-        </div>
-      );
-    }
+  // const createDnDteam = teamCount => {
+  //   if (teamCount > state.classList.length / 2) {
+  //     return (
+  //       <div style={{ textAlign: "center" }}>
+  //         <div>Wow, that`s a lot of teams!</div>{" "}
+  //         <div>Please, select a smaller team teamCount!</div>
+  //       </div>
+  //     );
+  //   }
 
-    let teamDragDropComponents = [];
+  //   let teamDragDropComponents = [];
 
-    let teams = state.teams;
+  //   let teams = state.teams;
 
-    console.log("teamCount = ", teamCount);
+  //   console.log("teamCount = ", teamCount);
 
-    for (let i = 0; i < teamCount; i++) {
-      let children = [];
+  //   for (let i = 0; i < teamCount; i++) {
+  //     let children = [];
 
 
-      // console.log("teams[0] is", teams[0]);
-      console.log("i = ", i);
-      console.log("teams =", teams);
-      console.log("teams.length = ", teams.length);
+  //     // console.log("teams[0] is", teams[0]);
+  //     console.log("i = ", i);
+  //     console.log("teams =", teams);
+  //     console.log("teams.length = ", teams.length);
 
-      // state.teams.map(team => {
-      //   team.map((student, index) => {
-      //     children.push(
-      //       <DragAndDropCard
-      //         id={"card_" + `${student}`.capitalize()}
-      //         className='card'
-      //         draggable='true'
-      //         key={index}
-      //       >
-      //         <Segment className='student-name-container'>
-      //           <div>{`${student}`.capitalize()}</div>
-      //         </Segment>
-      //       </DragAndDropCard>
-      //     );
-      //   });
-      // });
+  //     // state.teams.map(team => {
+  //     //   team.map((student, index) => {
+  //     //     children.push(
+  //     //       <DragAndDropCard
+  //     //         id={"card_" + `${student}`.capitalize()}
+  //     //         className='card'
+  //     //         draggable='true'
+  //     //         key={index}
+  //     //       >
+  //     //         <Segment className='student-name-container'>
+  //     //           <div>{`${student}`.capitalize()}</div>
+  //     //         </Segment>
+  //     //       </DragAndDropCard>
+  //     //     );
+  //     //   });
+  //     // });
 
-      teams[i].map((student, index) => {
-        children.push(
-          <DragAndDropCard
-            id={"card_" + `${student}`.capitalize()}
-            className='card'
-            draggable='true'
-            key={index}
-          >
-            <Segment className='student-name-container'>
-              <div>{`${student}`.capitalize()}</div>
-            </Segment>
-          </DragAndDropCard>
-        );
-      });
+  //     teams[i].map((student, index) => {
+  //       children.push(
+  //         <DragAndDropCard
+  //           id={"card_" + `${student}`.capitalize()}
+  //           className='card'
+  //           draggable='true'
+  //           key={index}
+  //         >
+  //           <Segment className='student-name-container'>
+  //             <div>{`${student}`.capitalize()}</div>
+  //           </Segment>
+  //         </DragAndDropCard>
+  //       );
+  //     });
 
-      teamDragDropComponents.push(
-        <DragAndDropComponent
-          key={i}
-          id={"team_board_" + `${i}`}
-          teams={state.teams}
-          makeTeams={makeTeams}
-          className='board'
-        >
-          {children}
-        </DragAndDropComponent>
-      );
-    }
-    return teamDragDropComponents;
+  //     teamDragDropComponents.push(
+  //       <DragAndDropComponent
+  //         key={i}
+  //         id={"team_board_" + `${i}`}
+  //         teams={state.teams}
+  //         makeTeams={makeTeams}
+  //         className='board'
+  //       >
+  //         {children}
+  //       </DragAndDropComponent>
+  //     );
+  //   }
+  //   return teamDragDropComponents;
 
-    // for (let i = 0; i < number; i++) {
-    //   let children = [];
-    //   if (i === 0) {
-    //     state.classList
-    //       .slice(i, state.classList.length / number)
-    //       .map((student, index) =>
-    //         children.push(
-    //           <DragAndDropCard
-    //             id={"card_" + `${student}`.capitalize()}
-    //             className='card'
-    //             draggable='true'
-    //             key={index}
-    //           >
-    //             <Segment className='student-name-container'>
-    //               <div>{`${student}`.capitalize()}</div>
-    //             </Segment>
-    //           </DragAndDropCard>
-    //         )
-    //       );
-    //   } else {
-    //     state.classList
-    //       .slice(
-    //         i * (state.classList.length / number),
-    //         (i + 1) * (state.classList.length / number)
-    //       )
-    //       .map((student, index) =>
-    //         children.push(
-    //           <DragAndDropCard
-    //             id={"card_" + `${student}`.capitalize()}
-    //             className='card'
-    //             draggable='true'
-    //             key={index}
-    //           >
-    //             <Segment className='student-name-container'>
-    //               <div>{`${student}`.capitalize()}</div>
-    //             </Segment>
-    //           </DragAndDropCard>
-    //         )
-    //       );
-    //   }
-    //   //Create the parent and add the children
-    //   teamDragDropComponents.push(
-    //     <DragAndDropComponent
-    //       key={i}
-    //       id={"team_board_" + `${i}`}
-    //       teams={state.teams}
-    //       makeTeams={makeTeams}
-    //       className='board'
-    //     >
-    //       {children}
-    //     </DragAndDropComponent>
-    //   );
-    // }
-    // return teamDragDropComponents;
-  };
+  //   // for (let i = 0; i < number; i++) {
+  //   //   let children = [];
+  //   //   if (i === 0) {
+  //   //     state.classList
+  //   //       .slice(i, state.classList.length / number)
+  //   //       .map((student, index) =>
+  //   //         children.push(
+  //   //           <DragAndDropCard
+  //   //             id={"card_" + `${student}`.capitalize()}
+  //   //             className='card'
+  //   //             draggable='true'
+  //   //             key={index}
+  //   //           >
+  //   //             <Segment className='student-name-container'>
+  //   //               <div>{`${student}`.capitalize()}</div>
+  //   //             </Segment>
+  //   //           </DragAndDropCard>
+  //   //         )
+  //   //       );
+  //   //   } else {
+  //   //     state.classList
+  //   //       .slice(
+  //   //         i * (state.classList.length / number),
+  //   //         (i + 1) * (state.classList.length / number)
+  //   //       )
+  //   //       .map((student, index) =>
+  //   //         children.push(
+  //   //           <DragAndDropCard
+  //   //             id={"card_" + `${student}`.capitalize()}
+  //   //             className='card'
+  //   //             draggable='true'
+  //   //             key={index}
+  //   //           >
+  //   //             <Segment className='student-name-container'>
+  //   //               <div>{`${student}`.capitalize()}</div>
+  //   //             </Segment>
+  //   //           </DragAndDropCard>
+  //   //         )
+  //   //       );
+  //   //   }
+  //   //   //Create the parent and add the children
+  //   //   teamDragDropComponents.push(
+  //   //     <DragAndDropComponent
+  //   //       key={i}
+  //   //       id={"team_board_" + `${i}`}
+  //   //       teams={state.teams}
+  //   //       makeTeams={makeTeams}
+  //   //       className='board'
+  //   //     >
+  //   //       {children}
+  //   //     </DragAndDropComponent>
+  //   //   );
+  //   // }
+  //   // return teamDragDropComponents;
+  // };
 
   const options = [
     { key: "1", text: "1", value: 1 },
@@ -371,7 +405,6 @@ const ClassroomDetailsPage = props => {
     classList,
     tasksList,
     currentTask,
-    teams,
     isMakeTeamsActive,
     teamCount
   } = state;
@@ -410,6 +443,7 @@ const ClassroomDetailsPage = props => {
             )}
           </div>
         </Segment>
+
         {isStudentsActive && (
           <Segment>
             <Form autoComplete='off' onSubmit={handleNewStudentSubmit}>
@@ -512,7 +546,7 @@ const ClassroomDetailsPage = props => {
 
                 {isMakeTeamsActive && (
                   <div>
-                    <div className='flexbox'>
+                    {/* <div className='flexbox'>
                       <Button
                         style={{ width: "95%" }}
                         content={
@@ -522,16 +556,9 @@ const ClassroomDetailsPage = props => {
                         }
                         onClick={makeTeams}
                       />
-                    </div>
+                    </div> */}
 
                     <Form autoComplete='off' onSubmit={handleNumberSubmit}>
-                      {/* <Form.Input
-                        placeholder='How many teams?'
-                        label='How many teams?'
-                        name='teamCount'
-                        value={teamCount}
-                        onChange={handleChange}
-                      /> */}
                       <Form.Select
                         label='How many teams?'
                         name='teamCount'
@@ -541,57 +568,18 @@ const ClassroomDetailsPage = props => {
                       />
                     </Form>
 
-                    <div className='flexbox'>
+                    {/* <div className='flexbox'>
                       {teamCount != "" && createDnDteam(`${teamCount}`)}
-                      {/* <DragAndDropComponent id='team_board_1' className='board'>
-                        {classList.slice(0, 5).map((student, index) => (
-                          <DragAndDropCard
-                            id={"card_" + `${student}`.capitalize()}
-                            className='card'
-                            draggable='true'
-                            key={index}
-                          >
-                            <Segment className='student-name-container'>
-                              <div>{`${student}`.capitalize()}</div>
-                            </Segment>
-                          </DragAndDropCard>
-                        ))}
-                      </DragAndDropComponent>
-                      <DragAndDropComponent id='team_board_2' className='board'>
-                        {classList.slice(5, 9).map((student, index) => (
-                          <DragAndDropCard
-                            id={"card_" + `${student}`.capitalize()}
-                            className='card'
-                            key={index}
-                            draggable='true'
-                          >
-                            <Segment className='student-name-container'>
-                              <div>{`${student}`.capitalize()}</div>
-                            </Segment>
-                          </DragAndDropCard>
-                        ))}
-                      </DragAndDropComponent>
-                      <DragAndDropComponent id='team_board_3' className='board'>
-                        {classList.slice(9, 18).map((student, index) => (
-                          <DragAndDropCard
-                            id={"card_" + `${student}`.capitalize()}
-                            className='card'
-                            draggable='true'
-                            key={index}
-                          >
-                            <Segment className='student-name-container'>
-                              <div>{`${student}`.capitalize()}</div>
-                            </Segment>
-                          </DragAndDropCard>
-                        ))}
-                      </DragAndDropComponent> */}
-                    </div>
+                    </div> */}
+
+                      <TeamMaker teams={teams} handleChange={handleChangeDnd} moveStudent={moveStudent} generateRandomTeams={generateRandomTeams} students={classList} teamCount={teamCount}/>
+
                   </div>
                 )}
               </div>
             )}
 
-            <Divider />
+            {/* <Divider />
             <Divider />
             <Divider />
             <List bulleted>
@@ -605,7 +593,7 @@ const ClassroomDetailsPage = props => {
                 Possibility to click on a student to see his digital journal and
                 improvements.
               </List.Item>
-            </List>
+            </List>*/}
           </Segment>
         )}
       </Segment.Group>

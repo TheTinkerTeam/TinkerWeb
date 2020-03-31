@@ -1,32 +1,17 @@
 import React from "react";
 
 const DragAndDropComponent = props => {
-  const updateTeams = oldTeams => {};
+  const { teamId, onChange } = props;
 
   const drop = e => {
     e.preventDefault();
 
-    // console.log('drop');
-    // console.log(e.dataTransfer.items);
+    const cardData = JSON.parse(e.dataTransfer.getData("card"));
 
-    const card_data = JSON.parse(e.dataTransfer.getData("card"));
-    // console.log("card_data=", card_data);
+    const studentId = cardData["studentId"];
+    const originTeamId = cardData["teamId"];
 
-    const card_id = card_data["card_id"];
-    // console.log("card_id=", card_id);
-
-    const card = document.getElementById(card_id);
-    // card.style.display = "block";
-    // console.log(e.target)
-    if (e.target.className == "board") {
-        e.target.appendChild(card);
-    }
-
-    console.log("props.teams:", props.teams);
-
-    // props.makeTeams();
-
-    // updateTeams(props.teams);
+    onChange(studentId, originTeamId, teamId);
   };
 
   const dragOver = e => {
@@ -40,7 +25,6 @@ const DragAndDropComponent = props => {
       onDragOver={dragOver}
       className={props.className}
     >
-      {console.log("propchildren", props.children)}
       {props.children}
     </div>
   );
