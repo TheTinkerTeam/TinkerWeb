@@ -7,17 +7,11 @@ import {
   List,
   Icon,
   Grid,
-  Image,
-  Divider,
-  Dropdown,
-  Select,
-  Input
+  Divider
 } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import DragAndDropComponent from "../../sections/DragAndDropComponent";
-import DragAndDropCard from "../../sections/DragAndDropCard";
 import TeamMaker from "./TeamMaker";
 
 const GET_PROJECTS = gql`
@@ -36,7 +30,6 @@ const GET_PROJECTS = gql`
 `;
 
 const ClassroomDetailsPage = props => {
-
   const initialState = {
     isStudentsActive: true,
     isWorkspaceActive: true,
@@ -58,16 +51,9 @@ const ClassroomDetailsPage = props => {
     ],
     tasksList: [],
     currentTask: "",
-    // teams: [
-    //   ["Lucas", "Edith", "Toto", "Joseph"],
-    //   ["Mike", "Chat", "Chien", "Banane"],
-    //   ["Loup", "Lion", "Tigre", "Grenade"]
-    // ],
     teams: [],
     teamCount: 3
   };
-
-  // initialState['teams'] = generateTeams(initialState['classList']) ;
 
   const [state, setState] = useState(initialState);
 
@@ -93,7 +79,9 @@ const ClassroomDetailsPage = props => {
     return teamsCreated;
   };
 
-  const [teams, setTeams] = useState(generateRandomTeams(state.teamCount, state.classList));
+  const [teams, setTeams] = useState(
+    generateRandomTeams(state.teamCount, state.classList)
+  );
 
   const moveStudent = (studentId, originTeamId, destinationTeamId, teams) => {
     const newTeams = [...teams];
@@ -126,27 +114,20 @@ const ClassroomDetailsPage = props => {
     setState(prevState => ({ ...prevState, [name]: value }));
 
   const handleNewStudentSubmit = () => {
-    // var boards = document.getElementsByClassName("board");
-
-    // if (boards.length != 0) {
-    //   const teams = Array.from(boards).map(board => {
-    //     return Array.from(board.children).map(card => card.innerText);
-    //   });
-    // }
-
     let newTeams = teams;
-
     newTeams[0] = [...teams[0], state.currentStudentName.capitalize()];
 
     if (state.currentStudentName.length !== 0) {
       setState(prevState => ({
         ...prevState,
-        classList: [...prevState.classList, prevState.currentStudentName.capitalize()],
-        currentStudentName: "",
+        classList: [
+          ...prevState.classList,
+          prevState.currentStudentName.capitalize()
+        ],
+        currentStudentName: ""
       }));
       setTeams(newTeams);
     }
-    console.log("the state is", state);
   };
 
   const handleNumberSubmit = () => {
@@ -156,11 +137,7 @@ const ClassroomDetailsPage = props => {
   };
 
   const handleDeleteStudent = name => {
-    // console.log("delete student");
-    console.log("name", name);
-
     const oldTeams = teams;
-
     let newTeams = [];
     newTeams = oldTeams.map(team => {
       return team.filter(student => student !== name);
@@ -168,7 +145,7 @@ const ClassroomDetailsPage = props => {
 
     setState(prevState => ({
       ...prevState,
-      classList: prevState.classList.filter(student => student !== name),
+      classList: prevState.classList.filter(student => student !== name)
     }));
     setTeams(newTeams);
   };
@@ -176,10 +153,6 @@ const ClassroomDetailsPage = props => {
   const handleStudentProfile = name => {
     console.log("open student profile");
     console.log(name);
-    // setState(prevState => ({
-    //   ...prevState,
-    //   classList: prevState.classList.filter(student => student !== name)
-    // }));
   };
 
   const handleSubmitTask = () => {
@@ -213,190 +186,15 @@ const ClassroomDetailsPage = props => {
     }));
   };
 
-  // const makeTeams = () => {
-  //   var boards = document.getElementsByClassName("board");
-
-  //   console.log("boards:", boards);
-
-  //   const teams = Array.from(boards).map(board => {
-  //     return Array.from(board.children).map(card => card.innerText);
-  //   });
-
-  //   console.log("teams:", teams);
-
-  //   setState(prevState => ({
-  //     ...prevState,
-  //     teams: teams
-  //   }));
-  // };
-
-  const generateTeams = classList => {
-    let teamCount = state.teamCount;
-    let teamsCreated = [];
-    for (let i = 0; i < teamCount; i++) {
-      let children = [];
-      if (i === 0) {
-        classList
-          .slice(i, classList.length / teamCount)
-          .map((student, index) => children.push(`${student}`.capitalize()));
-      } else {
-        classList
-          .slice(
-            i * (classList.length / teamCount),
-            (i + 1) * (classList.length / teamCount)
-          )
-          .map((student, index) => children.push(`${student}`.capitalize()));
-      }
-      //Create the parent and add the children
-      teamsCreated.push(children);
+  const createTeamsCountOptions = () => {
+    let options = [];
+    for (let i = 0; i < (state.classList.length / 2); i++) {
+      options.push({ key: `${i + 1}`, text: `${i + 1}`, value: `${i + 1}`})
     }
-    setState(prevState => ({
-      ...prevState,
-      teams: teamsCreated,
-    }));
-  };
+    return options;
+  }
 
-  // const createDnDteam = teamCount => {
-  //   if (teamCount > state.classList.length / 2) {
-  //     return (
-  //       <div style={{ textAlign: "center" }}>
-  //         <div>Wow, that`s a lot of teams!</div>{" "}
-  //         <div>Please, select a smaller team teamCount!</div>
-  //       </div>
-  //     );
-  //   }
-
-  //   let teamDragDropComponents = [];
-
-  //   let teams = state.teams;
-
-  //   console.log("teamCount = ", teamCount);
-
-  //   for (let i = 0; i < teamCount; i++) {
-  //     let children = [];
-
-
-  //     // console.log("teams[0] is", teams[0]);
-  //     console.log("i = ", i);
-  //     console.log("teams =", teams);
-  //     console.log("teams.length = ", teams.length);
-
-  //     // state.teams.map(team => {
-  //     //   team.map((student, index) => {
-  //     //     children.push(
-  //     //       <DragAndDropCard
-  //     //         id={"card_" + `${student}`.capitalize()}
-  //     //         className='card'
-  //     //         draggable='true'
-  //     //         key={index}
-  //     //       >
-  //     //         <Segment className='student-name-container'>
-  //     //           <div>{`${student}`.capitalize()}</div>
-  //     //         </Segment>
-  //     //       </DragAndDropCard>
-  //     //     );
-  //     //   });
-  //     // });
-
-  //     teams[i].map((student, index) => {
-  //       children.push(
-  //         <DragAndDropCard
-  //           id={"card_" + `${student}`.capitalize()}
-  //           className='card'
-  //           draggable='true'
-  //           key={index}
-  //         >
-  //           <Segment className='student-name-container'>
-  //             <div>{`${student}`.capitalize()}</div>
-  //           </Segment>
-  //         </DragAndDropCard>
-  //       );
-  //     });
-
-  //     teamDragDropComponents.push(
-  //       <DragAndDropComponent
-  //         key={i}
-  //         id={"team_board_" + `${i}`}
-  //         teams={state.teams}
-  //         makeTeams={makeTeams}
-  //         className='board'
-  //       >
-  //         {children}
-  //       </DragAndDropComponent>
-  //     );
-  //   }
-  //   return teamDragDropComponents;
-
-  //   // for (let i = 0; i < number; i++) {
-  //   //   let children = [];
-  //   //   if (i === 0) {
-  //   //     state.classList
-  //   //       .slice(i, state.classList.length / number)
-  //   //       .map((student, index) =>
-  //   //         children.push(
-  //   //           <DragAndDropCard
-  //   //             id={"card_" + `${student}`.capitalize()}
-  //   //             className='card'
-  //   //             draggable='true'
-  //   //             key={index}
-  //   //           >
-  //   //             <Segment className='student-name-container'>
-  //   //               <div>{`${student}`.capitalize()}</div>
-  //   //             </Segment>
-  //   //           </DragAndDropCard>
-  //   //         )
-  //   //       );
-  //   //   } else {
-  //   //     state.classList
-  //   //       .slice(
-  //   //         i * (state.classList.length / number),
-  //   //         (i + 1) * (state.classList.length / number)
-  //   //       )
-  //   //       .map((student, index) =>
-  //   //         children.push(
-  //   //           <DragAndDropCard
-  //   //             id={"card_" + `${student}`.capitalize()}
-  //   //             className='card'
-  //   //             draggable='true'
-  //   //             key={index}
-  //   //           >
-  //   //             <Segment className='student-name-container'>
-  //   //               <div>{`${student}`.capitalize()}</div>
-  //   //             </Segment>
-  //   //           </DragAndDropCard>
-  //   //         )
-  //   //       );
-  //   //   }
-  //   //   //Create the parent and add the children
-  //   //   teamDragDropComponents.push(
-  //   //     <DragAndDropComponent
-  //   //       key={i}
-  //   //       id={"team_board_" + `${i}`}
-  //   //       teams={state.teams}
-  //   //       makeTeams={makeTeams}
-  //   //       className='board'
-  //   //     >
-  //   //       {children}
-  //   //     </DragAndDropComponent>
-  //   //   );
-  //   // }
-  //   // return teamDragDropComponents;
-  // };
-
-  const options = [
-    { key: "1", text: "1", value: 1 },
-    { key: "2", text: "2", value: 2 },
-    { key: "3", text: "3", value: 3 },
-    { key: "4", text: "4", value: 4 },
-    { key: "5", text: "5", value: 5 },
-    { key: "6", text: "6", value: 6 },
-    { key: "7", text: "7", value: 7 },
-    { key: "8", text: "8", value: 8 },
-    { key: "9", text: "9", value: 9 },
-    { key: "10", text: "10", value: 10 },
-    { key: "11", text: "11", value: 11 },
-    { key: "12", text: "12", value: 12 }
-  ];
+  const options = createTeamsCountOptions();
 
   const {
     isStudentsActive,
@@ -418,7 +216,6 @@ const ClassroomDetailsPage = props => {
 
   return (
     <div>
-      {console.log(state)}
       <div className='classroom-title-style'>
         Hi, I am the "GRADE" ClassroomDetailsPage!
       </div>
@@ -568,20 +365,20 @@ const ClassroomDetailsPage = props => {
                       />
                     </Form>
 
-                    {/* <div className='flexbox'>
-                      {teamCount != "" && createDnDteam(`${teamCount}`)}
-                    </div> */}
-
-                      <TeamMaker teams={teams} handleChange={handleChangeDnd} moveStudent={moveStudent} generateRandomTeams={generateRandomTeams} students={classList} teamCount={teamCount}/>
-
+                    <TeamMaker
+                      teams={teams}
+                      handleChange={handleChangeDnd}
+                      moveStudent={moveStudent}
+                      generateRandomTeams={generateRandomTeams}
+                      students={classList}
+                      teamCount={teamCount}
+                    />
                   </div>
                 )}
               </div>
             )}
 
             {/* <Divider />
-            <Divider />
-            <Divider />
             <List bulleted>
               <div>What's in this section?</div>
               <List.Item>Option to make groups/team</List.Item>
@@ -602,6 +399,7 @@ const ClassroomDetailsPage = props => {
         <Segment className='section-title'>
           <div className='flexbox-container'>
             <div>WORKSPACE</div>
+
             {isWorkspaceActive ? (
               <Button
                 className='arrow-down-button-classroom'
@@ -622,7 +420,7 @@ const ClassroomDetailsPage = props => {
 
         {isWorkspaceActive && (
           <Segment>
-            <List bulleted>
+            {/* <List bulleted>
               <div>What's in this section?</div>
               <List.Item>Current project</List.Item>
               <List.Item>
@@ -630,14 +428,11 @@ const ClassroomDetailsPage = props => {
                 class
               </List.Item>
               <List.Item>Archived projects</List.Item>
-            </List>
+            </List> */}
 
             <Segment className='currentProjectContainer inWorkspaceContainer'>
               <Grid className='currentProjectGrid' stackable columns={2}>
                 <Grid.Column width={4}>
-                  {/* <Segment className="currentProjectColumn"> */}
-                  {/* <Image centered src={projects[0].imageURL} /> */}
-                  {/* </Segment> */}
                 </Grid.Column>
                 <Grid.Column width={12}>
                   <Segment className='currentProjectColumn'>

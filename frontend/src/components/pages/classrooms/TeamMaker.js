@@ -5,68 +5,7 @@ import { Segment } from "semantic-ui-react";
 import "../../../css/Classrooms.css";
 
 const TeamMaker = props => {
-  const { teamCount, teams, students, handleChange } = props;
-
-  //   const generateTeams = (teamCount, students) => {
-  //     const teams = [];
-
-  //     for (let i = 0; i < teamCount; i++) {
-  //       teams.push([`Lucas #${i}`, `Didi #${i}`, `Toto #${i}`]);
-  //     }
-
-  //     return teams;
-  //   };
-
-//   const generateRandomTeams = (teamCount, students) => {
-//     let teamsCreated = [];
-//     for (let i = 0; i < teamCount; i++) {
-//       let children = [];
-//       if (i === 0) {
-//         students
-//           .slice(i, students.length / teamCount)
-//           .map((student, index) => children.push(`${student}`.capitalize()));
-//       } else {
-//         students
-//           .slice(
-//             i * (students.length / teamCount),
-//             (i + 1) * (students.length / teamCount)
-//           )
-//           .map((student, index) => children.push(`${student}`.capitalize()));
-//       }
-//       //Create the parent and add the children
-//       teamsCreated.push(children);
-//     }
-//     return teamsCreated;
-//   };
-
-//   const [teams, setTeams] = useState(generateRandomTeams(teamCount, students));
-
-//   const moveStudent = (studentId, originTeamId, destinationTeamId, teams) => {
-//     const newTeams = [...teams];
-
-//     newTeams[originTeamId] = newTeams[originTeamId].filter(
-//       sid => sid !== studentId
-//     );
-
-//     newTeams[destinationTeamId].push(studentId);
-
-//     console.log("newTeams", newTeams);
-//     return newTeams;
-//   };
-
-//   useEffect(() => {
-//     setTeams(generateRandomTeams(teamCount, students));
-//   }, [teamCount]);
-
-//   const handleChange = (studentId, originTeamId, destinationTeamId) => {
-//     console.log("studentId =", studentId);
-//     console.log("originTeamId =", originTeamId);
-//     console.log("destinationTeamId =", destinationTeamId);
-
-//     console.log("Before moving, these are the teams:", teams);
-//     setTeams(moveStudent(studentId, originTeamId, destinationTeamId, teams));
-//     // console.log("After moving, these are the teams:", teams);
-//   };
+  const { teams, handleChange } = props;
 
   return (
     <div className='flexbox'>
