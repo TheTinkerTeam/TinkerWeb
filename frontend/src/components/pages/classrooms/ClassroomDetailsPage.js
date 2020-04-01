@@ -286,7 +286,7 @@ const ClassroomDetailsPage = props => {
 
         {isStudentsActive && (
           <Segment>
-            <Form className="newStudentInput" autoComplete="off" onSubmit={() => handleNewStudentSubmi(routeParam)}>
+            <Form className="newStudentInput" autoComplete="off" onSubmit={() => handleNewStudentSubmit(routeParam)}>
               <Form.Group>
                 <Form.Input
                   placeholder="Student Name"
@@ -365,7 +365,7 @@ const ClassroomDetailsPage = props => {
                     <div className='flexbox'>
                       <div>
                         Yay, here are the "
-                        {projects[0].title}" teams!
+                        {currentProject.title}" teams!
                       </div>
                     </div>
 

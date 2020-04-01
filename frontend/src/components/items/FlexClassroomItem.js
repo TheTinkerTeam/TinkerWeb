@@ -10,8 +10,8 @@ class FlexClassroomItem extends Component {
         <div className="class-text">{item.class}</div>
         {item.subject && <div className="subject-text">{item.subject}</div>}
         {item.assignments && item.assignments.length !== 0 ? (
-          item.assignments.slice(0, 3).map(due => (
-            <div className="assignement-text">
+          item.assignments.slice(0, 3).map((due, index) => (
+            <div key={index} className="assignement-text">
               {due.date} - {`${due.task}`.slice(0, 30)}
               {`${due.task}`.length >= 31 && <span>(.....)</span>}
             </div>

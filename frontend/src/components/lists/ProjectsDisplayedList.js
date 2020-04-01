@@ -10,7 +10,7 @@ class ProjectsDisplayedList extends Component {
       <div className="projects-display-flex-container">
         {projects &&
           projects.map(project => (
-            <ProjectsDisplayedItem key={project._id} project={project} />
+            <ProjectsDisplayedItem key={project.id} project={project} />
           ))}
       </div>
     );
