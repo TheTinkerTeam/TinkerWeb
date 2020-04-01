@@ -25,7 +25,6 @@ const httpLink = new createHttpLink({
 
 const authLink = setContext(async (_, { headers }) => {
   const currentUser = getFirebase().auth().currentUser;
-  console.log(currentUser);
   let token = null;
   if (currentUser) {
     token = await currentUser.getIdToken(true);

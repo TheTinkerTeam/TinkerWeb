@@ -4,7 +4,6 @@ import "../../css/Classrooms.css";
 class FlexClassroomItem extends Component {
   render() {
     const { item } = this.props;
-    console.log(item);
     return (
       <a href={`/classrooms/${item.id}`} className="classroomListItem">
         <div className="class-text">{item.class}</div>
