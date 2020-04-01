@@ -39,6 +39,7 @@ const App = props => {
   const auth = useSelector(state => state.firebase.auth);
   useEffect(() => {
     if (auth && auth.uid) {
+      props.client.resetStore();
       store.dispatch(loadUser(auth.uid));
     } else {
       store.dispatch(loadUser(null));
