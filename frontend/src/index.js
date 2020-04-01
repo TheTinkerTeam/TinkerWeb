@@ -55,7 +55,7 @@ let render = () => {
       <Provider store={store}>
         <ReactReduxFirebaseProvider {...reactReduxFirebaseProps}>
           <BrowserRouter>
-            <App />
+            <App client={client} />
           </BrowserRouter>
         </ReactReduxFirebaseProvider>
       </Provider>
