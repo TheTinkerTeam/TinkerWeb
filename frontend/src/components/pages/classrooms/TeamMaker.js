@@ -30,7 +30,7 @@ const TeamMaker = props => {
                   key={studentIndex}
                 >
                   <Segment className='student-name-container'>
-                    <div>{`${student}`.capitalize()}</div>
+                    <div style={{textAlign: "center", width: "100%"}}>{`${student}`.capitalize()}</div>
                   </Segment>
                 </DragAndDropCard>
               );

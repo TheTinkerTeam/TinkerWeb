@@ -243,7 +243,7 @@ const ClassroomDetailsPage = props => {
 
         {isStudentsActive && (
           <Segment>
-            <Form autoComplete='off' onSubmit={handleNewStudentSubmit}>
+            <Form className="newStudentInput" autoComplete='off' onSubmit={handleNewStudentSubmit}>
               <Form.Group>
                 <Form.Input
                   placeholder='Student Name'
@@ -321,8 +321,8 @@ const ClassroomDetailsPage = props => {
                   <div>
                     <div className='flexbox'>
                       <div>
-                        You have assigned students a team for the "
-                        {projects[0].title}" project.
+                        Yay, here are the "
+                        {projects[0].title}" teams!
                       </div>
                     </div>
 
@@ -355,13 +355,15 @@ const ClassroomDetailsPage = props => {
                       />
                     </div> */}
 
-                    <Form autoComplete='off' onSubmit={handleNumberSubmit}>
+                    <Form className="teamCountForm" autoComplete='off' onSubmit={handleNumberSubmit}>
                       <Form.Select
                         label='How many teams?'
                         name='teamCount'
                         onChange={handleChange}
                         options={options}
                         value={teamCount}
+                        placeholder="number"
+                        id='teamCountInput'
                       />
                     </Form>
 

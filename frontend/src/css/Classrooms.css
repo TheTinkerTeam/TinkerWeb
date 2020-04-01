@@ -207,6 +207,89 @@ a {
   visibility: visible;
 } */
 
+/* =============================================== */
+/*    Classroom Details Page - TeamsCount input    */
+/* =============================================== */
+
+#teamCountInput {
+  font-family: "Poppins";
+}
+
+.ui.form.teamCountForm .field > label {
+  font-family: "Poppins";
+  font-weight: 300;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+#teamCountInput:focus {
+  border-color: #dedede;
+}
+
+.ui.active.visible.selection.dropdown > .visible.menu.transition{
+  border-color: #dedede;
+}
+
+.ui.active.visible.selection.dropdown:active {
+  border-color: #dedede;
+}
+
+.ui.visible.selection.dropdown:active {
+  border-color: #dedede;
+}
+
+.ui.selection.active.dropdown #teamCountInput{
+  border-color: #dedede;
+}
+
+.ui.selection.active.dropdown:hover {
+  border-color: #dedede;
+}
+
+.ui.selection.dropdown .menu {
+  border-color: #dedede;
+}
+
+.ui.selection.active.dropdown .menu {
+  border-color: #dedede;
+}
+
+.ui.selection.active.dropdown .menu:hover {
+  border-color: #dedede;
+}
+
+.visible.menu.transition {
+  border-color: #dedede;
+}
+
+/* =============================================== */
+/*    Classroom Details Page - TeamsCount input    */
+/* =============================================== */
+
+.ui.form.newStudentInput .field .ui.input input, .ui.form.newStudentInput .fields .field .ui.input input {
+  width: auto;
+  min-width: 20vw;
+  font-family: "Roboto Mono";
+}
+
+.ui.form.newStudentInput input[type=text] {
+  border-color: #cacbcd;
+  color: #f5514c;
+  font-family: "Poppins";
+  font-weight: 400;
+}
+.ui.form.newStudentInput input[type=text]:focus {
+  border-color: #cacbcd;
+  color: #f5514c;
+  font-family: "Poppins";
+  font-weight: 400;
+}
+.ui.form.newStudentInput input[type=text]:focus::selection{
+  background-color: #f5514c;
+  color: white;
+}
+
+
 /* ============================================== */
 /*   Classroom Details Page - Workspace section   */
 /* ============================================== */
