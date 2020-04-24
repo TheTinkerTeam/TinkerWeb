@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  withRouter
-} from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
@@ -9,7 +7,7 @@ import { Segment, List, Image } from "semantic-ui-react";
 
 //https://www.apollographql.com/docs/react/data/queries/
 
-const ProjectDetailsPage = props => {
+const ProjectDetailsPage = (props) => {
   const routeParam = props.match.params.id;
   console.log(routeParam);
 
@@ -28,8 +26,12 @@ const ProjectDetailsPage = props => {
     }
   `;
 
+  const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + this.slice(1);
+  };
+
   const { loading, error, data } = useQuery(GET_PROJECT, {
-    variables: { id: routeParam }
+    variables: { id: routeParam },
   });
 
   if (loading) return <p>Loading...</p>;
@@ -41,7 +43,7 @@ const ProjectDetailsPage = props => {
       <div className='project-title-style'>{project.title}</div>
       <Segment.Group className='paragraph-style display-in-box'>
         <Segment>
-          <Image src={project.imageURL} size='small'/>
+          <Image src={project.imageURL} size='small' />
         </Segment>
         <Segment>
           <div className='paragraph-title-style'>
@@ -59,7 +61,7 @@ const ProjectDetailsPage = props => {
             {project.subjects &&
               project.subjects.map((subject, index) => (
                 <List bulleted key={index}>
-                  <List.Item>{`${subject}`.capitalize()}</List.Item>
+                  <List.Item>{capitalize(`${subject}`)}</List.Item>
                 </List>
               ))}
           </div>
@@ -170,8 +172,10 @@ const ProjectDetailsPage = props => {
   );
 };
 
-String.prototype.capitalize = function() {
-  return this.charAt(0).toUpperCase() + this.slice(1)
-}
+// if (!("capitalize" in String.prototype)) {
+//   String.prototype.capitalize = function () {
+//     return this.charAt(0).toUpperCase() + this.slice(1);
+//   };
+// }
 
 export default withRouter(ProjectDetailsPage);

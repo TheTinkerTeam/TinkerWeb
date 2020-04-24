@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "../../../css/Classrooms.css";
 import {
   Segment,
@@ -7,7 +7,7 @@ import {
   List,
   Icon,
   Grid,
-  Divider
+  Divider,
 } from "semantic-ui-react";
 import { withRouter, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
@@ -44,7 +44,11 @@ const ADD_STUDENT = gql`
   }
 `;
 
-const ClassroomDetailsPage = props => {
+const ClassroomDetailsPage = (props) => {
+  const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const initialState = {
     isStudentsActive: true,
     isWorkspaceActive: true,
@@ -62,37 +66,37 @@ const ClassroomDetailsPage = props => {
       "Loup",
       "Lion",
       "Tigre",
-      "Grenade"
+      "Grenade",
     ],
     tasksList: [],
     currentTask: "",
     teams: [],
-    teamCount: 3
+    teamCount: 3,
   };
 
   const [state, setState] = useState(initialState);
 
-  const generateRandomTeams = (teamCount, students) => {
+  const generateRandomTeams = useCallback((teamCount, students) => {
     let teamsCreated = [];
     for (let i = 0; i < teamCount; i++) {
       let children = [];
       if (i === 0) {
         students
           .slice(i, students.length / teamCount)
-          .map(student => children.push(`${student}`.capitalize()));
+          .map((student) => children.push(capitalize(`${student}`)));
       } else {
         students
           .slice(
             i * (students.length / teamCount),
             (i + 1) * (students.length / teamCount)
           )
-          .map(student => children.push(`${student}`.capitalize()));
+          .map((student) => children.push(capitalize(`${student}`)));
       }
       //Create the parent and add the children
       teamsCreated.push(children);
     }
     return teamsCreated;
-  };
+  }, []);
 
   const [teams, setTeams] = useState(
     generateRandomTeams(state.teamCount, state.classList)
@@ -102,7 +106,7 @@ const ClassroomDetailsPage = props => {
     const newTeams = [...teams];
 
     newTeams[originTeamId] = newTeams[originTeamId].filter(
-      sid => sid !== studentId
+      (sid) => sid !== studentId
     );
 
     newTeams[destinationTeamId].push(studentId);
@@ -113,7 +117,7 @@ const ClassroomDetailsPage = props => {
 
   useEffect(() => {
     setTeams(generateRandomTeams(state.teamCount, state.classList));
-  }, [state.teamCount, state.classList]);
+  }, [state.teamCount, state.classList, generateRandomTeams]);
 
   const handleChangeDnd = (studentId, originTeamId, destinationTeamId) => {
     // console.log("studentId =", studentId);
@@ -126,26 +130,26 @@ const ClassroomDetailsPage = props => {
   };
 
   const handleChange = (e, { name, value }) =>
-    setState(prevState => ({ ...prevState, [name]: value }));
+    setState((prevState) => ({ ...prevState, [name]: value }));
 
-  const handleNewStudentSubmit = id => {
+  const handleNewStudentSubmit = (id) => {
     let newTeams = teams;
-    newTeams[0] = [...teams[0], state.currentStudentName.capitalize()];
+    newTeams[0] = [...teams[0], capitalize(`${state.currentStudentName}`)];
 
     if (state.currentStudentName.length !== 0) {
       addStudent({
         variables: {
           id,
-          name: state.currentStudentName
-        }
+          name: state.currentStudentName,
+        },
       });
-      setState(prevState => ({
+      setState((prevState) => ({
         ...prevState,
         classList: [
           ...prevState.classList,
-          prevState.currentStudentName.capitalize()
+          capitalize(`${state.currentStudentName}`),
         ],
-        currentStudentName: ""
+        currentStudentName: "",
       }));
       setTeams(newTeams);
     }
@@ -154,56 +158,56 @@ const ClassroomDetailsPage = props => {
   const handleNumberSubmit = () => {
     const { teamCount } = state;
 
-    setState(prevState => ({ ...prevState, teamCount: teamCount }));
+    setState((prevState) => ({ ...prevState, teamCount: teamCount }));
   };
 
-  const handleDeleteStudent = name => {
+  const handleDeleteStudent = (name) => {
     const oldTeams = teams;
     let newTeams = [];
-    newTeams = oldTeams.map(team => {
-      return team.filter(student => student !== name);
+    newTeams = oldTeams.map((team) => {
+      return team.filter((student) => student !== name);
     });
 
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
-      classList: prevState.classList.filter(student => student !== name)
+      classList: prevState.classList.filter((student) => student !== name),
     }));
     setTeams(newTeams);
   };
 
-  const handleStudentProfile = name => {
+  const handleStudentProfile = (name) => {
     console.log("open student profile");
     console.log(name);
   };
 
   const handleSubmitTask = () => {
     if (state.currentTask.length !== 0) {
-      setState(prevState => ({
+      setState((prevState) => ({
         ...prevState,
         tasksList: [...prevState.tasksList, prevState.currentTask],
-        currentTask: ""
+        currentTask: "",
       }));
     }
   };
 
   const toggleButton = () => {
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
-      isStudentsActive: !prevState.isStudentsActive
+      isStudentsActive: !prevState.isStudentsActive,
     }));
   };
 
   const toggleWorkspaceButton = () => {
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
-      isWorkspaceActive: !prevState.isWorkspaceActive
+      isWorkspaceActive: !prevState.isWorkspaceActive,
     }));
   };
 
   const toggleMakeTeamsButton = () => {
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
-      isMakeTeamsActive: !prevState.isMakeTeamsActive
+      isMakeTeamsActive: !prevState.isMakeTeamsActive,
     }));
   };
 
@@ -225,7 +229,7 @@ const ClassroomDetailsPage = props => {
     tasksList,
     currentTask,
     isMakeTeamsActive,
-    teamCount
+    teamCount,
   } = state;
 
   const routeParam = props.match.params.id;
@@ -233,7 +237,7 @@ const ClassroomDetailsPage = props => {
   const [addStudent] = useMutation(ADD_STUDENT);
 
   const { loading, error, data } = useQuery(GET_CLASSROOM, {
-    variables: { id: routeParam }
+    variables: { id: routeParam },
   });
 
   if (loading) return <p>Loading...</p>;
@@ -249,7 +253,7 @@ const ClassroomDetailsPage = props => {
         push
         to={{
           pathname: "/",
-          state: { alert: "No Such Classroom" }
+          state: { alert: "No Such Classroom" },
         }}
       />
     );
@@ -258,7 +262,7 @@ const ClassroomDetailsPage = props => {
   if (!state.classList.length) {
     setState({
       ...state,
-      classList: classroom.students_name
+      classList: classroom.students_name,
     });
   }
 
@@ -313,7 +317,7 @@ const ClassroomDetailsPage = props => {
             ) : (
               classList.map((student, index) => (
                 <Segment className='student-name-container' key={index}>
-                  <div>{`${student}`.capitalize()}</div>
+                  <div>{capitalize(`${student}`)}</div>
                   <div>
                     <Button
                       className='student-button-classroom'
@@ -528,7 +532,7 @@ const ClassroomDetailsPage = props => {
                       className='feedContainer inWorkspaceContainer'
                       key={index}
                     >
-                      <List.Item>{`${task}`.capitalize()}</List.Item>
+                      <List.Item>{capitalize(`${task}`)}</List.Item>
                     </Segment>
                   ))
                 )}
