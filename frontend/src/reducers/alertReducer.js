@@ -4,13 +4,14 @@ const initialState = [];
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
+  // console.log(state);
 
   switch (type) {
     case SET_ALERT:
       for (let i = 0; i < state.length; i++) {
-        alert = state[i];
-        if (payload.msg === alert.msg) {
-          return [...state.filter(a => a.id !== alert.id), payload];
+        let alert_test = state[i];
+        if (payload.msg === alert_test.msg) {
+          return [...state.filter(a => a.id !== alert_test.id), payload];
         }
       }
       return [...state, payload];

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route, withRouter } from "react-router-dom";
 
 import logo from "./img/SHlogo.png";
@@ -19,24 +19,24 @@ import ProfilePage from "./components/pages/profile/ProfilePage";
 import SettingsDashboard from "./components/pages//settings";
 
 import { loadUser } from "./actions/authActions";
-import setAuthToken from "./utils/setAuthToken";
+// import setAuthToken from "./utils/setAuthToken";
 
-import { connect, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import store from "./store";
 import { Sidebar, Segment, Menu, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { toggleVisibility } from "./actions/sidebarActions";
 
-import ApolloClient, { InMemoryCache } from "apollo-boost";
-import { getFirebase, useFirebase } from "react-redux-firebase";
-import { ApolloProvider } from "@apollo/react-hooks";
+// import ApolloClient, { InMemoryCache } from "apollo-boost";
+// import { getFirebase, useFirebase } from "react-redux-firebase";
+// import { ApolloProvider } from "@apollo/react-hooks";
 
 import Alert from "./components/services/Alert";
 import { setAlert } from "./actions/alertActions";
 
-const App = props => {
-  const auth = useSelector(state => state.firebase.auth);
+const App = (props) => {
+  const auth = useSelector((state) => state.firebase.auth);
   useEffect(() => {
     if (auth && auth.uid) {
       props.client.resetStore();
@@ -44,16 +44,16 @@ const App = props => {
     } else {
       store.dispatch(loadUser(null));
     }
-  }, [auth]);
+  }, [auth, props.client]);
 
-  const sidebar = useSelector(state => state.sidebar);
+  const sidebar = useSelector((state) => state.sidebar);
   const dispatch = useDispatch();
 
   if (props.location.state && props.location.state.alert) {
     dispatch(setAlert(props.location.state.alert, "error", 2000));
     props.history.replace({
       pathname: props.location.pathname,
-      state: {}
+      state: {},
     });
   }
 
@@ -63,8 +63,8 @@ const App = props => {
       <Sidebar.Pushable as={Segment}>
         <Sidebar
           as={Menu}
-          animation="overlay"
-          icon="labeled"
+          animation='overlay'
+          icon='labeled'
           vertical
           onHide={() => {
             if (sidebar.visible === true) {
@@ -72,82 +72,82 @@ const App = props => {
             }
           }}
           visible={sidebar.visible}
-          width="thin"
+          width='thin'
         >
-          <img src={logo} alt="SHlogo" id="navlogo" />
+          <img src={logo} alt='SHlogo' id='navlogo' />
           <Menu.Item
             as={NavLink}
             exact
-            to="/"
-            name="Home"
+            to='/'
+            name='Home'
             onClick={() => store.dispatch(toggleVisibility())}
           >
-            <Icon name="user" />
+            <Icon name='user' />
             Home
           </Menu.Item>
           <Menu.Item
             as={NavLink}
-            to="/projects"
-            name="Projects"
+            to='/projects'
+            name='Projects'
             onClick={() => store.dispatch(toggleVisibility())}
           >
-            <Icon name="file" />
+            <Icon name='file' />
             Projects
           </Menu.Item>
           <Menu.Item
             as={NavLink}
-            to="/tutorials"
-            name="Tutorials"
+            to='/tutorials'
+            name='Tutorials'
             onClick={() => store.dispatch(toggleVisibility())}
           >
-            <Icon name="cut" />
+            <Icon name='cut' />
             Tutorials
           </Menu.Item>
           <Menu.Item
             as={NavLink}
-            to="/tinkercart"
-            name="Tinker Cart"
+            to='/tinkercart'
+            name='Tinker Cart'
             onClick={() => store.dispatch(toggleVisibility())}
           >
-            <Icon name="star" />
+            <Icon name='star' />
             Tinker Cart
           </Menu.Item>
           <Menu.Item
             as={NavLink}
-            to="/membership"
-            name="Membership"
+            to='/membership'
+            name='Membership'
             onClick={() => store.dispatch(toggleVisibility())}
           >
-            <Icon name="heart" />
+            <Icon name='heart' />
             Membership
           </Menu.Item>
         </Sidebar>
         <Sidebar.Pusher style={{ minHeight: "100vh" }} dimmed={sidebar.visible}>
           <NavBar />
-          <div className="container">
-            <Route exact path="/" component={Dashboard} />
+          <div className='container'>
+            <Route exact path='/' component={Dashboard} />
             <Route
-              path="/(.+)"
+              path='/(.+)'
               render={() => (
                 <div>
-                  <Route path="/membership" component={MembershipPage} />
-                  <Route path="/classes" component={ClassesPage} />
-                  <Route exact path="/classrooms" component={ClassroomsPage} />
+                  <Route path='/membership' component={MembershipPage} />
+                  <Route path='/classes' component={ClassesPage} />
+                  <Route exact path='/classrooms' component={ClassroomsPage} />
                   <Route
-                    path="/classrooms/:id"
+                    path='/classrooms/:id'
                     component={ClassroomDetailsPage}
                   />
-                  <Route exact path="/tutorials" component={TutorialsPage} />
-                  <Route exact path="/projects" component={ProjectsPage} />
-                  <Route path="/projects/:id" component={ProjectDetailsPage} />
+                  <Route exact path='/tutorials' component={TutorialsPage} />
+                  <Route exact path='/projects' component={ProjectsPage} />
+                  <Route path='/projects/:id' component={ProjectDetailsPage} />
                   <Route
-                    path="/tutorials/:id"
+                    path='/tutorials/:id'
                     component={TutorialDetailsPage}
                   />
-                  <Route exact path="/classes" component={ClassesPage} />
-                  <Route path="/classes/:id" component={ClassDetailsPage} />
-                  <Route exact path="/me" component={ProfilePage} />
-                  <Route path="/settings" component={SettingsDashboard} />
+                  <Route exact path='/classes' component={ClassesPage} />
+                  <Route path='/classes/:id' component={ClassDetailsPage} />
+                  <Route exact path='/me' component={ProfilePage} />
+                  <Route path='/settings' component={SettingsDashboard} />
                 </div>
               )}
             />

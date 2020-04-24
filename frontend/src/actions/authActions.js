@@ -146,7 +146,7 @@ export const googleSignIn = () => async dispatch => {
   const user = res.user;
   if (res.additionalUserInfo.isNewUser) {
     console.log(user);
-    const res = await axios.post(
+    await axios.post(
       "http://localhost:5000/api/v2",
       {
         query: `

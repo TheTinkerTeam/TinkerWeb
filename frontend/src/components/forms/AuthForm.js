@@ -158,7 +158,7 @@ const AuthForm = ({ signup, login }) => {
     }
     setInputs(newInputs);
     setButtons(newButtons);
-  }, [modal.position]);
+  }, [modal.position, user]);
 
   const handleChange = e => {
     setUser({
@@ -334,10 +334,9 @@ const AuthForm = ({ signup, login }) => {
         <Responsive minWidth={950}>
           <Button.Group widths={buttons.length}>
             {buttons.map((button, i) => (
-              <Fragment>
+              <Fragment key={i}>
                 <Button
                   id="user-type-button"
-                  key={i}
                   onClick={button.onClick}
                   inverted
                   size="big"
@@ -354,10 +353,9 @@ const AuthForm = ({ signup, login }) => {
         <Responsive maxWidth={950}>
           <Button.Group vertical widths={buttons.length}>
             {buttons.map((button, i) => (
-              <Fragment>
+              <Fragment key={i}>
                 <Button
                   id="user-type-button"
-                  key={i}
                   onClick={button.onClick}
                   inverted
                   size="big"
