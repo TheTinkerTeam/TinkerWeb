@@ -27,7 +27,7 @@ const ProjectDetailsPage = (props) => {
   `;
 
   const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + this.slice(1);
+    return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
   const { loading, error, data } = useQuery(GET_PROJECT, {

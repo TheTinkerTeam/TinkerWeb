@@ -111,7 +111,7 @@ const ClassroomDetailsPage = (props) => {
 
     newTeams[destinationTeamId].push(studentId);
 
-    console.log("newTeams", newTeams);
+    // console.log("newTeams", newTeams);
     return newTeams;
   };
 
