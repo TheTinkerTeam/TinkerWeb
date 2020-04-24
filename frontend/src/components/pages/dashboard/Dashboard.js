@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
 
 import "../../../css/Dashboard.css";
 
@@ -29,7 +28,7 @@ const GET_PROJECTS = gql`
   }
 `;
 
-const Dashboard = ({ createProject }) => {
+const Dashboard = () => {
   const { loading, error, data } = useQuery(GET_PROJECTS);
 
   if (loading) return <p>Loading...</p>;

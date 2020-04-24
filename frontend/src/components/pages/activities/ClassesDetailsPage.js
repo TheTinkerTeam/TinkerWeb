@@ -5,7 +5,7 @@ import {
 
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import { Segment, Divider, Container, List, Image } from "semantic-ui-react";
+import { Segment, List, Image } from "semantic-ui-react";
 
 //https://www.apollographql.com/docs/react/data/queries/
 

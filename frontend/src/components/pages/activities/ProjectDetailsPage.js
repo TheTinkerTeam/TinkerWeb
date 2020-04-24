@@ -1,12 +1,9 @@
 import React from "react";
-import { withRouter, Redirect, Route } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import { Segment, Divider, Container, List, Image } from "semantic-ui-react";
-import { setAlert } from "../../../actions/alertActions";
-import { useDispatch } from "react-redux";
-import { push } from "react-router-redux";
+import { Segment, List, Image } from "semantic-ui-react";
 
 //https://www.apollographql.com/docs/react/data/queries/
 

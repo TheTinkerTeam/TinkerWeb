@@ -1,8 +1,7 @@
-import React, { Component, useState } from "react";
+import React from "react";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import { useSelector } from "react-redux";
 
 const GET_CLASSES = gql`
   query {
@@ -12,7 +11,7 @@ const GET_CLASSES = gql`
   }
 `;
 
-const ClassesPage = props => {
+const ClassesPage = () => {
   const { loading, error, data } = useQuery(GET_CLASSES);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;

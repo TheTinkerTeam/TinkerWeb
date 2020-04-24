@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Icon, Button, Divider } from "semantic-ui-react";
 import FlexClassroomList from "../../lists/FlexClassroomList";
 import "../../../css/Classrooms.css";

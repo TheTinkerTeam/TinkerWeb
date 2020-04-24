@@ -79,14 +79,14 @@ const ClassroomDetailsPage = props => {
       if (i === 0) {
         students
           .slice(i, students.length / teamCount)
-          .map((student, index) => children.push(`${student}`.capitalize()));
+          .map(student => children.push(`${student}`.capitalize()));
       } else {
         students
           .slice(
             i * (students.length / teamCount),
             (i + 1) * (students.length / teamCount)
           )
-          .map((student, index) => children.push(`${student}`.capitalize()));
+          .map(student => children.push(`${student}`.capitalize()));
       }
       //Create the parent and add the children
       teamsCreated.push(children);
@@ -113,7 +113,7 @@ const ClassroomDetailsPage = props => {
 
   useEffect(() => {
     setTeams(generateRandomTeams(state.teamCount, state.classList));
-  }, [state.teamCount]);
+  }, [state.teamCount, state.classList]);
 
   const handleChangeDnd = (studentId, originTeamId, destinationTeamId) => {
     // console.log("studentId =", studentId);
@@ -128,7 +128,7 @@ const ClassroomDetailsPage = props => {
   const handleChange = (e, { name, value }) =>
     setState(prevState => ({ ...prevState, [name]: value }));
 
-  const handleNewStudentSubmit = (id) => {
+  const handleNewStudentSubmit = id => {
     let newTeams = teams;
     newTeams[0] = [...teams[0], state.currentStudentName.capitalize()];
 
@@ -209,11 +209,11 @@ const ClassroomDetailsPage = props => {
 
   const createTeamsCountOptions = () => {
     let options = [];
-    for (let i = 0; i < (state.classList.length / 2); i++) {
-      options.push({ key: `${i + 1}`, text: `${i + 1}`, value: `${i + 1}`})
+    for (let i = 0; i < state.classList.length / 2; i++) {
+      options.push({ key: `${i + 1}`, text: `${i + 1}`, value: `${i + 1}` });
     }
     return options;
-  }
+  };
 
   const options = createTeamsCountOptions();
 
@@ -240,7 +240,9 @@ const ClassroomDetailsPage = props => {
   if (error) return <p>Error :(</p>;
 
   const classroom = data.classroom;
-  console.log(classroom);
+
+  // console.log(classroom);
+
   if (!classroom) {
     return (
       <Redirect
@@ -252,32 +254,35 @@ const ClassroomDetailsPage = props => {
       />
     );
   }
+
   if (!state.classList.length) {
     setState({
       ...state,
       classList: classroom.students_name
     });
   }
+
   const currentProject = classroom.currentProject;
+
   return (
     <div>
-      <div className="classroom-title-style">{classroom.class}</div>
-      <Segment.Group className="paragraph-style display-in-box">
-        <Segment className="section-title">
-          <div className="flexbox-container">
+      <div className='classroom-title-style'>{classroom.class}</div>
+      <Segment.Group className='paragraph-style display-in-box'>
+        <Segment className='section-title'>
+          <div className='flexbox-container'>
             <div>STUDENTS</div>
             {isStudentsActive ? (
               <Button
-                className="arrow-down-button-classroom"
+                className='arrow-down-button-classroom'
                 circular
-                icon="angle up"
+                icon='angle up'
                 onClick={toggleButton}
               />
             ) : (
               <Button
-                className="arrow-down-button-classroom"
+                className='arrow-down-button-classroom'
                 circular
-                icon="angle down"
+                icon='angle down'
                 onClick={toggleButton}
               />
             )}
@@ -286,15 +291,19 @@ const ClassroomDetailsPage = props => {
 
         {isStudentsActive && (
           <Segment>
-            <Form className="newStudentInput" autoComplete="off" onSubmit={() => handleNewStudentSubmit(routeParam)}>
+            <Form
+              className='newStudentInput'
+              autoComplete='off'
+              onSubmit={() => handleNewStudentSubmit(routeParam)}
+            >
               <Form.Group>
                 <Form.Input
-                  placeholder="Student Name"
-                  name="currentStudentName"
+                  placeholder='Student Name'
+                  name='currentStudentName'
                   value={currentStudentName}
                   onChange={handleChange}
                 />
-                <Form.Button content="Add" />
+                <Form.Button content='Add' />
               </Form.Group>
             </Form>
             {classList && classList.length === 0 ? (
@@ -364,8 +373,7 @@ const ClassroomDetailsPage = props => {
                   <div>
                     <div className='flexbox'>
                       <div>
-                        Yay, here are the "
-                        {currentProject.title}" teams!
+                        Yay, here are the "{currentProject.title}" teams!
                       </div>
                     </div>
 
@@ -398,14 +406,18 @@ const ClassroomDetailsPage = props => {
                       />
                     </div> */}
 
-                    <Form className="teamCountForm" autoComplete='off' onSubmit={handleNumberSubmit}>
+                    <Form
+                      className='teamCountForm'
+                      autoComplete='off'
+                      onSubmit={handleNumberSubmit}
+                    >
                       <Form.Select
                         label='How many teams?'
                         name='teamCount'
                         onChange={handleChange}
                         options={options}
                         value={teamCount}
-                        placeholder="number"
+                        placeholder='number'
                         id='teamCountInput'
                       />
                     </Form>
@@ -440,23 +452,23 @@ const ClassroomDetailsPage = props => {
         )}
       </Segment.Group>
 
-      <Segment.Group className="paragraph-style display-in-box">
-        <Segment className="section-title">
-          <div className="flexbox-container">
+      <Segment.Group className='paragraph-style display-in-box'>
+        <Segment className='section-title'>
+          <div className='flexbox-container'>
             <div>WORKSPACE</div>
 
             {isWorkspaceActive ? (
               <Button
-                className="arrow-down-button-classroom"
+                className='arrow-down-button-classroom'
                 circular
-                icon="angle up"
+                icon='angle up'
                 onClick={toggleWorkspaceButton}
               />
             ) : (
               <Button
-                className="arrow-down-button-classroom"
+                className='arrow-down-button-classroom'
                 circular
-                icon="angle down"
+                icon='angle down'
                 onClick={toggleWorkspaceButton}
               />
             )}
@@ -477,8 +489,7 @@ const ClassroomDetailsPage = props => {
 
             <Segment className='currentProjectContainer inWorkspaceContainer'>
               <Grid className='currentProjectGrid' stackable columns={2}>
-                <Grid.Column width={4}>
-                </Grid.Column>
+                <Grid.Column width={4}></Grid.Column>
                 <Grid.Column width={12}>
                   <Segment className='currentProjectColumn'>
                     <div>Current Project: {currentProject.title}</div>

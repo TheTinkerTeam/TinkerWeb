@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import DragAndDropComponent from "../../sections/DragAndDropComponent";
 import DragAndDropCard from "../../sections/DragAndDropCard";
 import { Segment } from "semantic-ui-react";
@@ -9,12 +9,11 @@ const TeamMaker = props => {
 
   return (
     <div className='flexbox'>
-      {/* Hi Team Maker! This is the teamCount: {teamCount} */}
       {teams.map((team, teamIndex) => {
         return (
           <DragAndDropComponent
             key={teamIndex}
-            id={"team_board_" + `${teamIndex}`}
+            id={`team_board_${teamIndex}`}
             teamId={teamIndex}
             className='board'
             onChange={handleChange}

@@ -10,11 +10,12 @@ const Alert = ({ alerts }) => {
     visible: true
   };
   const [state, setVisible] = useState(initialState);
+
   useEffect(() => {
     if (alerts[0] && alerts[alerts.length - 1].id !== state.id) {
       setVisible({ id: alerts[alerts.length - 1].id, visible: !state.visible });
     }
-  }, [alerts]);
+  }, [alerts, state.id, state.visible]);
 
   if (alerts && alerts.length > 0) {
     return alerts.map(alert => {

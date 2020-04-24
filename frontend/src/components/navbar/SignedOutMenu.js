@@ -1,6 +1,5 @@
 import React from "react";
 import { Menu, Button, Icon, Modal } from "semantic-ui-react";
-import { connect } from "react-redux";
 
 import "../../css/SignedOutMenu.css";
 import AuthForm from "../forms/AuthForm";
