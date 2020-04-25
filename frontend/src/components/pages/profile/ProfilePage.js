@@ -7,9 +7,9 @@ const profilePage = ({ user, profile }) => {
     return (
       <Fragment>
         <ul>
-          <li>Email: {user.email}</li>
+          <li>Email: {profile.email}</li>
           <li>
-            Name: {profile.name.first} {profile.name.last}
+            Name: {profile.firstName} {profile.lastName}
           </li>
           <li>Username: {profile.username}</li>
           <li>School: {profile.school}</li>

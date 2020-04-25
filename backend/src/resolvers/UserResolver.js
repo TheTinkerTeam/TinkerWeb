@@ -63,6 +63,27 @@ module.exports = {
         console.error(err.message);
       }
     },
+    completeRegistration: async (parent, body, ctx) => {
+      console.log('completeRegistration = ', body);
+      console.log('uid = ', body.uid);
+
+      const uid = body.uid;
+
+      try {
+
+        user = await User.findOne({ uid });
+
+        console.log('user = ', user) ;
+
+        user.school = body.school;
+        user.role = body.role;
+
+        user.save();
+
+      } catch (err) {
+        console.error(err.message);
+      }
+    },
     login: async (parent, { email, password }, { prisma, res }) => {
       const user = await User.findOne({ email });
       if (!user) {

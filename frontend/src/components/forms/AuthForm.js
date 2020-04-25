@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 
 import {
   Form,
@@ -11,7 +11,7 @@ import {
   Divider,
 } from "semantic-ui-react";
 
-import { signup, login } from "../../actions/authActions";
+import { signup, login, completeRegistration, googleSignIn } from "../../actions/authActions";
 import Alert from "../services/Alert";
 
 import "../../css/AuthForm.css";
@@ -20,22 +20,39 @@ import SH_eyes from "../../img/SH_eyes.png";
 
 import checkEmail from "../../utils/checkEmail";
 
-import { googleSignIn } from "../../actions/authActions";
+//what if state.auth doesn't exist?
+//console.log(user)
 
-const AuthForm = ({ signup, login }) => {
+const AuthForm = ({ signup, completeRegistration, login }) => {
   const dispatch = useDispatch();
-  const initialmodal = {
-    position: "email",
-    template: "input",
-    header: "First, enter your email",
-    img: SH_eyes,
-    //img:
-    //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
-  };
+  const authentificatedUser = useSelector((state) => state.auth);
+  const finishingRegistration = (authentificatedUser && authentificatedUser.profile.role === "");
+  const initialmodal =
+    finishingRegistration
+      ? {
+          position: "role",
+          template: "buttons",
+          header: "Choose your account type",
+          img: SH_eyes,
+          //img:
+          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        }
+      : {
+          position: "email",
+          template: "input",
+          header: "First, enter your email",
+          img: SH_eyes,
+          //img:
+          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        };
+
+  console.log(authentificatedUser);
 
   const [modal, setModal] = useState(initialmodal);
 
-  const initialUser = {
+  const initialUser = (authentificatedUser && authentificatedUser.profile)
+  ? authentificatedUser.profile
+  : {
     email: "",
     firstName: "",
     lastName: "",
@@ -43,6 +60,8 @@ const AuthForm = ({ signup, login }) => {
     school: "",
     password: "",
   };
+
+  console.log('initialUser = ', initialUser);
 
   const [user, setUser] = useState(initialUser);
 
@@ -67,6 +86,44 @@ const AuthForm = ({ signup, login }) => {
         newButtons = [
           {
             text: "Confirm",
+          },
+        ];
+        break;
+      case "fullname":
+        newInputs = [
+          {
+            name: "firstName",
+            label: "First Name",
+            type: "input",
+            placeholder: "Barack",
+          },
+          {
+            name: "lastName",
+            label: "Last Name",
+            type: "input",
+            placeholder: "Obama",
+          },
+        ];
+        newButtons = [
+          {
+            text: "Confirm",
+          },
+        ];
+        break;
+      case "signup":
+      case "login":
+      case "password":
+        newInputs = [
+          {
+            name: "password",
+            label: "Enter your password",
+            type: "password",
+            placeholder: "***",
+          },
+        ];
+        newButtons = [
+          {
+            text: "Start Tinkering",
           },
         ];
         break;
@@ -102,27 +159,6 @@ const AuthForm = ({ signup, login }) => {
           },
         ];
         break;
-      case "fullname":
-        newInputs = [
-          {
-            name: "firstName",
-            label: "First Name",
-            type: "input",
-            placeholder: "Barack",
-          },
-          {
-            name: "lastName",
-            label: "Last Name",
-            type: "input",
-            placeholder: "Obama",
-          },
-        ];
-        newButtons = [
-          {
-            text: "Confirm",
-          },
-        ];
-        break;
       case "school":
         newInputs = [
           {
@@ -135,22 +171,6 @@ const AuthForm = ({ signup, login }) => {
         newButtons = [
           {
             text: "Confirm",
-          },
-        ];
-        break;
-      case "signup":
-      case "login":
-        newInputs = [
-          {
-            name: "password",
-            label: "Enter your password",
-            type: "password",
-            placeholder: "***",
-          },
-        ];
-        newButtons = [
-          {
-            text: "Start Tinkering",
           },
         ];
         break;
@@ -188,9 +208,9 @@ const AuthForm = ({ signup, login }) => {
       } else {
         setModal({
           ...modal,
-          position: "role",
-          template: "buttons",
-          header: "Choose your account type",
+          position: "fullname",
+          template: "input",
+          header: "What is your name?",
           img: SH_eyes,
           //img:
           //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
@@ -211,16 +231,27 @@ const AuthForm = ({ signup, login }) => {
       case "email":
         emailExists(user.email);
         break;
-      case "role":
+      case "fullname":
         setModal({
           ...modal,
-          position: "fullname",
+          position: "password",
           template: "input",
-          header: "What is your name?",
+          header: "Password",
           img: SH_eyes,
         });
         break;
-      case "fullname":
+      case "password":
+        setModal({
+          ...modal,
+          position: "role",
+          template: "buttons",
+          header: "Choose your account type",
+          img: SH_eyes,
+          //img:
+          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+        });
+        break;
+      case "role":
         setModal({
           ...modal,
           position: "school",
@@ -230,16 +261,11 @@ const AuthForm = ({ signup, login }) => {
         });
         break;
       case "school":
-        setModal({
-          ...modal,
-          position: "signup",
-          template: "input",
-          header: "Sign Up",
-          img: SH_eyes,
-        });
-        break;
-      case "signup":
-        signup(user);
+        if (finishingRegistration) {
+          completeRegistration(user);
+        } else {
+          signup(user);
+        }
         break;
       case "login":
         login({
@@ -400,6 +426,7 @@ const AuthForm = ({ signup, login }) => {
 
 AuthForm.propTypes = {
   signup: PropTypes.func.isRequired,
+  completeRegistration: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
 };
 
@@ -407,6 +434,7 @@ const mapStateToProps = null;
 
 const mapDispatchToProps = {
   signup,
+  completeRegistration,
   login,
 };
 

@@ -1,16 +1,18 @@
 import React from "react";
-import { Menu, Input, Responsive, Button, Image } from "semantic-ui-react";
+import { Menu, Input, Responsive, Button, Image, Modal } from "semantic-ui-react";
 import { NavLink, withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import logo from "../../img/SHlogo.png";
 import SignedOutMenu from "../navbar/SignedOutMenu";
 import SignedInMenu from "../navbar/SignedInMenu";
+import AuthForm from "../forms/AuthForm";
 import { toggleVisibility } from "../../actions/sidebarActions";
 
 const NavBar = props => {
   const dispatch = useDispatch();
   const auth = useSelector(state => state.firebase.auth);
+  const user = useSelector(state => state.auth);
   return (
     <div>
       <Menu pointing secondary fixed="top">
@@ -99,6 +101,12 @@ const NavBar = props => {
         ) : (
           <SignedInMenu />
         )}
+        <Modal
+        //open={false}
+          open={auth.isLoaded && (user.profile && user.profile.role === '')}
+        >
+          <AuthForm />
+        </Modal>
       </Menu>
     </div>
   );
