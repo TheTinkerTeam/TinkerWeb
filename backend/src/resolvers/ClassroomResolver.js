@@ -20,7 +20,7 @@ module.exports = {
             id: classroom._id
           });
         }
-        console.log(detailedClassrooms);
+        // console.log(detailedClassrooms);
         return detailedClassrooms;
       } catch (err) {
         console.error(err);
@@ -34,7 +34,7 @@ module.exports = {
           id: classroom._id,
           currentProject: await Project.findById(classroom.currentProject)
         };
-        console.log(returnedClassroom);
+        // console.log(returnedClassroom);
         return returnedClassroom;
       } catch (err) {
         console.error(err);

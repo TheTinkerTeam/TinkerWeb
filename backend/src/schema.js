@@ -74,6 +74,11 @@ const typeDefs = gql`
       role: String!
       avatar: String
     ): User!
+    completeRegistration(
+      uid: String!
+      school: String!
+      role: String!
+    ): User!
     login(email: String!, password: String!): User
     createProject(title: String!, description: String!): Project!
     updateProject(id: ID!, title: String, description: String): Project

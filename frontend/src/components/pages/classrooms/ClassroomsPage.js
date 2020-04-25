@@ -20,6 +20,8 @@ const GET_CLASSROOMS = gql`
 
 const ClassroomsPage = () => {
   const { loading, error, data } = useQuery(GET_CLASSROOMS);
+  // console.log(GET_CLASSROOMS);
+  // console.log(data);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
