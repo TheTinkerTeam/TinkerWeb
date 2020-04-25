@@ -8,7 +8,7 @@ import {
   Modal,
   Image,
   Responsive,
-  Divider
+  Divider,
 } from "semantic-ui-react";
 
 import { signup, login } from "../../actions/authActions";
@@ -28,7 +28,7 @@ const AuthForm = ({ signup, login }) => {
     position: "email",
     template: "input",
     header: "First, enter your email",
-    img: SH_eyes
+    img: SH_eyes,
     //img:
     //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
   };
@@ -41,7 +41,7 @@ const AuthForm = ({ signup, login }) => {
     lastName: "",
     role: "",
     school: "",
-    password: ""
+    password: "",
   };
 
   const [user, setUser] = useState(initialUser);
@@ -61,13 +61,13 @@ const AuthForm = ({ signup, login }) => {
           {
             name: "email",
             type: "input",
-            placeholder: "name@example.com"
-          }
+            placeholder: "name@example.com",
+          },
         ];
         newButtons = [
           {
-            text: "Confirm"
-          }
+            text: "Confirm",
+          },
         ];
         break;
       case "role":
@@ -77,29 +77,29 @@ const AuthForm = ({ signup, login }) => {
             onClick: () => {
               setUser({
                 ...user,
-                role: "student"
+                role: "student",
               });
             },
-            text: "I'm a Student"
+            text: "I'm a Student",
           },
           {
             onClick: () => {
               setUser({
                 ...user,
-                role: "teacher"
+                role: "teacher",
               });
             },
-            text: "I'm a Teacher"
+            text: "I'm a Teacher",
           },
           {
             onClick: () => {
               setUser({
                 ...user,
-                role: "school"
+                role: "school",
               });
             },
-            text: "I'm a School Admin"
-          }
+            text: "I'm a School Admin",
+          },
         ];
         break;
       case "fullname":
@@ -108,19 +108,19 @@ const AuthForm = ({ signup, login }) => {
             name: "firstName",
             label: "First Name",
             type: "input",
-            placeholder: "Barack"
+            placeholder: "Barack",
           },
           {
             name: "lastName",
             label: "Last Name",
             type: "input",
-            placeholder: "Obama"
-          }
+            placeholder: "Obama",
+          },
         ];
         newButtons = [
           {
-            text: "Confirm"
-          }
+            text: "Confirm",
+          },
         ];
         break;
       case "school":
@@ -129,13 +129,13 @@ const AuthForm = ({ signup, login }) => {
             name: "school",
             label: "What's the name of your school",
             type: "input",
-            placeholder: "Harvard"
-          }
+            placeholder: "Harvard",
+          },
         ];
         newButtons = [
           {
-            text: "Confirm"
-          }
+            text: "Confirm",
+          },
         ];
         break;
       case "signup":
@@ -145,13 +145,13 @@ const AuthForm = ({ signup, login }) => {
             name: "password",
             label: "Enter your password",
             type: "password",
-            placeholder: "***"
-          }
+            placeholder: "***",
+          },
         ];
         newButtons = [
           {
-            text: "Start Tinkering"
-          }
+            text: "Start Tinkering",
+          },
         ];
         break;
       default:
@@ -160,15 +160,20 @@ const AuthForm = ({ signup, login }) => {
     setButtons(newButtons);
   }, [modal.position, user]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const emailExists = async email => {
+  const emailExists = async (email) => {
     try {
+      if (!email) {
+        console.error("Email is empty.");
+        return;
+      }
+
       const exists = await checkEmail(email);
       if (exists) {
         setModal({
@@ -176,7 +181,7 @@ const AuthForm = ({ signup, login }) => {
           position: "login",
           template: "input",
           header: "Login",
-          img: SH_eyes
+          img: SH_eyes,
           //img:
           //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
@@ -186,21 +191,21 @@ const AuthForm = ({ signup, login }) => {
           position: "role",
           template: "buttons",
           header: "Choose your account type",
-          img: SH_eyes
+          img: SH_eyes,
           //img:
           //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
         });
       }
       setUser({
         ...user,
-        email: user.email
+        email: user.email,
       });
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     switch (modal.position) {
       case "email":
@@ -212,7 +217,7 @@ const AuthForm = ({ signup, login }) => {
           position: "fullname",
           template: "input",
           header: "What is your name?",
-          img: SH_eyes
+          img: SH_eyes,
         });
         break;
       case "fullname":
@@ -221,7 +226,7 @@ const AuthForm = ({ signup, login }) => {
           position: "school",
           template: "input",
           header: "And your school's name?",
-          img: SH_eyes
+          img: SH_eyes,
         });
         break;
       case "school":
@@ -230,7 +235,7 @@ const AuthForm = ({ signup, login }) => {
           position: "signup",
           template: "input",
           header: "Sign Up",
-          img: SH_eyes
+          img: SH_eyes,
         });
         break;
       case "signup":
@@ -239,7 +244,7 @@ const AuthForm = ({ signup, login }) => {
       case "login":
         login({
           email: user.email,
-          password: user.password
+          password: user.password,
         });
         break;
       case "another":
@@ -250,7 +255,7 @@ const AuthForm = ({ signup, login }) => {
           position: "email",
           template: "input",
           header: "First, enter your email",
-          img: "./img/SH_heads.png"
+          img: "./img/SH_heads.png",
         });
         break;
     }
@@ -268,16 +273,16 @@ const AuthForm = ({ signup, login }) => {
               style={{
                 margin: "6% 0",
                 fontFamily: "Roboto Mono",
-                color: "#9C9C9C"
+                color: "#9C9C9C",
               }}
               horizontal
             >
               Or
             </Divider>
             <Button
-              id="google-button"
-              color="teal"
-              content="Sign In with Google"
+              id='google-button'
+              color='teal'
+              content='Sign In with Google'
               onClick={() => dispatch(googleSignIn())}
             />
           </Fragment>
@@ -285,7 +290,7 @@ const AuthForm = ({ signup, login }) => {
       </Modal.Description>
       <Modal.Content image>
         <Image
-          size="medium"
+          size='medium'
           src={modal.img}
           style={{
             //paddingBottom: 100,
@@ -293,7 +298,7 @@ const AuthForm = ({ signup, login }) => {
             marginTop: `1em`,
             marginLeft: `auto`,
             marginRight: `auto`,
-            marginBottom: `-1.5em`
+            marginBottom: `-1.5em`,
           }}
         />
       </Modal.Content>
@@ -305,7 +310,7 @@ const AuthForm = ({ signup, login }) => {
     formTemplate = [
       inputs.map((input, i) => (
         <Form.Input
-          id="input-auth"
+          id='input-auth'
           key={i}
           label={input.label}
           type={input.type}
@@ -317,16 +322,16 @@ const AuthForm = ({ signup, login }) => {
       )),
       buttons.map((button, i) => (
         <Button
-          id="button-auth"
+          id='button-auth'
           fluid
-          size="big"
+          size='big'
           positive
-          type="submit"
+          type='submit'
           key={i}
         >
           {button.text}
         </Button>
-      ))
+      )),
     ];
   } else if (modal.template === "buttons") {
     formTemplate = (
@@ -336,12 +341,12 @@ const AuthForm = ({ signup, login }) => {
             {buttons.map((button, i) => (
               <Fragment key={i}>
                 <Button
-                  id="user-type-button"
+                  id='user-type-button'
                   onClick={button.onClick}
                   inverted
-                  size="big"
+                  size='big'
                   color={button.color}
-                  type="submit"
+                  type='submit'
                 >
                   {button.text}
                 </Button>
@@ -355,12 +360,12 @@ const AuthForm = ({ signup, login }) => {
             {buttons.map((button, i) => (
               <Fragment key={i}>
                 <Button
-                  id="user-type-button"
+                  id='user-type-button'
                   onClick={button.onClick}
                   inverted
-                  size="big"
+                  size='big'
                   color={button.color}
-                  type="submit"
+                  type='submit'
                 >
                   {button.text}
                 </Button>
@@ -375,14 +380,14 @@ const AuthForm = ({ signup, login }) => {
 
   return (
     <Fragment>
-      <Modal.Header size="big">{modal.header}</Modal.Header>
+      <Modal.Header size='big'>{modal.header}</Modal.Header>
       <Modal.Content>
         <Form
-          size="big"
-          onSubmit={e => {
+          size='big'
+          onSubmit={(e) => {
             handleSubmit(e);
           }}
-          autoComplete="off"
+          autoComplete='off'
         >
           {formTemplate}
         </Form>
@@ -395,14 +400,14 @@ const AuthForm = ({ signup, login }) => {
 
 AuthForm.propTypes = {
   signup: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = null;
 
 const mapDispatchToProps = {
   signup,
-  login
+  login,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);
