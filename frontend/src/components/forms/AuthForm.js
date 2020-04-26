@@ -11,7 +11,12 @@ import {
   Divider,
 } from "semantic-ui-react";
 
-import { signup, login, completeRegistration, googleSignIn } from "../../actions/authActions";
+import {
+  signup,
+  login,
+  completeRegistration,
+  googleSignIn,
+} from "../../actions/authActions";
 import Alert from "../services/Alert";
 
 import "../../css/AuthForm.css";
@@ -26,42 +31,45 @@ import checkEmail from "../../utils/checkEmail";
 const AuthForm = ({ signup, completeRegistration, login }) => {
   const dispatch = useDispatch();
   const authentificatedUser = useSelector((state) => state.auth);
-  const finishingRegistration = (authentificatedUser && authentificatedUser.profile.role === "");
-  const initialmodal =
-    finishingRegistration
-      ? {
-          position: "role",
-          template: "buttons",
-          header: "Choose your account type",
-          img: SH_eyes,
-          //img:
-          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
-        }
-      : {
-          position: "email",
-          template: "input",
-          header: "First, enter your email",
-          img: SH_eyes,
-          //img:
-          //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
-        };
+  const finishingRegistration =
+    authentificatedUser &&
+    authentificatedUser.profile &&
+    authentificatedUser.profile.role === "";
+  const initialmodal = finishingRegistration
+    ? {
+        position: "role",
+        template: "buttons",
+        header: "Choose your account type",
+        img: SH_eyes,
+        //img:
+        //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+      }
+    : {
+        position: "email",
+        template: "input",
+        header: "First, enter your email",
+        img: SH_eyes,
+        //img:
+        //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
+      };
 
   console.log(authentificatedUser);
 
   const [modal, setModal] = useState(initialmodal);
 
-  const initialUser = (authentificatedUser && authentificatedUser.profile)
-  ? authentificatedUser.profile
-  : {
-    email: "",
-    firstName: "",
-    lastName: "",
-    role: "",
-    school: "",
-    password: "",
-  };
+  const initialUser =
+    authentificatedUser && authentificatedUser.profile
+      ? authentificatedUser.profile
+      : {
+          email: "",
+          firstName: "",
+          lastName: "",
+          role: "",
+          school: "",
+          password: "",
+        };
 
-  console.log('initialUser = ', initialUser);
+  console.log("initialUser = ", initialUser);
 
   const [user, setUser] = useState(initialUser);
 
