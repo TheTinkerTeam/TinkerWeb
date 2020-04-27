@@ -63,11 +63,13 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
           role: "",
           school: "",
           password: "",
+          errors: [],
         };
 
   // console.log("initialUser = ", initialUser);
 
   const [user, setUser] = useState(initialUser);
+  console.log("User = ", user);
 
   const initialInputs = [];
   const initialButtons = [];
@@ -127,7 +129,7 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
         ];
         newButtons = [
           {
-            text: "Start Tinkering",
+            text: "Confirm",
           },
         ];
         break;
@@ -174,7 +176,7 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
         ];
         newButtons = [
           {
-            text: "Confirm",
+            text: "Start Tinkering",
           },
         ];
         break;
@@ -334,6 +336,50 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
       </Modal.Content>
     </Fragment>
   );
+  const isValidEmail = (email) => {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const isValidFullname = (user) => {
+    if (user.firstName === "") {
+      return false;
+    } else if (user.lastName === "") {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const isValidPassword = (password) => {
+    if (password.length < 8) {
+      return false
+    }
+    return true
+  }
+
+  const isValidSchool = (school) => {
+    if (school.length < 1) {
+      return false
+    }
+    return true
+  }
+
+  const isInputFieldValidated = (user) => {
+    if (modal.position === "email") {
+      return isValidEmail(user.email) ? false : true;
+    }
+    if (modal.position === "fullname") {
+      return isValidFullname(user) ? false : true;
+    }
+    if (modal.position === "password" ) {
+      return isValidPassword(user.password) ? false : true
+    }
+    if (modal.position === "school" ) {
+      return isValidSchool(user.school) ? false : true
+    }
+    return false;
+  };
 
   let formTemplate;
   if (modal.template === "input") {
@@ -348,6 +394,7 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
           name={input.name}
           value={user[input.name] || ""}
           onChange={handleChange}
+          required
         />
       )),
       buttons.map((button, i) => (
@@ -358,6 +405,7 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
           positive
           type='submit'
           key={i}
+          disabled={isInputFieldValidated(user)}
         >
           {button.text}
         </Button>
