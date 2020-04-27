@@ -41,19 +41,15 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
         template: "buttons",
         header: "Choose your account type",
         img: SH_eyes,
-        //img:
-        //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
       }
     : {
         position: "email",
         template: "input",
         header: "First, enter your email",
         img: SH_eyes,
-        //img:
-        //"https://images.squarespace-cdn.com/content/v1/5ab01798f407b49611dcb65d/1541343226521-CWES2Z1FOMEG9BIBHSSR/ke17ZwdGBToddI8pDm48kKc-NDPEQRg4ibkK_KN_68UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tygO-QF_xose4Xx9IU6iygwfTInKZZFmXM2_r-acTKUKMshLAGzx4R3EDFOm1kBS/SH_stalks.png"
       };
 
-  console.log(authentificatedUser);
+  // console.log(authentificatedUser);
 
   const [modal, setModal] = useState(initialmodal);
 
@@ -69,7 +65,7 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
           password: "",
         };
 
-  console.log("initialUser = ", initialUser);
+  // console.log("initialUser = ", initialUser);
 
   const [user, setUser] = useState(initialUser);
 
