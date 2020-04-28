@@ -14,7 +14,7 @@ import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 
 const GET_CURRENT_USER = gql`
-  query getCurrentUser($uid: String!) {
+  query GetCurrentUser($uid: String!) {
     user(uid: $uid) {
       uid
       email

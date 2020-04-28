@@ -3,26 +3,48 @@ import { Form, Button } from "semantic-ui-react";
 
 import { useForm } from "react-hook-form";
 
+import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks";
+
+const UPDATE_USER = gql`
+  mutation UpdateUser(
+    $uid: String!
+    $school: String
+    $role: String
+    $firstName: String
+    $lastName: String
+  ) {
+    updateUser(
+      uid: $uid
+      school: $school
+      role: $role
+      firstName: $firstName
+      lastName: $lastName
+    ) {
+      uid
+    }
+  }
+`;
+
 const BasicPage = ({ currentUser, userInfo }) => {
   // const { register, handleSubmit, watch, errors } = useForm();
+  const [updateUser] = useMutation(UPDATE_USER);
+  // console.log(updateUser);
+
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
     console.log({ data });
+    updateUser({
+      variables: {
+        uid: userInfo.uid,
+        school: data.school,
+        role: data.role,
+        firstName: data.firstName,
+        lastName: data.lastName,
+      },
+    });
   };
-
-  // console.log(watch("example")); // watch input value by passing the name of it
-  // if (!user) {
-  //   return (
-  //     <Redirect
-  //       push
-  //       to={{
-  //         pathname: "/",
-  //         state: { alert: "No Such Project" },
-  //       }}
-  //     />
-  //   );
-  // }
 
   return (
     <Fragment>

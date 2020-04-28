@@ -11,7 +11,7 @@ module.exports = {
       } else {
         return false;
       }
-    }
+    },
   },
   Mutation: {
     signup: async (parent, body, ctx) => {
@@ -54,7 +54,7 @@ module.exports = {
           username,
           role: body.role,
           school: body.school,
-          avatar: body.avatar
+          avatar: body.avatar,
         };
         const user = await User.create(newUser);
         return user;
@@ -64,22 +64,50 @@ module.exports = {
       }
     },
     completeRegistration: async (parent, body, ctx) => {
-      console.log('completeRegistration = ', body);
-      console.log('uid = ', body.uid);
+      console.log("completeRegistration = ", body);
+      console.log("uid = ", body.uid);
 
       const uid = body.uid;
 
       try {
-
         user = await User.findOne({ uid });
 
-        console.log('user = ', user) ;
+        console.log("user = ", user);
 
         user.school = body.school;
         user.role = body.role;
 
         user.save();
 
+        return user;
+      } catch (err) {
+        console.error(err.message);
+      }
+    },
+    updateUser: async (parent, body, ctx) => {
+      console.log("data = ", body);
+      // console.log('uid = ', body.uid);
+      // console.log('school = ', body.school);
+
+      const uid = body.uid;
+      const school = body.school;
+      const role = body.role;
+      const firstName = body.firstName;
+      const lastName = body.lastName;
+
+      try {
+        user = await User.findOne({ uid });
+
+        // console.log('user = ', user) ;
+
+        user.school = school;
+        user.role = role;
+        user.firstName = firstName;
+        user.lastName = lastName;
+
+        user.save();
+
+        return user;
       } catch (err) {
         console.error(err.message);
       }
@@ -89,6 +117,6 @@ module.exports = {
       if (!user) {
         throw new Error(`No user found for email: ${email}`);
       }
-    }
-  }
+    },
+  },
 };

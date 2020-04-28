@@ -79,6 +79,13 @@ const typeDefs = gql`
       school: String!
       role: String!
     ): User!
+    updateUser(
+      uid: String!
+      school: String
+      role: String
+      firstName: String
+      lastName: String
+    ): User!
     login(email: String!, password: String!): User
     createProject(title: String!, description: String!): Project!
     updateProject(id: ID!, title: String, description: String): Project
