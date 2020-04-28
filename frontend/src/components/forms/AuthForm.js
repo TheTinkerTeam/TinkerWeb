@@ -353,17 +353,17 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
 
   const isValidPassword = (password) => {
     if (password.length < 8) {
-      return false
+      return false;
     }
-    return true
-  }
+    return true;
+  };
 
   const isValidSchool = (school) => {
     if (school.length < 1) {
-      return false
+      return false;
     }
-    return true
-  }
+    return true;
+  };
 
   const isInputFieldValidated = (user) => {
     if (modal.position === "email") {
@@ -372,11 +372,11 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
     if (modal.position === "fullname") {
       return isValidFullname(user) ? false : true;
     }
-    if (modal.position === "password" ) {
-      return isValidPassword(user.password) ? false : true
+    if (modal.position === "password") {
+      return isValidPassword(user.password) ? false : true;
     }
-    if (modal.position === "school" ) {
-      return isValidSchool(user.school) ? false : true
+    if (modal.position === "school") {
+      return isValidSchool(user.school) ? false : true;
     }
     return false;
   };
