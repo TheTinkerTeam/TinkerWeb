@@ -23,6 +23,9 @@ const GET_CURRENT_USER = gql`
       username
       school
       role
+      description
+      interests
+      country
     }
   }
 `;
@@ -41,8 +44,11 @@ const SettingsDashboard = ({ currentUser }) => {
     console.log({ error });
   }
   // if (error) return <p>Error :(</p>;
-
+  console.log({ currentUser });
+  console.log(currentUser.uid);
+  console.log({ data });
   const user_from_gql = data.user;
+  // const user_from_gql = '';
 
   return (
     <Grid>
@@ -57,7 +63,9 @@ const SettingsDashboard = ({ currentUser }) => {
           />
           <Route
             path='/settings/about'
-            render={() => <AboutPage userInfo={user_from_gql} />}
+            render={() => (
+              <AboutPage currentUser={currentUser} userInfo={user_from_gql} />
+            )}
           />
           <Route path='/settings/photos' component={PhotosPage} />
           <Route path='/settings/account' component={AccountPage} />

@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Form,
-  Header,
-  Segment,
-} from "semantic-ui-react";
-import { useForm} from "react-hook-form";
+import { Button, Form, Header, Segment } from "semantic-ui-react";
+import { useForm } from "react-hook-form";
 
-// import { gql } from "apollo-boost";
-// import { useMutation } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks";
 
 const interests = [
   { key: "wood working", text: "Wood Working", value: "wood working" },
@@ -21,37 +16,92 @@ const interests = [
   { key: "art", text: "Art", value: "art" },
 ];
 
-const AboutPage = ({ userInfo }) => {
-  console.log({ userInfo });
-	const { register, handleSubmit, errors } = useForm();
+const UPDATE_USER = gql`
+  mutation UpdateUser(
+    $uid: String!
+    $description: String
+    $interests: [String]
+    $country: String
+  ) {
+    updateUser(
+      uid: $uid
+      description: $description
+      interests: $interests
+      country: $country
+    ) {
+      uid
+      description
+      interests
+      country
+    }
+  }
+`;
 
-	let initialInterests;
-	if (userInfo && userInfo["interests"]) {
-		initialInterests = userInfo["interests"]
-	} else {
-		initialInterests = []
-	}
+const GET_CURRENT_USER = gql`
+  query GetCurrentUser($uid: String!) {
+    user(uid: $uid) {
+      uid
+      email
+      firstName
+      lastName
+      username
+      school
+      role
+      description
+      interests
+      country
+    }
+  }
+`;
+
+const AboutPage = ({ currentUser, userInfo }) => {
+  console.log({ userInfo });
+
+  const [updateUser] = useMutation(UPDATE_USER);
+
+  const { register, handleSubmit, errors } = useForm();
+
+  let initialInterests;
+  if (userInfo && userInfo["interests"]) {
+    console.log("userInfo[interests]", userInfo["interests"]);
+    initialInterests = userInfo["interests"];
+  } else {
+    initialInterests = [];
+  }
+
+  console.log("initialInterests", initialInterests);
 
   const [interestsList, setInterestsList] = useState(initialInterests);
 
   const handleChange = (e, r) => {
-    console.log({ r });
-    console.log("value", r.value);
+    // console.log({ r });
+    // console.log("value", r.value);
     setInterestsList(r.value);
   };
 
   const onSubmit = (data) => {
-    console.log("interest submitted = ", interestsList);
-    console.log({ data });
-    // updateUser({
-    //   variables: {
-    //     uid: userInfo.uid,
-    //     school: data.school,
-    //     role: data.role,
-    //     firstName: data.firstName,
-    //     lastName: data.lastName,
-    //   },
-    // });
+    // console.log("interest submitted = ", interestsList);
+    // console.log({ data });
+    const interests = interestsList;
+    const description = data.description;
+    const country = data.country;
+    // console.log({ interests });
+    // console.log({ description });
+    // console.log({ country });
+    updateUser({
+      variables: {
+        uid: userInfo.uid,
+        description: description,
+        interests: interests,
+        country: country,
+      },
+      refetchQueries: [
+        {
+          query: GET_CURRENT_USER,
+          variables: { uid: `${currentUser.uid}` },
+        },
+      ],
+    });
   };
 
   return (
@@ -99,7 +149,7 @@ const AboutPage = ({ userInfo }) => {
               placeholder='Where do you come from?'
             />
             <div style={{ color: "red" }}>
-              {errors.description && <span>Country is required</span>}
+              {errors.country && <span>Country is required</span>}
             </div>
           </Form.Field>
 

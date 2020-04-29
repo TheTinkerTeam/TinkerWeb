@@ -4,48 +4,59 @@ const UserSchema = new mongoose.Schema({
   uid: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   firstName: {
-    type: String
+    type: String,
   },
   lastName: {
-    type: String
+    type: String,
   },
   username: {
-    type: String
+    type: String,
   },
   role: {
     type: String,
-    required: true
+    //required: true
   },
   school: {
-    type: String
+    type: String,
   },
+  description: {
+    type: String,
+  },
+  country: {
+    type: String,
+  },
+  interests: [
+    {
+      type: String,
+    },
+  ],
   avatar: {
-    type: String
+    type: String,
   },
   projects: [
     {
-      type: mongoose.Schema.Types.ObjectId
-    }
+      type: mongoose.Schema.Types.ObjectId,
+    },
   ],
   classrooms: [
     {
-      type: mongoose.Schema.Types.ObjectId
-    }
+      type: mongoose.Schema.Types.ObjectId,
+    },
   ],
   date: {
     created: {
       type: Date,
-      default: Date.now()
-    }
-  }
+      default: Date.now(),
+    },
+  },
 });
 
 const User = mongoose.model("user", UserSchema);

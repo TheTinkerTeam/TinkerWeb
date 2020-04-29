@@ -94,16 +94,22 @@ module.exports = {
       const role = body.role;
       const firstName = body.firstName;
       const lastName = body.lastName;
+      const description = body.description;
+      const interests = body.interests;
+      const country = body.country;
 
       try {
         user = await User.findOne({ uid });
 
         // console.log('user = ', user) ;
 
-        user.school = school;
-        user.role = role;
-        user.firstName = firstName;
-        user.lastName = lastName;
+        user.school = school ? school : user.school;
+        user.role = role ? role : user.role;
+        user.firstName = firstName ? firstName : user.firstName;
+        user.lastName = lastName ? lastName : user.lastName;
+        user.country = country ? country : user.country;
+        user.description = description ? description : user.description;
+        user.interests = interests ? interests : user.interests;
 
         user.save();
 

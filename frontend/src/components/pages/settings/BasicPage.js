@@ -22,14 +22,34 @@ const UPDATE_USER = gql`
       lastName: $lastName
     ) {
       uid
+      school
+      role
+      firstName
+      lastName
     }
   }
 `;
 
-const BasicPage = ({ userInfo }) => {
-  // const { register, handleSubmit, watch, errors } = useForm();
+const GET_CURRENT_USER = gql`
+  query GetCurrentUser($uid: String!) {
+    user(uid: $uid) {
+      uid
+      email
+      firstName
+      lastName
+      username
+      school
+      role
+    }
+  }
+`;
+
+const BasicPage = ({ currentUser, userInfo }) => {
+	// const { register, handleSubmit, watch, errors } = useForm();
+
   const [updateUser] = useMutation(UPDATE_USER);
-  // console.log(updateUser);
+	// console.log(updateUser);
+
 
   const { register, handleSubmit, errors } = useForm();
 
@@ -43,6 +63,10 @@ const BasicPage = ({ userInfo }) => {
         firstName: data.firstName,
         lastName: data.lastName,
       },
+      refetchQueries: [{
+        query: GET_CURRENT_USER,
+        variables: { uid: `${currentUser.uid}` },
+      }]
     });
   };
 
