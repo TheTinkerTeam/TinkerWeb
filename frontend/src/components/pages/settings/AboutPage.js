@@ -23,18 +23,25 @@ const interests = [
 
 const AboutPage = ({ userInfo }) => {
   console.log({ userInfo });
-  const { register, handleSubmit, errors } = useForm();
+	const { register, handleSubmit, errors } = useForm();
 
-  const [interestsList, setInterestsList] = useState([]);
+	let initialInterests;
+	if (userInfo && userInfo["interests"]) {
+		initialInterests = userInfo["interests"]
+	} else {
+		initialInterests = []
+	}
+
+  const [interestsList, setInterestsList] = useState(initialInterests);
 
   const handleChange = (e, r) => {
-    // console.log({ e });
-    // console.log("value", r.value);
-    setInterestsList([r.value]);
+    console.log({ r });
+    console.log("value", r.value);
+    setInterestsList(r.value);
   };
 
   const onSubmit = (data) => {
-    console.log("interest submitted = ", interestsList[0]);
+    console.log("interest submitted = ", interestsList);
     console.log({ data });
     // updateUser({
     //   variables: {
@@ -77,7 +84,7 @@ const AboutPage = ({ userInfo }) => {
               fluid
               search
               selection
-              defaultValue={[]}
+              defaultValue={interestsList}
               options={interests}
               onChange={handleChange}
             />
