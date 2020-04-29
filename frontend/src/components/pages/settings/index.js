@@ -55,7 +55,10 @@ const SettingsDashboard = ({ currentUser }) => {
               <BasicPage currentUser={currentUser} userInfo={user_from_gql} />
             )}
           />
-          <Route path='/settings/about' component={AboutPage} />
+          <Route
+            path='/settings/about'
+            render={() => <AboutPage userInfo={user_from_gql} />}
+          />
           <Route path='/settings/photos' component={PhotosPage} />
           <Route path='/settings/account' component={AccountPage} />
         </Switch>

@@ -26,7 +26,7 @@ const UPDATE_USER = gql`
   }
 `;
 
-const BasicPage = ({ currentUser, userInfo }) => {
+const BasicPage = ({ userInfo }) => {
   // const { register, handleSubmit, watch, errors } = useForm();
   const [updateUser] = useMutation(UPDATE_USER);
   // console.log(updateUser);
@@ -59,6 +59,7 @@ const BasicPage = ({ currentUser, userInfo }) => {
               ref={register({ required: true })}
               placeholder='Enter your firstname'
             />
+            {/* errors will return when field validation fails  */}
             <div style={{ color: "red" }}>
               {errors.firstName && <span>Firstname is required</span>}
             </div>
@@ -66,45 +67,33 @@ const BasicPage = ({ currentUser, userInfo }) => {
 
           <Form.Field>
             <label>Last Name</label>
-            {/* include validation with required or other standard HTML validation rules */}
             <input
               name='lastName'
               defaultValue={userInfo.lastName}
               ref={register({ required: true })}
               placeholder='Enter your lastname'
             />
-            {/* errors will return when field validation fails  */}
             <div>{errors.lastName && <span>Lastname is required</span>}</div>
           </Form.Field>
 
           <Form.Field>
             <label>Role</label>
-            {/* include validation with required or other standard HTML validation rules */}
-            {/* <input
-              name='roleRequired'
-              defaultValue={userInfo.role || ""}
-              ref={register({ required: true })}
-              placeholder='Enter your role'
-            /> */}
             <select name='role' ref={register} defaultValue={userInfo.role}>
               <option value='teacher'>Teacher</option>
               <option value='student'>Student</option>
               <option value='Admin'>Admin</option>
             </select>
-            {/* errors will return when field validation fails  */}
             <div>{errors.role && <span>This field is required</span>}</div>
           </Form.Field>
 
           <Form.Field>
             <label>School</label>
-            {/* include validation with required or other standard HTML validation rules */}
             <input
               name='school'
               defaultValue={userInfo.school || ""}
               ref={register({ required: true })}
               placeholder='Enter your school name'
             />
-            {/* errors will return when field validation fails  */}
             <div>
               {errors.school && <span>The school name is required</span>}
             </div>
