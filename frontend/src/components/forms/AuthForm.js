@@ -69,7 +69,7 @@ const AuthForm = ({ signup, completeRegistration, login }) => {
   // console.log("initialUser = ", initialUser);
 
   const [user, setUser] = useState(initialUser);
-  console.log("User = ", user);
+  // console.log("User = ", user);
 
   const initialInputs = [];
   const initialButtons = [];

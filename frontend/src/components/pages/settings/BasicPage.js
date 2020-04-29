@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Form, Button } from "semantic-ui-react";
 
 import { useForm } from "react-hook-form";
@@ -44,10 +44,33 @@ const GET_CURRENT_USER = gql`
   }
 `;
 
+const roleOptions = [
+  { key: "teacher", text: "Teacher", value: "teacher" },
+  { key: "student", text: "Student", value: "student" },
+  { key: "admin", text: "Admin", value: "admin" },
+];
+
 const BasicPage = ({ currentUser, userInfo }) => {
   const [updateUser] = useMutation(UPDATE_USER);
 
   const { register, handleSubmit, errors } = useForm();
+
+  let initialRole;
+  if (userInfo && userInfo["role"]) {
+    // console.log("userInfo['role']", userInfo["role"] )
+    initialRole = userInfo["role"];
+  } else {
+    // console.log("no initial role")
+    initialRole = [];
+  }
+
+  const [roleState, setRoleState] = useState(initialRole);
+
+  const handleChange = (e, r) => {
+    // console.log({r})
+    // console.log("r.value:", r.value)
+    setRoleState(r.value);
+  };
 
   const onSubmit = (data) => {
     // console.log({ data });
@@ -55,7 +78,8 @@ const BasicPage = ({ currentUser, userInfo }) => {
       variables: {
         uid: userInfo.uid,
         school: data.school,
-        role: data.role,
+        //role: data.role,
+        role: roleState,
         firstName: data.firstName,
         lastName: data.lastName,
       },
@@ -98,7 +122,7 @@ const BasicPage = ({ currentUser, userInfo }) => {
             <div>{errors.lastName && <span>Lastname is required</span>}</div>
           </Form.Field>
 
-          <Form.Field>
+          {/* <Form.Field>
             <label>Role</label>
             <select name='role' ref={register} defaultValue={userInfo.role}>
               <option value='teacher'>Teacher</option>
@@ -106,6 +130,20 @@ const BasicPage = ({ currentUser, userInfo }) => {
               <option value='Admin'>Admin</option>
             </select>
             <div>{errors.role && <span>This field is required</span>}</div>
+          </Form.Field> */}
+
+          <Form.Field>
+            <label>Role</label>
+            <Form.Dropdown
+              name='role'
+              placeholder='Select you role'
+              fluid
+              search
+              selection
+              defaultValue={userInfo.role}
+              options={roleOptions}
+              onChange={handleChange}
+            />
           </Form.Field>
 
           <Form.Field>
