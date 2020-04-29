@@ -25,16 +25,10 @@ const httpLink = new createHttpLink({
 
 const authLink = setContext(async (_, { headers }) => {
   const currentUser = getFirebase().auth().currentUser;
-  console.log({currentUser})
   let token = null;
   if (currentUser) {
     token = await currentUser.getIdToken(true);
   }
-  console.log({token})
-  // if (currentUser) {
-  //   token = await currentUser.getIdTokenForcingRefresh(true);
-  // }
-  // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,

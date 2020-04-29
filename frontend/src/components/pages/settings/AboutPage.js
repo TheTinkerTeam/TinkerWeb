@@ -55,39 +55,30 @@ const GET_CURRENT_USER = gql`
 `;
 
 const AboutPage = ({ currentUser, userInfo }) => {
-  console.log({ userInfo });
-
   const [updateUser] = useMutation(UPDATE_USER);
 
   const { register, handleSubmit, errors } = useForm();
 
   let initialInterests;
   if (userInfo && userInfo["interests"]) {
-    console.log("userInfo[interests]", userInfo["interests"]);
+    // console.log("userInfo['interests']", userInfo["interests"] )
     initialInterests = userInfo["interests"];
   } else {
+    // console.log("no initial interests")
     initialInterests = [];
   }
-
-  console.log("initialInterests", initialInterests);
 
   const [interestsList, setInterestsList] = useState(initialInterests);
 
   const handleChange = (e, r) => {
-    // console.log({ r });
-    // console.log("value", r.value);
     setInterestsList(r.value);
   };
 
   const onSubmit = (data) => {
-    // console.log("interest submitted = ", interestsList);
-    // console.log({ data });
     const interests = interestsList;
     const description = data.description;
     const country = data.country;
-    // console.log({ interests });
-    // console.log({ description });
-    // console.log({ country });
+
     updateUser({
       variables: {
         uid: userInfo.uid,
@@ -106,11 +97,10 @@ const AboutPage = ({ currentUser, userInfo }) => {
 
   return (
     <Segment>
-      <div>{interestsList}</div>
       <Header dividing size='large' content='About Me' />
       <p>Complete your profile to get the most out of this site</p>
       {userInfo && (
-        <Form onSubmit={handleSubmit(onSubmit, interests)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Field>
             <label>Tell us about yourself</label>
             <textarea
@@ -134,7 +124,7 @@ const AboutPage = ({ currentUser, userInfo }) => {
               fluid
               search
               selection
-              defaultValue={interestsList}
+              defaultValue={userInfo.interests}
               options={interests}
               onChange={handleChange}
             />

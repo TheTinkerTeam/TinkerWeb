@@ -45,16 +45,12 @@ const GET_CURRENT_USER = gql`
 `;
 
 const BasicPage = ({ currentUser, userInfo }) => {
-	// const { register, handleSubmit, watch, errors } = useForm();
-
   const [updateUser] = useMutation(UPDATE_USER);
-	// console.log(updateUser);
-
 
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
-    console.log({ data });
+    // console.log({ data });
     updateUser({
       variables: {
         uid: userInfo.uid,
@@ -63,10 +59,12 @@ const BasicPage = ({ currentUser, userInfo }) => {
         firstName: data.firstName,
         lastName: data.lastName,
       },
-      refetchQueries: [{
-        query: GET_CURRENT_USER,
-        variables: { uid: `${currentUser.uid}` },
-      }]
+      refetchQueries: [
+        {
+          query: GET_CURRENT_USER,
+          variables: { uid: `${currentUser.uid}` },
+        },
+      ],
     });
   };
 

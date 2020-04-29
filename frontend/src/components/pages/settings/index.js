@@ -44,11 +44,7 @@ const SettingsDashboard = ({ currentUser }) => {
     console.log({ error });
   }
   // if (error) return <p>Error :(</p>;
-  console.log({ currentUser });
-  console.log(currentUser.uid);
-  console.log({ data });
   const user_from_gql = data.user;
-  // const user_from_gql = '';
 
   return (
     <Grid>
