@@ -15,19 +15,21 @@ const UserPhotos = ({ photos, currentUser }) => {
           <Image src={currentUser.photoURL || avatar} />
           <Button positive>Main Photo</Button>
         </Card>
-        {/* {photos &&
+        {photos &&
           photos.map((photo, index) => {
-            <Card key={index}>
-              <Image src={photo.url} />
-              <div className='ui two buttons'>
-                <Button basic color='green'>
-                  Main
-                </Button>
-                <Button basic icon='trash' color='red' />
-              </div>
-            </Card>;
-          })} */}
-          {photos &&
+            return (
+              <Card key={index}>
+                <Image src={photo} />
+                <div className='ui two buttons'>
+                  <Button basic color='green'>
+                    Main
+                  </Button>
+                  <Button basic icon='trash' color='red' />
+                </div>
+              </Card>
+            );
+          })}
+        {/* {photos &&
             <Card>
               <Image src={photos} />
               <div className='ui two buttons'>
@@ -37,7 +39,7 @@ const UserPhotos = ({ photos, currentUser }) => {
                 <Button basic icon='trash' color='red' />
               </div>
             </Card>
-          }
+          } */}
       </Card.Group>
     </Fragment>
   );

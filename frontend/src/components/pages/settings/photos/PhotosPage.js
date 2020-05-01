@@ -17,7 +17,7 @@ import { useMutation } from "@apollo/react-hooks";
 import UserPhotos from "./UserPhotos";
 
 const UPDATE_USER = gql`
-  mutation UpdateUser($uid: String!, $imagesURL: String) {
+  mutation UpdateUser($uid: String!, $imagesURL: [String]) {
     updateUser(uid: $uid, imagesURL: $imagesURL) {
       uid
       imagesURL
