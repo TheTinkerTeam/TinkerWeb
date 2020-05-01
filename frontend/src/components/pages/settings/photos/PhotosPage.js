@@ -14,6 +14,7 @@ import { uploadImageEdith } from "../../../../actions/userActionsEdith";
 
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
+import UserPhotos from "./UserPhotos";
 
 const UPDATE_USER = gql`
   mutation UpdateUser($uid: String!, $imagesURL: String) {
@@ -29,6 +30,7 @@ const GET_CURRENT_USER = gql`
     user(uid: $uid) {
       uid
       avatar
+      imagesURL
     }
   }
 `;
@@ -48,6 +50,7 @@ const PhotosPage = ({ currentUser, userInfo }) => {
 
   const handleUploadImage = async () => {
     try {
+      setLoading(true);
       console.log(image);
       console.log(files[0].name);
       // await uploadProfileImage(image, files[0].name);
@@ -71,6 +74,7 @@ const PhotosPage = ({ currentUser, userInfo }) => {
       //save this imageURL to mongodb
 
       handleCancelCrop();
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -116,6 +120,8 @@ const PhotosPage = ({ currentUser, userInfo }) => {
                   style={{ width: "100px" }}
                   positive
                   icon='check'
+                  loading={isLoading}
+
                 />
                 <Button
                   onClick={handleCancelCrop}
@@ -129,24 +135,7 @@ const PhotosPage = ({ currentUser, userInfo }) => {
       </Grid>
 
       <Divider />
-      <Header sub color='teal' content='All Photos' />
-
-      <Card.Group itemsPerRow={5}>
-        <Card>
-          <Image src='https://randomuser.me/api/portraits/men/20.jpg' />
-          <Button positive>Main Photo</Button>
-        </Card>
-
-        <Card>
-          <Image src='https://randomuser.me/api/portraits/men/20.jpg' />
-          <div className='ui two buttons'>
-            <Button basic color='green'>
-              Main
-            </Button>
-            <Button basic icon='trash' color='red' />
-          </div>
-        </Card>
-      </Card.Group>
+      <UserPhotos currentUser={currentUser} photos={userInfo && userInfo.imagesURL ? userInfo.imagesURL : ''}/>
     </Segment>
   );
 };

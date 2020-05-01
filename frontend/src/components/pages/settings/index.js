@@ -26,6 +26,7 @@ const GET_CURRENT_USER = gql`
       description
       interests
       country
+      imagesURL
     }
   }
 `;
