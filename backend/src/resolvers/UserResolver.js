@@ -15,7 +15,7 @@ module.exports = {
   },
   Mutation: {
     signup: async (parent, body, ctx) => {
-      console.log(body);
+      // console.log(body);
       try {
         // TODO: MOVE to different file as function
         // Generate username from full name:
@@ -44,7 +44,7 @@ module.exports = {
           response = await User.findOne({ username });
           i++;
         }
-        console.log(body);
+        // console.log(body);
 
         const newUser = {
           uid: body.uid,
@@ -64,8 +64,8 @@ module.exports = {
       }
     },
     completeRegistration: async (parent, body, ctx) => {
-      console.log("completeRegistration = ", body);
-      console.log("uid = ", body.uid);
+      // console.log("completeRegistration = ", body);
+      // console.log("uid = ", body.uid);
 
       const uid = body.uid;
 
@@ -85,7 +85,7 @@ module.exports = {
       }
     },
     updateUser: async (parent, body, ctx) => {
-      console.log("data = ", body);
+      // console.log("data = ", body);
       // console.log('uid = ', body.uid);
       // console.log('school = ', body.school);
 
@@ -116,7 +116,7 @@ module.exports = {
         user.interests = interests ? interests : user.interests;
         // user.imagesURL = imagesURL ? imagesURL : user.imagesURL;
 
-        console.log("just before saving, user.imagesURL = ", user.imagesURL);
+        // console.log("just before saving, user.imagesURL = ", user.imagesURL);
 
         user.save();
 
@@ -126,7 +126,7 @@ module.exports = {
       }
     },
     updateImagesURLUser: async (parent, body, ctx) => {
-      console.log("data = ", body);
+      // console.log("data = ", body);
 
       const uid = body.uid;
       const imagesURL = body.imagesURL;
@@ -134,17 +134,17 @@ module.exports = {
       try {
         user = await User.findOne({ uid });
 
-        console.log(
-          "The current imagesURL (before update, in mongodb)= ",
-          user.imagesURL
-        );
-        console.log("imagesURL[0]", imagesURL[0]);
+        // console.log(
+        //   "The current imagesURL (before update, in mongodb)= ",
+        //   user.imagesURL
+        // );
+        // console.log("imagesURL[0]", imagesURL[0]);
         // user.imagesURL = imagesURL ? imagesURL : user.imagesURL;
         user.imagesURL === imagesURL
           ? (user.imagesURL = imagesURL)
           : (user.imagesURL = [...user.imagesURL, imagesURL[0]]);
 
-        console.log("just before saving, user.imagesURL = ", user.imagesURL);
+        // console.log("just before saving, user.imagesURL = ", user.imagesURL);
 
         user.save();
 

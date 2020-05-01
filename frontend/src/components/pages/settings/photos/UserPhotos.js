@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 import { Header, Card, Image, Button } from "semantic-ui-react";
 import avatar from "../../../../img/avatar.png";
 
-const UserPhotos = ({ photos, currentUser }) => {
-  console.log({ photos });
-  console.log({ currentUser });
+const UserPhotos = ({ photos, currentUser, deletePhoto }) => {
+  // console.log({ photos });
+  // console.log({ currentUser });
 
   return (
     <Fragment>
@@ -24,7 +24,12 @@ const UserPhotos = ({ photos, currentUser }) => {
                   <Button basic color='green'>
                     Main
                   </Button>
-                  <Button basic icon='trash' color='red' />
+                  <Button
+                    onClick={() => deletePhoto(photo)}
+                    basic
+                    icon='trash'
+                    color='red'
+                  />
                 </div>
               </Card>
             );

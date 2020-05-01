@@ -8,7 +8,8 @@ import {
 } from "semantic-ui-react";
 import DropzoneInput from "./DropzoneInput";
 import CropperInput from "./CropperInput";
-import { uploadImageEdith } from "../../../../actions/userActionsEdith";
+import { uploadImageEdith, deletePhoto } from "../../../../actions/userActionsEdith";
+import { v4 as uuidv4 } from "uuid";
 
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
@@ -51,9 +52,11 @@ const PhotosPage = ({ currentUser, userInfo }) => {
       setLoading(true);
       // console.log(image);
       // console.log(files[0].name);
+      const randomUuid = uuidv4();
+      const filename = `${randomUuid}_${files[0].name}`
 
       //upload image to firebase storage and return the url
-      const url = await uploadImageEdith(image, files[0].name);
+      const url = await uploadImageEdith(image, filename, currentUser.uid);
       // console.log("url = ", url);
       //save this imageURL to mongodb
       updateImagesURLUser({
@@ -79,6 +82,14 @@ const PhotosPage = ({ currentUser, userInfo }) => {
     setFiles([]);
     setImage(null);
   };
+
+  const handleDeletePhoto = async (photo) => {
+    try{
+      await deletePhoto(photo)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Segment>
@@ -130,7 +141,7 @@ const PhotosPage = ({ currentUser, userInfo }) => {
       </Grid>
 
       <Divider />
-      <UserPhotos currentUser={currentUser} photos={userInfo && userInfo.imagesURL ? userInfo.imagesURL : ''}/>
+      <UserPhotos deletePhoto={handleDeletePhoto} currentUser={currentUser} photos={userInfo && userInfo.imagesURL ? userInfo.imagesURL : ''}/>
     </Segment>
   );
 };
