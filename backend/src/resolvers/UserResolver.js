@@ -97,6 +97,7 @@ module.exports = {
       const description = body.description;
       const interests = body.interests;
       const country = body.country;
+      const imagesURL = body.imagesURL;
 
       try {
         user = await User.findOne({ uid });
@@ -110,6 +111,7 @@ module.exports = {
         user.country = country ? country : user.country;
         user.description = description ? description : user.description;
         user.interests = interests ? interests : user.interests;
+        user.imagesURL = imagesURL ? imagesURL : user.imagesURL;
 
         user.save();
 

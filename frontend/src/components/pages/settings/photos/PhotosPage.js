@@ -10,19 +10,35 @@ import {
 } from "semantic-ui-react";
 import DropzoneInput from "./DropzoneInput";
 import CropperInput from "./CropperInput";
-import { connect } from "react-redux";
-import { uploadProfileImage } from "../../../../actions/userActions";
-import { sayHi } from "../../../../actions/userActionsEdith";
 import { uploadImageEdith } from "../../../../actions/userActionsEdith";
 
-const mapDispatchToProps = {
-  uploadProfileImage,
-};
+import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks";
 
-const PhotosPage = ({ uploadProfileImage }) => {
+const UPDATE_USER = gql`
+  mutation UpdateUser($uid: String!, $imagesURL: String) {
+    updateUser(uid: $uid, imagesURL: $imagesURL) {
+      uid
+      imagesURL
+    }
+  }
+`;
+
+const GET_CURRENT_USER = gql`
+  query GetCurrentUser($uid: String!) {
+    user(uid: $uid) {
+      uid
+      avatar
+    }
+  }
+`;
+
+const PhotosPage = ({ currentUser, userInfo }) => {
   const [files, setFiles] = useState([]);
   const [image, setImage] = useState([null]);
   const [isLoading, setLoading] = useState(false);
+
+  const [updateUser] = useMutation(UPDATE_USER);
 
   useEffect(() => {
     return () => {
@@ -30,18 +46,29 @@ const PhotosPage = ({ uploadProfileImage }) => {
     };
   }, [files]);
 
-  // const UploadBlobToFirestoreBucket = async () => {
-
-  // }
-
   const handleUploadImage = async () => {
     try {
       console.log(image);
       console.log(files[0].name);
       // await uploadProfileImage(image, files[0].name);
-      const url = await uploadImageEdith(image, files[0].name);
 
-      console.log('url = ', url);
+      //upload image to firebase storage and return the url
+      const url = await uploadImageEdith(image, files[0].name);
+      console.log("url = ", url);
+      updateUser({
+        variables: {
+          uid: userInfo.uid,
+          imagesURL: url
+        },
+        refetchQueries: [
+          {
+            query: GET_CURRENT_USER,
+            variables: { uid: `${currentUser.uid}` },
+          },
+        ],
+      });
+
+      //save this imageURL to mongodb
 
       handleCancelCrop();
     } catch (error) {
@@ -124,5 +151,5 @@ const PhotosPage = ({ uploadProfileImage }) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(PhotosPage);
+export default PhotosPage;
 // export default PhotosPage;

@@ -17,6 +17,7 @@ const typeDefs = gql`
     country: String
     projects: [Project]
     avatar: String
+    imagesURL: String
     classrooms: [Classroom]
   }
 
@@ -91,6 +92,7 @@ const typeDefs = gql`
       description: String
       interests: [String]
       country: String
+      imagesURL: String
     ): User!
     login(email: String!, password: String!): User
     createProject(title: String!, description: String!): Project!

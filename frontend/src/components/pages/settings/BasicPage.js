@@ -122,16 +122,6 @@ const BasicPage = ({ currentUser, userInfo }) => {
             <div>{errors.lastName && <span>Lastname is required</span>}</div>
           </Form.Field>
 
-          {/* <Form.Field>
-            <label>Role</label>
-            <select name='role' ref={register} defaultValue={userInfo.role}>
-              <option value='teacher'>Teacher</option>
-              <option value='student'>Student</option>
-              <option value='Admin'>Admin</option>
-            </select>
-            <div>{errors.role && <span>This field is required</span>}</div>
-          </Form.Field> */}
-
           <Form.Field>
             <label>Role</label>
             <Form.Dropdown

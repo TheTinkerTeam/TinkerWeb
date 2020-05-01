@@ -63,7 +63,12 @@ const SettingsDashboard = ({ currentUser }) => {
               <AboutPage currentUser={currentUser} userInfo={user_from_gql} />
             )}
           />
-          <Route path='/settings/photos' component={PhotosPage} />
+          <Route
+            path='/settings/photos'
+            render={() => (
+              <PhotosPage currentUser={currentUser} userInfo={user_from_gql}/>
+            )}
+          />
           <Route path='/settings/account' component={AccountPage} />
         </Switch>
       </Grid.Column>

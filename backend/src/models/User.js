@@ -41,6 +41,9 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
+  imagesURL: {
+    type: String,
+  },
   projects: [
     {
       type: mongoose.Schema.Types.ObjectId,
