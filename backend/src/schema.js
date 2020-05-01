@@ -94,6 +94,10 @@ const typeDefs = gql`
       country: String
       imagesURL: [String]
     ): User!
+    updateImagesURLUser(
+      uid: String!
+      imagesURL: [String]
+    ): User!
     login(email: String!, password: String!): User
     createProject(title: String!, description: String!): Project!
     updateProject(id: ID!, title: String, description: String): Project

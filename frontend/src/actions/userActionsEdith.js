@@ -10,7 +10,7 @@ export const uploadImageEdith = async (file, fileName) => {
     var storageRef = firebase.storage().ref();
     // Create a child reference
 
-    var imageRef = storageRef.child(fileName);
+    // var imageRef = storageRef.child(fileName);
     // imagesRef now points to 'images'
 
     var randomUuid = uuidv4();

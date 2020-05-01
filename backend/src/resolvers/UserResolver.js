@@ -97,13 +97,16 @@ module.exports = {
       const description = body.description;
       const interests = body.interests;
       const country = body.country;
-      const imagesURL = body.imagesURL;
 
       try {
+        // console.log("The new imagesURL", imagesURL);
         user = await User.findOne({ uid });
 
-        // console.log('user = ', user) ;
-
+        // console.log(
+        //   "The current imagesURL (before update, in mongodb)= ",
+        //   user.imagesURL
+        // );
+        // console.log("imagesURL[0]", imagesURL[0]);
         user.school = school ? school : user.school;
         user.role = role ? role : user.role;
         user.firstName = firstName ? firstName : user.firstName;
@@ -111,7 +114,37 @@ module.exports = {
         user.country = country ? country : user.country;
         user.description = description ? description : user.description;
         user.interests = interests ? interests : user.interests;
-        user.imagesURL = imagesURL ? imagesURL : user.imagesURL;
+        // user.imagesURL = imagesURL ? imagesURL : user.imagesURL;
+
+        console.log("just before saving, user.imagesURL = ", user.imagesURL);
+
+        user.save();
+
+        return user;
+      } catch (err) {
+        console.error(err.message);
+      }
+    },
+    updateImagesURLUser: async (parent, body, ctx) => {
+      console.log("data = ", body);
+
+      const uid = body.uid;
+      const imagesURL = body.imagesURL;
+
+      try {
+        user = await User.findOne({ uid });
+
+        console.log(
+          "The current imagesURL (before update, in mongodb)= ",
+          user.imagesURL
+        );
+        console.log("imagesURL[0]", imagesURL[0]);
+        // user.imagesURL = imagesURL ? imagesURL : user.imagesURL;
+        user.imagesURL === imagesURL
+          ? (user.imagesURL = imagesURL)
+          : (user.imagesURL = [...user.imagesURL, imagesURL[0]]);
+
+        console.log("just before saving, user.imagesURL = ", user.imagesURL);
 
         user.save();
 

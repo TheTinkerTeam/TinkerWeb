@@ -1,12 +1,10 @@
 import React, { useState, useEffect, Fragment } from "react";
 import {
-  Image,
   Segment,
   Header,
   Divider,
   Grid,
   Button,
-  Card,
 } from "semantic-ui-react";
 import DropzoneInput from "./DropzoneInput";
 import CropperInput from "./CropperInput";
@@ -16,9 +14,9 @@ import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
 import UserPhotos from "./UserPhotos";
 
-const UPDATE_USER = gql`
-  mutation UpdateUser($uid: String!, $imagesURL: [String]) {
-    updateUser(uid: $uid, imagesURL: $imagesURL) {
+const UPDATE_USER_IMAGES = gql`
+  mutation updateImagesURLUser($uid: String!, $imagesURL: [String]) {
+    updateImagesURLUser(uid: $uid, imagesURL: $imagesURL) {
       uid
       imagesURL
     }
@@ -40,7 +38,7 @@ const PhotosPage = ({ currentUser, userInfo }) => {
   const [image, setImage] = useState([null]);
   const [isLoading, setLoading] = useState(false);
 
-  const [updateUser] = useMutation(UPDATE_USER);
+  const [updateImagesURLUser] = useMutation(UPDATE_USER_IMAGES);
 
   useEffect(() => {
     return () => {
@@ -51,14 +49,14 @@ const PhotosPage = ({ currentUser, userInfo }) => {
   const handleUploadImage = async () => {
     try {
       setLoading(true);
-      console.log(image);
-      console.log(files[0].name);
-      // await uploadProfileImage(image, files[0].name);
+      // console.log(image);
+      // console.log(files[0].name);
 
       //upload image to firebase storage and return the url
       const url = await uploadImageEdith(image, files[0].name);
-      console.log("url = ", url);
-      updateUser({
+      // console.log("url = ", url);
+      //save this imageURL to mongodb
+      updateImagesURLUser({
         variables: {
           uid: userInfo.uid,
           imagesURL: url
@@ -70,9 +68,6 @@ const PhotosPage = ({ currentUser, userInfo }) => {
           },
         ],
       });
-
-      //save this imageURL to mongodb
-
       handleCancelCrop();
       setLoading(false)
     } catch (error) {
@@ -141,4 +136,3 @@ const PhotosPage = ({ currentUser, userInfo }) => {
 };
 
 export default PhotosPage;
-// export default PhotosPage;
