@@ -3,6 +3,16 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   scalar DateTime
 
+  type UserImage {
+    name: String!
+    url: String!
+  }
+
+  input UserImageInput {
+    name: String!
+    url: String!
+  }
+
   type User {
     id: ID!
     uid: String!
@@ -17,7 +27,7 @@ const typeDefs = gql`
     country: String
     projects: [Project]
     avatar: String
-    imagesURL: [String]
+    userImages: [UserImage]
     classrooms: [Classroom]
   }
 
@@ -50,6 +60,7 @@ const typeDefs = gql`
     currentProject: Project
     archivedProjects: [Project]
   }
+
 
   type Query {
     # User
@@ -92,11 +103,14 @@ const typeDefs = gql`
       description: String
       interests: [String]
       country: String
-      imagesURL: [String]
     ): User!
     updateImagesURLUser(
       uid: String!
-      imagesURL: [String]
+      newImageURL: UserImageInput!
+    ): User!
+    deleteUserPhoto(
+      uid: String!
+      photoToDelete: UserImageInput!
     ): User!
     login(email: String!, password: String!): User
     createProject(title: String!, description: String!): Project!

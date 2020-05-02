@@ -1,14 +1,11 @@
 import React, { useState, useEffect, Fragment } from "react";
-import {
-  Segment,
-  Header,
-  Divider,
-  Grid,
-  Button,
-} from "semantic-ui-react";
+import { Segment, Header, Divider, Grid, Button } from "semantic-ui-react";
 import DropzoneInput from "./DropzoneInput";
 import CropperInput from "./CropperInput";
-import { uploadImageEdith, deletePhoto } from "../../../../actions/userActionsEdith";
+import {
+  uploadImageEdith,
+  deletePhoto,
+} from "../../../../actions/userActionsEdith";
 import { v4 as uuidv4 } from "uuid";
 
 import { gql } from "apollo-boost";
@@ -16,10 +13,25 @@ import { useMutation } from "@apollo/react-hooks";
 import UserPhotos from "./UserPhotos";
 
 const UPDATE_USER_IMAGES = gql`
-  mutation updateImagesURLUser($uid: String!, $imagesURL: [String]) {
-    updateImagesURLUser(uid: $uid, imagesURL: $imagesURL) {
+  mutation updateImagesURLUser($uid: String!, $newImageURL: UserImageInput!) {
+    updateImagesURLUser(uid: $uid, newImageURL: $newImageURL) {
       uid
-      imagesURL
+      userImages {
+        url
+        name
+      }
+    }
+  }
+`;
+
+const DELETE_USER_IMAGE = gql`
+  mutation deleteUserPhoto($uid: String!, $photoToDelete: UserImageInput!) {
+    deleteUserPhoto(uid: $uid, photoToDelete: $photoToDelete) {
+      uid
+      userImages {
+        url
+        name
+      }
     }
   }
 `;
@@ -29,7 +41,10 @@ const GET_CURRENT_USER = gql`
     user(uid: $uid) {
       uid
       avatar
-      imagesURL
+      userImages {
+        url
+        name
+      }
     }
   }
 `;
@@ -40,6 +55,7 @@ const PhotosPage = ({ currentUser, userInfo }) => {
   const [isLoading, setLoading] = useState(false);
 
   const [updateImagesURLUser] = useMutation(UPDATE_USER_IMAGES);
+  const [deleteUserPhoto] = useMutation(DELETE_USER_IMAGE);
 
   useEffect(() => {
     return () => {
@@ -53,7 +69,7 @@ const PhotosPage = ({ currentUser, userInfo }) => {
       // console.log(image);
       // console.log(files[0].name);
       const randomUuid = uuidv4();
-      const filename = `${randomUuid}_${files[0].name}`
+      const filename = `${randomUuid}_${files[0].name}`;
 
       //upload image to firebase storage and return the url
       const url = await uploadImageEdith(image, filename, currentUser.uid);
@@ -62,7 +78,10 @@ const PhotosPage = ({ currentUser, userInfo }) => {
       updateImagesURLUser({
         variables: {
           uid: userInfo.uid,
-          imagesURL: url
+          newImageURL: {
+            name: filename,
+            url: url,
+          },
         },
         refetchQueries: [
           {
@@ -72,7 +91,7 @@ const PhotosPage = ({ currentUser, userInfo }) => {
         ],
       });
       handleCancelCrop();
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -84,12 +103,27 @@ const PhotosPage = ({ currentUser, userInfo }) => {
   };
 
   const handleDeletePhoto = async (photo) => {
-    try{
-      await deletePhoto(photo)
+    try {
+      await deletePhoto(photo);
+      deleteUserPhoto({
+        variables: {
+          uid: userInfo.uid,
+          photoToDelete: {
+            name: photo.name,
+            url: photo.url,
+          },
+        },
+        refetchQueries: [
+          {
+            query: GET_CURRENT_USER,
+            variables: { uid: `${currentUser.uid}` },
+          },
+        ],
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <Segment>
@@ -127,7 +161,6 @@ const PhotosPage = ({ currentUser, userInfo }) => {
                   positive
                   icon='check'
                   loading={isLoading}
-
                 />
                 <Button
                   onClick={handleCancelCrop}
@@ -141,7 +174,11 @@ const PhotosPage = ({ currentUser, userInfo }) => {
       </Grid>
 
       <Divider />
-      <UserPhotos deletePhoto={handleDeletePhoto} currentUser={currentUser} photos={userInfo && userInfo.imagesURL ? userInfo.imagesURL : ''}/>
+      <UserPhotos
+        deletePhoto={handleDeletePhoto}
+        currentUser={currentUser}
+        photos={userInfo && userInfo.userImages ? userInfo.userImages : ""}
+      />
     </Segment>
   );
 };

@@ -26,7 +26,10 @@ const GET_CURRENT_USER = gql`
       description
       interests
       country
-      imagesURL
+      userImages {
+        url
+        name
+      }
     }
   }
 `;
@@ -45,7 +48,9 @@ const SettingsDashboard = ({ currentUser }) => {
     console.log({ error });
   }
   // if (error) return <p>Error :(</p>;
-  const user_from_gql = data.user;
+  // const user_from_gql = data.user
+  let user_from_gql;
+  if (data && data.user) {user_from_gql = data.user}
 
   return (
     <Grid>

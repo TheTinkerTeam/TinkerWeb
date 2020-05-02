@@ -126,25 +126,57 @@ module.exports = {
       }
     },
     updateImagesURLUser: async (parent, body, ctx) => {
-      // console.log("data = ", body);
+      console.log("data = ", body);
 
       const uid = body.uid;
-      const imagesURL = body.imagesURL;
-
+      const name = body.newImageURL.name;
+      const url = body.newImageURL.url;
       try {
         user = await User.findOne({ uid });
 
-        // console.log(
-        //   "The current imagesURL (before update, in mongodb)= ",
-        //   user.imagesURL
-        // );
+        console.log("user = ", user);
+
+        user.userImages = [...user.userImages, { name: name, url: url }];
+
+        console.log(
+          "The current imagesURL (before update, in mongodb)= ",
+          user.userImages
+        );
         // console.log("imagesURL[0]", imagesURL[0]);
         // user.imagesURL = imagesURL ? imagesURL : user.imagesURL;
-        user.imagesURL === imagesURL
-          ? (user.imagesURL = imagesURL)
-          : (user.imagesURL = [...user.imagesURL, imagesURL[0]]);
+
+        // user.imagesURL === imagesURL
+        //   ? (user.imagesURL = imagesURL)
+        //   : (user.imagesURL = [...user.imagesURL, imagesURL[0]]);
 
         // console.log("just before saving, user.imagesURL = ", user.imagesURL);
+
+        user.save();
+
+        return user;
+      } catch (err) {
+        console.error(err.message);
+      }
+    },
+    deleteUserPhoto: async (parent, body, ctx) => {
+      console.log("data = ", body);
+
+      const uid = body.uid;
+      const name = body.photoToDelete.name;
+      const url = body.photoToDelete.url;
+      try {
+        user = await User.findOne({ uid });
+
+        console.log("user.userImages = ", user.userImages)
+
+        // user.userImages = [...user.userImages, { name: name, url: url }];
+
+        user.userImages = [...user.userImages.filter((userImage) => userImage.name !== name)];
+
+        console.log(
+          "The current imagesURL (before update, in mongodb)= ",
+          user.userImages
+        );
 
         user.save();
 

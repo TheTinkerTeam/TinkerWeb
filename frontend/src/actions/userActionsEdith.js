@@ -65,24 +65,19 @@ export const deletePhoto = async (photo) => {
     const firebase = getFirebase();
     var storageRef = firebase.storage().ref();
     const user = firebase.auth().currentUser;
-    console.log({photo})
     // Create a reference to the file to delete
     var photoRef = storageRef.child(`${user.uid}/userImages/${photo.name}`);
 
-    photoRef.getMetadata().then(function(metadata) {
-      console.log("it worked!")
-      console.log('metadata.name = ', metadata.name)
-    }).catch(function(error) {
-      console.log("Uh-oh, an error occurred! ", error);
-    });
     // Delete the file
-    // photoRef
-    //   .delete()
-    //   .then(function () {
-    //     console.log("Delete was successful");
-    //   })
-    //   .catch(function (error) {
-    //     console.log("Uh-oh, an error occurred!");
-    //   });
+    photoRef
+      .delete()
+      .then(function () {
+        console.log("Delete was successful");
+        resolve();
+      })
+      .catch(function (error) {
+        console.log("Uh-oh, an error occurred!");
+        reject(error);
+      });
   });
 };

@@ -3,7 +3,7 @@ import { Header, Card, Image, Button } from "semantic-ui-react";
 import avatar from "../../../../img/avatar.png";
 
 const UserPhotos = ({ photos, currentUser, deletePhoto }) => {
-  // console.log({ photos });
+  console.log({ photos });
   // console.log({ currentUser });
 
   return (
@@ -19,7 +19,7 @@ const UserPhotos = ({ photos, currentUser, deletePhoto }) => {
           photos.map((photo, index) => {
             return (
               <Card key={index}>
-                <Image src={photo} />
+                <Image src={photo.url} />
                 <div className='ui two buttons'>
                   <Button basic color='green'>
                     Main

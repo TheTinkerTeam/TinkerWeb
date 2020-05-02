@@ -41,10 +41,15 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
-  imagesURL: [
+  userImages: [
     {
-      type: String,
-    },
+      name: {
+        type: String
+      },
+      url: {
+        type: String
+      }
+    }
   ],
   projects: [
     {

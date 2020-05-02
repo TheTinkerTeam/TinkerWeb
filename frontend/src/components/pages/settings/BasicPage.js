@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Form, Button } from "semantic-ui-react";
 
 import { useForm } from "react-hook-form";
@@ -63,8 +63,14 @@ const BasicPage = ({ currentUser, userInfo }) => {
     // console.log("no initial role")
     initialRole = [];
   }
+  // console.log("this is the initial role:", initialRole)
 
   const [roleState, setRoleState] = useState(initialRole);
+
+  useEffect(() => {
+    setRoleState(initialRole)
+  }, [initialRole]);
+  // console.log(roleState)
 
   const handleChange = (e, r) => {
     // console.log({r})
