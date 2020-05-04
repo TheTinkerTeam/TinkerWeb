@@ -108,6 +108,10 @@ const typeDefs = gql`
       uid: String!
       newImageURL: UserImageInput!
     ): User!
+    updateAvatar(
+      uid: String!
+      newAvatarURL: UserImageInput!
+    ): User!
     deleteUserPhoto(
       uid: String!
       photoToDelete: UserImageInput!

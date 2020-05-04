@@ -126,40 +126,43 @@ module.exports = {
       }
     },
     updateImagesURLUser: async (parent, body, ctx) => {
-      console.log("data = ", body);
+      // console.log("data = ", body);
 
       const uid = body.uid;
       const name = body.newImageURL.name;
       const url = body.newImageURL.url;
       try {
         user = await User.findOne({ uid });
-
-        console.log("user = ", user);
-
+        console.log("[updateImagesURLUser] user = ", user);
         user.userImages = [...user.userImages, { name: name, url: url }];
-
         console.log(
-          "The current imagesURL (before update, in mongodb)= ",
+          "[updateImagesURLUser] The current imagesURL (before update, in mongodb)= ",
           user.userImages
         );
-        // console.log("imagesURL[0]", imagesURL[0]);
-        // user.imagesURL = imagesURL ? imagesURL : user.imagesURL;
-
-        // user.imagesURL === imagesURL
-        //   ? (user.imagesURL = imagesURL)
-        //   : (user.imagesURL = [...user.imagesURL, imagesURL[0]]);
-
-        // console.log("just before saving, user.imagesURL = ", user.imagesURL);
-
         user.save();
+        return user;
+      } catch (err) {
+        console.error(err.message);
+      }
+    },
+    updateAvatar: async (parent, body, ctx) => {
+      console.log("data = ", body);
 
+      const uid = body.uid;
+      const name = body.newAvatarURL.name;
+      const url = body.newAvatarURL.url;
+      try {
+        user = await User.findOne({ uid });
+        console.log("Hello testing")
+        user.avatar = url;
+        user.save();
         return user;
       } catch (err) {
         console.error(err.message);
       }
     },
     deleteUserPhoto: async (parent, body, ctx) => {
-      console.log("data = ", body);
+      // console.log("data = ", body);
 
       const uid = body.uid;
       const name = body.photoToDelete.name;
@@ -167,16 +170,23 @@ module.exports = {
       try {
         user = await User.findOne({ uid });
 
-        console.log("user.userImages = ", user.userImages)
+        if (user.userImages.length == 1){
+          console.log('in the loop')
+          user.avatar = ''
+        }
 
-        // user.userImages = [...user.userImages, { name: name, url: url }];
+        user.userImages = [
+          ...user.userImages.filter((userImage) => userImage.name !== name),
+        ];
 
-        user.userImages = [...user.userImages.filter((userImage) => userImage.name !== name)];
-
-        console.log(
-          "The current imagesURL (before update, in mongodb)= ",
-          user.userImages
-        );
+        // console.log(
+        //   "The current imagesURL (before update, in mongodb)= ",
+        //   user.userImages
+        // );
+        // console.log(
+        //   "The current avatarURL (before update, in mongodb)= ",
+        //   user.avatar
+        // );
 
         user.save();
 

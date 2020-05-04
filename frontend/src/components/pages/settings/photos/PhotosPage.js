@@ -16,10 +16,20 @@ const UPDATE_USER_IMAGES = gql`
   mutation updateImagesURLUser($uid: String!, $newImageURL: UserImageInput!) {
     updateImagesURLUser(uid: $uid, newImageURL: $newImageURL) {
       uid
+      avatar
       userImages {
         url
         name
       }
+    }
+  }
+`;
+
+const UPDATE_AVATAR = gql`
+  mutation updateAvatar($uid: String!, $newAvatarURL: UserImageInput!) {
+    updateAvatar(uid: $uid, newAvatarURL: $newAvatarURL) {
+      uid
+      avatar
     }
   }
 `;
@@ -56,6 +66,12 @@ const PhotosPage = ({ currentUser, userInfo }) => {
 
   const [updateImagesURLUser] = useMutation(UPDATE_USER_IMAGES);
   const [deleteUserPhoto] = useMutation(DELETE_USER_IMAGE);
+  const [updateAvatar] = useMutation(UPDATE_AVATAR);
+
+  // const { loading, error, data } = useQuery(GET_CURRENT_USER, {
+  //   variables: { uid: `${currentUser.uid}` },
+  // });
+  // const user = data.user;
 
   useEffect(() => {
     return () => {
@@ -66,18 +82,19 @@ const PhotosPage = ({ currentUser, userInfo }) => {
   const handleUploadImage = async () => {
     try {
       setLoading(true);
-      // console.log(image);
+      console.log("image in handleUploadImage", image);
       // console.log(files[0].name);
       const randomUuid = uuidv4();
       const filename = `${randomUuid}_${files[0].name}`;
+      console.log("filename in handleUploadImage", image);
 
       //upload image to firebase storage and return the url
       const url = await uploadImageEdith(image, filename, currentUser.uid);
-      // console.log("url = ", url);
+      console.log("url = ", url);
       //save this imageURL to mongodb
       updateImagesURLUser({
         variables: {
-          uid: userInfo.uid,
+          uid: currentUser.uid,
           newImageURL: {
             name: filename,
             url: url,
@@ -104,6 +121,7 @@ const PhotosPage = ({ currentUser, userInfo }) => {
 
   const handleDeletePhoto = async (photo) => {
     try {
+      console.log("DELETE");
       await deletePhoto(photo);
       deleteUserPhoto({
         variables: {
@@ -123,6 +141,24 @@ const PhotosPage = ({ currentUser, userInfo }) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleSetMainPhoto = (photo) => {
+    updateAvatar({
+      variables: {
+        uid: currentUser.uid,
+        newAvatarURL: {
+          name: photo.name,
+          url: photo.url,
+        },
+      },
+      refetchQueries: [
+        {
+          query: GET_CURRENT_USER,
+          variables: { uid: `${currentUser.uid}` },
+        },
+      ],
+    });
   };
 
   return (
@@ -176,7 +212,9 @@ const PhotosPage = ({ currentUser, userInfo }) => {
       <Divider />
       <UserPhotos
         deletePhoto={handleDeletePhoto}
+        userInfo={userInfo}
         currentUser={currentUser}
+        setMainPhoto={handleSetMainPhoto}
         photos={userInfo && userInfo.userImages ? userInfo.userImages : ""}
       />
     </Segment>

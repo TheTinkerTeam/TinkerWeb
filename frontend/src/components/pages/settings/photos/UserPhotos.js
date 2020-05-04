@@ -2,9 +2,16 @@ import React, { Fragment } from "react";
 import { Header, Card, Image, Button } from "semantic-ui-react";
 import avatar from "../../../../img/avatar.png";
 
-const UserPhotos = ({ photos, currentUser, deletePhoto }) => {
+const UserPhotos = ({
+  photos,
+  currentUser,
+  userInfo,
+  deletePhoto,
+  setMainPhoto,
+}) => {
   console.log({ photos });
-  // console.log({ currentUser });
+  console.log({ currentUser });
+  console.log({ userInfo });
 
   return (
     <Fragment>
@@ -12,7 +19,14 @@ const UserPhotos = ({ photos, currentUser, deletePhoto }) => {
 
       <Card.Group itemsPerRow={5}>
         <Card>
-          <Image src={currentUser.photoURL || avatar} />
+          {/* {userInfo && userInfo.userImages && userInfo.userImages.length > 0 ? ( */}
+          {/* <Image src={userInfo.userImages[0].url || avatar} /> */}
+          {
+            userInfo && userInfo.avatar ? (
+            <Image src={userInfo.avatar || avatar} />
+          ) : (
+            <Image src={currentUser.photoURL || avatar} />
+          )}
           <Button positive>Main Photo</Button>
         </Card>
         {photos &&
@@ -21,7 +35,11 @@ const UserPhotos = ({ photos, currentUser, deletePhoto }) => {
               <Card key={index}>
                 <Image src={photo.url} />
                 <div className='ui two buttons'>
-                  <Button basic color='green'>
+                  <Button
+                    onClick={() => setMainPhoto(photo)}
+                    basic
+                    color='green'
+                  >
                     Main
                   </Button>
                   <Button
@@ -34,17 +52,6 @@ const UserPhotos = ({ photos, currentUser, deletePhoto }) => {
               </Card>
             );
           })}
-        {/* {photos &&
-            <Card>
-              <Image src={photos} />
-              <div className='ui two buttons'>
-                <Button basic color='green'>
-                  Main
-                </Button>
-                <Button basic icon='trash' color='red' />
-              </div>
-            </Card>
-          } */}
       </Card.Group>
     </Fragment>
   );
