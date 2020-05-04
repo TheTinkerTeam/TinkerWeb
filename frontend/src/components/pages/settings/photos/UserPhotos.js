@@ -9,10 +9,6 @@ const UserPhotos = ({
   deletePhoto,
   setMainPhoto,
 }) => {
-  console.log({ photos });
-  console.log({ currentUser });
-  console.log({ userInfo });
-
   return (
     <Fragment>
       <Header sub color='teal' content='All Photos' />

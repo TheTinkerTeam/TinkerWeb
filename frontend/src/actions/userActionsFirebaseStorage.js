@@ -65,7 +65,7 @@ export const deletePhoto = async (photo) => {
     photoRef
       .delete()
       .then(function () {
-        console.log("Delete was successful");
+        console.log("Delete picture was successful");
         resolve();
       })
       .catch(function (error) {
