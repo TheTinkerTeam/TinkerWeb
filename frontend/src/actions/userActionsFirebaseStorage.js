@@ -1,26 +1,17 @@
 import { getFirebase } from "react-redux-firebase";
 import "firebase/storage";
-// import { v4 as uuidv4 } from "uuid";
 
 export const uploadImageEdith = async (file, fileName, uid) => {
   return new Promise(function (resolve, reject) {
     const firebase = getFirebase();
 
-    var storageRef = firebase.storage().ref();
     // Create a child reference
+    var storageRef = firebase.storage().ref();
 
-    // var imageRef = storageRef.child(fileName);
-    // imagesRef now points to 'images'
-
-    // var randomUuid = uuidv4();
-    // generate random uuid for unique name in firestore storage
-
-    // Child references can also take paths delimited by '/'
+    // Child references can take paths delimited by '/'
     var spaceRef = storageRef.child(
       `${uid}/userImages/${fileName}`
     );
-    // spaceRef now points to "images/space.jpg"
-    // imagesRef still points to "images"
 
     // Create the file metadata
     var metadata = {
@@ -28,7 +19,7 @@ export const uploadImageEdith = async (file, fileName, uid) => {
       name: `${fileName}`
     };
 
-    // Upload file and metadata to the object 'images/mountains.jpg'
+    // Upload file and metadata to the object `${uid}/userImages/${fileName}`
     var uploadTask = spaceRef.put(file, metadata);
 
     // Listen for state changes, errors, and completion of the upload.
@@ -45,6 +36,8 @@ export const uploadImageEdith = async (file, fileName, uid) => {
           case firebase.storage.TaskState.RUNNING: // or 'running'
             console.log("Upload is running");
             break;
+          default:
+            console.log("default");
         }
       },
       function (error) {

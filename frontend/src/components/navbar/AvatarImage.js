@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment } from "react";
 import avatar from "../../img/avatar.png";
 import { Image } from "semantic-ui-react";
 
@@ -21,8 +21,10 @@ const AvatarImage = ({ profile }) => {
     variables: { uid: `${profile.uid}` },
   });
 
-  console.log({ data });
-  // let avatarURL;
+  // console.log({ data });
+  if (error) {
+    console.log(error);
+  }
   if (loading) return <Fragment></Fragment>;
 
   const avatarURL = data.user.avatar;
@@ -37,7 +39,7 @@ const AvatarImage = ({ profile }) => {
         //(profile && profile.avatar) ||
         //avatar
         //}
-        src={avatarURL === "defaultImgUrl" && avatar || avatarURL || avatar}
+        src={(avatarURL === "defaultImgUrl" && avatar) || avatarURL || avatar}
       />
     </Fragment>
   );

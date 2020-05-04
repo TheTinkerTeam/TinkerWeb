@@ -19,8 +19,6 @@ const UserPhotos = ({
 
       <Card.Group itemsPerRow={5}>
         <Card>
-          {/* {userInfo && userInfo.userImages && userInfo.userImages.length > 0 ? ( */}
-          {/* <Image src={userInfo.userImages[0].url || avatar} /> */}
           {userInfo && userInfo.avatar ? (
             userInfo.avatar === "defaultImgUrl" ? (
               <Image src={avatar} />
