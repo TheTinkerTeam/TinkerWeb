@@ -1,12 +1,12 @@
 import React from "react";
-import { Modal, Dropdown, Menu, Image } from "semantic-ui-react";
+import { Modal, Dropdown, Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import avatar from "../../img/avatar.png";
 
 import ProjectForm from "../forms/ProjectForm";
 
 import { logout } from "../../actions/authActions";
+import AvatarImage from "./AvatarImage";
 
 const SignedInMenu = () => {
   const dispatch = useDispatch();
@@ -14,15 +14,7 @@ const SignedInMenu = () => {
 
   return (
     <Menu.Item position='right'>
-      <Image
-        avatar
-        spaced='right'
-        src={
-          (profile && profile.avatar === "defaultImgUrl" && avatar) ||
-          (profile && profile.avatar) ||
-          avatar
-        }
-      />
+      {profile && <AvatarImage profile={profile}/>}
       <Dropdown pointing='top right' text={profile && profile.username}>
         <Dropdown.Menu>
           <Modal

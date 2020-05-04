@@ -191,7 +191,7 @@ export const googleSignIn = () => async (dispatch) => {
   const res = await firebase.login({ provider: "google", type: "popup" });
   const user = res.user;
   if (res.additionalUserInfo.isNewUser) {
-    console.log("Google SignIn New User", user);
+    // console.log("Google SignIn New User", user);
     await axios.post(
       "http://localhost:5000/api/v2",
       {
@@ -235,7 +235,7 @@ export const googleSignIn = () => async (dispatch) => {
       }
     );
   }
-  console.log("Google SignIn Not NEW", user);
+  // console.log("Google SignIn Not NEW", user);
 
   dispatch(loadUser(user.uid, true));
 };

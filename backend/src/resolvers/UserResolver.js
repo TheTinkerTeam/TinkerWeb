@@ -11,11 +11,11 @@ module.exports = {
       } else {
         return false;
       }
-    }
+    },
   },
   Mutation: {
     signup: async (parent, body, ctx) => {
-      console.log(body);
+      // console.log(body);
       try {
         // TODO: MOVE to different file as function
         // Generate username from full name:
@@ -44,7 +44,7 @@ module.exports = {
           response = await User.findOne({ username });
           i++;
         }
-        console.log(body);
+        // console.log(body);
 
         const newUser = {
           uid: body.uid,
@@ -54,7 +54,7 @@ module.exports = {
           username,
           role: body.role,
           school: body.school,
-          avatar: body.avatar
+          avatar: body.avatar,
         };
         const user = await User.create(newUser);
         return user;
@@ -64,22 +64,133 @@ module.exports = {
       }
     },
     completeRegistration: async (parent, body, ctx) => {
-      console.log('completeRegistration = ', body);
-      console.log('uid = ', body.uid);
+      // console.log("completeRegistration = ", body);
+      // console.log("uid = ", body.uid);
 
       const uid = body.uid;
 
       try {
-
         user = await User.findOne({ uid });
 
-        console.log('user = ', user) ;
+        console.log("user = ", user);
 
         user.school = body.school;
         user.role = body.role;
 
         user.save();
 
+        return user;
+      } catch (err) {
+        console.error(err.message);
+      }
+    },
+    updateUser: async (parent, body, ctx) => {
+      // console.log("data = ", body);
+      // console.log('uid = ', body.uid);
+      // console.log('school = ', body.school);
+
+      const uid = body.uid;
+      const school = body.school;
+      const role = body.role;
+      const firstName = body.firstName;
+      const lastName = body.lastName;
+      const description = body.description;
+      const interests = body.interests;
+      const country = body.country;
+
+      try {
+        // console.log("The new imagesURL", imagesURL);
+        user = await User.findOne({ uid });
+
+        // console.log(
+        //   "The current imagesURL (before update, in mongodb)= ",
+        //   user.imagesURL
+        // );
+        // console.log("imagesURL[0]", imagesURL[0]);
+        user.school = school ? school : user.school;
+        user.role = role ? role : user.role;
+        user.firstName = firstName ? firstName : user.firstName;
+        user.lastName = lastName ? lastName : user.lastName;
+        user.country = country ? country : user.country;
+        user.description = description ? description : user.description;
+        user.interests = interests ? interests : user.interests;
+        // user.imagesURL = imagesURL ? imagesURL : user.imagesURL;
+
+        // console.log("just before saving, user.imagesURL = ", user.imagesURL);
+
+        user.save();
+
+        return user;
+      } catch (err) {
+        console.error(err.message);
+      }
+    },
+    updateImagesURLUser: async (parent, body, ctx) => {
+      // console.log("data = ", body);
+
+      const uid = body.uid;
+      const name = body.newImageURL.name;
+      const url = body.newImageURL.url;
+      try {
+        user = await User.findOne({ uid });
+        console.log("[updateImagesURLUser] user = ", user);
+        user.userImages = [...user.userImages, { name: name, url: url }];
+        console.log(
+          "[updateImagesURLUser] The current imagesURL (before update, in mongodb)= ",
+          user.userImages
+        );
+        user.save();
+        return user;
+      } catch (err) {
+        console.error(err.message);
+      }
+    },
+    updateAvatar: async (parent, body, ctx) => {
+      console.log("data = ", body);
+
+      const uid = body.uid;
+      const name = body.newAvatarURL.name;
+      const url = body.newAvatarURL.url;
+      try {
+        user = await User.findOne({ uid });
+        console.log("Hello testing")
+        user.avatar = url;
+        user.save();
+        return user;
+      } catch (err) {
+        console.error(err.message);
+      }
+    },
+    deleteUserPhoto: async (parent, body, ctx) => {
+      // console.log("data = ", body);
+
+      const uid = body.uid;
+      const name = body.photoToDelete.name;
+      const url = body.photoToDelete.url;
+      try {
+        user = await User.findOne({ uid });
+
+        if (user.userImages.length == 1){
+          console.log('in the loop')
+          user.avatar = ''
+        }
+
+        user.userImages = [
+          ...user.userImages.filter((userImage) => userImage.name !== name),
+        ];
+
+        // console.log(
+        //   "The current imagesURL (before update, in mongodb)= ",
+        //   user.userImages
+        // );
+        // console.log(
+        //   "The current avatarURL (before update, in mongodb)= ",
+        //   user.avatar
+        // );
+
+        user.save();
+
+        return user;
       } catch (err) {
         console.error(err.message);
       }
@@ -89,6 +200,6 @@ module.exports = {
       if (!user) {
         throw new Error(`No user found for email: ${email}`);
       }
-    }
-  }
+    },
+  },
 };

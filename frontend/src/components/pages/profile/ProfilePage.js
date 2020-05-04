@@ -21,7 +21,7 @@ const profilePage = ({ user, profile }) => {
 };
 
 profilePage.propTypes = {
-  user: PropTypes.object.isRequired,
+  // user: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
 
