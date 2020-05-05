@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
-const ClassroomSchema = new mongoose.Schema({
-  class: {
-    type: String
-  },
+// const ClassroomSchema = new mongoose.Schema({
+//   class: {
+//     type: String
+//   },
   /*
   title: {
     type: String,
@@ -42,6 +42,46 @@ const ClassroomSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId
   },
   */
+//   students_name: [
+//     {
+//       type: String
+//     }
+//   ],
+//   assignments: [
+//     {
+//       date: {
+//         type: String
+//       },
+//       task: {
+//         type: String
+//       }
+//     }
+//   ],
+//   currentProject: {
+//     type: mongoose.Schema.Types.ObjectId
+//   },
+//   archivedProjects: [
+//     {
+//       type: mongoose.Schema.Types.ObjectId
+//     }
+//   ],
+//   date: {
+//     created: {
+//       type: Date,
+//       default: Date.now()
+//     }
+//   }
+// });
+
+const ClassroomSchema = new mongoose.Schema({
+  className: {
+    type: String,
+    required: true
+  },
+  grade: {
+    type: String,
+    required: true
+  },
   students_name: [
     {
       type: String

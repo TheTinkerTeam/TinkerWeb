@@ -9,7 +9,8 @@ const GET_CLASSROOMS = gql`
   query {
     classrooms {
       id
-      class
+      className
+      grade
       assignments {
         date
         task
@@ -21,20 +22,29 @@ const GET_CLASSROOMS = gql`
 const ClassroomsPage = () => {
   const { loading, error, data } = useQuery(GET_CLASSROOMS);
   // console.log(GET_CLASSROOMS);
-  // console.log(data);
+  console.log(data);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
+  const addClassroom = () => {
+    console.log("add classroom clicked");
+  };
+
   return (
     <div>
-      <div className="classrooms-title-container">
-        <div className="classroom-title-style">Hi Classroom!</div>
+      <div className='classrooms-title-container'>
+        <div className='classroom-title-style'>Hi Classroom!</div>
       </div>
       <FlexClassroomList classrooms={data.classrooms} />
       <Divider style={{ marginTop: "3em" }} />
       <div>
-        <Button className="transparent-button" icon labelPosition="left">
-          <Icon name="plus" />
+        <Button
+          onClick={addClassroom}
+          className='transparent-button'
+          icon
+          labelPosition='left'
+        >
+          <Icon name='plus' />
           Add a new class
         </Button>
       </div>

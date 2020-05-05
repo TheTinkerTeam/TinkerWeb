@@ -8,7 +8,7 @@ module.exports = {
       try {
         const uid = await ctx.user;
         const user = await User.findOne({
-          uid
+          uid,
         });
         const classrooms = user.classrooms;
         let detailedClassrooms = [];
@@ -17,7 +17,7 @@ module.exports = {
           detailedClassrooms.push({
             ...classroom._doc,
             currentProject: await Project.findById(classroom.currentProject),
-            id: classroom._id
+            id: classroom._id,
           });
         }
         // console.log(detailedClassrooms);
@@ -32,14 +32,14 @@ module.exports = {
         const returnedClassroom = {
           ...classroom._doc,
           id: classroom._id,
-          currentProject: await Project.findById(classroom.currentProject)
+          currentProject: await Project.findById(classroom.currentProject),
         };
         // console.log(returnedClassroom);
         return returnedClassroom;
       } catch (err) {
         console.error(err);
       }
-    }
+    },
   },
   Mutation: {
     addStudent: async (parent, { id, name }, { prisma }) => {
@@ -47,13 +47,31 @@ module.exports = {
         const test = await Classroom.updateOne(
           { _id: id },
           {
-            $push: { students_name: name }
+            $push: { students_name: name },
           }
         );
         return true;
       } catch (err) {
         console.error(err);
       }
-    }
-  }
+    },
+    addClassroom: async (parent, body, ctx) => {
+      try {
+        const newClassroom = {
+          className: body.className,
+          grade: body.grade,
+          // date: {
+          //   created: {
+          //     date: Date.now()
+          //   }
+          // }
+        };
+        const classroom = await Classroom.create(newClassroom);
+        return classroom;
+      } catch (error) {
+        console.log(newClassroom);
+        console.error(error.message);
+      }
+    },
+  },
 };

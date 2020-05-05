@@ -18,7 +18,7 @@ const GET_CLASSROOM = gql`
   query getClassroom($id: ID!) {
     classroom(id: $id) {
       id
-      class
+      grade
       students_name
       assignments {
         date
