@@ -34,6 +34,14 @@ module.exports = {
     classroom: async (parent, { id }, { prisma }) => {
       try {
         const classroom = await Classroom.findById(id);
+        // console.log(classroom._doc);
+
+        classroom._doc["students"] = classroom._doc["students"].map(
+          async (user_id) => await User.findById(user_id)
+        );
+
+        console.log(classroom._doc);
+
         const returnedClassroom = {
           ...classroom._doc,
           id: classroom._id,
@@ -47,17 +55,34 @@ module.exports = {
     },
   },
   Mutation: {
-    addStudent: async (parent, { id, name }, { prisma }) => {
+    addStudent: async (parent, body, ctx) => {
       try {
-        const test = await Classroom.updateOne(
-          { _id: id },
-          {
-            $push: { students_name: name },
-          }
-        );
-        return true;
-      } catch (err) {
-        console.error(err);
+        console.log(body);
+        const classroomID = body.classroomID;
+
+        const newStudent = {
+          // firstName: body.firstName,
+          email: body.name,
+        };
+
+        user = await User.findOne({ email: newStudent.email });
+        classroom = await Classroom.findOne({ _id: classroomID });
+
+        // console.log(user.uid);
+        // console.log(user._id);
+        // console.log({user})
+        user.classrooms = [...user.classrooms, classroom._id];
+        // console.log(user.classrooms)
+        user.save();
+
+        classroom.students = [...classroom.students, user._id];
+        classroom.save();
+
+        console.log({ classroom });
+
+        return user;
+      } catch (error) {
+        console.log(error);
       }
     },
     addClassroom: async (parent, body, ctx) => {
@@ -70,7 +95,7 @@ module.exports = {
         const classroom = await Classroom.create(newClassroom);
         const uid = await ctx.user;
         user = await User.findOne({ uid });
-        user.classrooms = [...user.classrooms, classroom]
+        user.classrooms = [...user.classrooms, classroom];
         user.save();
         return classroom;
       } catch (error) {

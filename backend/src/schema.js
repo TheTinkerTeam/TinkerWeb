@@ -56,7 +56,7 @@ const typeDefs = gql`
     className: String
     grade: String
     subject: String
-    students_name: [String]!
+    students: [User]!
     assignments: [Assignment]!
     currentProject: Project
     archivedProjects: [Project]!
@@ -124,7 +124,7 @@ const typeDefs = gql`
     createClassroom(title: String!, description: String!): Classroom!
     updateClassroom(id: ID!, title: String, description: String): Classroom
     deleteClassroom(id: ID!): Classroom
-    addStudent(id: ID, name: String): Boolean
+    addStudent(classroomID: ID!, name: String!): User!
   }
 `;
 

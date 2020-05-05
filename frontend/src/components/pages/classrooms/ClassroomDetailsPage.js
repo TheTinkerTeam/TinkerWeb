@@ -20,7 +20,9 @@ const GET_CLASSROOM = gql`
       id
       className
       grade
-      students_name
+      students {
+        id
+      }
       assignments {
         date
         task
@@ -40,8 +42,10 @@ const GET_CLASSROOM = gql`
 `;
 
 const ADD_STUDENT = gql`
-  mutation addStudent($id: ID!, $name: String!) {
-    addStudent(id: $id, name: $name)
+  mutation addStudent($classroomID: ID!, $name: String!) {
+    addStudent(classroomID: $classroomID, name: $name){
+      id
+    }
   }
 `;
 
@@ -140,7 +144,7 @@ const ClassroomDetailsPage = (props) => {
     if (state.currentStudentName.length !== 0) {
       addStudent({
         variables: {
-          id,
+          classroomID: id,
           name: state.currentStudentName,
         },
       });

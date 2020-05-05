@@ -86,9 +86,9 @@ const ClassroomSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  students_name: [
+  students: [
     {
-      type: String
+      type: mongoose.Schema.Types.ObjectId
     }
   ],
   assignments: [
