@@ -120,7 +120,7 @@ const typeDefs = gql`
     createProject(title: String!, description: String!): Project!
     updateProject(id: ID!, title: String, description: String): Project
     deleteProject(id: ID!): Project
-    addClassroom(className: String!, grade: String!): Classroom!
+    addClassroom(className: String!, grade: String!, subject: String!): Classroom!
     createClassroom(title: String!, description: String!): Classroom!
     updateClassroom(id: ID!, title: String, description: String): Classroom
     deleteClassroom(id: ID!): Classroom

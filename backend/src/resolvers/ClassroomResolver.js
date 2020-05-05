@@ -10,10 +10,14 @@ module.exports = {
         const user = await User.findOne({
           uid,
         });
-        const classrooms = user.classrooms;
+        const classroomIDs = user.classrooms;
+        // console.log({classroomIDs})
+
         let detailedClassrooms = [];
-        for (let i = 0; i < classrooms.length; i++) {
-          const classroom = await Classroom.findById(classrooms[i]);
+        for (let i = 0; i < classroomIDs.length; i++) {
+          const classroom = await Classroom.findById(classroomIDs[i]);
+          // console.log({classroom})
+
           detailedClassrooms.push({
             ...classroom._doc,
             currentProject: await Project.findById(classroom.currentProject),
@@ -21,6 +25,7 @@ module.exports = {
           });
         }
         // console.log(detailedClassrooms);
+
         return detailedClassrooms;
       } catch (err) {
         console.error(err);
@@ -60,13 +65,13 @@ module.exports = {
         const newClassroom = {
           className: body.className,
           grade: body.grade,
-          // date: {
-          //   created: {
-          //     date: Date.now()
-          //   }
-          // }
+          subject: body.subject,
         };
         const classroom = await Classroom.create(newClassroom);
+        const uid = await ctx.user;
+        user = await User.findOne({ uid });
+        user.classrooms = [...user.classrooms, classroom]
+        user.save();
         return classroom;
       } catch (error) {
         console.log(newClassroom);

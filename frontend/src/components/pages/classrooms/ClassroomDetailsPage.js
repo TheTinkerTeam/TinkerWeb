@@ -18,6 +18,7 @@ const GET_CLASSROOM = gql`
   query getClassroom($id: ID!) {
     classroom(id: $id) {
       id
+      className
       grade
       students_name
       assignments {
@@ -268,9 +269,11 @@ const ClassroomDetailsPage = (props) => {
 
   const currentProject = classroom.currentProject;
 
+  console.log({ classroom });
+
   return (
     <div>
-      <div className='classroom-title-style'>{classroom.class}</div>
+      <div className='classroom-title-style'>{classroom.className}</div>
       <Segment.Group className='paragraph-style display-in-box'>
         <Segment className='section-title'>
           <div className='flexbox-container'>
@@ -376,9 +379,11 @@ const ClassroomDetailsPage = (props) => {
                 ) : (
                   <div>
                     <div className='flexbox'>
-                      <div>
-                        Yay, here are the "{currentProject.title}" teams!
-                      </div>
+                      {currentProject && (
+                        <div>
+                          Yay, here are the "{currentProject.title}" teams!
+                        </div>
+                      )}
                     </div>
 
                     <div className='flexbox'>
@@ -496,8 +501,8 @@ const ClassroomDetailsPage = (props) => {
                 <Grid.Column width={4}></Grid.Column>
                 <Grid.Column width={12}>
                   <Segment className='currentProjectColumn'>
-                    <div>Current Project: {currentProject.title}</div>
-                    <div>{currentProject.description} (Read from db)</div>
+                    {currentProject && <div>Current Project: {currentProject.title}</div>}
+                    {currentProject && <div>{currentProject.description} (Read from db)</div>}
                     {/* <div>{currentProject.learning_objectives}</div> */}
                     <div>
                       <div className=''>{"Standards".toUpperCase()}</div>
