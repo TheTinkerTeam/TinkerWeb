@@ -124,7 +124,8 @@ const typeDefs = gql`
     createClassroom(title: String!, description: String!): Classroom!
     updateClassroom(id: ID!, title: String, description: String): Classroom
     deleteClassroom(id: ID!): Classroom
-    addStudent(classroomID: ID!, name: String!): User!
+    addStudent(classroomID: ID!, email: String!): User
+    deleteStudent(classroomID: ID!, uid: String!, studentID: ID!): Boolean
   }
 `;
 

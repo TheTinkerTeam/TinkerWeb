@@ -12,6 +12,7 @@ import {
 import { withRouter, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import TeamMaker from "./TeamMaker";
 
 const GET_CLASSROOM = gql`
   query getClassroom($id: ID!) {
@@ -45,16 +46,10 @@ const GET_CLASSROOM = gql`
 `;
 
 const ADD_STUDENT = gql`
-  mutation addStudent($classroomID: ID!, $email: String!) {
-    addStudent(classroomID: $classroomID, email: $email) {
+  mutation addStudent($classroomID: ID!, $name: String!) {
+    addStudent(classroomID: $classroomID, name: $name){
       id
     }
-  }
-`;
-
-const DELETE_STUDENT = gql`
-  mutation deleteStudent($classroomID: ID!, $uid: String!, $studentID: ID!) {
-    deleteStudent(classroomID: $classroomID, uid: $uid, studentID: $studentID)
   }
 `;
 
@@ -66,73 +61,132 @@ const ClassroomDetailsPage = (props) => {
   const initialState = {
     isStudentsActive: true,
     isWorkspaceActive: true,
-    currentStudentEmail: "",
+    isMakeTeamsActive: false,
+    currentStudentName: "",
+    classList: [
+      "Lucas",
+      "Edith",
+      "Toto",
+      "Joseph",
+      "Mike",
+      "Chat",
+      "Chien",
+      "Banane",
+      "Loup",
+      "Lion",
+      "Tigre",
+      "Grenade",
+    ],
     tasksList: [],
     currentTask: "",
+    teams: [],
+    teamCount: 3,
   };
 
   const [state, setState] = useState(initialState);
-  const [message, setMessage] = useState("");
+
+  const generateRandomTeams = useCallback((teamCount, students) => {
+    let teamsCreated = [];
+    for (let i = 0; i < teamCount; i++) {
+      let children = [];
+      if (i === 0) {
+        students
+          .slice(i, students.length / teamCount)
+          .map((student) => children.push(capitalize(`${student}`)));
+      } else {
+        students
+          .slice(
+            i * (students.length / teamCount),
+            (i + 1) * (students.length / teamCount)
+          )
+          .map((student) => children.push(capitalize(`${student}`)));
+      }
+      //Create the parent and add the children
+      teamsCreated.push(children);
+    }
+    return teamsCreated;
+  }, []);
+
+  const [teams, setTeams] = useState(
+    generateRandomTeams(state.teamCount, state.classList)
+  );
+
+  const moveStudent = (studentId, originTeamId, destinationTeamId, teams) => {
+    const newTeams = [...teams];
+
+    newTeams[originTeamId] = newTeams[originTeamId].filter(
+      (sid) => sid !== studentId
+    );
+
+    newTeams[destinationTeamId].push(studentId);
+
+    // console.log("newTeams", newTeams);
+    return newTeams;
+  };
+
+  useEffect(() => {
+    setTeams(generateRandomTeams(state.teamCount, state.classList));
+  }, [state.teamCount, state.classList, generateRandomTeams]);
+
+  const handleChangeDnd = (studentId, originTeamId, destinationTeamId) => {
+    // console.log("studentId =", studentId);
+    // console.log("originTeamId =", originTeamId);
+    // console.log("destinationTeamId =", destinationTeamId);
+
+    // console.log("Before moving, these are the teams:", teams);
+    setTeams(moveStudent(studentId, originTeamId, destinationTeamId, teams));
+    // console.log("After moving, these are the teams:", teams);
+  };
 
   const handleChange = (e, { name, value }) =>
     setState((prevState) => ({ ...prevState, [name]: value }));
 
-  const studentAlreadyIn = (studentsList, email) => {
-    return studentsList.map((student) => student.email).includes(email);
-  };
-
   const handleNewStudentSubmit = (id) => {
-    if (studentAlreadyIn(classroom.students, state.currentStudentEmail)) {
-      setMessage("Student has already joined your class.");
-      console.log("Student has already joined your class.")
-      return;
-    }
-    if (state.currentStudentEmail.length !== 0) {
+    let newTeams = teams;
+    newTeams[0] = [...teams[0], capitalize(`${state.currentStudentName}`)];
+
+    if (state.currentStudentName.length !== 0) {
       addStudent({
         variables: {
           classroomID: id,
-          email: state.currentStudentEmail,
+          name: state.currentStudentName,
         },
-        refetchQueries: [
-          {
-            query: GET_CLASSROOM,
-            variables: {
-              id: id,
-            },
-          },
-        ],
       });
       setState((prevState) => ({
         ...prevState,
-        currentStudentEmail: "",
+        classList: [
+          ...prevState.classList,
+          capitalize(`${state.currentStudentName}`),
+        ],
+        currentStudentName: "",
       }));
+      setTeams(newTeams);
     }
   };
 
-  const handleDeleteStudent = (uid, id) => {
-    // console.log({ uid });
-    // console.log({ id });
-    // console.log({ classroomID });
-    deleteStudent({
-      variables: {
-        classroomID: classroomID,
-        uid: uid,
-        studentID: id,
-      },
-      refetchQueries: [
-        {
-          query: GET_CLASSROOM,
-          variables: {
-            id: classroomID,
-          },
-        },
-      ],
-    });
+  const handleNumberSubmit = () => {
+    const { teamCount } = state;
+
+    setState((prevState) => ({ ...prevState, teamCount: teamCount }));
   };
 
-  const handleStudentProfile = (email) => {
+  const handleDeleteStudent = (name) => {
+    const oldTeams = teams;
+    let newTeams = [];
+    newTeams = oldTeams.map((team) => {
+      return team.filter((student) => student !== name);
+    });
+
+    setState((prevState) => ({
+      ...prevState,
+      classList: prevState.classList.filter((student) => student !== name),
+    }));
+    setTeams(newTeams);
+  };
+
+  const handleStudentProfile = (name) => {
     console.log("open student profile");
-    console.log(email);
+    console.log(name);
   };
 
   const handleSubmitTask = () => {
@@ -159,32 +213,48 @@ const ClassroomDetailsPage = (props) => {
     }));
   };
 
+  const toggleMakeTeamsButton = () => {
+    setState((prevState) => ({
+      ...prevState,
+      isMakeTeamsActive: !prevState.isMakeTeamsActive,
+    }));
+  };
+
+  const createTeamsCountOptions = () => {
+    let options = [];
+    for (let i = 0; i < state.classList.length / 2; i++) {
+      options.push({ key: `${i + 1}`, text: `${i + 1}`, value: `${i + 1}` });
+    }
+    return options;
+  };
+
+  const options = createTeamsCountOptions();
+
   const {
     isStudentsActive,
     isWorkspaceActive,
-    currentStudentEmail,
+    currentStudentName,
+    classList,
     tasksList,
     currentTask,
+    isMakeTeamsActive,
+    teamCount,
   } = state;
 
-  const classroomID = props.match.params.id;
+  const routeParam = props.match.params.id;
 
   const [addStudent] = useMutation(ADD_STUDENT);
-  const [deleteStudent] = useMutation(DELETE_STUDENT);
 
   const { loading, error, data } = useQuery(GET_CLASSROOM, {
-    variables: { id: classroomID },
+    variables: { id: routeParam },
   });
-
-  let classroom = [];
-  if (data && data.classroom) {
-    classroom = data.classroom;
-  }
-  const currentProject = classroom.currentProject;
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  console.log({ classroomStudents: classroom.students });
+
+  const classroom = data.classroom;
+
+  // console.log(classroom);
 
   if (!classroom) {
     return (
@@ -198,12 +268,16 @@ const ClassroomDetailsPage = (props) => {
     );
   }
 
-  // if (!state.classList.length) {
-  //   setState({
-  //     ...state,
-  //     classList: classroom.students_name,
-  //   });
-  // }
+  if (!state.classList.length) {
+    setState({
+      ...state,
+      classList: classroom.students_name,
+    });
+  }
+
+  const currentProject = classroom.currentProject;
+
+  console.log({ classroom });
 
   return (
     <div>
@@ -235,37 +309,33 @@ const ClassroomDetailsPage = (props) => {
             <Form
               className='newStudentInput'
               autoComplete='off'
-              onSubmit={() => handleNewStudentSubmit(classroomID)}
+              onSubmit={() => handleNewStudentSubmit(routeParam)}
             >
               <Form.Group>
                 <Form.Input
-                  placeholder='Student Email'
-                  name='currentStudentEmail'
-                  value={currentStudentEmail}
+                  placeholder='Student Name'
+                  name='currentStudentName'
+                  value={currentStudentName}
                   onChange={handleChange}
                 />
                 <Form.Button content='Add' />
               </Form.Group>
             </Form>
-            {classroom &&
-            classroom.students &&
-            classroom.students.length === 0 ? (
+            {classList && classList.length === 0 ? (
               <div>
                 Add students to your class <Icon name='heart outline' />
               </div>
             ) : (
-              classroom.students.map((student, index) => (
+              classList.map((student, index) => (
                 <Segment className='student-name-container' key={index}>
-                  <div>
-                    {capitalize(`${student.firstName} ${student.lastName}`)}
-                  </div>
+                  <div>{capitalize(`${student}`)}</div>
                   <div>
                     <Button
                       className='student-button-classroom'
                       circular
                       icon='user'
                       onClick={() => {
-                        handleStudentProfile(student.email);
+                        handleStudentProfile(`${student}`);
                       }}
                     />
                     <Button
@@ -273,15 +343,44 @@ const ClassroomDetailsPage = (props) => {
                       circular
                       icon='delete'
                       onClick={() => {
-                        handleDeleteStudent(student.uid, student.id);
+                        handleDeleteStudent(`${student}`);
                       }}
                     />
                   </div>
                 </Segment>
               ))
             )}
+            {/* {classroom.students && classroom.students.length === 0 ? (
+              <div>
+                Add students to your class <Icon name='heart outline' />
+              </div>
+            ) : (
+              classroom.students.map((student, index) => (
+                <Segment className='student-name-container' key={index}>
+                  <div>{capitalize(`${student.firstName} ${student.lastName}`)}</div>
+                  <div>
+                    <Button
+                      className='student-button-classroom'
+                      circular
+                      icon='user'
+                      onClick={() => {
+                        handleStudentProfile(`${student}`);
+                      }}
+                    />
+                    <Button
+                      className='student-button-classroom'
+                      circular
+                      icon='delete'
+                      onClick={() => {
+                        handleDeleteStudent(`${student}`);
+                      }}
+                    />
+                  </div>
+                </Segment>
+              ))
+            )} */}
 
-            {/* <div className='flexbox-container in-section-margin'>
+            <div className='flexbox-container in-section-margin'>
               <div className='section-classroom-title'>TEAMS</div>
 
               {isMakeTeamsActive ? (
@@ -299,9 +398,9 @@ const ClassroomDetailsPage = (props) => {
                   onClick={toggleMakeTeamsButton}
                 />
               )}
-            </div> */}
+            </div>
 
-            {/* <Divider />
+            <Divider />
             {classList && classList.length === 0 ? (
               <div>
                 Add students to your class <Icon name='heart outline' />
@@ -351,7 +450,7 @@ const ClassroomDetailsPage = (props) => {
                         }
                         onClick={makeTeams}
                       />
-                    </div>
+                    </div> */}
 
                     <Form
                       className='teamCountForm'
@@ -380,7 +479,7 @@ const ClassroomDetailsPage = (props) => {
                   </div>
                 )}
               </div>
-            )} */}
+            )}
 
             {/* <Divider />
             <List bulleted>
@@ -439,12 +538,8 @@ const ClassroomDetailsPage = (props) => {
                 <Grid.Column width={4}></Grid.Column>
                 <Grid.Column width={12}>
                   <Segment className='currentProjectColumn'>
-                    {currentProject && (
-                      <div>Current Project: {currentProject.title}</div>
-                    )}
-                    {currentProject && (
-                      <div>{currentProject.description} (Read from db)</div>
-                    )}
+                    {currentProject && <div>Current Project: {currentProject.title}</div>}
+                    {currentProject && <div>{currentProject.description} (Read from db)</div>}
                     {/* <div>{currentProject.learning_objectives}</div> */}
                     <div>
                       <div className=''>{"Standards".toUpperCase()}</div>

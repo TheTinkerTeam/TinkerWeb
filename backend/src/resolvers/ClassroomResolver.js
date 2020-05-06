@@ -40,7 +40,7 @@ module.exports = {
           async (user_id) => await User.findById(user_id)
         );
 
-        console.log(classroom._doc);
+        // console.log(classroom._doc);
 
         const returnedClassroom = {
           ...classroom._doc,
@@ -57,30 +57,78 @@ module.exports = {
   Mutation: {
     addStudent: async (parent, body, ctx) => {
       try {
-        console.log(body);
+        // console.log(body);
         const classroomID = body.classroomID;
 
         const newStudent = {
-          // firstName: body.firstName,
-          email: body.name,
+          email: body.email,
         };
 
         user = await User.findOne({ email: newStudent.email });
+
+        if(!user) {
+          console.log("EMAIL NOT FOUND")
+          return
+        }
+
         classroom = await Classroom.findOne({ _id: classroomID });
 
-        // console.log(user.uid);
-        // console.log(user._id);
-        // console.log({user})
         user.classrooms = [...user.classrooms, classroom._id];
-        // console.log(user.classrooms)
         user.save();
 
         classroom.students = [...classroom.students, user._id];
         classroom.save();
 
-        console.log({ classroom });
+        // console.log({ classroom });
 
         return user;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    deleteStudent: async (parent, body, ctx) => {
+      try {
+        // console.log(body);
+        const classroomID = body.classroomID;
+        const studentID = body.studentID;
+        const studentUID = body.uid;
+
+        classroom = await Classroom.findOne({ _id: classroomID });
+        // console.log("studentsList", classroom.students);
+        let newStudentsLists = [];
+        newStudentsLists = [
+          ...classroom.students.filter((id) => {
+            return `${id}` !== `${studentID}`;
+          }),
+        ];
+        // console.log("newStudentsLists", newStudentsLists)
+
+        classroom.students = [...newStudentsLists];
+        classroom.save();
+
+        user = await User.findOne({ uid: studentUID });
+        // console.log({user})
+        // console.log("user.classrooms", user.classrooms)
+
+        // let userClassroomsList = [...user.classrooms];
+        let userClassroomsFiltered = [];
+        // console.log("userClassroomsFiltered", userClassroomsFiltered);
+        // console.log("classroomID", classroomID);
+        userClassroomsFiltered = [
+          ...user.classrooms.filter((id) => {
+            // console.log(id);
+            // console.log(classroomID);
+            // console.log(`${id}` !== `${classroomID}`);
+            // return(id !== classroomID)
+            return `${id}` !== `${classroomID}`;
+          }),
+        ];
+        // console.log("userClassroomsFiltered", userClassroomsFiltered);
+
+        user.classrooms = [...userClassroomsFiltered]
+        user.save();
+
+        return true;
       } catch (error) {
         console.log(error);
       }
