@@ -74,7 +74,6 @@ const ClassroomDetailsPage = (props) => {
 
   const [state, setState] = useState(initialState);
   const [isLoading, setLoading] = useState(false);
-  // const [message, setMessage] = useState("");
 
   const handleChange = (e, { name, value }) =>
     setState((prevState) => ({ ...prevState, [name]: value }));
@@ -115,9 +114,6 @@ const ClassroomDetailsPage = (props) => {
   };
 
   const handleDeleteStudent = (uid, id) => {
-    // console.log({ uid });
-    // console.log({ id });
-    // console.log({ classroomID });
     deleteStudent({
       variables: {
         classroomID: classroomID,
@@ -175,6 +171,7 @@ const ClassroomDetailsPage = (props) => {
   const classroomID = props.match.params.id;
 
   const [addStudent] = useMutation(ADD_STUDENT);
+
   const [deleteStudent] = useMutation(DELETE_STUDENT);
 
   const { loading, error, data } = useQuery(GET_CLASSROOM, {
@@ -261,7 +258,7 @@ const ClassroomDetailsPage = (props) => {
                   classroom.students,
                   state.currentStudentEmail
                 ) && (
-                  <Label basic color='red' pointing='left'>
+                  <Label basic color='red' >
                     This student has already joined your class.
                   </Label>
                 )}

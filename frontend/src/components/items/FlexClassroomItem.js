@@ -2,7 +2,6 @@ import React from "react";
 import "../../css/Classrooms.css";
 
 const FlexClassroomItem = ({ classroom }) => {
-
   return (
     <a href={`/classrooms/${classroom.id}`} className='classroomListItem'>
       <div className='class-text'>{classroom.className}</div>
@@ -20,8 +19,13 @@ const FlexClassroomItem = ({ classroom }) => {
         <div className='assignement-text'>Nothing due, yay!</div>
       )}
       <div className='students-text'>
-        {classroom.students ? classroom.students.length : "no"} students
-        {!classroom.student && " yet"}
+        {classroom.students && classroom.students.length > 0
+          ? classroom.students.length
+          : "no"}{" "}
+        {classroom.students && classroom.students.length === 1
+          ? "student"
+          : "students"}
+        {classroom.students.length === 0 && " yet"}
       </div>
     </a>
   );

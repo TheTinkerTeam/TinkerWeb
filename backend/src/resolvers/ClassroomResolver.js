@@ -18,6 +18,10 @@ module.exports = {
           const classroom = await Classroom.findById(classroomIDs[i]);
           // console.log({classroom})
 
+          classroom._doc["students"] = classroom._doc["students"].map(
+            async (user_id) => await User.findById(user_id)
+          );
+
           detailedClassrooms.push({
             ...classroom._doc,
             currentProject: await Project.findById(classroom.currentProject),

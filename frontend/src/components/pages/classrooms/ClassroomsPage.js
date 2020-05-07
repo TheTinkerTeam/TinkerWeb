@@ -13,6 +13,9 @@ const GET_CLASSROOMS = gql`
     classrooms {
       id
       className
+      students{
+        id
+      }
       grade
       assignments {
         date
@@ -49,6 +52,8 @@ const ADD_CLASSROOM = gql`
 const ClassroomsPage = () => {
   const { loading, error, data } = useQuery(GET_CLASSROOMS);
   const [addClassroom] = useMutation(ADD_CLASSROOM);
+
+  console.log({data})
 
   // console.log(GET_CLASSROOMS);
   // console.log({data});
