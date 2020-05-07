@@ -94,7 +94,7 @@ const App = (props) => {
             <Icon name='file' />
             Projects
           </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             as={NavLink}
             to='/tutorials'
             name='Tutorials'
@@ -102,7 +102,18 @@ const App = (props) => {
           >
             <Icon name='cut' />
             Tutorials
-          </Menu.Item>
+          </Menu.Item> */}
+          {!auth.isEmpty && (
+            <Menu.Item
+              as={NavLink}
+              to='/classrooms'
+              name='Classrooms'
+              onClick={() => store.dispatch(toggleVisibility())}
+            >
+              <Icon name='thumbtack' />
+              Classrooms
+            </Menu.Item>
+          )}
           <Menu.Item
             as={NavLink}
             to='/tinkercart'

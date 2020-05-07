@@ -53,14 +53,14 @@ const typeDefs = gql`
 
   type Classroom {
     id: ID!
-    class: String
+    className: String
+    grade: String
     subject: String
-    students_name: [String]
-    assignments: [Assignment]
+    students: [User]!
+    assignments: [Assignment]!
     currentProject: Project
-    archivedProjects: [Project]
+    archivedProjects: [Project]!
   }
-
 
   type Query {
     # User
@@ -120,10 +120,12 @@ const typeDefs = gql`
     createProject(title: String!, description: String!): Project!
     updateProject(id: ID!, title: String, description: String): Project
     deleteProject(id: ID!): Project
+    addClassroom(className: String!, grade: String!, subject: String!): Classroom!
     createClassroom(title: String!, description: String!): Classroom!
     updateClassroom(id: ID!, title: String, description: String): Classroom
     deleteClassroom(id: ID!): Classroom
-    addStudent(id: ID, name: String): Boolean
+    addStudent(classroomID: ID!, email: String!): User
+    deleteStudent(classroomID: ID!, uid: String!, studentID: ID!): Boolean
   }
 `;
 

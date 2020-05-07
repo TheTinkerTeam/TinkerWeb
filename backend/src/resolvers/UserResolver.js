@@ -133,12 +133,12 @@ module.exports = {
       const url = body.newImageURL.url;
       try {
         user = await User.findOne({ uid });
-        console.log("[updateImagesURLUser] user = ", user);
+        // console.log("[updateImagesURLUser] user = ", user);
         user.userImages = [...user.userImages, { name: name, url: url }];
-        console.log(
-          "[updateImagesURLUser] The current imagesURL (before update, in mongodb)= ",
-          user.userImages
-        );
+        // console.log(
+        //   "[updateImagesURLUser] The current imagesURL (before update, in mongodb)= ",
+        //   user.userImages
+        // );
         user.save();
         return user;
       } catch (err) {
