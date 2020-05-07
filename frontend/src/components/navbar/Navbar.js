@@ -1,5 +1,12 @@
 import React from "react";
-import { Menu, Input, Responsive, Button, Image, Modal } from "semantic-ui-react";
+import {
+  Menu,
+  Input,
+  Responsive,
+  Button,
+  Image,
+  Modal,
+} from "semantic-ui-react";
 import { NavLink, withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -9,26 +16,26 @@ import SignedInMenu from "../navbar/SignedInMenu";
 import AuthForm from "../forms/AuthForm";
 import { toggleVisibility } from "../../actions/sidebarActions";
 
-const NavBar = props => {
+const NavBar = (props) => {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.firebase.auth);
-  const user = useSelector(state => state.auth);
+  const auth = useSelector((state) => state.firebase.auth);
+  const user = useSelector((state) => state.auth);
   return (
     <div>
-      <Menu pointing secondary fixed="top">
+      <Menu pointing secondary fixed='top'>
         <Menu.Item>
           <Responsive
             {...Responsive.onlyMobile}
             as={Button}
-            icon="bars"
-            size="big"
+            icon='bars'
+            size='big'
             onClick={() => dispatch(toggleVisibility())}
           />
           <Responsive
             {...Responsive.onlyTablet}
             as={Button}
-            icon="bars"
-            size="big"
+            icon='bars'
+            size='big'
             onClick={() => dispatch(toggleVisibility())}
           />
           <Responsive minWidth={Responsive.onlyTablet.minWidth}>
@@ -36,10 +43,10 @@ const NavBar = props => {
               style={{ width: "7em" }}
               as={NavLink}
               exact
-              to="/"
+              to='/'
               src={logo}
-              alt="SHlogo"
-              id="navlogo"
+              alt='SHlogo'
+              id='navlogo'
             />
           </Responsive>
         </Menu.Item>
@@ -48,8 +55,8 @@ const NavBar = props => {
             <Menu.Item
               style={{ marginTop: "0.6em" }}
               as={NavLink}
-              to="/classrooms"
-              name="Classrooms"
+              to='/classrooms'
+              name='Classrooms'
             />
           </Responsive>
         )}
@@ -57,8 +64,8 @@ const NavBar = props => {
           <Menu.Item
             style={{ marginTop: "0.6em" }}
             as={NavLink}
-            to="/projects"
-            name="Projects"
+            to='/projects'
+            name='Projects'
           />
         </Responsive>
         {/* <Responsive minWidth={1024}>
@@ -73,26 +80,26 @@ const NavBar = props => {
           <Menu.Item
             style={{ marginTop: "0.6em", whiteSpace: "nowrap" }}
             as={NavLink}
-            to="/tinkercart"
-            name="TinkerCart"
+            to='/tinkercart'
+            name='TinkerCart'
           />
         </Responsive>
         <Responsive minWidth={1024}>
           <Menu.Item
             style={{ marginTop: "0.6em" }}
             as={NavLink}
-            to="/membership"
-            name="Membership"
+            to='/membership'
+            name='Membership'
           />
         </Responsive>
         <Responsive minWidth={500}>
           <Menu.Item>
             <Input
               style={{ marginTop: "0.4em" }}
-              className="icon"
-              icon="search"
-              placeholder="Search..."
-              id="search-menubar"
+              className='icon'
+              icon='search'
+              placeholder='Search...'
+              id='search-menubar'
             />
           </Menu.Item>
         </Responsive>
@@ -102,8 +109,8 @@ const NavBar = props => {
           <SignedInMenu />
         )}
         <Modal
-        //open={false}
-          open={auth.isLoaded && (user.profile && user.profile.role === '')}
+          //open={false}
+          open={auth.isLoaded && user.profile && user.profile.role === ""}
         >
           <AuthForm />
         </Modal>
