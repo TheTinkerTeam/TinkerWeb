@@ -26,24 +26,15 @@ const GET_CLASSROOMS = gql`
 `;
 
 const ADD_CLASSROOM = gql`
-  mutation addClassroom($className: String!, $grade: String!) {
-    addClassroom(className: $className, grade: $grade) {
+  mutation addClassroom($className: String!, $grade: String!, $subject: String!) {
+    addClassroom(className: $className, grade: $grade, subject: $subject) {
       id
       className
       grade
       subject
-      students_name
       assignments {
         date
         task
-      }
-      currentProject {
-        id
-        title
-      }
-      archivedProjects {
-        id
-        title
       }
     }
   }
@@ -69,6 +60,7 @@ const ClassroomsPage = () => {
       variables: {
         className: data.className,
         grade: data.grade,
+        subject: data.subject
       },
       refetchQueries: [
         {
