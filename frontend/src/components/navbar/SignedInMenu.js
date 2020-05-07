@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Dropdown, Menu } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, withRouter} from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import ProjectForm from "../forms/ProjectForm";
@@ -8,9 +9,14 @@ import ProjectForm from "../forms/ProjectForm";
 import { logout } from "../../actions/authActions";
 import AvatarImage from "./AvatarImage";
 
-const SignedInMenu = () => {
+const SignedInMenu = (props) => {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.auth.profile);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    props.history.push('/');
+  }
 
   return (
     <Menu.Item position='right'>
@@ -41,7 +47,8 @@ const SignedInMenu = () => {
             icon='settings'
           />
           <Dropdown.Item
-            onClick={() => dispatch(logout())}
+            //onClick={() => dispatch(logout())}
+            onClick={handleLogout}
             text='Log Out'
             icon='power'
           />
@@ -51,4 +58,4 @@ const SignedInMenu = () => {
   );
 };
 
-export default SignedInMenu;
+export default withRouter(SignedInMenu);
