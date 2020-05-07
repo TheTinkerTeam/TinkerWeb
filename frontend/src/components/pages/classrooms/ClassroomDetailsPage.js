@@ -8,6 +8,7 @@ import {
   Icon,
   Grid,
   Divider,
+  Label,
 } from "semantic-ui-react";
 import { withRouter, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
@@ -72,7 +73,8 @@ const ClassroomDetailsPage = (props) => {
   };
 
   const [state, setState] = useState(initialState);
-  const [message, setMessage] = useState("");
+  const [isLoading, setLoading] = useState(false);
+  // const [message, setMessage] = useState("");
 
   const handleChange = (e, { name, value }) =>
     setState((prevState) => ({ ...prevState, [name]: value }));
@@ -81,14 +83,16 @@ const ClassroomDetailsPage = (props) => {
     return studentsList.map((student) => student.email).includes(email);
   };
 
-  const handleNewStudentSubmit = (id) => {
+  const handleNewStudentSubmit = async (id) => {
+    setLoading(true);
     if (studentAlreadyIn(classroom.students, state.currentStudentEmail)) {
-      setMessage("Student has already joined your class.");
-      console.log("Student has already joined your class.")
+      // setMessage("Student has already joined your class.");
+      console.log("Student has already joined your class.");
+      setLoading(false);
       return;
     }
     if (state.currentStudentEmail.length !== 0) {
-      addStudent({
+      await addStudent({
         variables: {
           classroomID: id,
           email: state.currentStudentEmail,
@@ -107,6 +111,7 @@ const ClassroomDetailsPage = (props) => {
         currentStudentEmail: "",
       }));
     }
+    setLoading(false);
   };
 
   const handleDeleteStudent = (uid, id) => {
@@ -244,9 +249,25 @@ const ClassroomDetailsPage = (props) => {
                   value={currentStudentEmail}
                   onChange={handleChange}
                 />
-                <Form.Button content='Add' />
+                <Form.Button
+                  disabled={studentAlreadyIn(
+                    classroom.students,
+                    state.currentStudentEmail
+                  )}
+                  loading={isLoading}
+                  content='Add'
+                />
+                {studentAlreadyIn(
+                  classroom.students,
+                  state.currentStudentEmail
+                ) && (
+                  <Label basic color='red' pointing='left'>
+                    This student has already joined your class.
+                  </Label>
+                )}
               </Form.Group>
             </Form>
+
             {classroom &&
             classroom.students &&
             classroom.students.length === 0 ? (
