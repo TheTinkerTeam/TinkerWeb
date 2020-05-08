@@ -17,17 +17,20 @@ const GET_CURRENT_USER = gql`
 `;
 
 const AvatarImage = ({ profile }) => {
-  const { loading, error, data } = useQuery(GET_CURRENT_USER, {
-    variables: { uid: `${profile.uid}` },
-  });
+  // const { loading, error, data } = useQuery(GET_CURRENT_USER, {
+  //   variables: { uid: `${profile.uid}` },
+  // });
 
   // console.log({ data });
-  if (error) {
-    console.log(error);
-  }
-  if (loading) return <Fragment></Fragment>;
+  // if (error) {
+  //   console.log(error);
+  // }
+  // if (loading) return <Fragment></Fragment>;
 
-  const avatarURL = data.user.avatar;
+  // let avatarURL = avatar;
+  // if (data && data.user) {
+  //   avatarURL = data.user.avatar;
+  // }
 
   return (
     <Fragment>
@@ -39,7 +42,7 @@ const AvatarImage = ({ profile }) => {
         //(profile && profile.avatar) ||
         //avatar
         //}
-        src={(avatarURL === "defaultImgUrl" && avatar) || avatarURL || avatar}
+        src={(profile.avatar === "defaultImgUrl" && avatar) || profile.avatar || avatar}
       />
     </Fragment>
   );

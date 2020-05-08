@@ -14,9 +14,8 @@ import ClassroomsPage from "./components/pages/classrooms/ClassroomsPage";
 import ClassroomDetailsPage from "./components/pages/classrooms/ClassroomDetailsPage";
 import ProjectDetailsPage from "./components/pages/activities/ProjectDetailsPage";
 import ClassesPage from "./components/pages/activities/ClassesPage";
-import ClassDetailsPage from "./components/pages/activities/ClassesDetailsPage";
 import ProfilePage from "./components/pages/profile/ProfilePage";
-import SettingsDashboard from "./components/pages//settings";
+import SettingsDashboard from "./components/pages/settings";
 import UserProfilePage from "./components/pages/userProfile/UserProfilePage";
 
 import { loadUser } from "./actions/authActions";
@@ -156,10 +155,8 @@ const App = (props) => {
                     path='/tutorials/:id'
                     component={TutorialDetailsPage}
                   />
-                  <Route exact path='/classes' component={ClassesPage} />
-                  <Route path='/classes/:id' component={ClassDetailsPage} />
                   <Route path='/profile/:id' component={UserProfilePage} />
-                  <Route exact path='/me' component={ProfilePage} />
+                  {/* <Route exact path='/me' component={ProfilePage} /> */}
                   <Route path='/settings' component={SettingsDashboard} />
                 </div>
               )}

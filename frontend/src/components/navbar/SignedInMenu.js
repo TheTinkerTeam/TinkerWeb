@@ -12,6 +12,10 @@ import AvatarImage from "./AvatarImage";
 const SignedInMenu = (props) => {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.auth.profile);
+  // const profileFirebase = useSelector((state) => state.firebase.auth);
+
+  console.log("HI", {profile})
+  console.log("HI", {props})
 
   const handleLogout = () => {
     dispatch(logout());
@@ -34,12 +38,11 @@ const SignedInMenu = (props) => {
           </Modal>
           <Dropdown.Item
             as={Link}
-            to='/classes'
-            text='My Classes'
-            icon='calendar'
+            to='/classrooms'
+            text='My Classrooms'
+            icon='thumbtack'
           />
-          <Dropdown.Item text='My Teams' icon='users' />
-          <Dropdown.Item as={Link} to='/me' text='My Profile' icon='user' />
+          {profile && <Dropdown.Item as={Link} to={`/profile/${profile.uid}`} text='My Profile' icon='user' />}
           <Dropdown.Item
             as={Link}
             to='/settings'

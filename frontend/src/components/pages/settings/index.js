@@ -16,6 +16,7 @@ import { useQuery } from "@apollo/react-hooks";
 const GET_CURRENT_USER = gql`
   query GetCurrentUser($uid: String!) {
     user(uid: $uid) {
+      id
       uid
       email
       firstName
@@ -44,6 +45,8 @@ const SettingsDashboard = ({ currentUser }) => {
     variables: { uid: `${currentUser.uid}` },
   });
 
+  // console.log({currentUser})
+
   if (loading) return <p>Loading...</p>;
   if (error) {
     console.log({ error });
@@ -57,7 +60,7 @@ const SettingsDashboard = ({ currentUser }) => {
     <Grid>
       <Grid.Column width={12}>
         <Switch>
-          <Redirect exact from='/settings/' to='/settings/basics' />
+          <Redirect exact from='/settings' to='/settings/basics' />
           <Route
             path='/settings/basics'
             render={() => (

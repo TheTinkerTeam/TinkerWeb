@@ -1,16 +1,9 @@
 import React from "react";
 import avatar from "../../../img/avatar.png";
-import {
-  Grid,
-  Header,
-  Item,
-  Segment,
-  Button
-} from "semantic-ui-react";
+import { Grid, Header, Item, Segment, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-
-const UserProfileHeader = ({auth,student}) => {
+const UserProfileHeader = ({ auth, student }) => {
   return (
     <Grid.Column width={16}>
       <Segment>
@@ -36,20 +29,22 @@ const UserProfileHeader = ({auth,student}) => {
               {/* <br /> */}
               <Header as='h2'>@{student.username}</Header>
             </Item.Content>
+            <Item.Content verticalAlign='bottom'>
+              {student.uid === auth.uid && (
+                <Button
+                  as={Link}
+                  to='/settings'
+                  //color='teal'
+                  //fluid
+                  basic
+                  circular
+                  icon='settings'
+                  style={{padding: "10px"}}
+                />
+              )}
+            </Item.Content>
           </Item>
         </Item.Group>
-        {student.uid === auth.uid && (
-            <Segment>
-              <Button
-                as={Link}
-                to='/settings/basics'
-                color='teal'
-                fluid
-                basic
-                content='Edit Profile'
-              />
-            </Segment>
-        )}
       </Segment>
     </Grid.Column>
   );
