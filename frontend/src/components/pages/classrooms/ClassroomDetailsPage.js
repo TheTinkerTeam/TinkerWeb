@@ -10,7 +10,7 @@ import {
   Divider,
   Label,
 } from "semantic-ui-react";
-import { withRouter, Redirect } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
@@ -131,9 +131,10 @@ const ClassroomDetailsPage = (props) => {
     });
   };
 
-  const handleStudentProfile = (email) => {
+  const handleStudentProfile = (email, uid) => {
     console.log("open student profile");
-    console.log(email);
+    console.log({uid})
+    console.log({email});
   };
 
   const handleSubmitTask = () => {
@@ -279,12 +280,14 @@ const ClassroomDetailsPage = (props) => {
                   </div>
                   <div>
                     <Button
+                      as={Link}
+                      to={`/profile/${student.uid}`}
                       className='student-button-classroom'
                       circular
                       icon='user'
-                      onClick={() => {
-                        handleStudentProfile(student.email);
-                      }}
+                      //onClick={() => {
+                        //handleStudentProfile(student.email, student.uid);
+                      //}}
                     />
                     <Button
                       className='student-button-classroom'
