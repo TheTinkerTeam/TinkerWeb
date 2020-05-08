@@ -17,6 +17,7 @@ import ClassesPage from "./components/pages/activities/ClassesPage";
 import ClassDetailsPage from "./components/pages/activities/ClassesDetailsPage";
 import ProfilePage from "./components/pages/profile/ProfilePage";
 import SettingsDashboard from "./components/pages//settings";
+import UserProfilePage from "./components/pages/userProfile/UserProfilePage";
 
 import { loadUser } from "./actions/authActions";
 // import setAuthToken from "./utils/setAuthToken";
@@ -157,6 +158,7 @@ const App = (props) => {
                   />
                   <Route exact path='/classes' component={ClassesPage} />
                   <Route path='/classes/:id' component={ClassDetailsPage} />
+                  <Route path='/profile/:id' component={UserProfilePage} />
                   <Route exact path='/me' component={ProfilePage} />
                   <Route path='/settings' component={SettingsDashboard} />
                 </div>
