@@ -1,15 +1,6 @@
-import React, { Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
-import {
-  Button,
-  Card,
-  Grid,
-  Header,
-  Image,
-  Item,
-  Menu,
-  Segment,
-} from "semantic-ui-react";
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { Grid } from "semantic-ui-react";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -45,10 +36,6 @@ const GET_STUDENT = gql`
 `;
 
 const UserProfilePage = (props) => {
-  const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
   const studentUID = props.match.params.id;
 
   const { loading, error, data } = useQuery(GET_STUDENT, {
@@ -68,7 +55,7 @@ const UserProfilePage = (props) => {
 
   return (
     <div className='dashboardcontainer'>
-      <Grid >
+      <Grid>
         <UserProfileHeader auth={auth} student={student} />
         <UserProfileDescription student={student} />
         <UserProfilePhotos photos={student.userImages} />
