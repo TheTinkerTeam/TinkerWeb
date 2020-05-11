@@ -3,7 +3,8 @@ const projects = [
     title: "Code'n'Tell",
     grades: [4, 5, 6],
     duration: "180 min",
-    imageURL: "https://via.placeholder.com/150",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Frobot.png?alt=media&token=a5b3311b-6608-46ef-a909-99e6aed91e12",
     description: "This is the description of the 'Code'n'Tell' project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -208,7 +209,8 @@ const projects = [
     keyConcepts: ["Construction", "Weight-bearing", "Stability"],
     keyQuestion:
       "Can you build a bridge to cover a gap of 25cm (10 inches) that can support a 1 kg weight?",
-    imageURL: "https://via.placeholder.com/150",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fbridge.png?alt=media&token=c96a60a6-f543-48f2-8005-7451d7b6a1df",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -379,7 +381,9 @@ const projects = [
     ],
     keyQuestion:
       "Can a kit be designed to clean up oil spills in specified human habitations?",
-    imageURL: "https://via.placeholder.com/150",
+    // imageURL: "https://via.placeholder.com/150",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fcleanup.png?alt=media&token=abec699f-967c-4d26-9d96-d88237d5ca44",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -591,7 +595,7 @@ const projects = [
       "Humans and animals need a certain temperature in which they can live comfortably. If it gets too hot, their bodies cannot cope with the heat. The same is true if they get too cold. Humans build structures called houses and buildings, that they can control the temperature in. This way they can guarantee that they will live comfortably.",
     keyConcepts: ["Insulation", "Body Heat", "Temperature", "Construct"],
     keyQuestion: "Can you design a doghouse to protect a puppy from the heat?",
-    imageURL: "https://via.placeholder.com/150",
+    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fdog%2Bfood.png?alt=media&token=4f6232d5-19b3-44f4-a8db-804d0838baaf",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -810,7 +814,7 @@ const projects = [
       "Design Thinking",
     ],
     keyQuestion: "How can you improve the safety of riding in a car?",
-    imageURL: "https://via.placeholder.com/150",
+    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fstarman.png?alt=media&token=3969b06c-63a8-4c19-a6d6-efd6aeb7a811",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1035,7 +1039,7 @@ const projects = [
       "The history of construction is all about how to move objects, heavy objects from one place to another. Sometimes these objects have to be lifted. We use a machine called a crane to ‘lift and move’. Cranes are a system of pulleys and motors. Without them, we would not have the type of cities and buildings we live in and work in today. Cranes have been around for thousands of years. We will look at how the physics of cranes affects their design and capacity to move objects. ",
     keyConcepts: ["Weight & Mass", "Assembling", "Engineering", "Construction"],
     keyQuestion: "How can you lift and move objects using mechanical devices?",
-    imageURL: "https://via.placeholder.com/150",
+    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Ffloating.png?alt=media&token=602ea5ac-2490-4e87-b4f9-6050844da506",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1233,7 +1237,7 @@ const projects = [
     keyConcepts: ["Utility", "Aesthetic", "Design Cycle", "Construction"],
     keyQuestion:
       "Can you create a model of a piece of furniture that both fits a purpose and place and reflects the ideas and style of a famous architect?",
-    imageURL: "https://via.placeholder.com/150",
+    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fchair.png?alt=media&token=8fb54f9e-a47f-4d03-a1ce-98b388b6775c",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1397,7 +1401,7 @@ const projects = [
     keyConcepts: ["Movement", "Energy", "Mechanical", "Force", "Resistance"],
     keyQuestion:
       "Can you build a boat that can travel over the length of a swimming pool using a motor of some sort?",
-    imageURL: "https://via.placeholder.com/150",
+    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fcontainer-shipping.png?alt=media&token=581d9fc9-82b8-4183-9ded-9bb868451362",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1606,7 +1610,7 @@ const projects = [
     ],
     keyQuestion:
       "Can you design and construct a sneaker to meet an identified need?",
-    imageURL: "https://via.placeholder.com/150",
+    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fjoyride.png?alt=media&token=786f2edb-ed2f-4c0d-98f3-baaaee90c6a0",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1804,7 +1808,7 @@ const projects = [
     ],
     keyQuestion:
       "Can you make something move that just uses air to push it along?",
-    imageURL: "https://via.placeholder.com/150",
+    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fpaper-plane.png?alt=media&token=b8c91f96-9a32-4256-9234-576de08baeec",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
