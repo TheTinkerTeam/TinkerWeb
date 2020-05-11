@@ -12,7 +12,7 @@ const dbCollection = school;
 
 const dbURI = `mongodb+srv://${dbUser}:${dbPass}@${dbHost}/${dbCollection}?retryWrites=true&w=majority`;
 
-const connectDB = async () => {
+const connect = async () => {
   try {
     await mongoose.connect(dbURI, {
       useNewUrlParser: true,
@@ -30,4 +30,8 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+const disconnect = async () => {
+  mongoose.connection.close();
+};
+
+module.exports = {connect, disconnect};

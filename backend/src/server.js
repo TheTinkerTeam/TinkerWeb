@@ -8,8 +8,8 @@ const { applyMiddleware } = require("graphql-middleware");
 const app = require("./app");
 const appConfig = require("./config/app");
 
-const connectDB = require("./config/db");
-connectDB();
+const { connect } = require("./config/db");
+connect();
 
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers/Root");
