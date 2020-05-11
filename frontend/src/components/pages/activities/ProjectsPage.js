@@ -74,7 +74,7 @@ const ProjectsPage = props => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   const projects = data.projects;
-
+  console.log(projects)
   return (
     <div className="projects-container">
       <div className="red-title rotate-title"> 
@@ -121,7 +121,7 @@ const mapStateToProps = state => ({
     },
     {
       id: "3",
-      name: "Wood-working"
+      name: "Wood-Working"
     },
     {
       id: "4",

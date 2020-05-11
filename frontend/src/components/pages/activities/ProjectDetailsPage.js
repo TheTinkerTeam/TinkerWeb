@@ -22,6 +22,35 @@ const ProjectDetailsPage = (props) => {
         subjects
         tags
         grades
+        bigIdea
+        keyConcepts
+        keyQuestion
+        standards{
+          code
+          description
+          skills
+        }
+        buildingSupplies{
+          name
+          type
+          available
+        }
+        upcycledSupplies{
+          name
+          type
+          available
+        }
+        tools{
+          name
+          type
+          available
+        }
+        partOneFindingOut
+        partTwoWorkingWithIdeas
+        partThreeMakingItHappen
+        partFourEvaluatingYourSolution
+        hints
+        safety
       }
     }
   `;
@@ -34,6 +63,7 @@ const ProjectDetailsPage = (props) => {
   if (error) return <p>Error :(</p>;
 
   const project = data.project;
+  console.log(project)
   if (!project) {
     return (
       <Redirect

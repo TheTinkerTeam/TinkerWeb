@@ -5,6 +5,9 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  duration: {
+    type: String,
+  },
   description: {
     type: String,
     required: true,

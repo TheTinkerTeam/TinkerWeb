@@ -37,7 +37,6 @@ const UserProfileHeader = ({ auth, student }) => {
               <Button
                 as={Link}
                 to='/settings'
-                color='standard'
                 //fluid
                 //basic
                 circular
