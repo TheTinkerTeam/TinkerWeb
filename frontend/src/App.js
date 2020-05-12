@@ -12,7 +12,7 @@ import TutorialDetailsPage from "./components/pages/activities/TutorialDetailsPa
 import ProjectsPage from "./components/pages/activities/ProjectsPage";
 import ClassroomsPage from "./components/pages/classrooms/ClassroomsPage";
 import ClassroomDetailsPage from "./components/pages/classrooms/ClassroomDetailsPage";
-import ProjectDetailsPage from "./components/pages/activities/ProjectDetailsPage";
+import ProjectDetailsPage from "./components/pages/activities/projectDetails/ProjectDetailsPage";
 import ClassesPage from "./components/pages/activities/ClassesPage";
 import ProfilePage from "./components/pages/profile/ProfilePage";
 import SettingsDashboard from "./components/pages/settings";

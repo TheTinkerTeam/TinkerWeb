@@ -65,7 +65,7 @@ const Dashboard = () => {
       <ProjectsList
         category="Wood-working"
         projects={projects.filter(project => {
-          return project.tags.indexOf("Wood-working") !== -1;
+          return project.tags.indexOf("Wood-Working") !== -1;
         })}
       />
       <ProjectsList

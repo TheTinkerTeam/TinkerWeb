@@ -10,8 +10,9 @@ class CarouselItem extends Component {
           src={project.imageURL}
           className="img__img"
           alt={project.title}
-          height="100em"
-          width="100em"
+          //height="100em"
+          height="130em"
+          width="130em"
         />
       </a>
     );

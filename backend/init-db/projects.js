@@ -4,7 +4,7 @@ const projects = [
     grades: [4, 5, 6],
     duration: "180 min",
     imageURL:
-      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Frobot.png?alt=media&token=a5b3311b-6608-46ef-a909-99e6aed91e12",
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Fcodentell.svg?alt=media&token=10077059-37bf-4537-8582-6bebd08bfcd0",
     description: "This is the description of the 'Code'n'Tell' project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -210,7 +210,7 @@ const projects = [
     keyQuestion:
       "Can you build a bridge to cover a gap of 25cm (10 inches) that can support a 1 kg weight?",
     imageURL:
-      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fbridge.png?alt=media&token=c96a60a6-f543-48f2-8005-7451d7b6a1df",
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Fgoldengate.png?alt=media&token=4595087f-5b6e-4ca0-a053-3b6b3f04fb8e",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -383,7 +383,7 @@ const projects = [
       "Can a kit be designed to clean up oil spills in specified human habitations?",
     // imageURL: "https://via.placeholder.com/150",
     imageURL:
-      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fcleanup.png?alt=media&token=abec699f-967c-4d26-9d96-d88237d5ca44",
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Fclean.png?alt=media&token=916c46ba-96ba-4ee1-a7b0-1acc2bb32fdf",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -595,7 +595,8 @@ const projects = [
       "Humans and animals need a certain temperature in which they can live comfortably. If it gets too hot, their bodies cannot cope with the heat. The same is true if they get too cold. Humans build structures called houses and buildings, that they can control the temperature in. This way they can guarantee that they will live comfortably.",
     keyConcepts: ["Insulation", "Body Heat", "Temperature", "Construct"],
     keyQuestion: "Can you design a doghouse to protect a puppy from the heat?",
-    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fdog%2Bfood.png?alt=media&token=4f6232d5-19b3-44f4-a8db-804d0838baaf",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Fdog.png?alt=media&token=832244f9-23bb-43c8-8c38-9de88757eabd",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -814,7 +815,8 @@ const projects = [
       "Design Thinking",
     ],
     keyQuestion: "How can you improve the safety of riding in a car?",
-    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fstarman.png?alt=media&token=3969b06c-63a8-4c19-a6d6-efd6aeb7a811",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Fcar.png?alt=media&token=a389180f-34b0-4e92-9c28-11903400163f",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1039,7 +1041,8 @@ const projects = [
       "The history of construction is all about how to move objects, heavy objects from one place to another. Sometimes these objects have to be lifted. We use a machine called a crane to ‘lift and move’. Cranes are a system of pulleys and motors. Without them, we would not have the type of cities and buildings we live in and work in today. Cranes have been around for thousands of years. We will look at how the physics of cranes affects their design and capacity to move objects. ",
     keyConcepts: ["Weight & Mass", "Assembling", "Engineering", "Construction"],
     keyQuestion: "How can you lift and move objects using mechanical devices?",
-    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Ffloating.png?alt=media&token=602ea5ac-2490-4e87-b4f9-6050844da506",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Fballoon.png?alt=media&token=27e70bc2-89bd-4e1d-b623-55314d7b9636",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1237,7 +1240,8 @@ const projects = [
     keyConcepts: ["Utility", "Aesthetic", "Design Cycle", "Construction"],
     keyQuestion:
       "Can you create a model of a piece of furniture that both fits a purpose and place and reflects the ideas and style of a famous architect?",
-    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fchair.png?alt=media&token=8fb54f9e-a47f-4d03-a1ce-98b388b6775c",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Fchair.png?alt=media&token=1675131e-748d-4026-b47d-974d2a26c976",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1401,7 +1405,8 @@ const projects = [
     keyConcepts: ["Movement", "Energy", "Mechanical", "Force", "Resistance"],
     keyQuestion:
       "Can you build a boat that can travel over the length of a swimming pool using a motor of some sort?",
-    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fcontainer-shipping.png?alt=media&token=581d9fc9-82b8-4183-9ded-9bb868451362",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Fboat.png?alt=media&token=1f6ccce7-8185-41a6-bb88-1c3de65b3736",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1610,7 +1615,8 @@ const projects = [
     ],
     keyQuestion:
       "Can you design and construct a sneaker to meet an identified need?",
-    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fjoyride.png?alt=media&token=786f2edb-ed2f-4c0d-98f3-baaaee90c6a0",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Ficon.png?alt=media&token=22b7320b-9cdd-499e-a8e2-4ef55c224a8d",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1808,7 +1814,8 @@ const projects = [
     ],
     keyQuestion:
       "Can you make something move that just uses air to push it along?",
-    imageURL: "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fpaper-plane.png?alt=media&token=b8c91f96-9a32-4256-9234-576de08baeec",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Ffloating.png?alt=media&token=c26a91b1-1c25-4158-b915-e6dcc65f7807",
     description: "This is the description of the project",
     learning_objectives:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1990,6 +1997,229 @@ const projects = [
       email: "edith.santacana@gmail.com",
     },
   },
+  {
+    title: "World Cuisine",
+    grades: [3, 4],
+    duration: "90 min",
+    subjects: ["science", "design"],
+    standards: [
+      {
+        code: "3-5-ETS1-2",
+        description:
+          "enerate and compare multiple possible solutions to a problem based on how well each is likely to meet the criteria and constraints of the problem. (Grades 3 - 5)",
+        skills: [
+          "Generate and compare multiple solutions to a problem based on how well they meet the criteria and constraints of the design problem.",
+          "At whatever stage, communicating with peers about proposed solutions is an important part of the design process, and shared ideas can lead to improved designs.",
+          "Engineers improve existing technologies or develop new ones to increase their benefits, to decrease known risks, and to meet societal demands.",
+        ],
+      },
+      {
+        code: "3-5-ETS1-1",
+        description:
+          "Define a simple design problem reflecting a need or a want that includes specified criteria for success and constraints on materials, time, or cost. (Grades 3 - 5)",
+        skills: [
+          "Define a simple design problem that can be solved through the development of an object, tool, process, or system and includes several criteria for success and constraints on materials, time, or cost.",
+          "Possible solutions to a problem are limited by available materials and resources (constraints). The success of a designed solution is determined by considering the desired features of a solution (criteria). Different proposals for solutions can be compared on the basis of how well each one meets the specified criteria for success or how well each takes the constraints into account.",
+          "People's needs and wants change over time, as do their demands for new and improved technologies.",
+        ],
+      },
+    ],
+    bigIdea:
+      "We have learnt that when we want to travel distances that would take a long, long time to walk, we have machines to use to move in. They are called ‘cars’. When the machine moves and we are in it, we do not have to do anything except sit there. Something makes the machine move. It could be a petrol motor, or a battery; all sorts of things can propel the car forward. Where this power comes from is very important for all sorts of reasons. Some motors make gases that make our world not such a good place to live. We need to think about what sorts of power is ‘safe’ and doesn’t change things in our world, but still can get us from one place to another.",
+    keyConcepts: [
+      "Power",
+      "Movement",
+      "Force",
+      "Travel",
+      "Pollution",
+      "Kinetic Energy",
+    ],
+    keyQuestion:
+      "Can you make something move that just uses air to push it along?",
+    imageURL:
+      "https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_pink%2Fburger.png?alt=media&token=caa75c0a-128e-48f1-8068-3e651cbe3925",
+    description: "This is the description of the project",
+    learning_objectives:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    buildingSupplies: [
+      {
+        name: "Propellers",
+        type: "electronic",
+        available: true,
+      },
+      {
+        name: "Plastic Wheel",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "Wooden Wheel",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "DC Electric Motor",
+        type: "electronic",
+        available: true,
+      },
+      {
+        name: "Electric Wire",
+        type: "electronic",
+        available: true,
+      },
+      {
+        name: "Straw",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "3mm Dowel",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "Hot Glue Sticks",
+        type: "supply",
+        available: true,
+      },
+      {
+        name: "Craft Sticks",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "Wood Pieces",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "Rubber Band (Long)",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "Paper Clip",
+        type: "supply",
+        available: true,
+      },
+      {
+        name: "Pins",
+        type: "supply",
+        available: true,
+      },
+      {
+        name: "Masking Tape",
+        type: "supply",
+        available: true,
+      },
+      {
+        name: "Propeller",
+        type: "material",
+        available: true,
+      },
+    ],
+    upcycledSupplies: [
+      {
+        name: "Paper (recycled)",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "Cardboard Boxes",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "Polystyrene Foam",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "Bottle Caps",
+        type: "material",
+        available: true,
+      },
+      {
+        name: "Be creative!",
+        type: "material",
+        available: true,
+      },
+    ],
+    tools: [
+      {
+        name: "Scissors",
+        type: "tool",
+        available: true,
+      },
+      {
+        name: "Hot Glue Gun",
+        type: "tool",
+        available: true,
+      },
+      {
+        name: "Paper Knife",
+        type: "tool",
+        available: true,
+      },
+      {
+        name: "Cutting Mats",
+        type: "tool",
+        available: true,
+      },
+      {
+        name: "Soldering Iron",
+        type: "tool",
+        available: true,
+      },
+    ],
+    tags: ["Featured", "Cooking", "Science"],
+    content: "",
+    partOneFindingOut: [
+      "Have discussion and research time into why we have cars and what sort of engines are used to make them go. Find pictures of them and put them in your design journal.",
+      "Choose the least ‘polluting’ engine that uses a ‘propellor’ to push or pull the car along and draw pictures of how a car that you would design using a propellor might look",
+    ],
+    partTwoWorkingWithIdeas: [
+      "Have the students make a ‘paper propellor’. They might know them as ‘windmills’.",
+      "Watch this video: https://www.youtube.com/watch?v=Ii1mFpJKZqM",
+      "Investigate what is needed to make the paper propellor spin when it won’t spin on its own. To make air move, you need a source of energy",
+      "Can your car carry a passenger? See if you can incorporate a seat into your design.",
+      "Students can look at what sort of shapes do not tip over easily but are very light and record them in their design books",
+    ],
+    partThreeMakingItHappen: [
+      "Look at these Youtube videos to see how to make propellor powered cars. https://www.youtube.com/watch?v=F8-84J8vtUg. You might like to make a solar powered car. Here is some advice. https://youtu.be/_xYmWPjNQpA",
+      "Construct their car after discussing their designs in their critique groups checking to see if the designs are light, strong, and won’t tip over easily. In their groups, they can help each other if they have a problem.",
+      "Test that their cars work and make any adjustments to their designs to improve their cars performance.",
+      "Take pictures of their finished cars and add them to pictures they took of the different stages of making their car.",
+    ],
+    partFourEvaluatingYourSolution: [
+      "Setup up a test track at least 50 meters long",
+      "Have the critique group test each others cars by measuring how far each car can travel down the test track",
+      "Have the students develop a checklist to see how each car performs compared to other cars. E.g. Is the chassis strong? Does the car run straight? Do the wheels wobble? Is the rubber band secure? Has the car been well made? Be careful making your car to keep it as light as possible. That includes using just the right amount of glue and tape. Make sure your rubber bands are the right sort. You can change them. Check all the wheels run in the same direction. Use the checklist to make sure all parts of your car are properly made and put together",
+      "Record the process, pictures of how you made your cars, and answer these questions in your design journal. ",
+      "As a class, have students share, compare and reflect on their cars success in their journals:",
+      "What have I found out about how cars can move using different sorts of motors?",
+      "Did I succeed in getting my propellor car to travel efficiently? What else do I need to find out about making model cars using different sorts of energy to make them run?’",
+      "What things make my car a big success?",
+      "How could I improve my final product? Can these improvements make my car go further and faster in the direction I want it to go?",
+      "How did you find working in your group? How did you find consulting with others to get new ideas and advice and did you enjoy the experience?",
+    ],
+    hints: [
+      "Certain materials are lighter than others and are just as strong. Experiment with these before you build your chassis. Do you have a way of weighing each one to see which is the lightest?",
+      "They are certain shapes that make your car structure very strong. One of those is a triangle. Can you see where you can use triangles in your car design?",
+      "Make sure the hooks you use to attach the rubber bands are very secure and strong. If they break when you are tightening the rubber bands, they can snap and be very dangerous.",
+      "Check the Youtube video if you are unsure about how to make everything work. Change the design to suit your ideas. There is no need to copy.",
+    ],
+    safety: [
+      "There is no such thing as zero risk. The TInker Cart is a tool that teaches students how to manage risk, how to work smart and practice safely.",
+      "Don’t use a tool if you haven’t passed the aforesaid tool license yet.",
+      "Take extra care with sharp tools.",
+      "The hot glue gun has the potential to burn skin.",
+    ],
+    author: {
+      email: "edith.santacana@gmail.com",
+    },
+  },
+
   // {
   //   title: "",
   //   grades: [4, 5],
