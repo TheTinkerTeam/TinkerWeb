@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 
 import TinkerNewsList from "../lists/TinkerNewsList";
 
-const mapStateToProps = state => ({
-  news: state.news
-});
+// const mapStateToProps = state => ({
+//   news: state.news
+// });
 
 class TinkerNews extends Component {
   render() {
@@ -20,4 +20,5 @@ class TinkerNews extends Component {
   }
 }
 
-export default connect(mapStateToProps)(TinkerNews);
+// export default connect(mapStateToProps)(TinkerNews);
+export default TinkerNews;

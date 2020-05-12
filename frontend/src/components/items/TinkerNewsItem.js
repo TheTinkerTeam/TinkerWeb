@@ -4,10 +4,10 @@ class TinkerNewsItem extends Component {
   render() {
     return (
       <div>
-        <div className='tinkernewsitem-title'>
+        <div className='tinkernewsitem-title' style={{maxWidth: "350px"}}>
           {this.props.notification.title}
         </div>
-        <div className='tinkernewsitem-description'>
+        <div className='tinkernewsitem-description' style={{maxWidth: "350px"}}>
           {this.props.notification.description}
         </div>
       </div>
