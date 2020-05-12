@@ -90,8 +90,8 @@ const Dashboard = () => {
           src={tinkercartPlus}
           className='tinkercart-img-position'
           alt='Tinker Cart model'
-          height='100em'
-          width='100em'
+          height='118em'
+          width='118em'
         />
         <WelcomeComponent items={[]} />
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5em" }}>

@@ -3,9 +3,9 @@ import { withRouter, Redirect } from "react-router-dom";
 
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import { Segment, List, Image, Icon } from "semantic-ui-react";
+import { Segment } from "semantic-ui-react";
 import ProjectDetailsStandards from "./ProjectDetailsStandards";
-import ProjectDetailsLearningObjectives from "./ProjectDetailsLearningObjectives";
+// import ProjectDetailsLearningObjectives from "./ProjectDetailsLearningObjectives";
 import ProjectDetailsSubjects from "./ProjectDetailsSubjects";
 import ProjectDetailsKeyConcepts from "./ProjectDetailsKeyConcepts";
 import ProjectDetailsKeyQuestion from "./ProjectDetailsKeyQuestion";
@@ -98,7 +98,7 @@ const ProjectDetailsPage = (props) => {
     <div>
       <div className='project-title-style'>{project.title}</div>
       <Segment.Group className='paragraph-style display-in-box'>
-        <ProjectDetailsImage image={project.imageURL} />
+        <ProjectDetailsImage props={props} image={project.imageURL} title={project.title}/>
         <ProjectDetailsBigIdea bigIdea={project.bigIdea} />
         <ProjectDetailsKeyQuestion keyQuestion={project.keyQuestion} />
         <ProjectDetailsKeyConcepts keyConcepts={project.keyConcepts} />
