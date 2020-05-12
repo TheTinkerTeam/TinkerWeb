@@ -1,5 +1,6 @@
 import React from "react";
-import { Segment, Image, Button, Modal, Header } from "semantic-ui-react";
+import { Segment, Image, Button, Modal, Icon } from "semantic-ui-react";
+import "../../../../css/SignedOutMenu.css";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -20,7 +21,20 @@ const ProjectDetailsImage = ({ props, image, title }) => {
         //</div>
         <div>
           <Modal
-            trigger={<Button basic color='grey'>{`Assign ${title}`}</Button>}
+            //trigger={<Button basic color='grey'>{`Assign ${title}`}</Button>}
+            trigger={
+              <Button
+                basic
+                className='custom'
+                icon
+                labelPosition='right'
+                //id='getStartedButton'
+              >
+                {`Assign ${title} to your class`}
+                {/* {"Assign"} {<strong>{`${title}`}</strong>} {"to your class"} */}
+                <Icon name='angle right' />
+              </Button>
+            }
           >
             <Modal.Header>{`Assign ${title} to a class`}</Modal.Header>
             <Modal.Content>

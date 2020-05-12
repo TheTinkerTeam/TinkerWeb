@@ -350,7 +350,7 @@ a {
   border-bottom-left-radius: 0.22rem;
   border-top-left-radius: 0.22rem;
   border-top-right-radius: 0;
-  background-image: url(https://via.placeholder.com/150);
+  /* background-image: url(https://via.placeholder.com/150); */
   background-position: center;
 }
 

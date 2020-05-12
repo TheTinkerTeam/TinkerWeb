@@ -74,7 +74,7 @@ const ProjectDetailsPage = (props) => {
   });
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  if (error) return <p>{console.log(error)}</p>;
 
   const project = data.project;
   console.log(project);
@@ -90,15 +90,15 @@ const ProjectDetailsPage = (props) => {
     );
   }
 
-  const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
   return (
     <div>
       <div className='project-title-style'>{project.title}</div>
       <Segment.Group className='paragraph-style display-in-box'>
-        <ProjectDetailsImage props={props} image={project.imageURL} title={project.title}/>
+        <ProjectDetailsImage
+          props={props}
+          image={project.imageURL}
+          title={project.title}
+        />
         <ProjectDetailsBigIdea bigIdea={project.bigIdea} />
         <ProjectDetailsKeyQuestion keyQuestion={project.keyQuestion} />
         <ProjectDetailsKeyConcepts keyConcepts={project.keyConcepts} />
