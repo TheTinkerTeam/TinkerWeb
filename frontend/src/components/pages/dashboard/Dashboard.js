@@ -56,7 +56,27 @@ const Dashboard = () => {
     },
   ];
 
+  const initialWelcome = [
+    {
+      id: "1",
+      description: "Try out starter projects",
+    },
+    {
+      id: "2",
+      description: "Join a class with your class code",
+    },
+    {
+      id: "3",
+      description: "Download the Tinker Cart plans",
+    },
+    {
+      id: "4",
+      description: "wow",
+    },
+  ];
+
   const [news, setNews] = useState(initialNews);
+  const [welcome, setWelcome] = useState(initialWelcome);
   // console.log(news);
 
   if (loading) return <p>Loading...</p>;
@@ -74,7 +94,23 @@ const Dashboard = () => {
           width='100em'
         />
         <WelcomeComponent items={[]} />
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5em" }}>
+          <div className='welcomelistitem'>Try out our <br/> projects</div>
+          <div className='welcomelistitem'>Wonder, Ask, Create <br/>  Try & Fix</div>
+          <div className='welcomelistitem'>Collaborate with <br/> your peers!</div>
+        </div>
       </div>
+
+      {/* <div className='welcome-item card'>
+        <img
+          src={tinkercartPlus}
+          className='tinkercart-img-position'
+          alt='Tinker Cart model'
+          height='100em'
+          width='100em'
+        />
+        <WelcomeComponent items={welcome} />
+      </div> */}
       <div className='tinker-news-item card'>
         <TinkerNewsComponent news={news} />
       </div>
