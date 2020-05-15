@@ -92,11 +92,11 @@ module.exports = {
         await Classroom.updateOne(
           { _id: classroomID },
           { students: [...classroom.students, user._id] }
-          );
+        );
         await User.updateOne(
           { email: newStudent.email },
           { classrooms: [...user.classrooms, classroom._id] }
-          );
+        );
 
         // classroom.students = [...classroom.students, user._id];
         console.log("classroom.students (post) = ", classroom.students);
@@ -122,7 +122,6 @@ module.exports = {
     },
     deleteStudent: async (parent, body, ctx) => {
       try {
-        // console.log(body);
         const classroomID = body.classroomID;
         const studentID = body.studentID;
         const studentUID = body.uid;
@@ -143,22 +142,17 @@ module.exports = {
         await Classroom.updateOne(
           { _id: classroomID },
           { students: [...newStudentsLists] }
-          );
+        );
 
         user = await User.findOne({ uid: studentUID });
         // console.log({user})
         // console.log("user.classrooms", user.classrooms)
 
-        // let userClassroomsList = [...user.classrooms];
         let userClassroomsFiltered = [];
         // console.log("userClassroomsFiltered", userClassroomsFiltered);
         // console.log("classroomID", classroomID);
         userClassroomsFiltered = [
           ...user.classrooms.filter((id) => {
-            // console.log(id);
-            // console.log(classroomID);
-            // console.log(`${id}` !== `${classroomID}`);
-            // return(id !== classroomID)
             return `${id}` !== `${classroomID}`;
           }),
         ];
@@ -167,8 +161,7 @@ module.exports = {
         await User.updateOne(
           { uid: studentUID },
           { classrooms: [...userClassroomsFiltered] }
-          );
-
+        );
 
         // user.classrooms = [...userClassroomsFiltered];
         // user.save();

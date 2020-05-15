@@ -1,18 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState,} from "react";
 import "../../../css/Classrooms.css";
-import {
-  Segment,
-  Button,
-  Form,
-  List,
-  Icon,
-  Grid,
-  Divider,
-  Label,
-} from "semantic-ui-react";
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import WorkspaceSection from "./classroomDetails/WorkspaceSection";
+import StudentsSection from "./classroomDetails/StudentsSection";
 
 const GET_CLASSROOM = gql`
   query getClassroom($id: ID!) {
@@ -73,6 +65,7 @@ const ClassroomDetailsPage = (props) => {
     currentStudentEmail: "",
     tasksList: [],
     currentTask: "",
+    isMakeTeamsActive: true,
   };
 
   const [state, setState] = useState(initialState);
@@ -132,12 +125,6 @@ const ClassroomDetailsPage = (props) => {
         },
       ],
     });
-  };
-
-  const handleStudentProfile = (email, uid) => {
-    console.log("open student profile");
-    console.log({ uid });
-    console.log({ email });
   };
 
   const handleSubmitTask = () => {
@@ -214,346 +201,33 @@ const ClassroomDetailsPage = (props) => {
   return (
     <div>
       <div className='classroom-title-style'>{classroom.className}</div>
-      <Segment.Group className='paragraph-style display-in-box'>
-        <Segment className='section-title'>
-          <div className='flexbox-container'>
-            <div>STUDENTS</div>
-            {isStudentsActive ? (
-              <Button
-                className='arrow-down-button-classroom'
-                circular
-                icon='angle up'
-                onClick={toggleButton}
-              />
-            ) : (
-              <Button
-                className='arrow-down-button-classroom'
-                circular
-                icon='angle down'
-                onClick={toggleButton}
-              />
-            )}
-          </div>
-        </Segment>
 
-        {isStudentsActive && (
-          <Segment>
-            <Form
-              className='newStudentInput'
-              autoComplete='off'
-              onSubmit={() => handleNewStudentSubmit(classroomID)}
-            >
-              <Form.Group>
-                <Form.Input
-                  placeholder='Student Email'
-                  name='currentStudentEmail'
-                  value={currentStudentEmail}
-                  onChange={handleChange}
-                />
-                <Form.Button
-                  disabled={studentAlreadyIn(
-                    classroom.students,
-                    state.currentStudentEmail
-                  )}
-                  loading={isLoading}
-                  content='Add'
-                />
-                {studentAlreadyIn(
-                  classroom.students,
-                  state.currentStudentEmail
-                ) && (
-                  <Label basic color='red'>
-                    This student has already joined your class.
-                  </Label>
-                )}
-              </Form.Group>
-            </Form>
+      <StudentsSection
+        handleNewStudentSubmit={handleNewStudentSubmit}
+        currentStudentEmail={currentStudentEmail}
+        handleChange={handleChange}
+        studentAlreadyIn={studentAlreadyIn}
+        classroom={classroom}
+        isLoading={isLoading}
+        classroomID={classroomID}
+        capitalize={capitalize}
+        handleDeleteStudent={handleDeleteStudent}
+        isStudentsActive={isStudentsActive}
+        toggleButton={toggleButton}
+        Î
+      />
 
-            {classroom &&
-            classroom.students &&
-            classroom.students.length === 0 ? (
-              <div>
-                Add students to your class <Icon name='heart outline' />
-              </div>
-            ) : (
-              classroom.students.map((student, index) => (
-                <Segment className='student-name-container' key={index}>
-                  <div>
-                    {capitalize(`${student.firstName} ${student.lastName}`)}
-                  </div>
-                  <div>
-                    <Button
-                      as={Link}
-                      to={`/profile/${student.uid}`}
-                      className='student-button-classroom'
-                      circular
-                      icon='user'
-                      //onClick={() => {
-                      //handleStudentProfile(student.email, student.uid);
-                      //}}
-                    />
-                    <Button
-                      className='student-button-classroom'
-                      circular
-                      icon='delete'
-                      onClick={() => {
-                        handleDeleteStudent(student.uid, student.id);
-                      }}
-                    />
-                  </div>
-                </Segment>
-              ))
-            )}
-
-            {/* <div className='flexbox-container in-section-margin'>
-              <div className='section-classroom-title'>TEAMS</div>
-
-              {isMakeTeamsActive ? (
-                <Button
-                  className='arrow-down-button-classroom'
-                  circular
-                  icon='angle up'
-                  onClick={toggleMakeTeamsButton}
-                />
-              ) : (
-                <Button
-                  className='arrow-down-button-classroom'
-                  circular
-                  icon='angle down'
-                  onClick={toggleMakeTeamsButton}
-                />
-              )}
-            </div> */}
-
-            {/* <Divider />
-            {classList && classList.length === 0 ? (
-              <div>
-                Add students to your class <Icon name='heart outline' />
-              </div>
-            ) : (
-              <div>
-                {teams.length === 0 ? (
-                  <div>
-                    <div className='flexbox'>
-                      <div>You haven't assigned students a team yet.</div>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <div className='flexbox'>
-                      {currentProject && (
-                        <div>
-                          Yay, here are the "{currentProject.title}" teams!
-                        </div>
-                      )}
-                    </div>
-
-                    <div className='flexbox'>
-                      {teams.map((team, index) => (
-                        <div key={index} style={{ textAlign: "center" }}>
-                          <div style={{ fontWeight: "bolder" }}>
-                            Team {index + 1}
-                          </div>
-                          {team.map((student, index) => (
-                            <div key={index}>{student}</div>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {isMakeTeamsActive && (
-                  <div>
-                    {/* <div className='flexbox'>
-                      <Button
-                        style={{ width: "95%" }}
-                        content={
-                          teams.length === 0
-                            ? `Make Teams for the current project: ${projects[0].title}`
-                            : `Make New Teams for the current project: ${projects[0].title}`
-                        }
-                        onClick={makeTeams}
-                      />
-                    </div>
-
-                    <Form
-                      className='teamCountForm'
-                      autoComplete='off'
-                      onSubmit={handleNumberSubmit}
-                    >
-                      <Form.Select
-                        label='How many teams?'
-                        name='teamCount'
-                        onChange={handleChange}
-                        options={options}
-                        value={teamCount}
-                        placeholder='number'
-                        id='teamCountInput'
-                      />
-                    </Form>
-
-                    <TeamMaker
-                      teams={teams}
-                      handleChange={handleChangeDnd}
-                      moveStudent={moveStudent}
-                      generateRandomTeams={generateRandomTeams}
-                      students={classList}
-                      teamCount={teamCount}
-                    />
-                  </div>
-                )}
-              </div>
-            )} */}
-
-            {/* <Divider />
-            <List bulleted>
-              <div>What's in this section?</div>
-              <List.Item>Option to make groups/team</List.Item>
-              <List.Item>Percentage of completion</List.Item>
-              <List.Item>
-                Click to see the learning profile / skills graph of each student
-              </List.Item>
-              <List.Item>
-                Possibility to click on a student to see his digital journal and
-                improvements.
-              </List.Item>
-            </List>*/}
-          </Segment>
-        )}
-      </Segment.Group>
-
-      <Segment.Group className='paragraph-style display-in-box'>
-        <Segment className='section-title'>
-          <div className='flexbox-container'>
-            <div>WORKSPACE</div>
-
-            {isWorkspaceActive ? (
-              <Button
-                className='arrow-down-button-classroom'
-                circular
-                icon='angle up'
-                onClick={toggleWorkspaceButton}
-              />
-            ) : (
-              <Button
-                className='arrow-down-button-classroom'
-                circular
-                icon='angle down'
-                onClick={toggleWorkspaceButton}
-              />
-            )}
-          </div>
-        </Segment>
-
-        {isWorkspaceActive && (
-          <Segment>
-            {/* <List bulleted>
-              <div>What's in this section?</div>
-              <List.Item>Current project</List.Item>
-              <List.Item>
-                Possibility to post assignements, homework, messages to the
-                class
-              </List.Item>
-              <List.Item>Archived projects</List.Item>
-            </List> */}
-
-            <Segment className='currentProjectContainer inWorkspaceContainer'>
-              <Grid
-                //as={Link}
-                //to={"/"}
-                className='currentProjectGrid'
-                stackable
-                columns={2}
-                onClick={
-                  () => {console.log("redirect"); props.history.push(`/projects/${currentProject.id}`)}
-                }
-              >
-                <Grid.Column
-                  style={{ backgroundImage: `url(${currentProject.imageURL})` }}
-                  width={4}
-                ></Grid.Column>
-                <Grid.Column width={12}>
-                  <Segment className='currentProjectColumn'>
-                    {currentProject && (
-                      <div>
-                        <strong>
-                          {`Current Project: ${currentProject.title}`.toUpperCase()}
-                        </strong>
-                      </div>
-                    )}
-                    {/* <br /> */}
-                    {currentProject && <div>{currentProject.bigIdea}</div>}
-                    {/* <div>{currentProject.learning_objectives}</div> */}
-                    <br />
-                    <div>
-                      <div className=''>
-                        <strong>{"Key Concepts".toUpperCase()}</strong>
-                      </div>
-                      {currentProject && (
-                        <div>
-                          {currentProject.keyConcepts.map((concept, index) => (
-                            //<List bulleted key={index}>
-                            //<List.Item>{concept}</List.Item>
-                            //</List>
-                            <span key={index}>
-                              {concept}{" "}
-                              {index + 1 != currentProject.keyConcepts.length &&
-                                " — "}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    <br />
-                    <div>
-                      <div className=''>
-                        <strong>{"Key Question".toUpperCase()}</strong>
-                      </div>
-                      {currentProject && (
-                        <div>{currentProject.keyQuestion}</div>
-                      )}
-                    </div>
-                    <br />
-                  </Segment>
-                </Grid.Column>
-              </Grid>
-            </Segment>
-
-            {isWorkspaceActive && (
-              <div>
-                <Form autoComplete='off' onSubmit={handleSubmitTask}>
-                  <Form.Group>
-                    <Form.Input
-                      placeholder='Share a message with your students'
-                      name='currentTask'
-                      value={currentTask}
-                      onChange={handleChange}
-                      style={{ width: "300px" }}
-                    />
-                    <Form.Button content='Post' />
-                  </Form.Group>
-                </Form>
-                {tasksList && tasksList.length === 0 ? (
-                  <div>
-                    No task assigned! <Icon name='heart outline' />
-                  </div>
-                ) : (
-                  tasksList.map((task, index) => (
-                    <Segment
-                      className='feedContainer inWorkspaceContainer'
-                      key={index}
-                    >
-                      <List.Item>{capitalize(`${task}`)}</List.Item>
-                    </Segment>
-                  ))
-                )}
-              </div>
-            )}
-            {/* <Segment className='feedContainer inWorkspaceContainer'>Feed</Segment> */}
-          </Segment>
-        )}
-      </Segment.Group>
+      <WorkspaceSection
+        isWorkspaceActive={isWorkspaceActive}
+        props={props}
+        currentProject={currentProject}
+        tasksList={tasksList}
+        handleChange={handleChange}
+        currentTask={currentTask}
+        capitalize={capitalize}
+        toggleWorkspaceButton={toggleWorkspaceButton}
+        handleSubmitTask={handleSubmitTask}
+      />
     </div>
   );
 };
