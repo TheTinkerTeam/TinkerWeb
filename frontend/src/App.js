@@ -5,7 +5,7 @@ import logo from "./img/SHlogo.png";
 
 import NavBar from "./components/navbar/Navbar";
 import Dashboard from "./components/pages/dashboard/Dashboard";
-// import TinkerCartPage from "./components/pages/TinkerCartPage";
+import TinkerCartPage from "./components/pages/tinkercart/TinkerCartPage";
 import MembershipPage from "./components/pages/membership/MembershipPage";
 import TutorialsPage from "./components/pages/activities/TutorialsPage";
 import TutorialDetailsPage from "./components/pages/activities/TutorialDetailsPage";
@@ -142,6 +142,7 @@ const App = (props) => {
               render={() => (
                 <div>
                   <Route path='/membership' component={MembershipPage} />
+                  <Route path='/tinkercart' component={TinkerCartPage} />
                   <Route path='/classes' component={ClassesPage} />
                   <Route exact path='/classrooms' component={ClassroomsPage} />
                   <Route

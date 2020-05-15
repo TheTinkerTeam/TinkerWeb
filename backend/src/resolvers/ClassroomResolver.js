@@ -61,27 +61,57 @@ module.exports = {
   Mutation: {
     addStudent: async (parent, body, ctx) => {
       try {
-        // console.log(body);
+        console.log(body);
         const classroomID = body.classroomID;
 
         const newStudent = {
           email: body.email,
         };
 
-        user = await User.findOne({ email: newStudent.email });
+        const user = await User.findOne({ email: newStudent.email });
 
-        if(!user) {
-          console.log("EMAIL NOT FOUND")
-          return
+        if (!user) {
+          console.error("EMAIL NOT FOUND");
+          return;
         }
 
-        classroom = await Classroom.findOne({ _id: classroomID });
+        // console.log("user", user)
+        console.log("user._id", user._id);
 
-        user.classrooms = [...user.classrooms, classroom._id];
-        user.save();
+        let classroom = await Classroom.findOne({ _id: classroomID });
 
-        classroom.students = [...classroom.students, user._id];
-        classroom.save();
+        if (!classroom) {
+          console.error("Classroom not found.");
+          return;
+        }
+
+        console.log("classroom._id", classroom._id);
+
+        console.log("classroom.students (pre) = ", classroom.students);
+
+        await Classroom.updateOne(
+          { _id: classroomID },
+          { students: [...classroom.students, user._id] }
+          );
+        await User.updateOne(
+          { email: newStudent.email },
+          { classrooms: [...user.classrooms, classroom._id] }
+          );
+
+        // classroom.students = [...classroom.students, user._id];
+        console.log("classroom.students (post) = ", classroom.students);
+
+        // user.classrooms = [...user.classrooms, classroom._id];
+        // await user.save();
+
+        // classroom = await Classroom.findOne({ _id: classroomID });
+
+        // console.log('classroom.students (pre) = ', classroom.students);
+
+        // classroom.students = [...classroom.students, user._id];
+        // await classroom.save();
+
+        // console.log('classroom.students (post) = ', classroom.students);
 
         // console.log({ classroom });
 
@@ -108,7 +138,12 @@ module.exports = {
         // console.log("newStudentsLists", newStudentsLists)
 
         classroom.students = [...newStudentsLists];
-        classroom.save();
+        // classroom.save();
+
+        await Classroom.updateOne(
+          { _id: classroomID },
+          { students: [...newStudentsLists] }
+          );
 
         user = await User.findOne({ uid: studentUID });
         // console.log({user})
@@ -129,8 +164,14 @@ module.exports = {
         ];
         // console.log("userClassroomsFiltered", userClassroomsFiltered);
 
-        user.classrooms = [...userClassroomsFiltered]
-        user.save();
+        await User.updateOne(
+          { uid: studentUID },
+          { classrooms: [...userClassroomsFiltered] }
+          );
+
+
+        // user.classrooms = [...userClassroomsFiltered];
+        // user.save();
 
         return true;
       } catch (error) {
