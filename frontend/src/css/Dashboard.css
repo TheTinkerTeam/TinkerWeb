@@ -135,7 +135,7 @@
 .tinkercart-img-position {
   position: relative;
   left: 76%;
-  top: 6em;
+  top: 7em;
   z-index: 2;
 }
 
@@ -171,7 +171,7 @@
 /* ===================== */
 
 .tinkernewslist-scroll {
-  height: 200px;
+  max-height: 300px;
   overflow-y: scroll;
   margin-top: 1.8em;
   padding: 1.5em;

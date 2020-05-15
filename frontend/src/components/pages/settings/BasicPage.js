@@ -21,6 +21,7 @@ const UPDATE_USER = gql`
       firstName: $firstName
       lastName: $lastName
     ) {
+      id
       uid
       school
       role
@@ -33,6 +34,7 @@ const UPDATE_USER = gql`
 const GET_CURRENT_USER = gql`
   query GetCurrentUser($uid: String!) {
     user(uid: $uid) {
+      id
       uid
       email
       firstName

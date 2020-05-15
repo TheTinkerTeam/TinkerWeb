@@ -22,6 +22,7 @@ const GET_STUDENT = gql`
       username
       avatar
       interests
+      country
       description
       classrooms {
         className
@@ -39,7 +40,7 @@ const UserProfilePage = (props) => {
   const studentUID = props.match.params.id;
 
   const { loading, error, data } = useQuery(GET_STUDENT, {
-    variables: { uid: studentUID },
+    variables: { uid: studentUID }
   });
 
   const auth = useSelector((state) => state.firebase.auth);

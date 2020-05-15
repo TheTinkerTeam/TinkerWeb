@@ -5,18 +5,17 @@ import logo from "./img/SHlogo.png";
 
 import NavBar from "./components/navbar/Navbar";
 import Dashboard from "./components/pages/dashboard/Dashboard";
-// import TinkerCartPage from "./components/pages/TinkerCartPage";
+import TinkerCartPage from "./components/pages/tinkercart/TinkerCartPage";
 import MembershipPage from "./components/pages/membership/MembershipPage";
 import TutorialsPage from "./components/pages/activities/TutorialsPage";
 import TutorialDetailsPage from "./components/pages/activities/TutorialDetailsPage";
 import ProjectsPage from "./components/pages/activities/ProjectsPage";
 import ClassroomsPage from "./components/pages/classrooms/ClassroomsPage";
 import ClassroomDetailsPage from "./components/pages/classrooms/ClassroomDetailsPage";
-import ProjectDetailsPage from "./components/pages/activities/ProjectDetailsPage";
+import ProjectDetailsPage from "./components/pages/activities/projectDetails/ProjectDetailsPage";
 import ClassesPage from "./components/pages/activities/ClassesPage";
-import ClassDetailsPage from "./components/pages/activities/ClassesDetailsPage";
 import ProfilePage from "./components/pages/profile/ProfilePage";
-import SettingsDashboard from "./components/pages//settings";
+import SettingsDashboard from "./components/pages/settings";
 import UserProfilePage from "./components/pages/userProfile/UserProfilePage";
 
 import { loadUser } from "./actions/authActions";
@@ -143,6 +142,7 @@ const App = (props) => {
               render={() => (
                 <div>
                   <Route path='/membership' component={MembershipPage} />
+                  <Route path='/tinkercart' component={TinkerCartPage} />
                   <Route path='/classes' component={ClassesPage} />
                   <Route exact path='/classrooms' component={ClassroomsPage} />
                   <Route
@@ -156,10 +156,8 @@ const App = (props) => {
                     path='/tutorials/:id'
                     component={TutorialDetailsPage}
                   />
-                  <Route exact path='/classes' component={ClassesPage} />
-                  <Route path='/classes/:id' component={ClassDetailsPage} />
                   <Route path='/profile/:id' component={UserProfilePage} />
-                  <Route exact path='/me' component={ProfilePage} />
+                  {/* <Route exact path='/me' component={ProfilePage} /> */}
                   <Route path='/settings' component={SettingsDashboard} />
                 </div>
               )}

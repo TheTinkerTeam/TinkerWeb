@@ -40,6 +40,9 @@ const GET_CLASSROOM = gql`
         subjects
         tags
         grades
+        bigIdea
+        keyConcepts
+        keyQuestion
       }
     }
   }
@@ -133,8 +136,8 @@ const ClassroomDetailsPage = (props) => {
 
   const handleStudentProfile = (email, uid) => {
     console.log("open student profile");
-    console.log({uid})
-    console.log({email});
+    console.log({ uid });
+    console.log({ email });
   };
 
   const handleSubmitTask = () => {
@@ -259,7 +262,7 @@ const ClassroomDetailsPage = (props) => {
                   classroom.students,
                   state.currentStudentEmail
                 ) && (
-                  <Label basic color='red' >
+                  <Label basic color='red'>
                     This student has already joined your class.
                   </Label>
                 )}
@@ -286,7 +289,7 @@ const ClassroomDetailsPage = (props) => {
                       circular
                       icon='user'
                       //onClick={() => {
-                        //handleStudentProfile(student.email, student.uid);
+                      //handleStudentProfile(student.email, student.uid);
                       //}}
                     />
                     <Button
@@ -456,21 +459,62 @@ const ClassroomDetailsPage = (props) => {
             </List> */}
 
             <Segment className='currentProjectContainer inWorkspaceContainer'>
-              <Grid className='currentProjectGrid' stackable columns={2}>
-                <Grid.Column width={4}></Grid.Column>
+              <Grid
+                //as={Link}
+                //to={"/"}
+                className='currentProjectGrid'
+                stackable
+                columns={2}
+                onClick={
+                  () => {console.log("redirect"); props.history.push(`/projects/${currentProject.id}`)}
+                }
+              >
+                <Grid.Column
+                  style={{ backgroundImage: `url(${currentProject.imageURL})` }}
+                  width={4}
+                ></Grid.Column>
                 <Grid.Column width={12}>
                   <Segment className='currentProjectColumn'>
                     {currentProject && (
-                      <div>Current Project: {currentProject.title}</div>
+                      <div>
+                        <strong>
+                          {`Current Project: ${currentProject.title}`.toUpperCase()}
+                        </strong>
+                      </div>
                     )}
-                    {currentProject && (
-                      <div>{currentProject.description} (Read from db)</div>
-                    )}
+                    {/* <br /> */}
+                    {currentProject && <div>{currentProject.bigIdea}</div>}
                     {/* <div>{currentProject.learning_objectives}</div> */}
+                    <br />
                     <div>
-                      <div className=''>{"Standards".toUpperCase()}</div>
-                      Read the standards from the database
+                      <div className=''>
+                        <strong>{"Key Concepts".toUpperCase()}</strong>
+                      </div>
+                      {currentProject && (
+                        <div>
+                          {currentProject.keyConcepts.map((concept, index) => (
+                            //<List bulleted key={index}>
+                            //<List.Item>{concept}</List.Item>
+                            //</List>
+                            <span key={index}>
+                              {concept}{" "}
+                              {index + 1 != currentProject.keyConcepts.length &&
+                                " — "}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
+                    <br />
+                    <div>
+                      <div className=''>
+                        <strong>{"Key Question".toUpperCase()}</strong>
+                      </div>
+                      {currentProject && (
+                        <div>{currentProject.keyQuestion}</div>
+                      )}
+                    </div>
+                    <br />
                   </Segment>
                 </Grid.Column>
               </Grid>

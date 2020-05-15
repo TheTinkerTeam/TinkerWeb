@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
 import { useForm } from "react-hook-form";
 
 import { gql } from "apollo-boost";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 
 const interests = [
   { key: "wood working", text: "Wood Working", value: "wood working" },
@@ -29,6 +29,7 @@ const UPDATE_USER = gql`
       interests: $interests
       country: $country
     ) {
+      id
       uid
       description
       interests
@@ -40,6 +41,7 @@ const UPDATE_USER = gql`
 const GET_CURRENT_USER = gql`
   query GetCurrentUser($uid: String!) {
     user(uid: $uid) {
+      id
       uid
       email
       firstName
@@ -55,20 +57,32 @@ const GET_CURRENT_USER = gql`
 `;
 
 const AboutPage = ({ currentUser, userInfo }) => {
+  const { loading, error, data } = useQuery(GET_CURRENT_USER, {
+    variables: { uid: `${currentUser.uid}` },
+  });
+
   const [updateUser] = useMutation(UPDATE_USER);
 
   const { register, handleSubmit, errors } = useForm();
 
+  console.log(userInfo)
   let initialInterests;
-  if (userInfo && userInfo["interests"]) {
-    // console.log("userInfo['interests']", userInfo["interests"] )
-    initialInterests = userInfo["interests"];
+  if (userInfo && userInfo.interests) {
+    initialInterests = userInfo.interests;
   } else {
-    // console.log("no initial interests")
     initialInterests = [];
   }
 
   const [interestsList, setInterestsList] = useState(initialInterests);
+
+  useEffect(() => {
+    setInterestsList(initialInterests)
+  }, [initialInterests]);
+
+  if(loading) {return <div>Loading...</div>}
+  if(error) {return <div>Error :( ...</div>}
+
+  console.log("interestsList",interestsList)
 
   const handleChange = (e, r) => {
     setInterestsList(r.value);
@@ -90,6 +104,7 @@ const AboutPage = ({ currentUser, userInfo }) => {
         {
           query: GET_CURRENT_USER,
           variables: { uid: `${currentUser.uid}` },
+          options: { fetchPolicy: 'no-cache' }
         },
       ],
     });

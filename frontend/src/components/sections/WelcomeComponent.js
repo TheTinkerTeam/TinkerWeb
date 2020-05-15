@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 
 import WelcomeList from "../lists/WelcomeList";
 
-const mapStateToProps = state => ({
-  welcomeItems: state.welcomeItems
-});
+// const mapStateToProps = state => ({
+//   welcomeItems: state.welcomeItems
+// });
 
 class WelcomeComponent extends Component {
   render() {
-    const { welcomeItems } = this.props;
+    const { items } = this.props;
 
     return (
       <div>
@@ -24,10 +24,11 @@ class WelcomeComponent extends Component {
             <span className="supertinker-text">nker</span></span>
           </div>
         </div>
-        <WelcomeList items={welcomeItems} />
+        <WelcomeList items={items} />
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps)(WelcomeComponent);
+// export default connect(mapStateToProps)(WelcomeComponent);
+export default WelcomeComponent;

@@ -3,6 +3,7 @@ import { Grid, Header, Segment } from "semantic-ui-react";
 import GeneralList from "../../lists/GeneralList";
 
 const UserProfileDescription = ({ student }) => {
+  console.log(student)
   return (
     <Grid.Column width={16}>
       <Segment>

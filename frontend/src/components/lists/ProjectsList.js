@@ -12,11 +12,11 @@ class ProjectsList extends Component {
       superLargeDesktop: {
         // the naming can be any, depends on you.
         breakpoint: { max: 4000, min: 3000 },
-        items: 9
+        items: 7
       },
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 9
+        items: 7
       },
       tablet: {
         breakpoint: { max: 1024, min: 464 },
@@ -31,7 +31,7 @@ class ProjectsList extends Component {
     return (
       <div className="projects-list card">
         <div className="red-title">{category} projects</div>
-        <div style={{width: "100%"}}>
+        <div style={{width: "100%", height: "150px", paddingTop:"8px"}}>
         <Carousel
           swipeable={true}
           draggable={true}

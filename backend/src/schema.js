@@ -31,18 +31,46 @@ const typeDefs = gql`
     classrooms: [Classroom]
   }
 
+  type Standard {
+    id: ID!
+    code: String
+    description: String
+    skills: [String]!
+  }
+
+  type Supply {
+    id: ID!
+    name: String!
+    type: String!
+    available: Boolean!
+  }
+
   type Project {
     id: ID!
     createdAt: DateTime!
     updatedAt: DateTime!
     title: String!
-    imageURL: String
+    duration: String!
+    imageURL: String!
     description: String
     learning_objectives: String
-    subjects: [String]
-    tags: [String]
-    grades: [String]
+    bigIdea: String!
+    keyConcepts: [String]!
+    keyQuestion: String!
+    standards: [Standard]!
+    subjects: [String]!
+    buildingSupplies: [Supply]!
+    upcycledSupplies: [Supply]!
+    tools: [Supply]!
+    tags: [String]!
+    grades: [String]!
     content: String
+    partOneFindingOut: [String]!
+    partTwoWorkingWithIdeas: [String]!
+    partThreeMakingItHappen: [String]!
+    partFourEvaluatingYourSolution: [String]!
+    hints: [String]!
+    safety: [String]!
     author: User!
   }
 
