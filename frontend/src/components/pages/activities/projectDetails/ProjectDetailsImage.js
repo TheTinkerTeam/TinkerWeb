@@ -1,27 +1,51 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Segment, Image, Button, Modal, Icon } from "semantic-ui-react";
 import "../../../../css/SignedOutMenu.css";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useMutation } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 
-const ProjectDetailsImage = ({ props, image, title }) => {
+import { useSelector } from "react-redux";
+
+const ADD_CURRENT_PROJECT = gql`
+  mutation addCurrentProject($classroomId: ID!, $projectId: ID!) {
+    addCurrentProject(classroomId: $classroomId, projectId: $projectId) {
+      id
+    }
+  }
+`;
+
+const ProjectDetailsImage = ({
+  props,
+  image,
+  title,
+  classrooms,
+  projectId,
+}) => {
   const auth = useSelector((state) => state.firebase.auth);
 
-  const handleOnClick = () => {
+  const [addCurrentProject] = useMutation(ADD_CURRENT_PROJECT);
+
+  const handleOnClick = async (classroomId, projectId) => {
     console.log("ASSIGN");
-    props.history.push("/classrooms/5e794bd652a4dc0ad8928ef1");
+    console.log("projectId = ", projectId);
+    console.log("classroomId = ", classroomId);
+    // await addCurrentProject(classroomId, projectId);
+    await addCurrentProject({
+      variables: {
+        classroomId: classroomId,
+        projectId: projectId,
+      },
+    });
+    props.history.push(`/classrooms/${classroomId}`);
   };
 
   return (
     <Segment style={{ display: "flex", justifyContent: "space-between" }}>
       <Image src={image} size='small' />
       {auth.uid && (
-        //<div>
-        //<Button onClick={handleOnClick}>{`Assign ${title}`}</Button>
-        //</div>
         <div>
           <Modal
-            //trigger={<Button basic color='grey'>{`Assign ${title}`}</Button>}
             trigger={
               <Button
                 basic
@@ -31,7 +55,6 @@ const ProjectDetailsImage = ({ props, image, title }) => {
                 //id='getStartedButton'
               >
                 {`Assign ${title} to your class`}
-                {/* {"Assign"} {<strong>{`${title}`}</strong>} {"to your class"} */}
                 <Icon name='angle right' />
               </Button>
             }
@@ -41,13 +64,18 @@ const ProjectDetailsImage = ({ props, image, title }) => {
               {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
               <div style={{ textAlign: "center" }}>
                 <Button.Group color='blue' widths='4'>
-                  <Button onClick={handleOnClick}>Grade 5A</Button>
-                  <Button.Or />
-                  <Button onClick={handleOnClick}>Grade 5B</Button>
-                  <Button.Or />
-                  <Button onClick={handleOnClick}>Grade 6A</Button>
-                  <Button.Or />
-                  <Button onClick={handleOnClick}>Grade 6A</Button>
+                  {classrooms.map((classroom, index) => {
+                    return (
+                      <Fragment key={classroom.id}>
+                        <Button
+                          onClick={() => handleOnClick(classroom.id, projectId)}
+                        >
+                          {classroom.className}
+                        </Button>
+                        {index !== classrooms.length - 1 && <Button.Or />}
+                      </Fragment>
+                    );
+                  })}
                 </Button.Group>
               </div>
             </Modal.Content>
@@ -59,4 +87,3 @@ const ProjectDetailsImage = ({ props, image, title }) => {
 };
 
 export default ProjectDetailsImage;
-// export default withRouter(ProjectDetailsImage);

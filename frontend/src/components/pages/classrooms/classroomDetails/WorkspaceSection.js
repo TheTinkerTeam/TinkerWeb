@@ -10,8 +10,18 @@ const WorkspaceSection = ({
   currentTask,
   handleChange,
   tasksList,
-  currentProject
+  currentProject,
 }) => {
+  // style={{ backgroundImage: `url(${currentProject.imageURL})` }}
+  let backgroundImage;
+  let minHeight;
+  if (currentProject) {
+    backgroundImage = `url(${currentProject.imageURL})`;
+  } else {
+    backgroundImage = `url("https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_projects_illustrations%2Fempty.png?alt=media&token=407ac0d3-3bf1-4120-a2ac-c8edffe3f934")`;
+    minHeight = "250px";
+  }
+
   return (
     <Segment.Group className='paragraph-style display-in-box'>
       <Segment className='section-title'>
@@ -57,15 +67,30 @@ const WorkspaceSection = ({
               columns={2}
               onClick={() => {
                 console.log("redirect");
-                props.history.push(`/projects/${currentProject.id}`);
+                if (currentProject) {
+                  props.history.push(`/projects/${currentProject.id}`);
+                }
               }}
             >
               <Grid.Column
-                style={{ backgroundImage: `url(${currentProject.imageURL})` }}
+                //style={{ backgroundImage: `url(${currentProject.imageURL})` }}
+                style={{
+                  backgroundImage: backgroundImage,
+                  minHeight: minHeight,
+                }}
                 width={4}
               ></Grid.Column>
               <Grid.Column width={12}>
                 <Segment className='currentProjectColumn'>
+                  {!currentProject && (
+                    <div>
+                        No current project selected.
+                        <br />
+                        <br />
+                        Assign a project to your class{" "}
+                        <Icon name='heart outline' />
+                    </div>
+                  )}
                   {currentProject && (
                     <div>
                       <strong>
@@ -75,18 +100,15 @@ const WorkspaceSection = ({
                   )}
                   {/* <br /> */}
                   {currentProject && <div>{currentProject.bigIdea}</div>}
-                  {/* <div>{currentProject.learning_objectives}</div> */}
                   <br />
-                  <div>
-                    <div className=''>
-                      <strong>{"Key Concepts".toUpperCase()}</strong>
-                    </div>
-                    {currentProject && (
+                  {currentProject && (
+                    <div>
+                      <div className=''>
+                        <strong>{"Key Concepts".toUpperCase()}</strong>
+                      </div>
+
                       <div>
                         {currentProject.keyConcepts.map((concept, index) => (
-                          //<List bulleted key={index}>
-                          //<List.Item>{concept}</List.Item>
-                          //</List>
                           <span key={index}>
                             {concept}{" "}
                             {index + 1 != currentProject.keyConcepts.length &&
@@ -94,15 +116,17 @@ const WorkspaceSection = ({
                           </span>
                         ))}
                       </div>
-                    )}
-                  </div>
-                  <br />
-                  <div>
-                    <div className=''>
-                      <strong>{"Key Question".toUpperCase()}</strong>
                     </div>
-                    {currentProject && <div>{currentProject.keyQuestion}</div>}
-                  </div>
+                  )}
+                  <br />
+                  {currentProject && (
+                    <div>
+                      <div className=''>
+                        <strong>{"Key Question".toUpperCase()}</strong>
+                      </div>
+                      <div>{currentProject.keyQuestion}</div>
+                    </div>
+                  )}
                   <br />
                 </Segment>
               </Grid.Column>
