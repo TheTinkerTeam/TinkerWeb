@@ -2,19 +2,19 @@ import React, { Fragment } from "react";
 import avatar from "../../img/avatar.png";
 import { Image } from "semantic-ui-react";
 
-import { gql } from "apollo-boost";
-import { useQuery } from "@apollo/react-hooks";
+// import { gql } from "apollo-boost";
+// import { useQuery } from "@apollo/react-hooks";
 
-const GET_CURRENT_USER = gql`
-  query GetCurrentUser($uid: String!) {
-    user(uid: $uid) {
-      uid
-      username
-      role
-      avatar
-    }
-  }
-`;
+// const GET_CURRENT_USER = gql`
+//   query GetCurrentUser($uid: String!) {
+//     user(uid: $uid) {
+//       uid
+//       username
+//       role
+//       avatar
+//     }
+//   }
+// `;
 
 const AvatarImage = ({ profile }) => {
   // const { loading, error, data } = useQuery(GET_CURRENT_USER, {

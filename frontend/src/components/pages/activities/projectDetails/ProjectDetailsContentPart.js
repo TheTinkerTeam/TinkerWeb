@@ -8,7 +8,7 @@ const ProjectDetailsContentPart = ({ title, strands }) => {
       {strands &&
         strands.map(
           (strand, index) =>
-            strand != "" && (
+            strand !== "" && (
               <List key={index}>
                 <List.Item>
                   <Icon name='square outline' />

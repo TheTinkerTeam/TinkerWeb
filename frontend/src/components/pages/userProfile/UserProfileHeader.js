@@ -1,8 +1,7 @@
 import React from "react";
 import avatar from "../../../img/avatar.png";
-import { Grid, Header, Item, Segment, Button } from "semantic-ui-react";
+import { Grid, Item, Segment, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import GeneralList from "../../lists/GeneralList";
 
 const UserProfileHeader = ({ auth, student }) => {
   return (

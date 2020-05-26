@@ -114,7 +114,7 @@ const WorkspaceSection = ({
                         {currentProject.keyConcepts.map((concept, index) => (
                           <span key={index}>
                             {concept}{" "}
-                            {index + 1 != currentProject.keyConcepts.length &&
+                            {index + 1 !== currentProject.keyConcepts.length &&
                               " — "}
                           </span>
                         ))}

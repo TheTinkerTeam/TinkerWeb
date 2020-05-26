@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Segment, Image, Button, Modal, Icon } from "semantic-ui-react";
 import "../../../../css/SignedOutMenu.css";
 
@@ -27,8 +27,6 @@ const ProjectDetailsImage = ({
   const auth = useSelector((state) => state.firebase.auth);
 
   const [addCurrentProject] = useMutation(ADD_CURRENT_PROJECT);
-
-  const [hover, setHover] = useState(false);
 
   const handleOnClick = async (
     classroomId,
@@ -68,12 +66,6 @@ const ProjectDetailsImage = ({
     }
 
     // await addCurrentProject(classroomId, projectId);
-  };
-
-  const styles = {
-    hover: {
-      backgroundColor: 'white',
-    },
   };
 
   return (

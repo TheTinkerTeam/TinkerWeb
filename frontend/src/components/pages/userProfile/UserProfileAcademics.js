@@ -1,11 +1,9 @@
 import React from "react";
 import {
-  Button,
   Card,
   Grid,
   Header,
   Image,
-  Item,
   Menu,
   Segment,
 } from "semantic-ui-react";
@@ -32,7 +30,7 @@ const UserProfileAcademics = () => {
           <Card>
             <Image src='https://firebasestorage.googleapis.com/v0/b/supertinker.appspot.com/o/aaa_images%2Fachievements%2Fmath_gourou.png?alt=media&token=b19a56fb-ced2-4823-97ce-5b8d17d8a70c' />
             <Card.Content>
-              <Card.Header textAlign='center'>Math Gourou</Card.Header>
+              <Card.Header textAlign='center'>Math Guru</Card.Header>
               <Card.Meta textAlign='center'>
                 April 30, 2020 at 12:00 PM
               </Card.Meta>

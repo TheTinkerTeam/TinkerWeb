@@ -57,7 +57,7 @@ const GET_CURRENT_USER = gql`
 `;
 
 const AboutPage = ({ currentUser, userInfo }) => {
-  const { loading, error, data } = useQuery(GET_CURRENT_USER, {
+  const { loading, error } = useQuery(GET_CURRENT_USER, {
     variables: { uid: `${currentUser.uid}` },
   });
 

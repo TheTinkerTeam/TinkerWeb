@@ -5,7 +5,7 @@ import ImageList from "../../lists/ImageList";
 const UserProfilePhotos = ({ photos }) => {
   return (
     <>
-      {photos && photos.length != 0 && (
+      {photos && photos.length !== 0 && (
         <Grid.Column width={16}>
           <Segment attached style={{ border: "none" }}>
             <Header icon='image' content='Photos' />

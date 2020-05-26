@@ -1,12 +1,11 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
-import { Grid, Segment, Button, Item, Header } from "semantic-ui-react";
+import { withRouter } from "react-router-dom";
+import { Grid, Segment } from "semantic-ui-react";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { useSelector } from "react-redux";
 
-import avatar from "../../../img/avatar.png"
 import UserProfilePhotos from "./UserProfilePhotos";
 import UserProfileHeader from "./UserProfileHeader";
 import UserProfileDescription from "./UserProfileDescription";
@@ -58,15 +57,17 @@ const UserProfilePage = (props) => {
   return (
     <div>
       {/* <div className='dashboardcontainer'> */}
-      <div className='classroom-title-style'>{student.firstName} {student.lastName} @{student.username}</div>
+      <div className='classroom-title-style'>
+        {student.firstName} {student.lastName} @{student.username}
+      </div>
 
       <Segment.Group className='paragraph-style display-in-box'>
-          <Grid>
-            <UserProfileHeader auth={auth} student={student} />
-            <UserProfileDescription student={student} />
-            <UserProfilePhotos photos={student.userImages} />
-            <UserProfileAcademics />
-          </Grid>
+        <Grid>
+          <UserProfileHeader auth={auth} student={student} />
+          <UserProfileDescription student={student} />
+          <UserProfilePhotos photos={student.userImages} />
+          <UserProfileAcademics />
+        </Grid>
       </Segment.Group>
     </div>
   );
