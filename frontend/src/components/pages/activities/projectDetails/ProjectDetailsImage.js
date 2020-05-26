@@ -7,7 +7,7 @@ import { gql } from "apollo-boost";
 
 import { useSelector } from "react-redux";
 
-import { StyledButtonClasses } from './StyledButtonClasses';
+import { StyledButtonClasses } from './styledComponents/StyledButtonClasses';
 
 const ADD_CURRENT_PROJECT = gql`
   mutation addCurrentProject($classroomId: ID!, $projectId: ID!) {
