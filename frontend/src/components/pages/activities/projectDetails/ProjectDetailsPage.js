@@ -40,6 +40,11 @@ const ProjectDetailsPage = (props) => {
           id
           className
           grade
+          subject
+          currentProject {
+            title
+            id
+          }
         }
         userImages {
           name

@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Classroom = require("../models/Classroom");
+const Project = require("../models/Project");
 
 module.exports = {
   Query: {
@@ -12,6 +13,11 @@ module.exports = {
         user._doc["classrooms"] = user._doc["classrooms"].map(
           async (classroom_id) => {
             const classroom = await Classroom.findById(classroom_id);
+            // project._doc["standards"] = project._doc["standards"].map(
+            //   async (standard_id) => await Standard.findById(standard_id)
+            // );
+            classroom._doc["currentProject"] = await Project.findById(classroom.currentProject)
+
             // console.log(classroom)
             // console.log(classroom_id)
             return classroom

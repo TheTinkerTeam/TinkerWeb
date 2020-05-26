@@ -69,7 +69,10 @@ const WorkspaceSection = ({
                 console.log("redirect");
                 if (currentProject) {
                   props.history.push(`/projects/${currentProject.id}`);
+                } else {
+                  props.history.push(`/projects`);
                 }
+
               }}
             >
               <Grid.Column
