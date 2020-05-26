@@ -1,12 +1,14 @@
 import React from "react";
 import avatar from "../../../img/avatar.png";
-import { Grid, Header, Item, Segment, Button } from "semantic-ui-react";
+import { Grid, Item, Segment, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const UserProfileHeader = ({ auth, student }) => {
   return (
     <Grid.Column width={16}>
-      <Segment>
+      <Segment attached style={{ border: "none" }}>
+        {/* <Segment.Group className='paragraph-style display-in-box'>
+        <Segment className='section-title'> */}
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Item.Group>
             <Item>
@@ -22,13 +24,37 @@ const UserProfileHeader = ({ auth, student }) => {
                 }
               />
               <Item.Content verticalAlign='bottom'>
-                <Header as='h1'>
-                  {student.firstName} {student.lastName}
-                </Header>
-                <br />
-                {/* <Header as='h3'>{capitalize(`${student.role}`)}</Header> */}
-                {/* <br /> */}
-                <Header as='h2'>@{student.username}</Header>
+                {/* <Grid columns={2}>
+                  <Grid.Column width={10}>
+                    <Header
+                      icon='calendar outline'
+                      content={`About ${student.firstName}`}
+                    />
+                    <p>
+                      I am a <strong>{student.role}</strong>
+                    </p>
+                    <p>
+                      Originally from{" "}
+                      <strong>
+                        {student.country ? student.country : "no country yet"}
+                      </strong>
+                    </p>
+                    <p>
+                      Description:{" "}
+                      {student.description
+                        ? student.description
+                        : "no description yet"}
+                    </p>
+                  </Grid.Column>
+                  <Grid.Column width={6}>
+                    <Header content='Interests' />
+                    {student.interests.length === 0 ? (
+                      <div>No interests</div>
+                    ) : (
+                      <GeneralList array={student.interests} />
+                    )}
+                  </Grid.Column>
+                </Grid> */}
               </Item.Content>
             </Item>
           </Item.Group>

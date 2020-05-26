@@ -1,27 +1,79 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Segment, Image, Button, Modal, Icon } from "semantic-ui-react";
 import "../../../../css/SignedOutMenu.css";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useMutation } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 
-const ProjectDetailsImage = ({ props, image, title }) => {
+import { useSelector } from "react-redux";
+
+import { StyledButtonClasses } from './styledComponents/StyledButtonClasses';
+
+const ADD_CURRENT_PROJECT = gql`
+  mutation addCurrentProject($classroomId: ID!, $projectId: ID!) {
+    addCurrentProject(classroomId: $classroomId, projectId: $projectId) {
+      id
+    }
+  }
+`;
+
+const ProjectDetailsImage = ({
+  props,
+  image,
+  title,
+  classrooms,
+  projectId,
+}) => {
   const auth = useSelector((state) => state.firebase.auth);
 
-  const handleOnClick = () => {
+  const [addCurrentProject] = useMutation(ADD_CURRENT_PROJECT);
+
+  const handleOnClick = async (
+    classroomId,
+    projectId,
+    classname,
+    currentProject
+  ) => {
     console.log("ASSIGN");
-    props.history.push("/classrooms/5e794bd652a4dc0ad8928ef1");
+    console.log("projectId = ", projectId);
+    console.log("classroomId = ", classroomId);
+    if (!currentProject) {
+      console.log("ASSIGN PROJECT");
+      await addCurrentProject({
+        variables: {
+          classroomId: classroomId,
+          projectId: projectId,
+        },
+      });
+      props.history.push(`/classrooms/${classroomId}`);
+    } else {
+      if (
+        window.confirm(
+          `Are you sure you want to assign "${title}" to ${classname}? This will overwrite its current project: "${currentProject.title}"`
+        )
+      ) {
+        console.log("YES");
+        await addCurrentProject({
+          variables: {
+            classroomId: classroomId,
+            projectId: projectId,
+          },
+        });
+        props.history.push(`/classrooms/${classroomId}`);
+      } else {
+        console.log("NO");
+      }
+    }
+
+    // await addCurrentProject(classroomId, projectId);
   };
 
   return (
     <Segment style={{ display: "flex", justifyContent: "space-between" }}>
       <Image src={image} size='small' />
       {auth.uid && (
-        //<div>
-        //<Button onClick={handleOnClick}>{`Assign ${title}`}</Button>
-        //</div>
         <div>
           <Modal
-            //trigger={<Button basic color='grey'>{`Assign ${title}`}</Button>}
             trigger={
               <Button
                 basic
@@ -31,7 +83,6 @@ const ProjectDetailsImage = ({ props, image, title }) => {
                 //id='getStartedButton'
               >
                 {`Assign ${title} to your class`}
-                {/* {"Assign"} {<strong>{`${title}`}</strong>} {"to your class"} */}
                 <Icon name='angle right' />
               </Button>
             }
@@ -40,14 +91,47 @@ const ProjectDetailsImage = ({ props, image, title }) => {
             <Modal.Content>
               {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
               <div style={{ textAlign: "center" }}>
-                <Button.Group color='blue' widths='4'>
-                  <Button onClick={handleOnClick}>Grade 5A</Button>
-                  <Button.Or />
-                  <Button onClick={handleOnClick}>Grade 5B</Button>
-                  <Button.Or />
-                  <Button onClick={handleOnClick}>Grade 6A</Button>
-                  <Button.Or />
-                  <Button onClick={handleOnClick}>Grade 6A</Button>
+                {/* </div><Button.Group color='blue' widths='5'> */}
+                <Button.Group
+                  color='red'
+                  vertical
+                  //style={{ fontFamily: "Roboto Mono" }}
+                >
+                  {classrooms.map((classroom, index) => {
+                    return (
+                      <Fragment key={classroom.id}>
+                        <StyledButtonClasses
+                          key={index}
+                          //onMouseEnter={() => {
+                          //setHover(true);
+                          //}}
+                          //onMouseLeave={() => {
+                          //setHover(false);
+                          //}}
+                          //color="red"
+                          //style={{
+                            //fontFamily: "Roboto Mono",
+                            //fontSize: "1.2rem",
+                            //backgroundColor: "#F5514C",
+                          //}}
+                          disabled={classroom.currentProject.title === title}
+                          onClick={() =>
+                            handleOnClick(
+                              classroom.id,
+                              projectId,
+                              classroom.className,
+                              classroom.currentProject
+                            )
+                          }
+                        >
+                          {classroom.className} <br />
+                          {classroom.currentProject.title === title &&
+                            "(already assigned)"}
+                        </StyledButtonClasses>
+                        {/* {index !== classrooms.length - 1 && <Button.Or />} */}
+                      </Fragment>
+                    );
+                  })}
                 </Button.Group>
               </div>
             </Modal.Content>
@@ -59,4 +143,3 @@ const ProjectDetailsImage = ({ props, image, title }) => {
 };
 
 export default ProjectDetailsImage;
-// export default withRouter(ProjectDetailsImage);

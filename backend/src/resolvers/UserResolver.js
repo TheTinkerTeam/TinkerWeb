@@ -1,9 +1,43 @@
 const User = require("../models/User");
+const Classroom = require("../models/Classroom");
+const Project = require("../models/Project");
 
 module.exports = {
   Query: {
     users: async (parent, args, { prisma }) => await User.find(),
-    user: async (parent, { uid }, { prisma }) => await User.findOne({ uid }),
+    // user: async (parent, { uid }, { prisma }) => await User.findOne({ uid }),
+    user: async (parent, { uid }, { prisma }) => {
+      try {
+        const user = await User.findOne({ uid });
+
+        user._doc["classrooms"] = user._doc["classrooms"].map(
+          async (classroom_id) => {
+            const classroom = await Classroom.findById(classroom_id);
+            // project._doc["standards"] = project._doc["standards"].map(
+            //   async (standard_id) => await Standard.findById(standard_id)
+            // );
+            classroom._doc["currentProject"] = await Project.findById(classroom.currentProject)
+
+            // console.log(classroom)
+            // console.log(classroom_id)
+            return classroom
+          }
+        );
+
+        // console.log("user = ", user)
+
+        // const returnedUser = {
+        //   ...user._doc,
+        //   id: user._id,
+        // };
+        // console.log("returnedUser =", returnedUser);
+        // return returnedUser;
+
+        return user
+      } catch (error) {
+        console.log(error);
+      }
+    },
     checkEmail: async (parent, { email }, { prisma }) => {
       const res = await User.findOne({ email });
       if (res) {
@@ -153,7 +187,7 @@ module.exports = {
       const url = body.newAvatarURL.url;
       try {
         user = await User.findOne({ uid });
-        console.log("Hello testing")
+        console.log("Hello testing");
         user.avatar = url;
         user.save();
         return user;
@@ -170,9 +204,9 @@ module.exports = {
       try {
         user = await User.findOne({ uid });
 
-        if (user.userImages.length == 1){
-          console.log('in the loop')
-          user.avatar = ''
+        if (user.userImages.length == 1) {
+          console.log("in the loop");
+          user.avatar = "";
         }
 
         user.userImages = [

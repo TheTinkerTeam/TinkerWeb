@@ -35,7 +35,7 @@ module.exports = {
         project._doc["tools"] = project._doc["tools"].map(
           async (supply_id) => await Supply.findById(supply_id)
         );
-        console.log(project);
+        // console.log(project);
         return project;
       } catch (err) {
         console.error(err);

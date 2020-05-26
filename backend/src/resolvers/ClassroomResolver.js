@@ -11,12 +11,10 @@ module.exports = {
           uid,
         });
         const classroomIDs = user.classrooms;
-        // console.log({classroomIDs})
 
         let detailedClassrooms = [];
         for (let i = 0; i < classroomIDs.length; i++) {
           const classroom = await Classroom.findById(classroomIDs[i]);
-          // console.log({classroom})
 
           classroom._doc["students"] = classroom._doc["students"].map(
             async (user_id) => await User.findById(user_id)
@@ -28,8 +26,6 @@ module.exports = {
             id: classroom._id,
           });
         }
-        // console.log(detailedClassrooms);
-
         return detailedClassrooms;
       } catch (err) {
         console.error(err);
@@ -92,11 +88,11 @@ module.exports = {
         await Classroom.updateOne(
           { _id: classroomID },
           { students: [...classroom.students, user._id] }
-          );
+        );
         await User.updateOne(
           { email: newStudent.email },
           { classrooms: [...user.classrooms, classroom._id] }
-          );
+        );
 
         // classroom.students = [...classroom.students, user._id];
         console.log("classroom.students (post) = ", classroom.students);
@@ -122,20 +118,17 @@ module.exports = {
     },
     deleteStudent: async (parent, body, ctx) => {
       try {
-        // console.log(body);
         const classroomID = body.classroomID;
         const studentID = body.studentID;
         const studentUID = body.uid;
 
         classroom = await Classroom.findOne({ _id: classroomID });
-        // console.log("studentsList", classroom.students);
         let newStudentsLists = [];
         newStudentsLists = [
           ...classroom.students.filter((id) => {
             return `${id}` !== `${studentID}`;
           }),
         ];
-        // console.log("newStudentsLists", newStudentsLists)
 
         classroom.students = [...newStudentsLists];
         // classroom.save();
@@ -143,32 +136,21 @@ module.exports = {
         await Classroom.updateOne(
           { _id: classroomID },
           { students: [...newStudentsLists] }
-          );
+        );
 
         user = await User.findOne({ uid: studentUID });
-        // console.log({user})
-        // console.log("user.classrooms", user.classrooms)
 
-        // let userClassroomsList = [...user.classrooms];
         let userClassroomsFiltered = [];
-        // console.log("userClassroomsFiltered", userClassroomsFiltered);
-        // console.log("classroomID", classroomID);
         userClassroomsFiltered = [
           ...user.classrooms.filter((id) => {
-            // console.log(id);
-            // console.log(classroomID);
-            // console.log(`${id}` !== `${classroomID}`);
-            // return(id !== classroomID)
             return `${id}` !== `${classroomID}`;
           }),
         ];
-        // console.log("userClassroomsFiltered", userClassroomsFiltered);
 
         await User.updateOne(
           { uid: studentUID },
           { classrooms: [...userClassroomsFiltered] }
-          );
-
+        );
 
         // user.classrooms = [...userClassroomsFiltered];
         // user.save();
@@ -176,6 +158,26 @@ module.exports = {
         return true;
       } catch (error) {
         console.log(error);
+      }
+    },
+    addCurrentProject: async (parent, body, ctx) => {
+      try {
+        const classroomId = body.classroomId;
+        const projectId = body.projectId;
+
+        console.log("classroomId =", classroomId)
+        console.log("projectId =", projectId)
+
+        classroom = await Classroom.findOne({ _id: classroomId });
+        await Classroom.updateOne(
+          { _id: classroomId },
+          { currentProject: projectId }
+        );
+
+        return classroom;
+
+      } catch (error) {
+        console.log(error)
       }
     },
     addClassroom: async (parent, body, ctx) => {

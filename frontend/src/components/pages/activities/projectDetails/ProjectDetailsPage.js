@@ -15,11 +15,47 @@ import ProjectDetailsMaterial from "./ProjectDetailsMaterial";
 import ProjectDetailsContent from "./ProjectDetailsContent";
 import ProjectDetailsSafety from "./ProjectDetailsSafety";
 
+import { useSelector } from "react-redux";
+
 //https://www.apollographql.com/docs/react/data/queries/
 
 const ProjectDetailsPage = (props) => {
-  const routeParam = props.match.params.id;
-  // console.log(routeParam);
+  const projectId = props.match.params.id;
+  // console.log(projectId);
+
+  const GET_USER_CLASSROOMS = gql`
+    query user($uid: String!) {
+      user(uid: $uid) {
+        id
+        uid
+        firstName
+        lastName
+        role
+        username
+        avatar
+        interests
+        country
+        description
+        classrooms {
+          id
+          className
+          grade
+          subject
+          currentProject {
+            title
+            id
+          }
+        }
+        userImages {
+          name
+          url
+        }
+      }
+    }
+  `;
+
+  const auth = useSelector((state) => state.firebase.auth);
+  console.log(auth.uid);
 
   const GET_PROJECT = gql`
     query getProject($id: ID!) {
@@ -70,11 +106,25 @@ const ProjectDetailsPage = (props) => {
   `;
 
   const { loading, error, data } = useQuery(GET_PROJECT, {
-    variables: { id: routeParam },
+    variables: { id: projectId },
+  });
+
+  const {
+    loading: loadingUserClassrooms,
+    error: errorUserClassrooms,
+    data: dataUserClassrooms,
+  } = useQuery(GET_USER_CLASSROOMS, {
+    variables: { uid: auth.uid },
   });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{console.log(error)}</p>;
+
+  if (loadingUserClassrooms) return <p>Loading...</p>;
+  if (errorUserClassrooms) return <p>{console.log(error)}</p>;
+
+  const user = dataUserClassrooms.user;
+  console.log({ user });
 
   const project = data.project;
   console.log(project);
@@ -98,6 +148,8 @@ const ProjectDetailsPage = (props) => {
           props={props}
           image={project.imageURL}
           title={project.title}
+          classrooms={user.classrooms}
+          projectId={projectId}
         />
         <ProjectDetailsBigIdea bigIdea={project.bigIdea} />
         <ProjectDetailsKeyQuestion keyQuestion={project.keyQuestion} />

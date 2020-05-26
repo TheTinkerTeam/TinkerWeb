@@ -14,7 +14,6 @@ import ClassroomsPage from "./components/pages/classrooms/ClassroomsPage";
 import ClassroomDetailsPage from "./components/pages/classrooms/ClassroomDetailsPage";
 import ProjectDetailsPage from "./components/pages/activities/projectDetails/ProjectDetailsPage";
 import ClassesPage from "./components/pages/activities/ClassesPage";
-import ProfilePage from "./components/pages/profile/ProfilePage";
 import SettingsDashboard from "./components/pages/settings";
 import UserProfilePage from "./components/pages/userProfile/UserProfilePage";
 

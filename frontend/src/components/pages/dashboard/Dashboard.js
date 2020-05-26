@@ -56,27 +56,27 @@ const Dashboard = () => {
     },
   ];
 
-  const initialWelcome = [
-    {
-      id: "1",
-      description: "Try out starter projects",
-    },
-    {
-      id: "2",
-      description: "Join a class with your class code",
-    },
-    {
-      id: "3",
-      description: "Download the Tinker Cart plans",
-    },
-    {
-      id: "4",
-      description: "wow",
-    },
-  ];
+  // const initialWelcome = [
+  //   {
+  //     id: "1",
+  //     description: "Try out starter projects",
+  //   },
+  //   {
+  //     id: "2",
+  //     description: "Join a class with your class code",
+  //   },
+  //   {
+  //     id: "3",
+  //     description: "Download the Tinker Cart plans",
+  //   },
+  //   {
+  //     id: "4",
+  //     description: "wow",
+  //   },
+  // ];
 
-  const [news, setNews] = useState(initialNews);
-  const [welcome, setWelcome] = useState(initialWelcome);
+  const [news] = useState(initialNews);
+  // const [welcome, setWelcome] = useState(initialWelcome);
   // console.log(news);
 
   if (loading) return <p>Loading...</p>;
