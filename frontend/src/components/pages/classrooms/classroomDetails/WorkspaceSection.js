@@ -72,7 +72,6 @@ const WorkspaceSection = ({
                 } else {
                   props.history.push(`/projects`);
                 }
-
               }}
             >
               <Grid.Column
@@ -87,11 +86,11 @@ const WorkspaceSection = ({
                 <Segment className='currentProjectColumn'>
                   {!currentProject && (
                     <div>
-                        No current project selected.
-                        <br />
-                        <br />
-                        Assign a project to your class{" "}
-                        <Icon name='heart outline' />
+                      No current project selected.
+                      <br />
+                      <br />
+                      Assign a project to your class{" "}
+                      <Icon name='heart outline' />
                     </div>
                   )}
                   {currentProject && (
@@ -138,14 +137,18 @@ const WorkspaceSection = ({
 
           {isWorkspaceActive && (
             <div>
-              <Form autoComplete='off' onSubmit={handleSubmitTask}>
-                <Form.Group>
+              <Form
+                autoComplete='off'
+                onSubmit={handleSubmitTask}
+                className='newStudentInput'
+              >
+                <Form.Group style={{marginTop: "4em", marginBottom: "1em"}}>
                   <Form.Input
                     placeholder='Share a message with your students'
                     name='currentTask'
                     value={currentTask}
                     onChange={handleChange}
-                    style={{ width: "300px" }}
+                    style={{ width: "400px" }}
                   />
                   <Form.Button content='Post' />
                 </Form.Group>
