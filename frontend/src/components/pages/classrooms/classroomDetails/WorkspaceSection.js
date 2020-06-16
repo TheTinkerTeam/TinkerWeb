@@ -11,6 +11,7 @@ const WorkspaceSection = ({
   handleChange,
   tasksList,
   currentProject,
+  userProfile,
 }) => {
   // style={{ backgroundImage: `url(${currentProject.imageURL})` }}
   let backgroundImage;
@@ -137,22 +138,26 @@ const WorkspaceSection = ({
 
           {isWorkspaceActive && (
             <div>
-              <Form
-                autoComplete='off'
-                onSubmit={handleSubmitTask}
-                className='newStudentInput'
-              >
-                <Form.Group style={{marginTop: "4em", marginBottom: "1em"}}>
-                  <Form.Input
-                    placeholder='Share a message with your students'
-                    name='currentTask'
-                    value={currentTask}
-                    onChange={handleChange}
-                    style={{ width: "400px" }}
-                  />
-                  <Form.Button content='Post' />
-                </Form.Group>
-              </Form>
+              {userProfile && userProfile.role === "teacher" && (
+                <Form
+                  autoComplete='off'
+                  onSubmit={handleSubmitTask}
+                  className='newStudentInput'
+                >
+                  <Form.Group
+                    style={{ marginTop: "4em", marginBottom: "1.5em" }}
+                  >
+                    <Form.Input
+                      placeholder='Share a message with your students'
+                      name='currentTask'
+                      value={currentTask}
+                      onChange={handleChange}
+                      style={{ width: "400px" }}
+                    />
+                    <Form.Button content='Post' />
+                  </Form.Group>
+                </Form>
+              )}
               {tasksList && tasksList.length === 0 ? (
                 <div>
                   No task assigned! <Icon name='heart outline' />

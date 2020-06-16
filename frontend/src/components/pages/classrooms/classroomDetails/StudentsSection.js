@@ -15,6 +15,7 @@ const StudentsSection = ({
   handleDeleteStudent,
   isStudentsActive,
   toggleButton,
+  userProfile
 }) => {
   return (
     <Segment.Group className='paragraph-style display-in-box'>
@@ -41,7 +42,7 @@ const StudentsSection = ({
 
       {isStudentsActive && (
         <Segment>
-          <AddStudentFormSection
+          {userProfile && userProfile.role === "teacher" && <AddStudentFormSection
             handleNewStudentSubmit={handleNewStudentSubmit}
             currentStudentEmail={currentStudentEmail}
             handleChange={handleChange}
@@ -49,7 +50,7 @@ const StudentsSection = ({
             classroom={classroom}
             isLoading={isLoading}
             classroomID={classroomID}
-          />
+          />}
           <StudentsListSection
             classroom={classroom}
             capitalize={capitalize}
