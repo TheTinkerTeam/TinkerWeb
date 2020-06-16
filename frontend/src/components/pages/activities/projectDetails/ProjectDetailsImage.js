@@ -25,6 +25,7 @@ const ProjectDetailsImage = ({
   projectId,
 }) => {
   const auth = useSelector((state) => state.firebase.auth);
+  const userProfile = useSelector((state) => state.auth.profile);
 
   const [addCurrentProject] = useMutation(ADD_CURRENT_PROJECT);
 
@@ -71,7 +72,7 @@ const ProjectDetailsImage = ({
   return (
     <Segment style={{ display: "flex", justifyContent: "space-between" }}>
       <Image src={image} size='small' />
-      {auth.uid && (
+      {auth.uid && userProfile.role === "teacher" && (
         <div>
           <Modal
             trigger={
