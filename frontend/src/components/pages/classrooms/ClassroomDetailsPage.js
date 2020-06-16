@@ -3,6 +3,7 @@ import "../../../css/Classrooms.css";
 import { withRouter, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import { useSelector } from 'react-redux'
 import WorkspaceSection from "./classroomDetails/WorkspaceSection";
 import StudentsSection from "./classroomDetails/StudentsSection";
 
@@ -70,6 +71,8 @@ const ClassroomDetailsPage = (props) => {
 
   const [state, setState] = useState(initialState);
   const [isLoading, setLoading] = useState(false);
+
+  const userProfile = useSelector(state => state.auth.profile)
 
   const handleChange = (e, { name, value }) =>
     setState((prevState) => ({ ...prevState, [name]: value }));
@@ -214,7 +217,7 @@ const ClassroomDetailsPage = (props) => {
         handleDeleteStudent={handleDeleteStudent}
         isStudentsActive={isStudentsActive}
         toggleButton={toggleButton}
-        Î
+        userProfile={userProfile}
       />
 
       <WorkspaceSection
@@ -227,6 +230,7 @@ const ClassroomDetailsPage = (props) => {
         capitalize={capitalize}
         toggleWorkspaceButton={toggleWorkspaceButton}
         handleSubmitTask={handleSubmitTask}
+        userProfile={userProfile}
       />
     </div>
   );
