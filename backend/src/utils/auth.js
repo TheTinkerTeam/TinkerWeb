@@ -3,10 +3,8 @@ const User = require("../models/User");
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("../config/serviceAccountKey.json");
-
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.applicationDefault(),
   databaseURL: "https://supertinker.firebaseio.com"
 });
 

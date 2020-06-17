@@ -1,6 +1,6 @@
 {
   "name": "tinkerweb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Follow the Instructions below to build & run Tinker Web in your local environment.",
   "main": "index.js",
   "engines": {
